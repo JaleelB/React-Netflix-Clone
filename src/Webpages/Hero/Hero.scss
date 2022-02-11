@@ -1,0 +1,74 @@
+$background-width: 100vw; $background-height: 100vh;
+
+//font-sizes
+$ft-mono: "SF Mono","Fira Code","Fira Mono","Roboto Mono",monospace;
+$ft-sans: "Calibre","Inter","San Francisco","SF Pro Text",-apple-system,system-ui,sans-serif;
+$ft-xxs: 12px;
+$ft-xs: 13px;
+$ft-sm: 14px;
+$ft-md: 1rem;
+$ft-lg: 18px;
+$ft-xl: 20px;
+$ft-xxl: 22px;
+$ft-heading: 2rem;
+$spacing: 1rem;
+
+
+*,*::before,*::after{ padding:0; margin:0; }
+
+body{ background: #151515; font-family: $ft-sans; width: 100vw;}
+
+.big-heading{font-size: clamp(30px, 4vw, 60px);}
+
+#hero{
+    height: calc(100vh - 4rem);
+    display: flex; flex-direction: row; 
+    
+
+    .media-details{ 
+        display: flex; align-items: center;
+        height: 100%; width: 50%; color: #fff;
+        // margin: 0 auto;
+
+        .inner{ 
+            display: flex; flex-direction: column; gap: 1rem;
+
+            .media-studio{ font-size: clamp($ft-sm, 5vw, $ft-md); font-weight: 400; font-family: $ft-mono;}
+            .media-name{ width:auto; word-break: normal;}
+        }
+    }
+
+    .media-selection{
+        // display: grid; place-items:center;
+        width: 50%; height: 100%; 
+        // border: 1px solid orangered;
+        // cursor: grab; 
+        overflow:hidden; display: flex; align-items: flex-end;
+
+        .media-selection-inner{
+            width:100%; 
+            // border: 1px solid purple; 
+
+            .top-movie-selections{ 
+                .media-scroller::-webkit-scrollbar {display :none; }
+                .media-scroller::-webkit-scrollbar-thumb { display :none; } 
+
+                .media-scroller{
+                    
+                    .card{
+                        img{ transition: all 0.5s ease;}
+                        img:hover{ transform: scale(1.05); border: 3px solid #fff; z-index: 2;}
+                    }
+
+                }
+
+    
+                .snap-inline{ scroll-margin-inline: 1rem; scroll-snap-type: inline mandatory; scroll-padding-inline: 3rem;}
+                .snap-inline > * { scroll-snap-align: start; }
+
+                
+        
+            }
+        }
+    }
+}
