@@ -7,7 +7,6 @@ import newMovies from '../NewMovies/NewMovies';
 
 const MediaScroller = () => {
 
-    let index = 1;
     let cardNumber = 0;
 
     return (
@@ -17,18 +16,29 @@ const MediaScroller = () => {
                 display: 'grid', gridAutoFlow: 'column', 
                 placeItems: 'center', gap: '1rem',
                 minHeight: '100%', width: '100%',
-                padding:'3rem 2rem',overflowX: 'auto', 
+                padding:'3rem 0',
+                //overflowX: 'auto', enable this on mobile
                 gridAutoColumns: '21%', border: '1px solid white', overscrollBehaviorInline: 'contain'
             }}>
+                <Button className="prev" variant="outlined" sx={{width: 'calc(2rem + 2vw)',height: 'calc(2rem + 2vw)',borderColor: '#fff', borderRadius: '50%' ,color: '#fff'}}> 
+                        <NavigateBefore sx={{width: '80%', height: '80%'}}/> 
+                </Button>
                 {
                     newMovies.map( (movie) =>{
                         cardNumber++;
-                        return  <Card key={cardNumber} image = {movie.image} />
+                        return  <Card key={cardNumber} id={cardNumber} image = {movie.image} />
                     })
                 }
+                <Button className="next" variant="outlined" sx={{width: 'calc(2rem + 2vw)',height: 'calc(2rem + 2vw)',borderColor: '#fff', borderRadius: '50%',color: '#fff'}}> 
+                        <NavigateNext sx={{width: '80%', height: '80%'}}/> 
+                </Button>
                 
             </Box>
+<<<<<<< HEAD
             <Box className="media-navigation" sx={{ display: 'flex', gap: 'calc(3rem + 3vw)'}}>
+=======
+            {/* <Box className="media-navigation" sx={{ display: 'flex', gap: 'calc(3rem + 3vw)'}}>
+>>>>>>> 1af6197b77817961a76f7e866de4e5193957f66e
                 <Box className="nav-buttons" sx={{display: 'flex', gap: 'calc(0.5rem + 0.5vw)', margin: '0 0 1rem'}}>
                     <Button className="prev" variant="outlined" sx={{width: 'calc(2rem + 2vw)',height: 'calc(2rem + 2vw)',borderColor: '#fff', borderRadius: '50%' ,color: '#fff'}}> 
                         <NavigateBefore sx={{width: '80%', height: '80%'}}/> 
@@ -41,7 +51,7 @@ const MediaScroller = () => {
                 <Box className="nav-card-count">
                     <h2 className="big-heading" style={{color: '#fff'}}>0{index}</h2>
                 </Box>
-            </Box>
+            </Box> */}
         </Box>
     )
 }
