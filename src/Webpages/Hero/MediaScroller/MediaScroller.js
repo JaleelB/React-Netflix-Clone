@@ -34,11 +34,7 @@ const MediaScroller = () => {
                 </Button>
                 
             </Box>
-<<<<<<< HEAD
-            <Box className="media-navigation" sx={{ display: 'flex', gap: 'calc(3rem + 3vw)'}}>
-=======
             {/* <Box className="media-navigation" sx={{ display: 'flex', gap: 'calc(3rem + 3vw)'}}>
->>>>>>> 1af6197b77817961a76f7e866de4e5193957f66e
                 <Box className="nav-buttons" sx={{display: 'flex', gap: 'calc(0.5rem + 0.5vw)', margin: '0 0 1rem'}}>
                     <Button className="prev" variant="outlined" sx={{width: 'calc(2rem + 2vw)',height: 'calc(2rem + 2vw)',borderColor: '#fff', borderRadius: '50%' ,color: '#fff'}}> 
                         <NavigateBefore sx={{width: '80%', height: '80%'}}/> 
