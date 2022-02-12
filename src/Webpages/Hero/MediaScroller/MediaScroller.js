@@ -10,7 +10,6 @@ const MediaScroller = () => {
     let index = 1;
     let cardNumber = 0;
 
-
     return (
         <Box className="scroller-container">
             <Box className="media-scroller snap-inline"
@@ -29,12 +28,12 @@ const MediaScroller = () => {
                 }
                 
             </Box>
-            <Box className="media-navigation" sx={{ display: 'none', gap: 'calc(3rem + 3vw)'}}>
+            <Box className="media-navigation" sx={{ display: 'flex', gap: 'calc(3rem + 3vw)'}}>
                 <Box className="nav-buttons" sx={{display: 'flex', gap: 'calc(0.5rem + 0.5vw)', margin: '0 0 1rem'}}>
-                    <Button variant="outlined" sx={{width: 'calc(2rem + 2vw)',height: 'calc(2rem + 2vw)',borderColor: '#fff', borderRadius: '50%' ,color: '#fff'}}> 
+                    <Button className="prev" variant="outlined" sx={{width: 'calc(2rem + 2vw)',height: 'calc(2rem + 2vw)',borderColor: '#fff', borderRadius: '50%' ,color: '#fff'}}> 
                         <NavigateBefore sx={{width: '80%', height: '80%'}}/> 
                     </Button>
-                    <Button variant="outlined" sx={{width: 'calc(2rem + 2vw)',height: 'calc(2rem + 2vw)',borderColor: '#fff', borderRadius: '50%',color: '#fff'}}> 
+                    <Button className="next" variant="outlined" sx={{width: 'calc(2rem + 2vw)',height: 'calc(2rem + 2vw)',borderColor: '#fff', borderRadius: '50%',color: '#fff'}}> 
                         <NavigateNext sx={{width: '80%', height: '80%'}}/> 
                     </Button>
                 </Box>
