@@ -15,15 +15,25 @@ const Card = ({image, id}) => {
         <Box 
             id={id}
             className='card' 
-            onMouseEnter={() =>  setTimeout(() => {activeHandler()}, 500) }
-            onMouseLeave={() => activeHandler()}
+            // onMouseEnter={() =>  setTimeout(() => {activeHandler()}, 800) }
+            // onMouseLeave={() => activeHandler()}
+            onClick={() => activeHandler()}
             sx={{
-                display: 'grid', placeItems: 'center',
-                width: '100%', height: '100%',
-                background: 'transparent', borderRadius: '15px'
+                display: 'flex', justifyContent: 'center', alignItems: 'center',
+                width: '100%', height: '60%',
+                background: 'grey', borderRadius: '15px'
             }}
         >
-            <img className={isActive ? "active" : "inactive"} style={{inlineSize: '100%', height: '100%', aspectRation: '1.9 / 1', objectFit:'cover', borderRadius: '15px'}} src={image} alt='movie-poster'/>
+            <img className={isActive ? "active" : "inactive"} 
+                style={{
+                    width: '100%', height: '100%', 
+                    aspectRation: '1.9 / 1', 
+                    // objectFit:'cover', inlineSize: '100%',
+                    borderRadius: '15px'
+                }} 
+                src={image} 
+                alt='movie-poster'
+            />
         </Box>
     )
 }
