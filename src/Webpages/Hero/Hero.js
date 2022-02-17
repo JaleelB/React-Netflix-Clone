@@ -27,11 +27,11 @@ const Hero = () => {
                 background: `url('https://wallpapercave.com/wp/wp7653796.jpg') no-repeat`,
                 backgroundSize: 'cover'
             }}>
-            <Box className="inner" sx={{border: '1px solid purple', width: '100%', height: '100%'}}>
+            <Box className="inner" sx={{width: '100%', height: '100%'}}>
 
                 <Grid container spacing={2} sx={{height: '100%', width: '100%',margin: 0}}>
                     <Grid item xs={6} sx={{
-                        border: '1px solid orange', padding: '0 !important', margin: 'auto 0 0 0'
+                        padding: '0 !important', margin: 'auto 0 0 0'
                     }}>
                         <Box className="media-details">
                             <Box className="media-details-inner">

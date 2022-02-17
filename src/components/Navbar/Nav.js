@@ -54,7 +54,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Nav() {
   return (
     <Box sx={{ flexGrow: 1, height: '4rem'}}>
-      <AppBar position="static" color="inherit" sx={{ boxShadow: 'none', background:'transparent', color: 'white'}}>
+      <AppBar position="absolute" color="inherit" sx={{ boxShadow: 'none', background:'transparent', color: 'white'}}>
         <Toolbar>
           <Typography
             variant="h6"
