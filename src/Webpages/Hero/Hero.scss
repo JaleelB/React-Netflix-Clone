@@ -30,7 +30,7 @@ body{ background: #151515; font-family: $ft-sans; width: 100vw; overflow: hidden
         height: 100%; width: 70%; color: #fff;
 
         .media-details-inner{ 
-            display: flex; flex-direction: column; gap: 2.5rem;
+            display: flex; flex-direction: column; gap: 1rem;
 
             .media-studio h1{ font-size: clamp($ft-md, 5vw, $ft-lg); font-weight: 400; font-family: $ft-mono;}
             .media-name{ width:auto; word-break: normal;}
@@ -74,7 +74,7 @@ body{ background: #151515; font-family: $ft-sans; width: 100vw; overflow: hidden
   
                 }
             }
-            .media-poster:hover {  transform: scale(1.4) !important;}
+            .media-poster:hover { border: 1px solid white; transform: scale(1.4) !important;}
             .media-poster:hover .media-poster-content{ position: relative; visibility: visible;}
             .media-poster:hover .media-poster-image{  
                 filter: brightness(40%); 

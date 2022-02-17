@@ -40,8 +40,7 @@ const MediaRowSection = ({title, medias}) => {
                 {
                     
                     medias.map((media) => {
-                        
-                        // console.log(media);
+
                         return <Box key={media.id} className="media-poster stacked" sx={{width: '9rem', position: 'relative'}}>
                                     <img className="media-poster-image" style={{ inlineSize: '100%', objectFit: 'cover'}} src={"https://image.tmdb.org/t/p/w300" + media.poster_path} alt={media.name}/>
                                     <Box className="media-poster-content">
@@ -57,7 +56,7 @@ const MediaRowSection = ({title, medias}) => {
                                             <ul className="genre-list">
                                                 {
                                                     makeObjectArray(media.genre_ids).map((genre, index) => {
-                                                        return <li key={index} className="genre-text"><Typography variant="subtitle2" component="h4">{genre}</Typography></li>
+                                                        return <li key={index} className="genre-text"><Typography variant="string" component="h6">{genre}</Typography></li>
                                                     })
                                                     
                                                 }

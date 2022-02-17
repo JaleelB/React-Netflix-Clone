@@ -55,7 +55,9 @@ export default function Nav() {
   return (
     <Box sx={{ flexGrow: 1, height: '4rem'}}>
       <AppBar position="absolute" color="inherit" sx={{ boxShadow: 'none', background:'transparent', color: 'white'}}>
-        <Toolbar>
+        <Toolbar 
+          // sx={{position: 'absolute'}}
+        >
           <Typography
             variant="h6"
             noWrap
@@ -65,7 +67,7 @@ export default function Nav() {
             EMD
           </Typography>
 
-          <Box sx={{margin:'auto'}}>
+          <Box sx={{marginRight:'auto'}}>
             <Button color="inherit">Movies</Button>
             <Button color="inherit">TV Shows</Button>
             <Button color="inherit">My List</Button>
