@@ -74,20 +74,11 @@ body{ background: #151515; font-family: $ft-sans; width: 100vw; overflow: hidden
   
                 }
             }
-            .media-poster:hover { border: 1px solid white; transform: scale(1.4) !important;}
+            .active-poster{width: 10rem; border: 3.5px solid white;}
+            .media-poster:hover { transform: scale(1.35) !important;}
             .media-poster:hover .media-poster-content{ position: relative; visibility: visible;}
-            .media-poster:hover .media-poster-image{  
-                filter: brightness(40%); 
-                
-            }
-            // .media-poster:hover > .overlay {
-            //     width:100%;
-            //     height:100%;
-            //     // margin-left: 0.5rem;
-            //     // position:absolute;
-            //     background-color:#000;
-            //     opacity:0.5;
-            // }
+            .media-poster:hover .media-poster-image{ filter: brightness(40%); }
+            
         }
         
     }

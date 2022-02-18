@@ -1,9 +1,18 @@
 import { Box,Typography } from '@mui/material';
 import React from 'react';
+import { useState } from 'react';
 import apiComponents from '../../components/API/Api';
 
 
 const MediaRowSection = ({title, medias}) => {
+
+    const [activeId, setActiveId] = useState(null); //determines which poster is active based on the id of the poster component
+    const [activeFirstPoster, setActiveFirstPoster] = useState(true);                            
+
+    const handleActivePoster = (id) =>{ 
+        if(activeFirstPoster)setActiveFirstPoster(!activeFirstPoster);
+        setActiveId(id); //updates the stater with the id of the component clicked. if they match it assigns class to poster
+    };
 
     const handleObjectNameKey = (object)=>{
         let value =  ('name' in object) ? 'name' : 'title';
@@ -39,9 +48,15 @@ const MediaRowSection = ({title, medias}) => {
             }}>
                 {
                     
-                    medias.map((media) => {
-
-                        return <Box key={media.id} className="media-poster stacked" sx={{width: '9rem', position: 'relative'}}>
+                    medias.map((media,index) => {
+                        return <Box 
+                                    key={media.id}
+                                    className={
+                                        `media-poster stacked ${(media.id === activeId) ? 'active-poster': ''} ${(index===0 && activeFirstPoster) ? 'active-poster': ''}`
+                                    } 
+                                    sx={{width: '9rem', position: 'relative'}}
+                                    onClick={() => handleActivePoster(media.id)}
+                                >
                                     <img className="media-poster-image" style={{ inlineSize: '100%', objectFit: 'cover'}} src={"https://image.tmdb.org/t/p/w300" + media.poster_path} alt={media.name}/>
                                     <Box className="media-poster-content">
 
