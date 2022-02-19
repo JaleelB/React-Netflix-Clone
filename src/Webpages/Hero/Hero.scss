@@ -16,14 +16,18 @@ $spacing: 1rem;
 
 *,*::before,*::after{ padding:0; margin:0; }
 
-body{ background: #151515; font-family: $ft-sans; width: 100vw; overflow: hidden; line-height: 1.5;}
+body{ 
+    // background: #151515;
+    background: url('https://wallpapercave.com/wp/wp4676582.jpg'); 
+    font-family: $ft-sans; width: 100vw; overflow: hidden; line-height: 1.5;
+}
 
 .big-heading{font-size: clamp(30px, 4vw, 60px);}
 .stacked{display: grid;}
 .stacked > * {grid-column: 1 / 2; grid-row: 1 / 2;}
 
 #hero{
-    height: calc(100vh - 4rem); 
+    height: 100vh;
     
     .media-details{ 
         display: flex; align-items: center;
@@ -42,20 +46,30 @@ body{ background: #151515; font-family: $ft-sans; width: 100vw; overflow: hidden
         flex-grow: 1;
 
         ::-webkit-scrollbar{display: none; -ms-overflow-style: none; scrollbar-width: none; }
-        .media-row:hover .media-poster{ transform: translateX(-25%);}
-        .media-poster:hover ~ .media-poster {transform: translateX(25%);}
+        // .media-row:hover .media-poster{ transform: translateX(-25%);}
+        // .media-poster:hover ~ .media-poster {transform: translateX(25%);}
 
-        .title-wrapper{ position: absolute;}
+        .title-wrapper{ position: relative;}
 
         .media-row{
+            // &:hover .media-poster{ transform: translateX(-5%);}
+
             .media-poster{ 
                 margin: 0 2px; transition: transform 300ms ease 100ms;
-                display: grid; place-content: center;
+                display: grid; place-content: center; 
+                transform: perspective(25rem) rotateY(30deg) translateX(-3rem);
+
+                &:hover { 
+                    // transform: scale(1.1) !important;
+                    // ~ .media-poster {transform: translateX(5%);}
+                    .media-poster-content{ position: relative; visibility: visible;}
+                    .media-poster-image{ filter: brightness(40%); }
+                }
 
                 .media-poster-content{
                     color: #fff; line-height: 1.5; align-self: end;  margin-left :.5rem;
                     padding: 0  0  .5rem .5rem; display: grid;
-                    visibility: hidden; z-index: 2;
+                    visibility: hidden; z-index: 2; 
 
                     .media-poster-media_type-details{
                         display: flex; gap: 1rem; 
@@ -69,15 +83,22 @@ body{ background: #151515; font-family: $ft-sans; width: 100vw; overflow: hidden
 
                     .media-genres{
                         padding: 1rem 1rem 0rem;
-                        // .genre-list{ display: flex; }
+                        .genre-list{ display: flex;  gap :1rem}
                     }
   
                 }
             }
-            .active-poster{width: 10rem; border: 3.5px solid white;}
-            .media-poster:hover { transform: scale(1.35) !important;}
-            .media-poster:hover .media-poster-content{ position: relative; visibility: visible;}
-            .media-poster:hover .media-poster-image{ filter: brightness(40%); }
+
+            .active-poster{ 
+                width: 17rem; border: 3.5px solid #4447E2; transform: perspective(0) rotateY(0deg); 
+                transition: transform 300ms ease-in-out;
+            }
+            
+            .active-poster ~ .media-poster{ transform: perspective(25rem) rotateY(-30deg) translateX(3rem);}
+            
+            // .media-poster:hover { transform: scale(1.35) !important;}
+            // .media-poster:hover .media-poster-content{ position: relative; visibility: visible;}
+            // .media-poster:hover .media-poster-image{ filter: brightness(40%); }
             
         }
         

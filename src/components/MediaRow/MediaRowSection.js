@@ -1,4 +1,4 @@
-import { Box,Typography } from '@mui/material';
+import { Box,Typography,Rating } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
 import apiComponents from '../../components/API/Api';
@@ -6,12 +6,15 @@ import apiComponents from '../../components/API/Api';
 
 const MediaRowSection = ({title, medias}) => {
 
-    const [activeId, setActiveId] = useState(null); //determines which poster is active based on the id of the poster component
-    const [activeFirstPoster, setActiveFirstPoster] = useState(true);                            
+    //determines which poster is active based on the id of the poster component
+    const [activeId, setActiveId] = useState(null); 
+    const [activeFirstPoster, setActiveFirstPoster] = useState(true); 
+    const [voteAverage, setVoteAverage] = useState(1);                          
 
     const handleActivePoster = (id) =>{ 
         if(activeFirstPoster)setActiveFirstPoster(!activeFirstPoster);
-        setActiveId(id); //updates the stater with the id of the component clicked. if they match it assigns class to poster
+        //updates the stater with the id of the component clicked. if they match it assigns class to poster
+        setActiveId(id); 
     };
 
     const handleObjectNameKey = (object)=>{
@@ -33,6 +36,7 @@ const MediaRowSection = ({title, medias}) => {
         return objectToArray;
     };
     
+    console.log(medias);
     return (
         <Box className="media-container" sx={{
             margin: '0 auto'
@@ -42,8 +46,10 @@ const MediaRowSection = ({title, medias}) => {
             </Box>
              
             <Box className="media-row" sx={{
-                display: 'grid', gap: '1rem', gridAutoFlow: 'column',
-                // gridAutoColumns:'11%',
+                display: 'grid', 
+                // gap: '.5rem', 
+                gridAutoFlow: 'column',
+                scrollBehavior: 'smooth',
                 padding: '3rem 1rem', margin: '0', overflowX: 'auto',
             }}>
                 {
@@ -54,9 +60,13 @@ const MediaRowSection = ({title, medias}) => {
                                     className={
                                         `media-poster stacked ${(media.id === activeId) ? 'active-poster': ''} ${(index===0 && activeFirstPoster) ? 'active-poster': ''}`
                                     } 
-                                    sx={{width: '9rem', position: 'relative'}}
-                                    onClick={() => handleActivePoster(media.id)}
+                                    sx={{width: '15rem', position: 'relative'}}
+                                    onClick={() => {
+                                        handleActivePoster(media.id);
+                                        setVoteAverage(media.vote_average);
+                                    }}
                                 >
+                                    {console.log(voteAverage)} 
                                     <img className="media-poster-image" style={{ inlineSize: '100%', objectFit: 'cover'}} src={"https://image.tmdb.org/t/p/w300" + media.poster_path} alt={media.name}/>
                                     <Box className="media-poster-content">
 
@@ -65,7 +75,14 @@ const MediaRowSection = ({title, medias}) => {
                                             <Typography className='media-poster-media_type' variant="subtitle2" component="h4"> 
                                                 {media.media_type.toUpperCase()}
                                             </Typography>
-                                            <Typography className="media-rating" variant="subtitle2" component="h4">{media.vote_average}</Typography>
+                
+                                            {/* <Typography className="media-rating" variant="subtitle2" component="h4">{}</Typography> */}
+                                            <Rating 
+                                                name="read-only"
+                                                value={voteAverage} 
+                                                precision={0.1}
+                                                readOnly
+                                            />
                                         </Box>
                                         <Box className="media-genres">
                                             <ul className="genre-list">
@@ -79,11 +96,11 @@ const MediaRowSection = ({title, medias}) => {
                                         </Box>
                                         
                                     </Box>
-                                    
-                                    <Box className="overlay"></Box>
+
                                 </Box>
                     })   
-                }     
+                }
+                 
             </Box>
         </Box> 
     )

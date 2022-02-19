@@ -25,13 +25,14 @@ const Hero = () => {
     return (
         <Box id="hero" sx={{
                 paddingLeft: 'calc(3.5vw + 24px)', 
-                background: `url('https://wallpapercave.com/wp/wp7653796.jpg') no-repeat`,
+                // background: '#131313',
+                background: `url('https://www.pixel4k.com/wp-content/uploads/2019/07/spiderman-far-from-home-movie-4k_1562107247.jpg') no-repeat`,
                 backgroundSize: 'cover'
             }}>
             <Box className="inner" sx={{width: '100%', height: '100%'}}>
 
-                <Grid container spacing={2} sx={{height: '100%', width: '100%',margin: 0}}>
-                    <Grid item xs={6} sx={{
+                <Grid container spacing={2} sx={{height: '100%', width: '100%',margin: 0, display:'flex', alignContent: 'center'}}>
+                    {/* <Grid item xs={6} sx={{
                         padding: '0 !important', margin: 'auto 0 0 0'
                     }}>
                         <Box className="media-details">
@@ -45,9 +46,9 @@ const Hero = () => {
                                 </Box>
                             </Box>
                         </Box>
-                    </Grid>
+                    </Grid> */}
 
-                    <Grid item xs={12} sx={{padding: '0 !important',margin: 'auto 0 0 0'}}>
+                    <Grid item xs={12} sx={{padding: '0 !important',margin: '0'}}>
                         <MediaRowSection
                             title = "Trending Movies and TV Shows"
                             medias = {trending}
