@@ -6,7 +6,7 @@ const apiComponents = [
         popular: "/movie/popular",
         now_playing: "/movie/now_playing",
         on_tv: "/tv/on-the-air",
-        trending: "/trending/all/week"
+        trending: "/trending/all/day"
     },
     [
         {28: 'Action' },        

@@ -16,10 +16,13 @@ $spacing: 1rem;
 
 *,*::before,*::after{ padding:0; margin:0; }
 
+html{overflow: hidden;}
+
 body{ 
     // background: #151515;
-    background: url('https://wallpapercave.com/wp/wp4676582.jpg'); 
-    font-family: $ft-sans; width: 100vw; overflow: hidden; line-height: 1.5;
+    background: #131313; display: grid; place-items: center;
+    font-family: $ft-sans; width: 100vw;  line-height: 1.5;
+    overflow: hidden; height: 100vh;
 }
 
 .big-heading{font-size: clamp(30px, 4vw, 60px);}
@@ -27,7 +30,7 @@ body{
 .stacked > * {grid-column: 1 / 2; grid-row: 1 / 2;}
 
 #hero{
-    height: 100vh;
+    height: 100vh; width: 100vw;
     
     .media-details{ 
         display: flex; align-items: center;
@@ -45,7 +48,7 @@ body{
     .media-container{
         flex-grow: 1;
 
-        ::-webkit-scrollbar{display: none; -ms-overflow-style: none; scrollbar-width: none; }
+        // ::-webkit-scrollbar{display: none; -ms-overflow-style: none; scrollbar-width: none; }
         // .media-row:hover .media-poster{ transform: translateX(-25%);}
         // .media-poster:hover ~ .media-poster {transform: translateX(25%);}
 
@@ -53,11 +56,14 @@ body{
 
         .media-row{
             // &:hover .media-poster{ transform: translateX(-5%);}
-
+            cursor: grab; scroll-snap-type: mandatory; 
+            // ::-webkit-scrollbar{display: none; -ms-overflow-style: none; scrollbar-width: none; }
+            
             .media-poster{ 
-                margin: 0 2px; transition: transform 300ms ease 100ms;
+                margin: 0 2px; transition: transform 300ms ease-in-out 100ms;
                 display: grid; place-content: center; 
                 transform: perspective(25rem) rotateY(30deg) translateX(-3rem);
+                scroll-snap-align: start;
 
                 &:hover { 
                     // transform: scale(1.1) !important;
@@ -90,8 +96,9 @@ body{
             }
 
             .active-poster{ 
-                width: 17rem; border: 3.5px solid #4447E2; transform: perspective(0) rotateY(0deg); 
-                transition: transform 300ms ease-in-out;
+                // width: 17rem; 
+                outline: 3.5px solid #4447E2; transform: perspective(0) rotateY(0deg); 
+                transition: transform  outline 300ms ease-in-out 100ms;
             }
             
             .active-poster ~ .media-poster{ transform: perspective(25rem) rotateY(-30deg) translateX(3rem);}
