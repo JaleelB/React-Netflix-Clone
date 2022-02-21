@@ -6,20 +6,53 @@ import axios from 'axios';
 import apiComponents from '../../components/API/Api';
 import MediaRowSection from "../../components/MediaRow/MediaRowSection";
 
-const Hero = () => {
-    const [activeBackground, setActiveBackground] = useState([]); 
-    const [trending, setTrending] = useState([]);
-
+const Hero = ({mood}) => {
+    const [activeBackground, setActiveBackground] = useState(''); 
+    const [discoverMovies, setDiscoverMovies] = useState([]);
+    const [discoverTvShows, setDiscoverTvShows] = useState([]);
+   
     useEffect(() => {
+        let genre_filters = '';
+
+        switch(mood){
+            case "Love, Family & Laughter":
+                genre_filters = '10751|10749|35|16|10402|10762'
+                break;
+
+            case "Fantasy":
+                genre_filters = '14|10765'
+                break;
+
+            case "Discovery & Exploration":
+                genre_filters = '878|99|36|10763'
+                break;
+
+            case "Drama":
+                genre_filters = '18|10766|10767|10764'
+                break;
+
+            case "Thriller & Suspense":
+                genre_filters = '28|12|10759|27|80|10752|10768|37|53|9648'
+                break;
+            
+            default:
+                genre_filters = '28|12|35|80|27'
+                break;
+            
+        }
+
         axios
-          .get(`${apiComponents[0]}${apiComponents[2].trending}`, {
-            params: {
-              api_key: apiComponents[1],
-            },
-          })
-          .then((res) => setTrending(res.data.results));
-      
-    }, []);
+            .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&with_genres=${genre_filters}`)
+            .then((res) => {setDiscoverMovies(res.data.results) })
+            .catch(error => { console.log(error) })
+
+        axios
+            .get(`${apiComponents[0]}${apiComponents[2].discover_tv}?api_key=${apiComponents[1]}&with_genres=${genre_filters}`)
+            .then((res) => {setDiscoverTvShows(res.data.results) })
+            .catch(error => { console.log(error) })
+
+  
+    }, [mood]);
 
     const handleBackgroundChange = (background) => {setActiveBackground(background);}
 
@@ -37,9 +70,10 @@ const Hero = () => {
 
                     <Grid item xs={12} sx={{padding: '0 !important',margin: '0'}}>
                         <MediaRowSection
-                            title = "Trending Movies and TV Shows Based On Your Mood"
-                            medias = {trending}
+                            title = "Discover Movies and TV Shows Based On Your Mood"
+                            medias = {[...discoverMovies,...discoverTvShows]}
                             changeBackground = {handleBackgroundChange}
+                            userMood = {mood}
                         />
                     </Grid>
                     

@@ -4,11 +4,11 @@ import { useState } from 'react';
 import apiComponents from '../../components/API/Api';
 
 const MediaRowSection = ({title, medias, changeBackground}) => {
-
+    
     //determines which poster is active based on the id of the poster component
     const [activeId, setActiveId] = useState(null); 
     const [activeFirstPoster, setActiveFirstPoster] = useState(true); 
-    const [voteAverage, setVoteAverage] = useState(1);
+    // const [voteAverage, setVoteAverage] = useState(1);
 
     const handleActivePoster = (id) =>{ 
         if(activeFirstPoster)setActiveFirstPoster(!activeFirstPoster);
@@ -35,11 +35,12 @@ const MediaRowSection = ({title, medias, changeBackground}) => {
         return objectToArray;
     };
 
+    console.log(medias);
     return (
         <Box className="media-container" sx={{
             margin: '0 auto', overflow: 'hidden'
         }}>
-            <Box className="title-wrapper" sx={{paddingLeft: '1rem'}}>
+            <Box className="title-wrapper" sx={{padding: '0 1rem'}}>
                 <h2 className="media-row-title" style={{color: '#fff'}}>{title}</h2>
             </Box>
              
@@ -59,7 +60,6 @@ const MediaRowSection = ({title, medias, changeBackground}) => {
                     medias.map((media,index) => {
                         return <Box 
                                     key={media.id}
-                                    // {index === 0 ? changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path): ''}
                                     className={
                                         `media-poster stacked ${(media.id === activeId) ? 'active-poster': ''} ${(index===0 && activeFirstPoster) ? 'active-poster': ''}`
                                     } 
@@ -68,25 +68,26 @@ const MediaRowSection = ({title, medias, changeBackground}) => {
                                         position: 'relative',
                                         width: 'clamp(9rem,17rem,24rem)'
                                     }}
+                                    onLoad={()=>{ if(index === 0) changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path) } }
                                     onClick={() => {
                                         handleActivePoster(media.id);
-                                        setVoteAverage(media.vote_average);
+                                        // setVoteAverage(media.vote_average);
                                         changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path);
                                     }}
                                 >
-                                    {/* {console.log(voteAverage)}  */}
+                                    
                                     <img className="media-poster-image" draggable="false" style={{ inlineSize: '100%', objectFit: 'cover'}} src={"https://image.tmdb.org/t/p/w300" + media.poster_path} alt={media.name}/>
                                     <Box className="media-poster-content">
 
                                         <Typography className="media-name" variant="subtitle1" component="h2">{media[handleObjectNameKey(media)]}</Typography>
                                         <Box className="media-poster-media_type-details">
-                                            <Typography className='media-poster-media_type' variant="subtitle2" component="h4"> 
+                                            {/* <Typography className='media-poster-media_type' variant="subtitle2" component="h4"> 
                                                 {media.media_type.toUpperCase()}
                                             </Typography>
-                
+                 */}
                                             <Rating 
                                                 name="read-only"
-                                                value={voteAverage} 
+                                                value={media.vote_average} 
                                                 precision={0.1}
                                                 readOnly
                                             />
@@ -107,7 +108,7 @@ const MediaRowSection = ({title, medias, changeBackground}) => {
                                 </Box>
                     })   
                 }
-                 
+
             </Box>
         </Box> 
     )

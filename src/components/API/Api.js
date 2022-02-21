@@ -6,7 +6,9 @@ const apiComponents = [
         popular: "/movie/popular",
         now_playing: "/movie/now_playing",
         on_tv: "/tv/on-the-air",
-        trending: "/trending/all/day"
+        trending: "/trending/all/day",
+        discover_movie: "/discover/movie",
+        discover_tv: "/discover/tv"
     },
     [
         {28: 'Action' },        
@@ -28,7 +30,6 @@ const apiComponents = [
         {10752:'War'},
         {37: 'Western'},
         {10759: 'Action & Adventure'},
-        {99: 'Documentary'},
         {10762: 'Kids'},
         {9648: 'Mystery'},
         {10763:'News'},
@@ -36,13 +37,11 @@ const apiComponents = [
         {10765:'Sci-Fi & Fantasy'},
         {10766: 'Soap'},
         {10767: 'Talk'},
-        {10768: 'War & Politics'},
-        {37: 'Western'}
+        {10768: 'War & Politics'}
     ]
 ]; 
 
 export default apiComponents;
 
 
-
-
+//'878|99|36|10763'
