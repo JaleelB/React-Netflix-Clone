@@ -9,17 +9,12 @@
         // flex-direction: column;  bborder: 1px solid white;
         
         .mood-categories-wrapper{
-            display: flex;  
-            gap: 1rem; flex-flow:wrap; margin: 0 auto;
-            // display: grid; place-content :center;
-            // grid-auto-flow: column; 
-            // grid-template-columns: repeat(auto-fill, minmax(10vw, 1fr));
-            // border: 1px solid white;
+            display: flex;  justify-content: center; flex-flow:wrap;
+            gap: 1rem;  margin: 0 auto;
 
             .category-wrapper{
-                // width: 10vw; padding: 1rem 0; 
-                display: grid; place-items: center; 
-                grid-template-rows: min-content; gap: .5rem;
+                display: flex; flex-direction: column; place-items: center;
+                flex: 0 0 10vw; flex-basis: min-content; gap: .5rem;
                 
 
                 .category-icon{
@@ -34,7 +29,7 @@
 
                 .category-title{
                     width: 10vw; display: grid; place-items: center; 
-                    .icon-title{color: #fff; text-align: center; overflow-wrap: break-word}
+                    .icon-title{color: #fff; text-align: center; overflow-wrap: break-word; font-size: clamp(1rem,0.8vw, 2rem);}
                 }
                 
             }

@@ -50,7 +50,8 @@ const MediaRowSection = ({title, medias, changeBackground}) => {
                     display: 'grid', 
                     // gap: '.5rem',
                     minHeight: '10rem',
-                    gridAutoFlow: 'column',
+                    gridAutoFlow: 'column', 
+                    // gridAutoColumns: '23%',
                     scrollBehavior: 'smooth',
                     padding: '3rem 3rem 3rem 0', margin: '0', overflowX: 'auto', overflowY: 'hidden'
                 }}
@@ -69,12 +70,13 @@ const MediaRowSection = ({title, medias, changeBackground}) => {
                                         // width: 'calc(50vw + 48px)'
                                         width: 'clamp(9rem,20rem,34rem)'
                                     }}
-                                    onLoad={()=>{ if(index === 0) changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path) } }
+                                    // onLoad={()=>{ if(index === 0) changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path) } }
                                     onClick={() => {
                                         handleActivePoster(media.id);
                                         // setVoteAverage(media.vote_average);
-                                        changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path);
+                                        // changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path);
                                     }}
+                                    onMouseOver = {() => {changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path);}}
                                 >
                                     
                                     <Box className="poster-image-wrapper">

@@ -74,11 +74,11 @@ export default function Nav() {
 
           <Box sx={{margin:'0 auto', display: { xs: 'none', md: 'block' }}}>
               <Button variant="text">
-                <Link style={{textDecoration: 'none', textAlign: 'center', color: 'white', fontSize: '1.2vw'}} to={'/'}>Discover</Link>
+                <Link style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} to={'/'}>Discover</Link>
               </Button>
               {pages.map((page) => (
                 <Button variant="text" key={page} >
-                  <Link style={{textDecoration: 'none', textAlign: 'center', color: 'white', fontSize: '1.2vw'}} to={`/${page}`}>{page}</Link>
+                  <Link style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} to={`/${page}`}>{page}</Link>
                 </Button>
               ))}
           </Box>
