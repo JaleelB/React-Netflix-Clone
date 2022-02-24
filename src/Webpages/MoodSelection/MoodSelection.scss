@@ -10,7 +10,7 @@
         
         .mood-categories-wrapper{
             display: flex;  
-            gap: .5rem; flex-flow:wrap; margin: 0 auto;
+            gap: 1rem; flex-flow:wrap; margin: 0 auto;
             // display: grid; place-content :center;
             // grid-auto-flow: column; 
             // grid-template-columns: repeat(auto-fill, minmax(10vw, 1fr));
@@ -27,6 +27,7 @@
                     max-height: 200px; max-width: 200px;
                     min-height: 84px; min-width: 84px;
                     background: #4447E2; transition: outline 0.2s ease;
+                    border-radius: 50%;
 
                     &:hover{ outline: 3px solid white; }
                 }

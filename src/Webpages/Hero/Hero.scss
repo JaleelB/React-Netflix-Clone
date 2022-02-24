@@ -22,7 +22,7 @@ body{
     // background: #151515;
     background: #131313; display: grid; place-items: center;
     font-family: $ft-sans; width: 100vw;  line-height: 1.5;
-    overflow: hidden; height: 100vh;
+    overflow: hidden; height: 100vh; 
 }
 
 .big-heading{font-size: clamp(30px, 4vw, 60px);}
@@ -30,7 +30,7 @@ body{
 .stacked > * {grid-column: 1 / 2; grid-row: 1 / 2;}
 
 #hero{
-    height: 100vh; width: 100vw;
+    height: 100vh; width: 100vw; transition: background 300ms ease;
     
     .media-details{ 
         display: flex; align-items: center;
@@ -60,17 +60,19 @@ body{
             // ::-webkit-scrollbar{display: none; -ms-overflow-style: none; scrollbar-width: none; }
             
             .media-poster{ 
-                margin: 0 2px; transition: transform 300ms ease-in-out 100ms;
+                margin: 0 0px; transition: transform 300ms ease;
                 display: grid; place-content: center; 
-                transform: perspective(25rem) rotateY(30deg) translateX(-3rem);
-                scroll-snap-align: start;
+                transform: perspective(30rem) rotateY(30deg) translateX(2rem);
+                scroll-snap-align: start; border-radius: 10px; filter: brightness(50%);
 
                 &:hover { 
                     // transform: scale(1.1) !important;
                     // ~ .media-poster {transform: translateX(5%);}
                     .media-poster-content{ position: relative; visibility: visible;}
-                    .media-poster-image{ filter: brightness(40%); }
+                    // .media-poster-image{ filter: brightness(40%); }
                 }
+
+             
 
                 .media-poster-content{
                     color: #fff; line-height: 1.5; align-self: end;  margin-left :.5rem;
@@ -103,12 +105,16 @@ body{
             }
 
             .active-poster{ 
-                // width: 17rem; 
-                outline: 3.5px solid #4447E2; transform: perspective(0) rotateY(0deg); 
+                margin: 0 1rem; filter: brightness(100%);
+                transform: perspective(0) rotateY(0deg); 
                 transition: transform  outline 300ms ease-in-out 100ms;
+
+                &>img{outline: 3.5px solid #4447E2;}
             }
+
+           
             
-            .active-poster ~ .media-poster{ transform: perspective(25rem) rotateY(-30deg) translateX(3rem);}
+            .active-poster ~ .media-poster{ transform: perspective(30rem) rotateY(-30deg) translateX(-2rem);}
             
             // .media-poster:hover { transform: scale(1.35) !important;}
             // .media-poster:hover .media-poster-content{ position: relative; visibility: visible;}

@@ -1,18 +1,22 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Hero from '../../Webpages/Hero/Hero';
-
-
+import Movies from '../../Webpages/Movies/Movies';
+import TvShows from '../../Webpages/TvShows/TvShows';
+import Search from '../../Webpages/Search/Search';
+import Saved from '../../Webpages/Saved/Saved';
 
 const NavRoutes = () => {
     return (
+    
         <Routes>
             <Route path='/' exact element={<Hero/>} />
-            {/* <Rosute path='/RecycleUS' element={<RecycleUS />} />
-            <Route path='/WhyRecycle' element={<WhyRecycle />} />
-            <Route path='/DonatePage' element={<DonatePage />} />
-            <Route path='/SourcesPage' element={<SourcesPage />} /> */}
+            <Route path='Search' element={<Search />} />
+            <Route path='Movies' element={<Movies />} />
+            <Route path='TvShows' element={<TvShows />} />
+            <Route path='Saved' element={<Saved />} />
         </Routes>
+
     )
 }
 

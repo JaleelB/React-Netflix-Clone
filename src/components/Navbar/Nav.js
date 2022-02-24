@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { AppBar,Avatar,Button,Typography,Toolbar,Box,Menu, MenuItem} from '@mui/material';
+import { AppBar,Avatar,Button,Typography,Toolbar,Box,Menu, MenuItem } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import '../../Webpages/Hero/Hero.scss';
-
+import { Link } from "react-router-dom";
 
 
 export default function Nav() {
 
-  const pages = ['Home', 'Search', 'Movies', 'TV Shows', 'Saved'];
+  const pages = [ 'Search', 'Movies', 'TvShows', 'Saved'];
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => { setAnchorElNav(event.currentTarget); };
@@ -60,9 +60,12 @@ export default function Nav() {
                     display: { xs: 'block', md: 'none' }
                   }}
                 >
+                  <MenuItem onClick={handleCloseNavMenu} >
+                    <Link style={{textDecoration: 'none', textAlign: 'center', color: 'black'}} to={'/'}>Discover</Link>
+                  </MenuItem>
                   {pages.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu} >
-                      <Typography textAlign="center">{page}</Typography>
+                      <Link style={{textDecoration: 'none', textAlign: 'center', color: 'black'}} to={`/${page}`}>{page}</Link>
                     </MenuItem>
                   ))}
                 </Menu>
@@ -70,11 +73,14 @@ export default function Nav() {
           </Box>
 
           <Box sx={{margin:'0 auto', display: { xs: 'none', md: 'block' }}}>
-            <Button color="inherit">Home</Button>
-            <Button color="inherit">Search</Button>
-            <Button color="inherit">Movies</Button>
-            <Button color="inherit">TV Shows</Button>
-            <Button color="inherit">My List</Button>
+              <Button variant="text">
+                <Link style={{textDecoration: 'none', textAlign: 'center', color: 'white', fontSize: '1.2vw'}} to={'/'}>Discover</Link>
+              </Button>
+              {pages.map((page) => (
+                <Button variant="text" key={page} >
+                  <Link style={{textDecoration: 'none', textAlign: 'center', color: 'white', fontSize: '1.2vw'}} to={`/${page}`}>{page}</Link>
+                </Button>
+              ))}
           </Box>
 
           <Avatar sx={{position: 'absolute', right: '1rem', marginLeft: '1rem'}}/>
