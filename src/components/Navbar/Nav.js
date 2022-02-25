@@ -43,7 +43,7 @@ export default function Nav() {
                 <Box class="nav-background">&nbsp;</Box>
 
 
-                <Box className="nav-navigation" sx={{ display: { xs: 'block', md: 'block' }}}>
+                <Box className="nav-navigation" sx={{ display: { md: 'block' }}}>
                   {
                     <ul className="nav-list">
                         <li className="nav-item" onClick={() => setChecked(!checked)}>
@@ -59,6 +59,28 @@ export default function Nav() {
                   
                 </Box>
               </Box>
+                  
+              <Box className="full-nav" sx={{display: {xs: 'none', md: 'flex'}, gap: '1rem'}}>
+                    <Box className="full-nav-item" onClick={() => setChecked(!checked)}>
+                      <Link className="full-nav-link" style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} to={'/'}>Discover</Link>
+                    </Box>
+                    {pages.map((page) => (
+                        <Box className="full-nav-item" key={page} onClick={() => setChecked(!checked)}>
+                          <Link className="full-nav-link" style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} to={`/${page}`}>{page}</Link>
+                        </Box>
+                    ))}
+                {/* <ul className="full-nav-list" sx={{display: 'flex'}}>
+                    <li className="full-nav-item" onClick={() => setChecked(!checked)}>
+                      <Link className="full-nav-link" style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} to={'/'}>Discover</Link>
+                    </li>
+                    {pages.map((page) => (
+                        <li className="full-nav-item" key={page} onClick={() => setChecked(!checked)}>
+                          <Link className="full-nav-link" style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} to={`/${page}`}>{page}</Link>
+                        </li>
+                    ))}
+                </ul> */}
+              </Box>
+
           </Box>
 
         </Toolbar>
