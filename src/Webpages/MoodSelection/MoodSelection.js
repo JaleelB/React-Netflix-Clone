@@ -5,6 +5,7 @@ import './MoodSelection.scss';
 const moodCategories = ['Love, Family & Laughter','Fantasy','Discovery & Exploration', 'Drama', 'Thriller & Suspense'];
 
 const MoodSelection = ({screenState,removeScreen,setMoodCategory}) => {
+
     return (
         <Box className={`mood-screen ${screenState ? 'remove-mood-screen' : ''}`}>
             

@@ -8,7 +8,7 @@ const MediaRowSection = ({title, medias, changeBackground}) => {
     //determines which poster is active based on the id of the poster component
     const [activeId, setActiveId] = useState(null); 
     const [activeFirstPoster, setActiveFirstPoster] = useState(true); 
-    // const [voteAverage, setVoteAverage] = useState(1);
+    const [voteAverage, setVoteAverage] = useState(0);
 
     const handleActivePoster = (id) =>{ 
         if(activeFirstPoster)setActiveFirstPoster(!activeFirstPoster);
@@ -70,13 +70,13 @@ const MediaRowSection = ({title, medias, changeBackground}) => {
                                         // width: 'calc(50vw + 48px)'
                                         width: 'clamp(9rem,20rem,34rem)'
                                     }}
-                                    // onLoad={()=>{ if(index === 0) changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path) } }
+                                    onLoad={()=>{ if(index === 0) changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path) } }
                                     onClick={() => {
                                         handleActivePoster(media.id);
                                         // setVoteAverage(media.vote_average);
-                                        // changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path);
+                                        changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path);
                                     }}
-                                    onMouseOver = {() => {changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path);}}
+                                    // onMouseOver = {() => {changeBackground("https://image.tmdb.org/t/p/original" + media.backdrop_path);}}
                                 >
                                     
                                     <Box className="poster-image-wrapper">
@@ -92,7 +92,8 @@ const MediaRowSection = ({title, medias, changeBackground}) => {
                                                               
                                                 <Rating 
                                                     name="read-only"
-                                                    value={media.vote_average} 
+                                                    onLoad ={ () => setVoteAverage(media.vote_average) }
+                                                    value={voteAverage}
                                                     precision={0.1}
                                                     readOnly
                                                 />

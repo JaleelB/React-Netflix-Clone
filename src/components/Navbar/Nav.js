@@ -1,22 +1,19 @@
-import * as React from 'react';
-import { AppBar,Avatar,Button,Typography,Toolbar,Box,Menu, MenuItem } from '@mui/material';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import '../../Webpages/Hero/Hero.scss';
+// import * as React from 'react';
+import { AppBar,Typography,Toolbar,Box} from '@mui/material';
+import React, { useState } from "react";
+import './Nav.scss'
 import { Link } from "react-router-dom";
 
 
 export default function Nav() {
 
   const pages = [ 'Search', 'Movies', 'TvShows', 'Saved'];
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => { setAnchorElNav(event.currentTarget); };
-  const handleCloseNavMenu = () => { setAnchorElNav(null); };
+  const [checked, setChecked] = useState(false);
 
   return (
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="fixed" color="transparent" sx={{ boxShadow: 'none', color: 'white'}}>
-        <Toolbar sx={{display: { lg: 'flex',xl: 'flex'}}}>
+        <Toolbar sx={{display: { xs: 'flex'}}}>
 
           <Box sx={{position: 'relative', left: '0', display: { xs: 'flex'}}}>
             <Typography
@@ -28,62 +25,41 @@ export default function Nav() {
               EMD
             </Typography>
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none'} }}>
-              <Button 
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-                sx={{display: 'flex', marginLeft: '1rem', padding: '0', color :'white'}}
-              >
-                <Typography variant="subtitle1">Browse</Typography>
-                <ArrowDropDownIcon/>
-              </Button>
-
-              <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorElNav}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={handleCloseNavMenu}
-                  sx={{
-                    display: { xs: 'block', md: 'none' }
-                  }}
+            <Box className ="nav" sx={{ flexGrow: 1, display: { xs: 'block', md: 'none'} }}>
+                <input 
+                  type="checkbox" 
+                  class="nav-checkbox" 
+                  id="nav-toggle"
+                  checked={checked}
+                />
+                <label 
+                  for="nav-toggle" 
+                  class="nav-button"
+                  onClick={() => setChecked(!checked)}
                 >
-                  <MenuItem onClick={handleCloseNavMenu} >
-                    <Link style={{textDecoration: 'none', textAlign: 'center', color: 'black'}} to={'/'}>Discover</Link>
-                  </MenuItem>
-                  {pages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu} >
-                      <Link style={{textDecoration: 'none', textAlign: 'center', color: 'black'}} to={`/${page}`}>{page}</Link>
-                    </MenuItem>
-                  ))}
-                </Menu>
-            </Box>
-          </Box>
+                  <span class="nav-icon">&nbsp;</span>
+                </label>
 
-          <Box sx={{margin:'0 auto', display: { xs: 'none', md: 'block' }}}>
-              <Button variant="text">
-                <Link style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} to={'/'}>Discover</Link>
-              </Button>
-              {pages.map((page) => (
-                <Button variant="text" key={page} >
-                  <Link style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} to={`/${page}`}>{page}</Link>
-                </Button>
-              ))}
-          </Box>
+                <Box class="nav-background">&nbsp;</Box>
 
-          <Avatar sx={{position: 'absolute', right: '1rem', marginLeft: '1rem'}}/>
+
+                <Box className="nav-navigation" sx={{ display: { xs: 'block', md: 'block' }}}>
+                  {
+                    <ul className="nav-list">
+                        <li className="nav-item" onClick={() => setChecked(!checked)}>
+                          <Link className="nav-link" style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} to={'/'}>Discover</Link>
+                        </li>
+                        {pages.map((page) => (
+                          <li className="nav-item" key={page} onClick={() => setChecked(!checked)}>
+                            <Link className="nav-link" style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} to={`/${page}`}>{page}</Link>
+                          </li>
+                    ))}
+                    </ul>
+                  }
+                  
+                </Box>
+              </Box>
+          </Box>
 
         </Toolbar>
       </AppBar>

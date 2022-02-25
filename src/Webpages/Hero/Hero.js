@@ -66,9 +66,12 @@ const Hero = ({moodCategory}) => {
                 background: `url(${activeBackground}) no-repeat `,
                 backgroundSize: 'cover'
             }}>
-            <Box className="inner" sx={{width: '100%', height: '100%'}}>
+            <Box className="inner" sx={{width: '100%', height: 'calc(100vh - 4rem)', display:'flex', alignContent: 'center'}}>
 
-                <Grid container spacing={2} sx={{height: '100%', width: '100%',margin: 0, display:'flex', alignContent: 'center'}}>
+                <Grid container spacing={2} sx={{
+                    // height: '100%', width: '100%',
+                    margin: 0, display:'flex', alignContent: 'center', justifyContent: 'center'
+                }}>
 
                     <Grid item xs={12} sx={{padding: '0 !important',margin: '0'}}>
                         <MediaRowSection

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 import MoodSelection from './Webpages/MoodSelection/MoodSelection';
 import Nav from './components/Navbar/Nav';
 import NavRoutes from './components/Navbar/NavRoutes';
@@ -17,12 +17,12 @@ function App() {
       {!removeMoodScreen ? <MoodSelection
                             screenState = {removeMoodScreen}
                             removeScreen = {setRemoveMoodScreen}
-                            // setMoodCategory = { setMoodCategory }
+                            setMoodCategory = { setMoodCategory }
                           /> : ""
       }
 
       {removeMoodScreen ? <Nav/> : ""}
-      {removeMoodScreen ? <NavRoutes/> : ""}
+      {removeMoodScreen ? <NavRoutes userMood = {moodCategory}/> : ""}
       {/* <Hero
           mood = {moodCategory}
         /> */}

@@ -109,6 +109,8 @@ body{
                 transform: perspective(0) rotateY(0deg); 
                 transition: transform  outline 300ms ease-in-out 100ms;
 
+                // position: fixed;
+
                 &>img{outline: 3.5px solid #4447E2;}
             }
 
