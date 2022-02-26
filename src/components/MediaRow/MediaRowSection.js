@@ -2,6 +2,7 @@ import { Box,Typography,Rating, Button } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
 import apiComponents from '../../components/API/Api';
+import './MediaRow.scss'
 
 const MediaRowSection = ({title, medias, changeBackground}) => {
     

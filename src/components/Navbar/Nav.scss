@@ -32,7 +32,7 @@
     &-list {
         position: absolute; top: 50%; left: 50%; width: 100%;
         transform: translate(-50%,-50%); list-style: none;
-        text-align: center; 
+        text-align: center;  
     }
 
     &-link {
@@ -74,7 +74,6 @@
     &-button:hover &-icon::before { top: -1rem; }
     &-button:hover &-icon::after {top: 1rem;}
 
-   
     &-checkbox:checked + &-button &-icon::before, &-checkbox:checked + &-button &-icon::after { width: 2rem; height: 2px; left: 0;} 
     &-checkbox:checked + &-button &-icon { background-color: transparent; }
     &-checkbox:checked + &-button &-icon::before { top: 0; transform: rotate(135deg); }

@@ -1,18 +1,4 @@
-$background-width: 100vw; $background-height: 100vh;
-
-//font-sizes
-$ft-mono: "SF Mono","Fira Code","Fira Mono","Roboto Mono",monospace;
-$ft-sans: "Calibre","Inter","San Francisco","SF Pro Text",-apple-system,system-ui,sans-serif;
-$ft-xxs: 12px;
-$ft-xs: 13px;
-$ft-sm: 14px;
-$ft-md: 1rem;
-$ft-lg: 18px;
-$ft-xl: 20px;
-$ft-xxl: 22px;
-$ft-heading: 2rem;
-$spacing: 1rem;
-
+@import '../../mainStyles';
 
 *,*::before,*::after{ padding:0; margin:0; }
 
@@ -21,8 +7,8 @@ html{overflow: hidden;}
 body{ 
     // background: #151515;
     background: #131313; display: grid; place-items: center;
-    font-family: $ft-sans; width: 100vw;  line-height: 1.5;
-    overflow: hidden; height: 100vh; 
+    font-family: $ft-sans; width: $background-width;  line-height: 1.5;
+    overflow: hidden; height: $background-height; 
 }
 
 .big-heading{font-size: clamp(30px, 4vw, 60px);}
@@ -31,100 +17,4 @@ body{
 
 #hero{
     height: 100vh; width: 100vw; transition: background 300ms ease;
-    
-    .media-details{ 
-        display: flex; align-items: center;
-        height: 100%; width: 70%; color: #fff;
-
-        .media-details-inner{ 
-            display: flex; flex-direction: column; gap: 1rem;
-
-            .media-studio h1{ font-size: clamp($ft-md, 5vw, $ft-lg); font-weight: 400; font-family: $ft-mono;}
-            .media-name{ width:auto; word-break: normal;}
-        }
-    }
-    
-
-    .media-container{
-        flex-grow: 1;
-
-        // ::-webkit-scrollbar{display: none; -ms-overflow-style: none; scrollbar-width: none; }
-        // .media-row:hover .media-poster{ transform: translateX(-25%);}
-        // .media-poster:hover ~ .media-poster {transform: translateX(25%);}
-
-        .title-wrapper{ position: relative;}
-
-        .media-row{
-            // &:hover .media-poster{ transform: translateX(-5%);}
-            cursor: grab; scroll-snap-type: mandatory; 
-            // ::-webkit-scrollbar{display: none; -ms-overflow-style: none; scrollbar-width: none; }
-            
-            .media-poster{ 
-                margin: 0 0px; transition: transform 300ms ease;
-                display: grid; place-content: center; 
-                transform: perspective(30rem) rotateY(30deg) translateX(2rem);
-                scroll-snap-align: start; border-radius: 10px; filter: brightness(50%);
-
-                &:hover { 
-                    // transform: scale(1.1) !important;
-                    // ~ .media-poster {transform: translateX(5%);}
-                    .media-poster-content{ position: relative; visibility: visible;}
-                    // .media-poster-image{ filter: brightness(40%); }
-                }
-
-             
-
-                .media-poster-content{
-                    color: #fff; line-height: 1.5; align-self: end;  margin-left :.5rem;
-                    padding: 0  0  .5rem .5rem; display: grid;
-                    visibility: hidden; z-index: 2; 
-
-                    .media-poster-media_type-details{
-                        display: flex; gap: 1rem; 
-
-                        .media-rating{
-                            background: #fff; color:#000; border-radius: 5px;
-                            padding: 0 .3rem;  display: grid; place-items: center;
-                        }
-                        .media-poster-media_type{ color: #46D369; }
-                    }
-
-                    .media-genres{
-                        margin: 0 auto;
-                        // padding: 1rem 0rem 0rem;
-                        .genre-list{ 
-                            display: flex;  gap:1rem; 
-                            list-style: none; padding: 0; 
-                            // border: 1px solid white;
-
-                            .genre-text{ padding: .2rem; border: 1px solid #262a34; border-radius: 10px; background:#262a34; }
-                        }
-                    }
-  
-                }
-            }
-
-            .active-poster{ 
-                margin: 0 1rem; filter: brightness(100%);
-                transform: perspective(0) rotateY(0deg); 
-                transition: transform  outline 300ms ease-in-out 100ms;
-
-                // position: fixed;
-
-                &>img{outline: 3.5px solid #4447E2;}
-            }
-
-           
-            
-            .active-poster ~ .media-poster{ transform: perspective(30rem) rotateY(-30deg) translateX(-2rem);}
-            
-            // .media-poster:hover { transform: scale(1.35) !important;}
-            // .media-poster:hover .media-poster-content{ position: relative; visibility: visible;}
-            // .media-poster:hover .media-poster-image{ filter: brightness(40%); }
-            
-        }
-        
-    }
-    
-    
 }

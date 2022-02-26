@@ -62,18 +62,17 @@ const Hero = ({moodCategory}) => {
         <Box id="hero" sx={{
                 // paddingLeft: 'calc(3.5vw + 24px)', 
                 padding: 0,
-                // background: '#131313',
                 background: `url(${activeBackground}) no-repeat `,
-                backgroundSize: 'cover'
+                backgroundSize: 'cover !important'
             }}>
             <Box className="inner" sx={{width: '100%', height: 'calc(100vh - 4rem)', display:'flex', alignContent: 'center'}}>
 
-                <Grid container spacing={2} sx={{
+                <Grid className="hero-grid" container spacing={2} sx={{
                     // height: '100%', width: '100%',
-                    margin: 0, display:'flex', alignContent: 'center', justifyContent: 'center'
+                    margin: 0, display:'flex'
                 }}>
 
-                    <Grid item xs={12} sx={{padding: '0 !important',margin: '0'}}>
+                    <Grid className="hero-grid-media-row" item xs={12} sx={{padding: '0 !important',margin: 'auto 0 0 0', justifyContent: 'flex-end'}}>
                         <MediaRowSection
                             title = "Discover Movies and TV Shows Based On Your Mood"
                             medias = {[...discoverMovies,...discoverTvShows]}
