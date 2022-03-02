@@ -8,16 +8,13 @@ export function MediaRowTitle({title}){
     );
 }
 
-export function MediaRowItems(){
+export function MediaRowItems({posters}){
     return(
         <Box className="media-row" sx={{
             display: 'grid', gridAutoFlow: 'columns', gridAutoColumns:'19%',
             padding: '1rem', margin: '1rem 0 0 0',
         }}>
-            {
-                
-                MediaPoster()
-            }     
+           {posters}   
         </Box>
     );
 }

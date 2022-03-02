@@ -1,7 +1,7 @@
 $color-black: #000;
 $color-white: #fff;
-$primary-black: #070707;
-$primary-purple: #4447E2;
+$primary-black: #131313;
+$primary-red: #E50914;
 
 
 $background-width: 100vw; 
@@ -22,3 +22,16 @@ $ft-xl: 20px;
 $ft-xxl: 22px;
 $ft-heading: 2rem;
 
+*,*::before,*::after{ padding:0; margin:0; }
+
+body{ 
+    // background: #151515;
+    background: #131313; display: grid; place-items: center;
+    font-family: $ft-sans;   line-height: 1.5;
+    overflow-x: hidden; 
+    // height: $background-height; width: $background-width;
+
+}
+
+
+// html{-ms-overflow-style: none;  scrollbar-width: none; }

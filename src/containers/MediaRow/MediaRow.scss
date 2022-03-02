@@ -1,0 +1,69 @@
+.media-container{
+    flex-grow: 1; margin: 0;  position:relative; margin: 3vw 0 0 0;
+    transition: transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, -webkit-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, -moz-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, -o-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s; 
+
+    .title-wrapper{ 
+        h2{
+            line-height: 1.25vw; font-size: clamp(1em, 3vw, 1.5em); font-weight: 400;
+        }
+      }
+
+    .media-row{
+        cursor: pointer; scroll-snap-type: mandatory; 
+
+
+        @media screen and (min-width: 680px){ grid-auto-columns:13%;} 
+        @media screen and (max-width: 1180px){
+            &::-webkit-scrollbar { display: none; }
+            -ms-overflow-style: none;  scrollbar-width: none; 
+        }
+
+        
+        display: grid; grid-auto-flow: column; 
+        grid-auto-columns:37%;
+        
+
+        gap: 1rem;
+        min-height: 10rem; scroll-behavior: smooth;
+        padding: 0 1rem; margin: 0; overflow-x: scroll; overflow-y: hidden;
+
+        .media-poster{  
+            margin: 1rem 0; position: relative;
+
+            .netflix-icon{ 
+                position: absolute; top: .5rem; left: .5rem; 
+                width: 5vw; height: 5vw;
+                @media screen and (min-width: 800px){ width: 2vw; height: 2vw; }
+            }
+        }
+        // .media-poster{ 
+        //     margin: 1rem 0; transition: transform 300ms ease;
+        //     display: grid; place-content: center;
+        //     // transform: perspective(30rem) rotateY(30deg) translateX(2rem);
+        //     scroll-snap-align: start; border-radius: 10px; filter: brightness(50%);
+
+        // }
+
+        // .active-poster{ 
+        //     margin: 0; filter: brightness(100%);
+        //     // transform: perspective(0) rotateY(0deg); 
+        //     transition: transform  outline 300ms ease-in-out 100ms;
+
+        //     // position: fixed;
+
+        //     &>img{outline: 3.5px solid #4447E2;}
+        // }
+
+       
+        
+        // .active-poster ~ .media-poster{ 
+        //     transform: perspective(30rem) rotateY(-30deg) translateX(-2rem);
+        // }
+        
+        // .media-poster:hover { transform: scale(1.35) !important;}
+        // .media-poster:hover .media-poster-content{ position: relative; visibility: visible;}
+        // .media-poster:hover .media-poster-image{ filter: brightness(40%); }
+        
+    }
+    
+}

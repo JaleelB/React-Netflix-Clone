@@ -4,8 +4,13 @@
 *::after,
 *::before { margin: 0; padding: 0; box-sizing: inherit; }
 
+.netflix-large-logo, .netflix-small-logo{ position: absolute; top: -.6rem; }
+.netflix-small-logo{width: 40px; height: 30px}; 
+.netflix-large-logo{width: 90px; }; 
+
 .nav{
     position: relative; margin-left: auto; color: $color-white;
+
 
     &-checkbox{display :none;}
     &-button{
@@ -17,7 +22,7 @@
     &-background {
         position:fixed; top: -3rem; right: 0;
         width: 3rem; height: 3rem;
-        border-radius: 50%;z-index: 1000; opacity: 1;
+        border-radius: 50%; z-index: 1000; opacity: 1;
         background-image: radial-gradient($primary-black, $primary-black);
         transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
     }
@@ -39,14 +44,15 @@
 
         &:link,
         &:visited {
-            display: inline-block; font-size: 2rem; font-weight: 300;
+            display: inline-block; font-size: 1.8rem; font-weight: 300;
             padding: 1rem 2rem; color: $color-white;
             text-decoration: none; text-transform: uppercase;
             
+            @media screen and (min-width: 800px) { font-size: 2.5rem; }
         }
         
         &:hover,
-        &:active { background-position: 100%; color: $primary-purple; transform: translateX(1rem);}
+        &:active { background-position: 100%; color: $primary-red; transform: translateX(1rem);}
 
     }
 
@@ -59,7 +65,7 @@
 
         &,
         &::before,
-        &::after { background-color: $primary-purple; display: inline-block; }
+        &::after { background-color: $color-white; display: inline-block; }
 
         &::before,
         &::after { width: 1rem; height: 2px; content: ""; position: absolute;  transition: all .2s; }
@@ -82,5 +88,5 @@
 }
 
 .full-nav{
-    position: fixed; right: 1rem;
+    position: fixed; right: 1rem; top: 1rem;
 }
