@@ -5,7 +5,7 @@ import '../../containers/Header/Header.scss';
 const HeaderDescription = ({description}) => {
     return (
         <Box className="header__description-wrapper" sx={{
-                maxWidth: '450px', display:{xs: 'none', sm: 'block'}
+                maxWidth: '650px', display:{xs: 'none', sm: 'block'}
             }}
         >
             <Typography 

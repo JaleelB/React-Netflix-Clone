@@ -24,7 +24,7 @@
         
 
         gap: 1rem;
-        min-height: 10rem; scroll-behavior: smooth;
+        scroll-behavior: smooth;
         padding: 0 1rem; margin: 0; overflow-x: scroll; overflow-y: hidden;
 
         .media-poster{  
@@ -35,34 +35,11 @@
                 width: 5vw; height: 5vw;
                 @media screen and (min-width: 800px){ width: 2vw; height: 2vw; }
             }
+
+            &:hover { transform: scale(1.4); transition: all 500ms ease-in-out 100ms; z-index: 4; }
         }
-        // .media-poster{ 
-        //     margin: 1rem 0; transition: transform 300ms ease;
-        //     display: grid; place-content: center;
-        //     // transform: perspective(30rem) rotateY(30deg) translateX(2rem);
-        //     scroll-snap-align: start; border-radius: 10px; filter: brightness(50%);
-
-        // }
-
-        // .active-poster{ 
-        //     margin: 0; filter: brightness(100%);
-        //     // transform: perspective(0) rotateY(0deg); 
-        //     transition: transform  outline 300ms ease-in-out 100ms;
-
-        //     // position: fixed;
-
-        //     &>img{outline: 3.5px solid #4447E2;}
-        // }
-
-       
         
-        // .active-poster ~ .media-poster{ 
-        //     transform: perspective(30rem) rotateY(-30deg) translateX(-2rem);
-        // }
         
-        // .media-poster:hover { transform: scale(1.35) !important;}
-        // .media-poster:hover .media-poster-content{ position: relative; visibility: visible;}
-        // .media-poster:hover .media-poster-image{ filter: brightness(40%); }
         
     }
     

@@ -10,6 +10,8 @@ const Header = ({movie}) => {
     //     return value;
     // };
 
+    console.table(movie);
+
     return (
         
         <Box className="header" sx={{ 
@@ -19,8 +21,9 @@ const Header = ({movie}) => {
             <Box className="header__cta-text-wrapper">
                     {/* <HeaderTitle title={movie['title'] !== undefined ? movie?.title : movie?.name}/> */}
                     {/* <HeaderTitle title={movie[handleObjectNameKey(movie)]}/> */}
+                    {/* <HeaderTitle title={movie}/> */}
                     <HeaderDescription description={movie?.overview}/>
-                    <Box className="header__button-container">
+                    <Box className="header__button-container" id="button-container">
                        <Button variant="outlined" className="header__button-play">Play Trailer</Button>
                         <Button variant="outlined" className="header__button-details">View Info</Button>
                     </Box> 
@@ -32,7 +35,3 @@ const Header = ({movie}) => {
 
 export default Header;
 
-
-//<Select labelId="demo-simple-select-label" id="demo-simple-select" value={age} onChange={handleChange} > 
-// {objTest.length && objTest.map(myList => { return( <MenuItem key = {myList.ClientDatabase} value = {myList} > {myList.ClientName} + {myList.Site} </MenuItem> ) })} 
-//</Select>

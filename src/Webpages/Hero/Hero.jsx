@@ -4,7 +4,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {apiComponents} from '../../components';
-import { MediaRowSection, Header } from '../../containers';
+import { MediaRowContainer, Header } from '../../containers';
 
 const Hero = () => {
     
@@ -62,19 +62,20 @@ const Hero = () => {
             <Box className="inner">
 
                 <Header movie = {originals[Math.floor(Math.random() * originals.length)]}/>
-                <MediaRowSection
+                <MediaRowContainer
                     title = "Netflix Original Shows"
+                    netflixOriginal
                     medias = { originals }
                 />
-                <MediaRowSection
+                <MediaRowContainer
                     title = "Most Users Loved These Shows"
                     medias = { popular }
                 />
-                <MediaRowSection
+                <MediaRowContainer
                     title = "Trending Shows"
                     medias = { trending }
                 />
-                <MediaRowSection
+                <MediaRowContainer
                     title = "Most Loved Shows Of All Time"
                     medias = { topRated }
                 />
