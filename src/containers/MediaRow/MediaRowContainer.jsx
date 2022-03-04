@@ -6,7 +6,7 @@ import MediaRow from '../../components/MediaRowComponents/MediaRow';
 import MediaRowTitle from '../../components/MediaRowComponents/MediaRowTitle';
 import './MediaRow.scss'
 
-const MediaRowContainer = ({title, medias, netflixOriginal}) => {
+const MediaRowContainer = ({title, medias, netflixOriginal,largeRow}) => {
     
     //determines which poster is active based on the id of the poster component
     const [activeId, setActiveId] = useState(null); 
@@ -39,7 +39,7 @@ const MediaRowContainer = ({title, medias, netflixOriginal}) => {
         }}>
 
             <MediaRowTitle title={title}/>
-            <MediaRow medias={medias} netflixOriginal={netflixOriginal}/>
+            <MediaRow medias={medias} netflixOriginal={netflixOriginal} largeRow={largeRow}/>
              
         </Box> 
     )

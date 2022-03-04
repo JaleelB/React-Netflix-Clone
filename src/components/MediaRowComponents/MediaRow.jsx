@@ -3,9 +3,9 @@ import React from 'react';
 import MediaPoster from './MediaPoster';
 import '../../containers/MediaRow/MediaRow.scss';
 
-const MediaRow = ({medias, netflixOriginal}) => {
+const MediaRow = ({medias, netflixOriginal,largeRow}) => {
     return (
-        <Box className="media-row" >
+        <Box className={`media-row ${largeRow ? 'large-row' : '' }`} >
 
             {
                 medias && medias.map((media) => {

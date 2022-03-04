@@ -66,6 +66,8 @@ export default function Nav() {
                 
 
               </Box>
+
+              <Box sx={{display: {xs: 'none', md: 'block'}}} className="nav-avatar-wrapper"> <img className="nav-avatar" src="https://i.pinimg.com/originals/0d/dc/ca/0ddccae723d85a703b798a5e682c23c1.png" alt="Avatar"/> </Box>
                   
               <Box className="full-nav" sx={{display: {xs: 'none', md: 'flex'}, gap: '1rem'}}>
                     <Box className="full-nav-item">
@@ -77,6 +79,8 @@ export default function Nav() {
                         </Box>
                     ))}
               </Box>
+
+              
 
           </Box>
 

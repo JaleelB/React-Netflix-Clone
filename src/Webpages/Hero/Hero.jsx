@@ -59,12 +59,14 @@ const Hero = () => {
                 // background: `url(${activeBackground}) no-repeat `,
                 // backgroundSize: 'cover !important'
             }}>
+            
+            <Header movie = {originals[Math.floor(Math.random() * originals.length)]}/>
             <Box className="inner">
 
-                <Header movie = {originals[Math.floor(Math.random() * originals.length)]}/>
                 <MediaRowContainer
                     title = "Netflix Original Shows"
                     netflixOriginal
+                    largeRow
                     medias = { originals }
                 />
                 <MediaRowContainer
@@ -72,7 +74,7 @@ const Hero = () => {
                     medias = { popular }
                 />
                 <MediaRowContainer
-                    title = "Trending Shows"
+                    title = "Trending Shows Today"
                     medias = { trending }
                 />
                 <MediaRowContainer

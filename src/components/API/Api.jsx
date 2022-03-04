@@ -8,6 +8,7 @@ const apiComponents = [
         on_tv: "/tv/on-the-air",
         trending: "/trending/all/day",
         discover_movie: "/discover/movie",
+        discover_tv: "/discover/tv",
         originals: `/discover/tv?api_key=df7dbf24a32b1fff30834fc68ab0ce25&with_networks=213`,
     },
     [

@@ -12,7 +12,7 @@ const HeaderDescription = ({description}) => {
                 className="header__description"
                 variant="h6" 
                 component="h5"
-                sx={{color :'#fff', lineHeight: '1.4', fontWeight: 400}}
+                sx={{color :'#fff', lineHeight: '1.4', fontWeight: 400, textShadow: '2px 2px 4px rgb(0 0 0 / 45%)'}}
             >
                 {description}
             </Typography>

@@ -11,10 +11,9 @@
 .nav{
     position: relative; margin-left: auto; color: $color-white;
 
-
     &-checkbox{display :none;}
     &-button{
-        position:fixed; top: .25rem; right: .5rem;
+        position:fixed; top: .25rem; right: .2rem;
         width: 3rem; height: 3rem; z-index: 2000;
         text-align: center; cursor: pointer; border-radius: 50%;        
     }
@@ -85,8 +84,13 @@
     &-checkbox:checked + &-button &-icon::before { top: 0; transform: rotate(135deg); }
     &-checkbox:checked + &-button &-icon::after { top: 0; transform: rotate(-135deg); }
 
+
+    &-avatar-wrapper{ 
+        position: fixed; right: 1rem; top: 1rem; 
+
+        .nav-avatar{ width: 32px; height: 32px; object-fit: contain;}
+    }
+
 }
 
-.full-nav{
-    position: fixed; right: 1rem; top: 1rem;
-}
+.full-nav{ position: fixed; left: 10rem; top: 1.3rem; }
