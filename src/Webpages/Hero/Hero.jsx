@@ -4,7 +4,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {apiComponents} from '../../components';
-import { MediaRowContainer, Header } from '../../containers';
+import { MediaRowContainer, Billboard } from '../../containers';
 
 const Hero = () => {
     
@@ -48,7 +48,7 @@ const Hero = () => {
   
     }, []);
 
-    // const handleBackgroundChange = (background) => {setActiveBackground(background);}
+    const randomNum = Math.floor(Math.random() * originals.length);
 
     return (
         <Box id="hero" sx={{
@@ -59,8 +59,12 @@ const Hero = () => {
                 // background: `url(${activeBackground}) no-repeat `,
                 // backgroundSize: 'cover !important'
             }}>
-            
-            <Header movie = {originals[Math.floor(Math.random() * originals.length)]}/>
+            {/* use fuse js for live searching an array for search tab of projecct */}
+            <Billboard 
+                movie = {originals[randomNum]} 
+                // title={originals[randomNum]['title'] ? originals[randomNum].title : originals[randomNum].name}
+            />
+
             <Box className="inner">
 
                 <MediaRowContainer

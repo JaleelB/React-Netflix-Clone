@@ -1,5 +1,5 @@
 .media-container{
-    flex-grow: 1; margin: 0;  margin: 3vw 0 0 0; padding: 0 0 0 3%;
+    flex-grow: 1; margin: 0;  margin: 3vw 0 0 0; padding: 0 0 0 3%; position: relative;
     transition: transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, -webkit-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, -moz-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, -o-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s; 
 
     .title-wrapper{ 
@@ -12,8 +12,9 @@
         cursor: pointer; scroll-snap-type: mandatory; 
 
 
-        @media screen and (min-width: 680px){ grid-auto-columns:13%;} 
-        @media screen and (max-width: 1180px){
+        @media screen and (min-width: 680px){ grid-auto-columns:15%;} 
+        @media screen and (min-width: 2000px){ grid-auto-columns:9%;} 
+        @media screen and (max-width: 180px){
             &::-webkit-scrollbar { display: none; }
             -ms-overflow-style: none;  scrollbar-width: none; 
         }
@@ -35,6 +36,7 @@
                 position: absolute; top: .5rem; left: .5rem; 
                 width: 5vw; height: 5vw;
                 @media screen and (min-width: 800px){ width: 2vw; height: 2vw; }
+                @media screen and (min-width: 2000px){ width: 1.3vw; height: 1.3vw; }
             }
 
             &:hover { 

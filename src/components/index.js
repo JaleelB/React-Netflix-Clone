@@ -4,6 +4,6 @@
 export {default as Nav} from './Navbar/Nav';
 export {default as NavRoutes} from './Navbar/NavRoutes';
 export {default as apiComponents} from './API/Api.jsx';
-export {default as HeaderDescription} from './HeaderComponents/HeaderDescription';
-export {default as HeaderTitle} from './HeaderComponents/HeaderTitle';
-export {default as HeaderVideo} from './HeaderComponents/HeaderVideo';
+export {default as BillboardDescription} from './BillboardComponents/BillboardDescription';
+export {default as BillboardTitle} from './BillboardComponents/BillboardTitle';
+export {default as BillboardVideo} from './BillboardComponents/BillboardVideo';
