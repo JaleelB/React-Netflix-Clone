@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import {BillboardTitle, BillboardDescription, BillboardVideo } from '../../components';
 import {apiComponents} from '../../components';
 import './Billboard.scss';
@@ -47,6 +47,10 @@ const Billboard = ({movie, title}) => {
                     <BillboardTitle title={movie?.name}/>
                     {/* <BillboardVideo source={``}/> */}
                     {/* <h1>{movie?.name}</h1> */}
+                    <Box sx={{display: 'flex', gap: '1rem'}}>
+                        <img style={{width: '2vw', height: '2vw'}} className="netflix-icon" src="https://cdn.icon-icons.com/icons2/2699/PNG/512/netflix_logo_icon_170919.png" alt="Netflix Icon"/>
+                        <Typography sx={{color :'#fff'}}>Netflix Original</Typography>
+                    </Box>
                     <BillboardDescription description={movie?.overview}/>
                     
                     <Box className="billboard__button-container" >

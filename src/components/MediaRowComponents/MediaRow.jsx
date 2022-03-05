@@ -20,6 +20,8 @@ const MediaRow = ({medias, netflixOriginal,largeRow}) => {
                 })   
             }
 
+            <Box class="cover-bar"></Box>
+
         </Box>
     )
 }

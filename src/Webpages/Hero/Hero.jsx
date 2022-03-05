@@ -3,7 +3,7 @@ import './Hero.scss';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {apiComponents} from '../../components';
+import {apiComponents, Footer} from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
 
 const Hero = () => {
@@ -12,6 +12,7 @@ const Hero = () => {
     const [popular, setPopular] = useState([]);
     const [trending, setTrending] = useState([]);
     const [topRated, setTopRated] = useState([]);
+    const [actionThriller, setActionThriller] = useState([]);
    
     useEffect(() => {
 
@@ -45,10 +46,16 @@ const Hero = () => {
         })
         .catch(error => { console.log(error) })
         
+        axios
+        .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&with_networks=213&with_genres=28&53&12`)
+        .then((res)=> {
+            setActionThriller(res.data.results)
+        })
+        .catch(error => { console.log(error) })
   
     }, []);
 
-    const randomNum = Math.floor(Math.random() * originals.length);
+    
 
     return (
         <Box id="hero" sx={{
@@ -61,7 +68,7 @@ const Hero = () => {
             }}>
             {/* use fuse js for live searching an array for search tab of projecct */}
             <Billboard 
-                movie = {originals[randomNum]} 
+                movie = {originals[Math.floor(Math.random() * originals.length)]} 
                 // title={originals[randomNum]['title'] ? originals[randomNum].title : originals[randomNum].name}
             />
 
@@ -85,8 +92,15 @@ const Hero = () => {
                     title = "Most Loved Shows Of All Time"
                     medias = { topRated }
                 />
+                <MediaRowContainer
+                    title = "Action Thrillers"
+                    medias = { actionThriller }
+                />
     
             </Box>
+
+            <Footer/>
+            
         </Box>
     );
 }

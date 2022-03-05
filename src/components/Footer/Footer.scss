@@ -1,0 +1,29 @@
+@import '../../mainStyles';
+
+.footer{
+    max-width: 980px; margin: 20px auto 2%; padding: 0 5%;
+    color: grey; 
+
+    .footer__social-media-links{
+        display: flex; gap: 1rem; 
+        
+        .footer__social-media-link{color: white; margin: 0 0 3% 0; height: 25px; width: 36px;}
+    }
+
+    .footer__links-wrapper{
+        display: flex; flex-direction: row; align-items: flex-start;     flex-wrap: wrap;
+        -webkit-box-align: start; -webkit-box-orient: horizontal; -webkit-box-direction: normal;
+        margin: 0 0 14px 0; font-size: 13px; padding: 0;
+
+        .footer__link-wrapper{ 
+            list-style-type: none; margin-bottom: 16px;
+            -webkit-box-flex: 0; -webkit-flex: 0 0 50%; -moz-box-flex: 0; -ms-flex: 0 0 50%; flex: 0 0 50%;
+            -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
+            
+            @media screen and (min-width: 800px){  -webkit-flex-basis: 25%; -ms-flex-preferred-size: 25%; flex-basis: 25%; }
+
+            .footer__link{ color: grey; text-decoration: none; cursor: pointer; }
+        } 
+       
+    }
+}

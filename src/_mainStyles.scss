@@ -29,7 +29,9 @@ body{
     background: $primary-black; display: grid; place-items: center;
     font-family: $ft-sans;   line-height: 1.5;
     overflow-x: hidden; 
-    // height: $background-height; width: $background-width;
+    
+    &::-webkit-scrollbar { background-color: transparent;  width: 10px; }
+    &::-webkit-scrollbar-thumb { background-color: $primary-red; border-radius: 10px;}
 
 }
 
