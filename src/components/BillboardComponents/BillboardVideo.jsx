@@ -1,8 +1,10 @@
 import { Box } from '@mui/material';
 import React, { useState, useEffect, useRef } from 'react';
-import YouTube from 'react-youtube';
+// import YouTube from 'react-youtube';
+import ReactPlayer from 'react-player/youtube'
 
-const BillboardVideo = ({source}) => {
+
+const BillboardVideo = ({source, playState}) => {
 
     const videoCanvas = useRef(null);
     const[videoWidth, setVideoWidth] = useState();
@@ -19,20 +21,24 @@ const BillboardVideo = ({source}) => {
 
     }
 
-    useEffect(() => { handleWindowResize(); }, [videoCanvas.current]);
+    useEffect(() => { handleWindowResize(); }, []);
     useEffect(() => { window.addEventListener("resize", handleWindowResize); }, []);
-    
-    const opts = {
-        height: `${videoHeight}`,
-        width: `${videoWidth}`,
-        playerVars: {
-          autoplay: 1,
-        },
-    };
 
     return (
         <Box className="billboard__video-wrapper" ref={videoCanvas} >
-            {source && <YouTube videoId={source}  containerClassName={'billboard__video'} opts={opts} title=''/>}
+
+             { source && <ReactPlayer
+                            className='billboard__video-container'
+                            url={`https://www.youtube.com/watch?v=${source}?modestbranding=1&showinfo=0`}
+                            width={videoWidth}
+                            height={videoHeight}
+                            config={{
+                                youtube: {
+                                  playerVars: { showinfo: 0 }
+                                }
+                              }}
+                            playing={playState}
+                        /> }           
         </Box>
     )
 }

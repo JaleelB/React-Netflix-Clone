@@ -1,5 +1,5 @@
 // import * as React from 'react';
-import { AppBar,Typography,Toolbar,Box} from '@mui/material';
+import { AppBar,Toolbar,Box} from '@mui/material';
 import React, { useState } from "react";
 import './Nav.scss'
 import { Link } from "react-router-dom";
