@@ -39,7 +39,7 @@ const MediaRowContainer = ({title, medias, netflixOriginal,largeRow}) => {
         }}>
 
             <MediaRowTitle title={title}/>
-            <MediaRow medias={medias} netflixOriginal={netflixOriginal} largeRow={largeRow}/>
+            {medias &&  <MediaRow medias={medias} netflixOriginal={netflixOriginal} largeRow={largeRow}/> }
              
         </Box> 
     )

@@ -1,13 +1,38 @@
 import { Box } from '@mui/material';
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react';
+import YouTube from 'react-youtube';
 
 const BillboardVideo = ({source}) => {
+
+    const videoCanvas = useRef(null);
+    const[videoWidth, setVideoWidth] = useState();
+    const[videoHeight, setVideoHeight] = useState();
+
+    const handleWindowResize = () => { 
+
+        if(videoCanvas && videoCanvas.current){
+            const width = videoCanvas.current.clientWidth;
+            const height = videoCanvas.current.clientHeight;
+            setVideoWidth(width);
+            setVideoHeight(height); 
+        }
+
+    }
+
+    useEffect(() => { handleWindowResize(); }, [videoCanvas.current]);
+    useEffect(() => { window.addEventListener("resize", handleWindowResize); }, []);
+    
+    const opts = {
+        height: `${videoHeight}`,
+        width: `${videoWidth}`,
+        playerVars: {
+          autoplay: 1,
+        },
+    };
+
     return (
-        <Box className="billboard__video-wrapper" sx={{display: {xs: 'none', lg: 'block'}}}>
-            <video autoplay muted loop id="header-video">
-                <source src={source} type="video/mp4"/>
-                Your browser does not support HTML5 video.
-            </video>
+        <Box className="billboard__video-wrapper" ref={videoCanvas} >
+            {source && <YouTube videoId={source}  containerClassName={'billboard__video'} opts={opts} title=''/>}
         </Box>
     )
 }

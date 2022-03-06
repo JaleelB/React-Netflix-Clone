@@ -6,10 +6,10 @@ const BillboardTitle = ({title}) => {
     return (
         <Box className="billboard__title-wrapper">
             <Typography 
-                variant="h2" 
+                variant="h3" 
                 component="h1" 
                 className="billboard__image-title"
-                sx={{color :'#fff'}}
+                sx={{color :'#fff', fontWeight: 500, textTransform:'uppercase'}}
             >
                 {title}
             </Typography>

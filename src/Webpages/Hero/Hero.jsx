@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import './Hero.scss';
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import {apiComponents, Footer} from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
@@ -13,10 +13,10 @@ const Hero = () => {
     const [trending, setTrending] = useState([]);
     const [topRated, setTopRated] = useState([]);
     const [actionThriller, setActionThriller] = useState([]);
+    const [newReleases, setNewReleases] = useState([]);
+    
    
     useEffect(() => {
-
- 
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].originals}?api_key=${apiComponents[1]}&with_networks=213`)
@@ -52,25 +52,35 @@ const Hero = () => {
             setActionThriller(res.data.results)
         })
         .catch(error => { console.log(error) })
+
+        axios
+        .get(`${apiComponents[0]}${apiComponents[2].latest_releases}?api_key=${apiComponents[1]}&language=en-US`)
+        .then((res)=> {
+            setNewReleases(res.data.results)
+        })
+        .catch(error => { console.log(error) })
+
   
     }, []);
 
-    
 
+    let randNum = useRef(null);
+    const generateRandNum = () => {
+        if(randNum.current === null) randNum.current = Math.floor(Math.random() * originals.length);
+        return randNum.current;
+    };
+
+
+  
     return (
         <Box id="hero" sx={{
                 // paddingLeft: 'calc(3.5vw + 24px)', 
                 background: '#131313'
-                // , position: "relative"
-                // padding: 0,
-                // background: `url(${activeBackground}) no-repeat `,
-                // backgroundSize: 'cover !important'
             }}>
             {/* use fuse js for live searching an array for search tab of projecct */}
-            <Billboard 
-                movie = {originals[Math.floor(Math.random() * originals.length)]} 
-                // title={originals[randomNum]['title'] ? originals[randomNum].title : originals[randomNum].name}
-            />
+            {/* <Billboard movie = {originals[Math.floor(Math.random() * originals.length)]}/> */}
+            <Billboard movie = {originals[generateRandNum()]}/>
+            {/* <Billboard movies = {originals}/> */}
 
             <Box className="inner">
 
@@ -85,8 +95,12 @@ const Hero = () => {
                     medias = { popular }
                 />
                 <MediaRowContainer
-                    title = "Trending Shows Today"
+                    title = "Trending Now"
                     medias = { trending }
+                />
+                <MediaRowContainer
+                    title = "New Releases"
+                    medias = { newReleases }
                 />
                 <MediaRowContainer
                     title = "Most Loved Shows Of All Time"
