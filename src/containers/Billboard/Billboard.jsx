@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 import {BillboardTitle, BillboardDescription, BillboardVideo } from '../../components';
 import {apiComponents} from '../../components';
 import './Billboard.scss';
-import { PlayArrow, Pause } from '@mui/icons-material';
+import { PlayArrow, Pause, VolumeOff, VolumeUp } from '@mui/icons-material';
 
 const Billboard = ({movie}) => {
 
     
     const [videoPath, setVideoPath] = useState('');
     const [videoPlay, setVideoPlay] = useState(true);
+    const [volumeMute, setVolumeMute] = useState(true);
     const[deviceWindowWidth, setDeviceWindowWidth] = useState(window.innerWidth);
 
     const handleWindowResize = () => { setDeviceWindowWidth(window.innerWidth) }
@@ -49,7 +50,7 @@ const Billboard = ({movie}) => {
             
             <Box className="billboard__fade-top"></Box>
 
-            {deviceWindowWidth > 758 && videoPath ? <BillboardVideo source={videoPath} playState={videoPlay}/> : null }
+            {deviceWindowWidth > 1200 && videoPath ? <BillboardVideo source={videoPath} playState={videoPlay} muteStatus={volumeMute}/> : null }
 
             <Box className="billboard__cta-text-wrapper">
 
@@ -76,6 +77,14 @@ const Billboard = ({movie}) => {
 
                     </Box> 
             </Box> 
+
+            <Box className="billboard__volume-rating-conatiner">
+                <IconButton className="billboard__volume-toggle" onClick={()=> setVolumeMute(!volumeMute)}>
+                    { volumeMute ? <VolumeOff/> : <VolumeUp/> }
+                </IconButton>
+                <Box className="billboard__maturity-rating">TV-14</Box>
+            </Box>
+
             <Box className="billboard__fade-bottom"></Box>
            
         </Box>

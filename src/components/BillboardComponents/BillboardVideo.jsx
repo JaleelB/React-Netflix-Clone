@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactPlayer from 'react-player/youtube'
 
 
-const BillboardVideo = ({source, playState}) => {
+const BillboardVideo = ({source, playState, muteStatus}) => {
 
     const videoCanvas = useRef(null);
     const[videoWidth, setVideoWidth] = useState();
@@ -38,6 +38,8 @@ const BillboardVideo = ({source, playState}) => {
                                 }
                               }}
                             playing={playState}
+                            volume='1'
+                            muted={muteStatus}
                         /> }           
         </Box>
     )
