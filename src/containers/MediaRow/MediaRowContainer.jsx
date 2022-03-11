@@ -1,19 +1,16 @@
 import { Box } from '@mui/material';
 import React from 'react';
-import MediaRow from '../../components/MediaRowComponents/MediaRow';
-import MediaRowTitle from '../../components/MediaRowComponents/MediaRowTitle';
+import {MediaRowWrapper, MediaRowTitle } from '../../components';
 import './MediaRow.scss'
 
-const MediaRowContainer = ({title, medias, netflixOriginal,largeRow}) => {
+const MediaRowContainer = ({title, medias, netflixOriginal}) => {
+
     
     return (
-        <Box className="media-container" sx={{
-            // margin: '0 auto', overflow: 'hidden', 
-            // position:'relative'
-        }}>
+        <Box className="media-container" >
 
             <MediaRowTitle title={title}/>
-            {medias &&  <MediaRow medias={medias} netflixOriginal={netflixOriginal} largeRow={largeRow}/> }
+            {medias &&  <MediaRowWrapper medias={medias} netflixOriginal={netflixOriginal} /> }
              
         </Box> 
     )

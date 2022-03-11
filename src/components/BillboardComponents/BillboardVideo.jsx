@@ -29,17 +29,23 @@ const BillboardVideo = ({source, playState, muteStatus}) => {
 
              { source && <ReactPlayer
                             className='billboard__video-container'
-                            url={`https://www.youtube.com/watch?v=${source}?modestbranding=1&showinfo=0`}
+                            // url={`https://www.youtube.com/ watch?v=${source}?modestbranding=1&showinfo=0&rel=0&fs=0`}
+                            url={`https://www.youtube.com/embed/${source}?modestbranding=1&rel=0&fs=0`}
                             width={videoWidth}
                             height={videoHeight}
                             config={{
                                 youtube: {
-                                  playerVars: { showinfo: 0 }
+                                  playerVars: { 
+                                      showinfo: 0,
+                                      disablekb: 1 
+                                    }
                                 }
                               }}
                             playing={playState}
-                            volume='1'
+                            volume={1}
                             muted={muteStatus}
+                            controls={true}
+                            loop={true}
                         /> }           
         </Box>
     )

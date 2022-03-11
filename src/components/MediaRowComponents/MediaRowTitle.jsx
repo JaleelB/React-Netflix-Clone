@@ -4,7 +4,7 @@ import '../../containers/MediaRow/MediaRow.scss';
 
 const MediaRowTitle = ({title}) => {
     return (
-        <Box className="title-wrapper" sx={{padding: '0 1rem'}}>
+        <Box className="title-wrapper" >
             <h2 className="media-row-title" style={{color: '#fff'}}>{title}</h2>
         </Box>
     )

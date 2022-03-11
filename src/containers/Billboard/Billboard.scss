@@ -7,7 +7,7 @@
     margin: 0;
 
     @media screen and (min-width: 1200px) { height: 90vh; }
-    @media screen and (min-width: 600px) and (max-width: 1199px){ height: 70vh; }
+    // @media screen and (min-width: 600px) and (max-width: 1199px){ height: 70vh; }
 
     @media screen and (max-width: 600px) { 
         display: flex; justify-content: center;  align-items: center; 
@@ -19,12 +19,6 @@
         position: absolute; height: 100%; width: 60%; left: 0;
         background: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,0.6) 90%)
     }
-
-    // .billboard__hero-image-wrapper{ 
-    //     width: 100%; height :90%; position: relative;
-
-    //     .billboard__hero-image{ inline-size: 100%; object-fit: cover;}
-    // }
 
     &__fade-top{ 
         position: absolute; left:0; top: 0rem; padding: 0; margin:0;
@@ -41,9 +35,11 @@
     &__cta-text-wrapper{
         margin: auto 0; display: grid; gap: 1.5vw; padding: 0 3%; z-index: 2;
         @media screen and (max-width: 699px) { margin: auto 0 20% 0; }
+        @media screen and (max-height: 450px) { margin: auto 0; }
 
         .billboard__title-wrapper{
-            @media screen and (max-width: 599px) { display: grid; place-content: center; }
+            max-width: 300px;
+            @media screen and (max-width: 599px) { display: grid; place-content: center; text-align: center;}
             &__image-title{
                 text-transform: uppercase; color: $color-white; 
             }
@@ -59,6 +55,8 @@
         
         .billboard__description-wrapper{
             max-width: 650px;
+            @media screen and (max-height: 450px) { display: none; }
+
             .billboard__description{ color:$color-white; font-size: clamp(1rem, 1.4vw, 2rem); line-height: 1.4; font-weight: 300; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45); }
         }
 
@@ -80,12 +78,17 @@
     }
 
     &__volume-rating-conatiner{
-        margin: auto 0 auto auto; 
+
+        position: absolute; right: 0; bottom: 35%;
         display: flex; gap: 1rem; -webkit-box-align: center; align-items: center;
+        -webkit-box-pack: end; justify-content: flex-end; -webkit-box-align: center;
         z-index: 2; color: $color-white;
 
         .billboard__volume-toggle{
+            width: 2.4vw; height: 2.4vw;
             border: 3px solid $color-white; color: $color-white;
+
+            .billboard__volume-icon{width: 1.4vw; height: 1.4vw;}
         }
 
         .billboard__maturity-rating{
