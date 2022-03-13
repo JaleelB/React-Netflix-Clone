@@ -1,13 +1,8 @@
 @import '../../mainStyles';
 
-
-
-.big-heading{font-size: clamp(30px, 4vw, 60px);}
-.stacked{display: grid;}
-.stacked > * {grid-column: 1 / 2; grid-row: 1 / 2;}
-
 #hero{
     width: $background-width; transition: background 300ms ease; overflow:hidden;
+    position: relative;
 
     .inner{ 
         width: 100%;  min-height: 1000px; display:flex; flex-direction: column;  

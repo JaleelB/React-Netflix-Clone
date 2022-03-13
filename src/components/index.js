@@ -11,3 +11,4 @@ export {default as BillboardDescription} from './BillboardComponents/BillboardDe
 export {default as BillboardTitle} from './BillboardComponents/BillboardTitle';
 export {default as BillboardVideo} from './BillboardComponents/BillboardVideo';
 export {default as Footer} from './Footer/Footer';
+export {default as PosterPreviewPopup} from './PosterPreviewPopup/PosterPreviewPopup';

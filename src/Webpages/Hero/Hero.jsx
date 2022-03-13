@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
 import './Hero.scss';
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {apiComponents, Footer} from '../../components';
+import {apiComponents, Footer } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
 
 const Hero = () => {
@@ -14,7 +14,6 @@ const Hero = () => {
     const [topRated, setTopRated] = useState([]);
     const [actionThriller, setActionThriller] = useState([]);
     const [newReleases, setNewReleases] = useState([]);
-    
    
     useEffect(() => {
 
@@ -62,15 +61,6 @@ const Hero = () => {
 
   
     }, []);
-
-
-    let randNum = useRef(null);
-    const generateRandNum = () => {
-        if(randNum.current === null) randNum.current = Math.floor(Math.random() * originals.length);
-        return randNum.current;
-    };
-
-
   
     return (
         <Box id="hero" sx={{
@@ -79,7 +69,7 @@ const Hero = () => {
             }}>
             {/* use fuse js for live searching an array for search tab of projecct */}
             {/* <Billboard movie = {originals[Math.floor(Math.random() * originals.length)]}/> */}
-            <Billboard movie = {originals[generateRandNum()]}/>
+            <Billboard movie = {originals[2]}/>
             {/* <Billboard movies = {originals}/> */}
 
             <Box className="inner">
@@ -87,7 +77,6 @@ const Hero = () => {
                 <MediaRowContainer
                     title = "Netflix Original Shows"
                     netflixOriginal
-                    largeRow
                     medias = { originals }
                 />
                 <MediaRowContainer

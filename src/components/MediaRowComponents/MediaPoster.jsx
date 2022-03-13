@@ -1,16 +1,50 @@
 import { Box, Link } from '@mui/material';
 import React, { useState, useEffect } from 'react';
+import {apiComponents} from '../../components';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaPoster = ({posterPath, name, netflixOriginal, posterRef, updatePosterWidth}) => {
+const MediaPoster = ({popupProps, rowContainerRef, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs}) => {
 
-    // const[isHovered, setIsHovered] = useState(false);
+    const { 
+        setIsHovered,
+        setCardPopupWidth,
+        setCardPopupHeight,
+        setDelayed,
+        setDelayHandler,
+        setPosterIndex,
+        setGenres,
+        isHovered,
+        delayHandler,
+        delayed
+    } = popupProps;
     
     useEffect(()=>{
         updatePosterWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
     },[posterRef.current])
 
+    const getGenres = () => {
+
+        const genres = [];
+
+        for(let genreItem in genreIDs){
+            for(let i=0; i<apiComponents[3].length; i++){
+                if(genreIDs[genreItem] in apiComponents[3][i]) genres.push(apiComponents[3][i][`${genreIDs[genreItem]}`])
+            }
+        }
+
+        return genres;
+    };
+
+    const handleDelayOnMouseEnter = event => {
+        setDelayHandler(setTimeout(() => {
+            setDelayed(false)
+        }, 700))
+    }
+
+    const handleDelayOnMouseLeave = () => {
+        clearTimeout(delayHandler)
+    }
 
     return (
         // <Link>
@@ -18,13 +52,25 @@ const MediaPoster = ({posterPath, name, netflixOriginal, posterRef, updatePoster
                 className='media-poster stacked' 
                 sx={{width: '100%', height: '100%'}}
                 ref={posterRef}
-                // onMouseEnter={()=> setIsHovered(!isHovered)}
-                // onMouseLeave={()=> setIsHovered(!isHovered)}
+                onMouseEnter={()=>{
+                    handleDelayOnMouseEnter();
+                    setIsHovered(true);
+                    setCardPopupWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
+                    setCardPopupHeight(Math.floor(posterRef.current.getBoundingClientRect().height));
+                    setPosterIndex(index);
+                    setGenres(getGenres());
+                }}
+                onMouseLeave={()=> {
+                    handleDelayOnMouseLeave()
+                    setDelayed(true)
+                }}
             >
-                { netflixOriginal && posterPath && <img className="netflix-icon"src="https://cdn.icon-icons.com/icons2/2699/PNG/512/netflix_logo_icon_170919.png" alt="Netflix Icon"/> }
+                
                 <Box className="media-poster-image-wrapper">
+                    { netflixOriginal && posterPath && <img className="netflix-icon"src="https://cdn.icon-icons.com/icons2/2699/PNG/512/netflix_logo_icon_170919.png" alt="Netflix Icon"/> }
                     <img className="media-poster-image" draggable="false"  src={"https://image.tmdb.org/t/p/w500" + posterPath} alt={name}/>
                 </Box>
+
             </Box>
         // </Link>
     )

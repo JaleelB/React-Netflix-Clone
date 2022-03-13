@@ -4,20 +4,24 @@ import MediaPoster from './MediaPoster';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaRow = ({medias, wrapperRef, netflixOriginal,updateTotalPosters, distance, updateContainerWidth}) => {
+const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal }) => {
 
     const [posterWidth, setPosterWidth] = useState(0);
     
     const posterRef = useRef(null);
     const rowContainerRef = useRef(null);
 
+    const { setRowPadding, distance, setContainerWidth, setTotalPostersInView } = popupProps;
+
     useEffect(()=>{
         const rowPadding = window.getComputedStyle(rowContainerRef.current).getPropertyValue('padding-left');
         const rowPaddingValue = Number(rowPadding.substring(0, rowPadding.length - 3));
         const rowContainerWidth = wrapperRef.current.clientWidth - (rowPaddingValue * 2);
 
-        updateContainerWidth(Math.floor(rowContainerWidth));
-        updateTotalPosters(Math.floor(rowContainerWidth / posterWidth));
+        setContainerWidth(Math.floor(rowContainerWidth));
+        setRowPadding(Math.floor(rowPaddingValue));
+        setTotalPostersInView(Math.floor(rowContainerWidth / posterWidth));
+
         
     },[wrapperRef.current, rowContainerRef.current, posterWidth]);    
    
@@ -30,15 +34,19 @@ const MediaRow = ({medias, wrapperRef, netflixOriginal,updateTotalPosters, dista
             sx={{transform: `translate3d(${distance}px, 0, 0)`}}
         >
             {
-                medias && medias.map((media) => {
-                                
+                medias && medias.map((media, index) => {
+                    
                     return <MediaPoster
                                 updatePosterWidth = {setPosterWidth}
                                 posterRef={posterRef}
+                                rowContainerRef= {rowContainerRef}
                                 key={media.id}
                                 netflixOriginal={netflixOriginal}
                                 posterPath = {media.poster_path}
                                 name = {media.name}
+                                genreIDs = {media.genre_ids}
+                                popupProps = {popupProps}
+                                index = {index}
                             />
                                 
                 })   

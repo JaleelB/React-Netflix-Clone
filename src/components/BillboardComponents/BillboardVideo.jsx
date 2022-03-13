@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import React, { useState, useEffect, useRef } from 'react';
-// import YouTube from 'react-youtube';
 import ReactPlayer from 'react-player/youtube'
 
 
@@ -30,7 +29,7 @@ const BillboardVideo = ({source, playState, muteStatus}) => {
              { source && <ReactPlayer
                             className='billboard__video-container'
                             // url={`https://www.youtube.com/ watch?v=${source}?modestbranding=1&showinfo=0&rel=0&fs=0`}
-                            url={`https://www.youtube.com/embed/${source}?modestbranding=1&rel=0&fs=0`}
+                            url={`https://www.youtube.com/embed/${source}?modestbranding=1&rel=0&fs=0&autohide=1&showinfo=0&controls=0`}
                             width={videoWidth}
                             height={videoHeight}
                             config={{
