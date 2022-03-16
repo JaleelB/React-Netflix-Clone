@@ -16,24 +16,32 @@
        border-radius: 6px; background: $primary-black;
        z-index: 3; opacity: 1; transform-origin: center center;
 
-       .media-poster-trailer-player{
-           height: 60%; background: white;
+       .media-popup-container{
+           height: 60%; background: white; border-radius: 6px 6px 0 0;
+           background: $color-white;
+
+           .popup-container-title{ color: $color-white;  margin: auto 0 .5rem .5rem; z-index: 2; }
+           img { 
+               inline-size: 100%; object-fit: cover; 
+               height: 100%; border-radius: 6px 6px 0 0; 
+               filter: brightness(70%); 
+            }
        }
 
-       .media-poster-info{
-           height: 40%; background: grey;
+       .media-popup-info{
+           height: 40%;
            color: $color-white; 
 
            .button-controls-container{ 
                width: 100%; padding: .5rem .5rem 0;  margin-bottom: .25rem; display: flex;
 
                .popup-icon{
-                    min-width: 42px; min-height: 42px;
-                    max-width: 52px; max-height: 52px;
+                    min-width: 35px; min-height: 35px;
+                    max-width: 45px; max-height: 45px;
                     margin: .2rem;
                }
 
-               .details-button{ position:relative; margin-left: auto;}
+               .details-button{ position:relative; margin-left: auto; }
             }
 
             .genre-list{
@@ -42,7 +50,7 @@
                     list-style: none; display: flex; gap: .5rem; flex-wrap: wrap;
 
                     .genre{ 
-                        padding-right: 0.5vw; display: flex; align-items: center; font-size: 0.65vw;
+                        padding-right: 0.5vw; display: flex; align-items: center; font-size: 1rem;
 
                         .separator{
 

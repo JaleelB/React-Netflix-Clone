@@ -23,8 +23,7 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal }) => {
         setTotalPostersInView(Math.floor(rowContainerWidth / posterWidth));
 
         
-    },[wrapperRef.current, rowContainerRef.current, posterWidth]);    
-   
+    },[posterWidth, setContainerWidth, setRowPadding,  setTotalPostersInView]);    
 
     return (
 
@@ -42,9 +41,11 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal }) => {
                                 rowContainerRef= {rowContainerRef}
                                 key={media.id}
                                 netflixOriginal={netflixOriginal}
-                                posterPath = {media.poster_path}
-                                name = {media.name}
-                                genreIDs = {media.genre_ids}
+                                posterPath = {media?.poster_path}
+                                name = {media?.name ? media?.name : media?.title}
+                                genreIDs = {media?.genre_ids}
+                                backdrop = {media?.backdrop_path}
+                                id={media?.id}
                                 popupProps = {popupProps}
                                 index = {index}
                             />

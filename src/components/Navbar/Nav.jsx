@@ -1,6 +1,6 @@
 // import * as React from 'react';
 import { AppBar,Toolbar,Box} from '@mui/material';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './Nav.scss'
 import { Link } from "react-router-dom";
 
@@ -10,9 +10,23 @@ export default function Nav() {
   const pages = [ 'Search', 'Movies', 'TvShows', 'Saved'];
   const [checked, setChecked] = useState(false);
 
+  const [darkNavbar, setDarkNavbar] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        setDarkNavbar(true);
+      } else setDarkNavbar(false);
+    });
+
+    return () => {
+      window.removeEventListener("scroll");
+    };
+  }, []);
+
   return (
     <Box sx={{ flexGrow: 1}}>
-      <AppBar position="fixed" color="transparent" sx={{ boxShadow: 'none', color: 'white', zIndex: 33}}>
+      <AppBar position="fixed" sx={{ boxShadow: 'none', color: 'white', zIndex: 33, background:`${darkNavbar ? '#171717' : 'transparent'}`}}>
         <Toolbar sx={{display: { xs: 'flex'}}}>
 
           <Box sx={{position: 'relative', left: '0', display: { xs: 'flex'}}}>

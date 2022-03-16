@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Box, Button, IconButton, Typography } from '@mui/material';
-import {BillboardTitle, BillboardDescription, BillboardVideo } from '../../components';
-import {apiComponents} from '../../components';
+import {BillboardTitle, BillboardDescription, BillboardVideo, apiComponents } from '../../components';
 import './Billboard.scss';
 import { PlayArrow, Pause, VolumeOff, VolumeUp,  AddIcCallOutlined, Add } from '@mui/icons-material';
 

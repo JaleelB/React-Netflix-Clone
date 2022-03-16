@@ -4,7 +4,7 @@ import {apiComponents} from '../../components';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaPoster = ({popupProps, rowContainerRef, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs}) => {
+const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, id}) => {
 
     const { 
         setIsHovered,
@@ -16,8 +16,12 @@ const MediaPoster = ({popupProps, rowContainerRef, index,posterPath, name, netfl
         setGenres,
         isHovered,
         delayHandler,
-        delayed
+        delayed,
+        setCardPopupBackdrop,
+        setCardPopupTrailerPath,
+        setCardPopupTitle
     } = popupProps;
+
     
     useEffect(()=>{
         updatePosterWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
@@ -44,6 +48,7 @@ const MediaPoster = ({popupProps, rowContainerRef, index,posterPath, name, netfl
 
     const handleDelayOnMouseLeave = () => {
         clearTimeout(delayHandler)
+        // setDelayed(true)
     }
 
     return (
@@ -53,16 +58,19 @@ const MediaPoster = ({popupProps, rowContainerRef, index,posterPath, name, netfl
                 sx={{width: '100%', height: '100%'}}
                 ref={posterRef}
                 onMouseEnter={()=>{
-                    handleDelayOnMouseEnter();
                     setIsHovered(true);
+                    handleDelayOnMouseEnter(); 
                     setCardPopupWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
                     setCardPopupHeight(Math.floor(posterRef.current.getBoundingClientRect().height));
                     setPosterIndex(index);
                     setGenres(getGenres());
+                    setCardPopupBackdrop('https://image.tmdb.org/t/p/original/' + backdrop);
+                    setCardPopupTrailerPath(id);
+                    setCardPopupTitle(name);
                 }}
                 onMouseLeave={()=> {
                     handleDelayOnMouseLeave()
-                    setDelayed(true)
+                    // setDelayed(true)
                 }}
             >
                 

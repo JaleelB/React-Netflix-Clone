@@ -17,32 +17,30 @@ const MediaRowContainer = ({title, medias, netflixOriginal }) => {
     const [genres, setGenres] = useState([]);
     const [delayed, setDelayed] = useState(true);
     const [delayHandler, setDelayHandler] = useState(null);
+    const [cardPopupBackdrop, setCardPopupBackdrop] = useState('');
+    const [cardPopupTrailerPath, setCardPopupTrailerPath] = useState('');
+    const [cardPopupTitle, setCardPopupTitle] = useState('');
+    const [postersInViewTabNumber, setPostersInViewTabNumber] = useState(0);
 
     const popupProps = {
-        setIsHovered,
-        setCardPopupWidth,
-        setCardPopupHeight,
-        distance, 
-        setDistance,
-        setPosterIndex,
-        totalPostersInView, 
-        setTotalPostersInView,
-        setRowPadding,
-        viewedPosters, 
-        setViewPosters,
-        containerWidth, 
-        setContainerWidth,
-        setGenres,
-        isHovered,
-        cardPopupWidth,
-        cardPopupHeight,
-        genres,
-        posterIndex,
-        rowPadding,
-        delayed,
-        setDelayed,
-        delayHandler, 
-        setDelayHandler
+
+        setIsHovered, isHovered,
+        setCardPopupWidth,setCardPopupHeight,
+        distance, setDistance,
+        posterIndex, setPosterIndex,
+        totalPostersInView, setTotalPostersInView,
+        setRowPadding, rowPadding,
+        viewedPosters, setViewPosters,
+        containerWidth, setContainerWidth,
+        setGenres, genres,
+        cardPopupWidth, cardPopupHeight,
+        delayed, setDelayed,
+        delayHandler, setDelayHandler,
+        cardPopupBackdrop, setCardPopupBackdrop,
+        cardPopupTrailerPath, setCardPopupTrailerPath,
+        cardPopupTitle, setCardPopupTitle,
+        postersInViewTabNumber, setPostersInViewTabNumber
+
     };
 
     return (
@@ -58,15 +56,9 @@ const MediaRowContainer = ({title, medias, netflixOriginal }) => {
                         /> 
             }
 
-            { !delayed && isHovered &&
+            { !delayed && window.innerWidth > 1200 && isHovered &&
                 
                     <PosterPreviewPopup 
-                        // width = {cardPopupWidth}
-                        // height = {cardPopupHeight}
-                        // isHovered = {isHovered}
-                        // genres = {genres}
-                        // posterIndex = { posterIndex }
-                        // rowPadding = {rowPadding}
                         popupProps = {popupProps}
                     />
             }

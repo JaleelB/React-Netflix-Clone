@@ -9,16 +9,12 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps}) => {
 
     const wrapperRef = useRef(null);
 
-    // const [distance, setDistance] = useState(0);
-    // const [totalPostersInView, setTotalPostersInView] = useState(0);
-    // const [viewedPosters, setViewPosters] = useState(0);
-    // const [containerWidth, setContainerWidth]  = useState(0);
-
     const { 
         distance, setDistance, 
         totalPostersInView, setTotalPostersInView,
         viewedPosters, setViewPosters,
-        containerWidth, setContainerWidth
+        containerWidth, setContainerWidth,
+        postersInViewTabNumber, setPostersInViewTabNumber
     } = popupProps
 
     const showPrevButton = distance < 0;
@@ -26,13 +22,17 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps}) => {
 
 
     const handleMovementLeft = () => {
+        setPostersInViewTabNumber(prevPostersInViewTabNumber => prevPostersInViewTabNumber - 1); 
         setViewPosters(viewedPosters - totalPostersInView);
-        setDistance(distance + containerWidth);
+        setDistance(distance + containerWidth + (totalPostersInView * 0.5));
+        //console.log(postersInViewTabNumber);
     };
 
     const handleMovementRight = () => {
+        setPostersInViewTabNumber(prevPostersInViewTabNumber => prevPostersInViewTabNumber + 1);
         setViewPosters(viewedPosters + totalPostersInView);
         setDistance(distance - containerWidth);
+        //console.log(postersInViewTabNumber);
     };
 
 
@@ -46,12 +46,8 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps}) => {
                     <MediaRow 
                         medias={medias} 
                         netflixOriginal={netflixOriginal} 
-                        // distance = {distance}
                         wrapperRef = {wrapperRef}
-                        // updateContainerWidth = {setContainerWidth}
-                        // updateTotalPosters = {setTotalPostersInView}
                         popupProps = {popupProps}
-                        // setRowPadding = {setRowPadding}
                     />
 
                 {showNextButton && <ArrowForwardIosOutlined

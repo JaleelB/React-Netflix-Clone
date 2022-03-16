@@ -37,7 +37,7 @@
         .media-row{
             padding: 0 3%; margin: 20px 0 10px 0; 
             display: grid; grid-auto-flow: column; grid-auto-columns:29%; 
-            scroll-behavior: smooth; scroll-snap-type: inline mandatory; gap: .5rem;
+            scroll-behavior: smooth; scroll-snap-type: inline mandatory; gap: $smaller-gap;
             overflow-x: scroll; overflow-y: hidden; transition: all 500ms ease 100ms; 
             
             
@@ -51,7 +51,7 @@
             -ms-overflow-style: none;  scrollbar-width: none; 
 
             .media-poster{  
-                margin-right: .5rem;  scroll-snap-align: start; 
+                margin-right: $smaller-gap;  scroll-snap-align: start; 
                 // overflow: hidden; 
                 border-radius: 6px; box-sizing: border-box;
                 display: grid; place-items: center; 
@@ -62,7 +62,7 @@
                     img{border-radius: 6px; inline-size: 100%; object-fit: cover; height: 100%;}
 
                     .netflix-icon{ 
-                        position: absolute; top: .5rem; left: .5rem; 
+                        position: absolute; top: $smaller-gap; left: $smaller-gap; 
                         width: 5vw; height: 5vw;
                         @media screen and (min-width: 750px){ width: 3vw; height: 3vw; }
                         @media screen and (min-width: 800px){ width: 2vw; height: 2vw; }
