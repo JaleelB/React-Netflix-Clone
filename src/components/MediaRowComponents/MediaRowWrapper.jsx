@@ -5,7 +5,7 @@ import MediaRow from './MediaRow';
 
 import '../../containers/MediaRow/MediaRow.scss';
 
-const MediaRowWrapper = ({medias,netflixOriginal, popupProps}) => {
+const MediaRowWrapper = ({medias,netflixOriginal, popupProps, movieProps}) => {
 
     const wrapperRef = useRef(null);
 

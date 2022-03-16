@@ -1,10 +1,11 @@
 import { Box, Link } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import {apiComponents} from '../../components';
+import axios from 'react';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, id}) => {
+const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating}) => {
 
     const { 
         setIsHovered,
@@ -14,14 +15,13 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
         setDelayHandler,
         setPosterIndex,
         setGenres,
-        isHovered,
         delayHandler,
-        delayed,
         setCardPopupBackdrop,
-        setCardPopupTrailerPath,
-        setCardPopupTitle
+        setCardPopupAirDate,
+        setCardPopupTitle,
+        setCardPopupRating
+   
     } = popupProps;
-
     
     useEffect(()=>{
         updatePosterWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
@@ -65,8 +65,9 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
                     setPosterIndex(index);
                     setGenres(getGenres());
                     setCardPopupBackdrop('https://image.tmdb.org/t/p/original/' + backdrop);
-                    setCardPopupTrailerPath(id);
                     setCardPopupTitle(name);
+                    setCardPopupAirDate(airDate);
+                    setCardPopupRating(rating);
                 }}
                 onMouseLeave={()=> {
                     handleDelayOnMouseLeave()

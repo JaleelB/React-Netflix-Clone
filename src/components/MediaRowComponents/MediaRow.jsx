@@ -23,7 +23,9 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal }) => {
         setTotalPostersInView(Math.floor(rowContainerWidth / posterWidth));
 
         
-    },[posterWidth, setContainerWidth, setRowPadding,  setTotalPostersInView]);    
+    },[posterWidth, setContainerWidth, setRowPadding,  setTotalPostersInView]);   
+    
+    // console.log(medias)
 
     return (
 
@@ -33,7 +35,7 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal }) => {
             sx={{transform: `translate3d(${distance}px, 0, 0)`}}
         >
             {
-                medias && medias.map((media, index) => {
+                medias && medias.map((media, index) => {   
                     
                     return <MediaPoster
                                 updatePosterWidth = {setPosterWidth}
@@ -45,9 +47,10 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal }) => {
                                 name = {media?.name ? media?.name : media?.title}
                                 genreIDs = {media?.genre_ids}
                                 backdrop = {media?.backdrop_path}
-                                id={media?.id}
                                 popupProps = {popupProps}
                                 index = {index}
+                                airDate={media?.first_air_date ? media?.first_air_date : media?.release_date}
+                                rating={media?.vote_average}
                             />
                                 
                 })   

@@ -2,7 +2,7 @@
 
 .preview-popup{
     transform-origin: center center; 
-    transform: none; top: 10px; will-change: transform;
+    transform: none; top: -20px; will-change: transform;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px;
     z-index: 33; background: $primary-black;
     position: absolute; transition: all 500ms ease-in-out 100ms; 
@@ -43,6 +43,17 @@
 
                .details-button{ position:relative; margin-left: auto; }
             }
+
+            .movie-metadata-container{
+                width: 100%; display: flex;
+                padding: .5rem 1rem 0;  margin-bottom: .25rem; gap: 1rem;
+
+                .movie-rating{ text-align: center; color: #46d369; margin: .2rem;}
+
+                .movie-air-date{ text-align: center; margin: .2rem;}
+
+                .movie-video-quality{ text-align: center; border: 1px solid $color-white; padding: 0 .3rem; margin: .2rem;}
+           }
 
             .genre-list{
                 width: 100%; padding:  0 .7rem;  margin-bottom: .5rem; 

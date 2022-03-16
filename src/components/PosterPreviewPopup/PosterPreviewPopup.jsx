@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { PlayCircle, ThumbDownOffAlt, ThumbUpOffAlt, AddCircleOutline, ExpandCircleDown } from '@mui/icons-material';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import './PosterPreviewPopup.scss';
 
-const PosterPreviewPopup = ({ popupProps}) => {
+const PosterPreviewPopup = ({ popupProps, movieProps }) => {
 
     const { 
         cardPopupWidth,
@@ -17,14 +17,19 @@ const PosterPreviewPopup = ({ popupProps}) => {
         totalPostersInView,
         cardPopupBackdrop, 
         cardPopupTitle,
-        postersInViewTabNumber
+        postersInViewTabNumber,
+        cardPopupAirDate,
+        cardPopupRating
     } = popupProps;
 
+
     console.log(
-        posterIndex ,
-        postersInViewTabNumber,
-        (totalPostersInView * postersInViewTabNumber),
-        posterIndex  - (totalPostersInView * postersInViewTabNumber),
+        // posterIndex ,
+        // postersInViewTabNumber,
+        // (totalPostersInView * postersInViewTabNumber),
+        // posterIndex  - (totalPostersInView * postersInViewTabNumber),
+        cardPopupAirDate,
+        cardPopupRating
     );
 
     return (
@@ -32,14 +37,13 @@ const PosterPreviewPopup = ({ popupProps}) => {
             className="preview-popup" 
             sx={{
                 width: `${cardPopupWidth * 1.6}px`,
-                height: `${cardPopupHeight * 1.3}px`,
-                top: 0,
-                left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding + ( posterIndex > 1 ? (8 * posterIndex) : 0 ) ) - rowPadding}px`
-                // left: `${((cardPopupWidth * (posterIndex > totalPostersInView ? posterIndex - (totalPostersInView + 1) : posterIndex)) + rowPadding + (8 * posterIndex)) - rowPadding}px`
+                height: `${cardPopupHeight * 1.4}px`,
+                // left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding + ( posterIndex > 1 ? (8 * posterIndex) : 0 ) ) - rowPadding}px`
+                left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding )}px`
             }}
             onMouseLeave={()=> {
-                    setIsHovered(false)
-                    setDelayed(true)
+                setIsHovered(false)
+                setDelayed(true)
             }}
         >  
             <Box className="media-poster-info-popup">
@@ -57,6 +61,13 @@ const PosterPreviewPopup = ({ popupProps}) => {
                         <ThumbDownOffAlt className="popup-icon"/>
                         <ExpandCircleDown className="popup-icon details-button"/>
                     </Box>
+
+                    <Box className="movie-metadata-container">
+                        <Box className="movie-rating">{cardPopupRating * 10}%</Box>
+                        <Box className="movie-air-date">{cardPopupAirDate}</Box>
+                        <Box className="movie-video-quality">HD</Box>
+                    </Box>
+
                     <Box className="genre-list">
                         <ul>
                             {

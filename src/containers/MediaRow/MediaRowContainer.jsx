@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {MediaRowWrapper, MediaRowTitle, PosterPreviewPopup } from '../../components';
 import './MediaRow.scss';
 
-const MediaRowContainer = ({title, medias, netflixOriginal }) => {
+const MediaRowContainer = ({title, medias, netflixOriginal, movieProps }) => {
 
     const[isHovered, setIsHovered] = useState(false);
     const [cardPopupWidth, setCardPopupWidth] = useState(''); 
@@ -18,9 +18,11 @@ const MediaRowContainer = ({title, medias, netflixOriginal }) => {
     const [delayed, setDelayed] = useState(true);
     const [delayHandler, setDelayHandler] = useState(null);
     const [cardPopupBackdrop, setCardPopupBackdrop] = useState('');
-    const [cardPopupTrailerPath, setCardPopupTrailerPath] = useState('');
+    const [cardPopupAirDate, setCardPopupAirDate] = useState(null);
+    const [cardPopupRating, setCardPopupRating] = useState(null);
     const [cardPopupTitle, setCardPopupTitle] = useState('');
     const [postersInViewTabNumber, setPostersInViewTabNumber] = useState(0);
+    
 
     const popupProps = {
 
@@ -37,9 +39,10 @@ const MediaRowContainer = ({title, medias, netflixOriginal }) => {
         delayed, setDelayed,
         delayHandler, setDelayHandler,
         cardPopupBackdrop, setCardPopupBackdrop,
-        cardPopupTrailerPath, setCardPopupTrailerPath,
+        cardPopupRating, setCardPopupRating,
         cardPopupTitle, setCardPopupTitle,
-        postersInViewTabNumber, setPostersInViewTabNumber
+        postersInViewTabNumber, setPostersInViewTabNumber,
+        cardPopupAirDate, setCardPopupAirDate
 
     };
 
