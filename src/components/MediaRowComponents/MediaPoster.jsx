@@ -5,7 +5,7 @@ import axios from 'react';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating}) => {
+const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating, id, fullscreenPlayerProps}) => {
 
     const { 
         setIsHovered,
@@ -22,6 +22,10 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
         setCardPopupRating
    
     } = popupProps;
+
+    const {
+        setPosterID
+    } = fullscreenPlayerProps;
     
     useEffect(()=>{
         updatePosterWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
@@ -68,6 +72,7 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
                     setCardPopupTitle(name);
                     setCardPopupAirDate(airDate);
                     setCardPopupRating(rating);
+                    setPosterID(id)
                 }}
                 onMouseLeave={()=> {
                     handleDelayOnMouseLeave()

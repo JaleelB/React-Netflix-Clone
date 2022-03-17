@@ -21,7 +21,12 @@ const BillboardVideo = ({source, playState, muteStatus}) => {
     }
 
     useEffect(() => { handleWindowResize(); }, []);
-    useEffect(() => { window.addEventListener("resize", handleWindowResize); }, []);
+    useEffect(() => { 
+        window.addEventListener("resize", handleWindowResize); 
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        }
+    }, []);
 
     return (
         <Box className="billboard__video-wrapper" ref={videoCanvas} >
@@ -43,7 +48,7 @@ const BillboardVideo = ({source, playState, muteStatus}) => {
                             playing={playState}
                             volume={1}
                             muted={muteStatus}
-                            controls={true}
+                            controls={false}
                             loop={true}
                         /> }           
         </Box>

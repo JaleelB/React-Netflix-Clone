@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {MediaRowWrapper, MediaRowTitle, PosterPreviewPopup } from '../../components';
 import './MediaRow.scss';
 
-const MediaRowContainer = ({title, medias, netflixOriginal, movieProps }) => {
+const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenPlayerProps }) => {
 
     const[isHovered, setIsHovered] = useState(false);
     const [cardPopupWidth, setCardPopupWidth] = useState(''); 
@@ -21,8 +21,9 @@ const MediaRowContainer = ({title, medias, netflixOriginal, movieProps }) => {
     const [cardPopupAirDate, setCardPopupAirDate] = useState(null);
     const [cardPopupRating, setCardPopupRating] = useState(null);
     const [cardPopupTitle, setCardPopupTitle] = useState('');
+    // const [fullVideoPath, setFullVideoPath] = useState('');
     const [postersInViewTabNumber, setPostersInViewTabNumber] = useState(0);
-    
+    // const [posterID, setPosterID] = useState(0);
 
     const popupProps = {
 
@@ -42,8 +43,8 @@ const MediaRowContainer = ({title, medias, netflixOriginal, movieProps }) => {
         cardPopupRating, setCardPopupRating,
         cardPopupTitle, setCardPopupTitle,
         postersInViewTabNumber, setPostersInViewTabNumber,
-        cardPopupAirDate, setCardPopupAirDate
-
+        cardPopupAirDate, setCardPopupAirDate,
+        // posterID, setPosterID,
     };
 
     return (
@@ -55,7 +56,7 @@ const MediaRowContainer = ({title, medias, netflixOriginal, movieProps }) => {
                             medias={medias}   
                             netflixOriginal={netflixOriginal}
                             popupProps = {popupProps}
-                            // setRowPadding = { setRowPadding }
+                            fullscreenPlayerProps = {fullscreenPlayerProps}
                         /> 
             }
 
@@ -63,8 +64,11 @@ const MediaRowContainer = ({title, medias, netflixOriginal, movieProps }) => {
                 
                     <PosterPreviewPopup 
                         popupProps = {popupProps}
+                        fullscreenPlayerProps = {fullscreenPlayerProps}
                     />
             }
+
+            
         </Box> 
     )
 }

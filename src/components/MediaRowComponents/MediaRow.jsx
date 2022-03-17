@@ -4,7 +4,7 @@ import MediaPoster from './MediaPoster';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal }) => {
+const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenPlayerProps }) => {
 
     const [posterWidth, setPosterWidth] = useState(0);
     
@@ -51,6 +51,8 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal }) => {
                                 index = {index}
                                 airDate={media?.first_air_date ? media?.first_air_date : media?.release_date}
                                 rating={media?.vote_average}
+                                id={media?.id}
+                                fullscreenPlayerProps = {fullscreenPlayerProps}
                             />
                                 
                 })   

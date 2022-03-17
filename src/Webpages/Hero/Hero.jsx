@@ -3,7 +3,7 @@ import './Hero.scss';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {apiComponents, Footer } from '../../components';
+import {apiComponents, Footer, FullscreenPlayer } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
 
 const Hero = () => {
@@ -14,6 +14,10 @@ const Hero = () => {
     const [topRated, setTopRated] = useState([]);
     const [actionThriller, setActionThriller] = useState([]);
     const [newReleases, setNewReleases] = useState([]);
+
+    const [fullscreenPlayer, setFullscreenPlayer] = useState(false);
+    const[fullVideoPath, setFullVideoPath] = useState('');
+    const [posterID, setPosterID] = useState(0);
    
     useEffect(() => {
 
@@ -60,6 +64,12 @@ const Hero = () => {
         .catch(error => { console.log(error) })
   
     }, []);
+
+    const fullscreenPlayerProps = {
+        fullscreenPlayer, setFullscreenPlayer,
+        fullVideoPath, setFullVideoPath,
+        posterID, setPosterID
+    };
   
     return (
         <Box id="hero" sx={{
@@ -77,29 +87,43 @@ const Hero = () => {
                     title = "Netflix Original Shows"
                     netflixOriginal
                     medias = { originals }
+                    fullscreenPlayerProps = { fullscreenPlayerProps } 
                 />
                 <MediaRowContainer
                     title = "Most Users Loved These Shows"
                     medias = { popular }
+                    fullscreenPlayerProps = { fullscreenPlayerProps } 
                 />
                 <MediaRowContainer
                     title = "Trending Now"
                     medias = { trending }
+                    fullscreenPlayerProps = { fullscreenPlayerProps } 
                 />
                 <MediaRowContainer
                     title = "New Releases"
                     medias = { newReleases }
+                    fullscreenPlayerProps = { fullscreenPlayerProps } 
                 />
                 <MediaRowContainer
                     title = "Most Loved Shows Of All Time"
                     medias = { topRated }
+                    fullscreenPlayerProps = { fullscreenPlayerProps } 
                 />
                 <MediaRowContainer
                     title = "Action Thrillers"
                     medias = { actionThriller }
+                    fullscreenPlayerProps = { fullscreenPlayerProps } 
                 />
     
             </Box>
+
+            {
+                fullscreenPlayer && window.innerWidth > 1200 &&
+                
+                    <FullscreenPlayer
+                        fullscreenPlayerProps = {fullscreenPlayerProps}
+                    />
+            }
 
             <Footer/>
             
