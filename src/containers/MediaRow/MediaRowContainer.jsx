@@ -21,7 +21,7 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenPlayerProp
     const [cardPopupAirDate, setCardPopupAirDate] = useState(null);
     const [cardPopupRating, setCardPopupRating] = useState(null);
     const [cardPopupTitle, setCardPopupTitle] = useState('');
-    // const [fullVideoPath, setFullVideoPath] = useState('');
+    const [mediaType, setMediaType] = useState('');
     const [postersInViewTabNumber, setPostersInViewTabNumber] = useState(0);
     // const [posterID, setPosterID] = useState(0);
 
@@ -44,6 +44,7 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenPlayerProp
         cardPopupTitle, setCardPopupTitle,
         postersInViewTabNumber, setPostersInViewTabNumber,
         cardPopupAirDate, setCardPopupAirDate,
+        mediaType, setMediaType
         // posterID, setPosterID,
     };
 

@@ -21,11 +21,8 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
         setContainerWidth(Math.floor(rowContainerWidth));
         setRowPadding(Math.floor(rowPaddingValue));
         setTotalPostersInView(Math.floor(rowContainerWidth / posterWidth));
-
-        //console.log(rowContainerWidth, posterWidth)
-
         
-    },[posterWidth, setContainerWidth, setRowPadding,  setTotalPostersInView]);   
+    },[posterWidth, setContainerWidth, setRowPadding,  setTotalPostersInView, wrapperRef]);   
     
     // console.log(medias)
 
@@ -55,6 +52,7 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
                                 rating={media?.vote_average}
                                 id={media?.id}
                                 fullscreenPlayerProps = {fullscreenPlayerProps}
+                                type={media?.media_type ? media?.media_type : ''}
                             />
                                 
                 })   

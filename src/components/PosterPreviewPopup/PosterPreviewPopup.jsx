@@ -12,17 +12,18 @@ const PosterPreviewPopup = ({ popupProps, fullscreenPlayerProps }) => {
         cardPopupWidth, setDelayed, cardPopupHeight, genres,
         rowPadding, posterIndex,setIsHovered, totalPostersInView,
         cardPopupBackdrop,cardPopupTitle,postersInViewTabNumber,
-        cardPopupAirDate, cardPopupRating
+        cardPopupAirDate, cardPopupRating, mediaType
     } = popupProps;
 
     const {
         fullscreenPlayer, setFullscreenPlayer, setFullVideoPath, posterID
     } = fullscreenPlayerProps;
 
+
     useEffect(() => {
 
         axios
-        .get(`https://api.themoviedb.org/3/tv/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US`)
+        .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US`)
         .then((res)=> {
             setFullVideoPath(res.data.results[0]?.key)
         })
@@ -65,6 +66,7 @@ const PosterPreviewPopup = ({ popupProps, fullscreenPlayerProps }) => {
 
                     <Box className="movie-metadata-container">
                         <Box className="movie-rating">{cardPopupRating * 10}%</Box>
+                        {mediaType !== '' && <Box className="media-type">{mediaType}</Box>}
                         <Box className="movie-air-date">{cardPopupAirDate}</Box>
                         <Box className="movie-video-quality">HD</Box>
                     </Box>

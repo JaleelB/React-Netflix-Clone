@@ -1,6 +1,6 @@
-import { Box, IconButton } from '@mui/material';
+import { Box } from '@mui/material';
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from '@mui/icons-material';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 import MediaRow from './MediaRow';
 
 import '../../containers/MediaRow/MediaRow.scss';
@@ -11,10 +11,9 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenPlayerPr
 
     const { 
         distance, setDistance, 
-        totalPostersInView, setTotalPostersInView,
+        totalPostersInView,
         viewedPosters, setViewPosters,
-        containerWidth, setContainerWidth,
-        postersInViewTabNumber, setPostersInViewTabNumber
+        containerWidth, setPostersInViewTabNumber
     } = popupProps
 
     //console.log(viewedPosters, totalPostersInView);

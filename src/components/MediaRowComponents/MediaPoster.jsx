@@ -1,11 +1,10 @@
-import { Box, Link } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import { Box } from '@mui/material';
+import React, { useEffect } from 'react';
 import {apiComponents} from '../../components';
-import axios from 'react';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating, id, fullscreenPlayerProps}) => {
+const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating, id, fullscreenPlayerProps, type}) => {
 
     const { 
         setIsHovered,
@@ -19,7 +18,8 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
         setCardPopupBackdrop,
         setCardPopupAirDate,
         setCardPopupTitle,
-        setCardPopupRating
+        setCardPopupRating,
+        setMediaType
    
     } = popupProps;
 
@@ -28,8 +28,8 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
     } = fullscreenPlayerProps;
     
     useEffect(()=>{
-        updatePosterWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
-    },[posterRef])
+        updatePosterWidth(Math.floor(posterRef.current.clientWidth));
+    },[posterRef, updatePosterWidth])
 
     const getGenres = () => {
 
@@ -72,7 +72,8 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
                     setCardPopupTitle(name);
                     setCardPopupAirDate(airDate);
                     setCardPopupRating(rating);
-                    setPosterID(id)
+                    setPosterID(id);
+                    setMediaType(type);
                 }}
                 onMouseLeave={()=> {
                     handleDelayOnMouseLeave()
