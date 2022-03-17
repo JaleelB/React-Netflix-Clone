@@ -17,6 +17,8 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenPlayerPr
         postersInViewTabNumber, setPostersInViewTabNumber
     } = popupProps
 
+    //console.log(viewedPosters, totalPostersInView);
+
     const showPrevButton = distance < 0;
     const showNextButton = (viewedPosters + totalPostersInView) < medias.length;
 
@@ -25,7 +27,6 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenPlayerPr
         setPostersInViewTabNumber(prevPostersInViewTabNumber => prevPostersInViewTabNumber - 1); 
         setViewPosters(viewedPosters - totalPostersInView);
         setDistance(distance + containerWidth + (totalPostersInView * 0.5));
-        //console.log(postersInViewTabNumber);
     };
 
     const handleMovementRight = () => {

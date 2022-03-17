@@ -22,6 +22,8 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
         setRowPadding(Math.floor(rowPaddingValue));
         setTotalPostersInView(Math.floor(rowContainerWidth / posterWidth));
 
+        //console.log(rowContainerWidth, posterWidth)
+
         
     },[posterWidth, setContainerWidth, setRowPadding,  setTotalPostersInView]);   
     

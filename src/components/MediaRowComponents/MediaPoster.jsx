@@ -29,7 +29,7 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
     
     useEffect(()=>{
         updatePosterWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
-    },[posterRef.current])
+    },[posterRef])
 
     const getGenres = () => {
 
