@@ -4,7 +4,7 @@ import MediaPoster from './MediaPoster';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenPlayerProps }) => {
+const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenProps }) => {
 
     const [posterWidth, setPosterWidth] = useState(0);
     
@@ -12,6 +12,7 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
     const rowContainerRef = useRef(null);
 
     const { setRowPadding, distance, setContainerWidth, setTotalPostersInView } = popupProps;
+
 
     useEffect(()=>{
         const rowPadding = window.getComputedStyle(rowContainerRef.current).getPropertyValue('padding-left');
@@ -22,7 +23,8 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
         setRowPadding(Math.floor(rowPaddingValue));
         setTotalPostersInView(Math.floor(rowContainerWidth / posterWidth));
         
-    },[posterWidth, setContainerWidth, setRowPadding,  setTotalPostersInView, wrapperRef]);   
+    },[posterWidth,rowContainerRef.current, setContainerWidth, setRowPadding,  setTotalPostersInView, wrapperRef ]);   
+
     
     // console.log(medias)
 
@@ -51,7 +53,7 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
                                 airDate={media?.first_air_date ? media?.first_air_date : media?.release_date}
                                 rating={media?.vote_average}
                                 id={media?.id}
-                                fullscreenPlayerProps = {fullscreenPlayerProps}
+                                fullscreenProps = {fullscreenProps}
                                 type={media?.media_type ? media?.media_type : ''}
                             />
                                 

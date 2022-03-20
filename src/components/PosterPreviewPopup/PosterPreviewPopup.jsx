@@ -1,12 +1,12 @@
 import { Box, Typography } from '@mui/material';
 import { PlayCircle, ThumbDownOffAlt, ThumbUpOffAlt, AddCircleOutline, ExpandCircleDown } from '@mui/icons-material';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {apiComponents } from '../../components';
 
 import './PosterPreviewPopup.scss';
 
-const PosterPreviewPopup = ({ popupProps, fullscreenPlayerProps }) => {
+const PosterPreviewPopup = ({ popupProps, fullscreenProps }) => {
 
     const { 
         cardPopupWidth, setDelayed, cardPopupHeight, genres,
@@ -16,9 +16,8 @@ const PosterPreviewPopup = ({ popupProps, fullscreenPlayerProps }) => {
     } = popupProps;
 
     const {
-        fullscreenPlayer, setFullscreenPlayer, setFullVideoPath, posterID
-    } = fullscreenPlayerProps;
-
+        fullscreenPlayer, setFullscreenPlayer, setFullVideoPath, posterID, setOpenFullscreenPopup
+    } = fullscreenProps;
 
     useEffect(() => {
 
@@ -28,6 +27,16 @@ const PosterPreviewPopup = ({ popupProps, fullscreenPlayerProps }) => {
             setFullVideoPath(res.data.results[0]?.key)
         })
         .catch(error => { console.log(error) })
+
+        axios
+        .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US&with_networks=213`)
+        .then((res)=> {
+            setFullVideoPath(res.data.results[0]?.key)
+        })
+        .catch(error => { console.log(error) })
+
+
+        //choose either movies or tv | get the type of the media
     
     },[posterID, setFullVideoPath]);
 
@@ -44,6 +53,7 @@ const PosterPreviewPopup = ({ popupProps, fullscreenPlayerProps }) => {
                 setIsHovered(false)
                 setDelayed(true)
             }}
+            onClick={() => setOpenFullscreenPopup(true)}
         >  
             <Box className="media-poster-info-popup">
 
@@ -61,7 +71,10 @@ const PosterPreviewPopup = ({ popupProps, fullscreenPlayerProps }) => {
                         <AddCircleOutline className="popup-icon"/>
                         <ThumbUpOffAlt className="popup-icon"/>
                         <ThumbDownOffAlt className="popup-icon"/>
-                        <ExpandCircleDown className="popup-icon details-button"/>
+                        <ExpandCircleDown 
+                            className="popup-icon details-button"
+                            onClick = {() => setOpenFullscreenPopup(true)}
+                        />
                     </Box>
 
                     <Box className="movie-metadata-container">

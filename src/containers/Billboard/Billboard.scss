@@ -4,7 +4,7 @@
 
     width: 100%; height: 80vh; display: grid; position: relative;
     background-size: cover !important; background-position: center center !important;
-    margin: 0;
+    margin: 0 0 3% 0;
 
     @media screen and (min-width: 1200px) { height: 90vh; }
     // @media screen and (min-width: 600px) and (max-width: 1199px){ height: 70vh; }
@@ -61,7 +61,7 @@
         }
 
         .billboard__button-container{  
-            display: flex; gap: 1rem; 
+            display: flex; gap: 1rem; white-space: nowrap;
             
             @media screen and (max-width: 600px){justify-content: center;}
             
@@ -101,7 +101,8 @@
 
     &__fade-bottom{ 
         position: absolute; left:0; bottom: 0rem; padding: 0; 
-        // display: flex; margin:auto 0 0 0;
-        width: 100%; height: 7.4rem; background-image: linear-gradient(180deg,transparent,rgba(37,37,37,.51),$primary-black); 
+        width: 100%; height: 2.4rem; background-image: linear-gradient(180deg,transparent,rgba(37,37,37,.51),$primary-black); 
+
+        @media screen and (min-width: 600px){height: 7.4rem;}
     }
 }

@@ -12,17 +12,24 @@ export default function Nav() {
 
   const [darkNavbar, setDarkNavbar] = useState(false);
 
+  const handleNavbarChange = () => {
+      if (window.scrollY > 100) setDarkNavbar(true); 
+      else setDarkNavbar(false);
+  };
+
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
-        setDarkNavbar(true);
-      } else setDarkNavbar(false);
-    });
+    window.addEventListener("scroll", handleNavbarChange);
 
     return () => {
-      window.removeEventListener("scroll");
+      window.removeEventListener("scroll", handleNavbarChange);
     };
   }, []);
+
+  // () => {
+  //   // if (window.scrollY > 100) {
+  //   //   setDarkNavbar(true);
+  //   // } else setDarkNavbar(false);
+  // }
 
   return (
     <Box sx={{ flexGrow: 1}}>

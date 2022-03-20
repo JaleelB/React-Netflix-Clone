@@ -3,7 +3,7 @@ import './Hero.scss';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {apiComponents, Footer, FullscreenPlayer } from '../../components';
+import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
 
 const Hero = () => {
@@ -18,6 +18,12 @@ const Hero = () => {
     const [fullscreenPlayer, setFullscreenPlayer] = useState(false);
     const[fullVideoPath, setFullVideoPath] = useState('');
     const [posterID, setPosterID] = useState(0);
+
+    const [openFullscreenPopup, setOpenFullscreenPopup] = useState(false);
+    const [movie, setMovie] = useState([]);
+    const [movieCredits, setMovieCredits] = useState([]);
+    const [similiarMovies, setSimiliarMovies] = useState([]);
+    const [disablePointer, setDisablePointer] = useState(false);
    
     useEffect(() => {
 
@@ -65,54 +71,57 @@ const Hero = () => {
   
     }, []);
 
-    const fullscreenPlayerProps = {
+    const fullscreenProps = {
         fullscreenPlayer, setFullscreenPlayer,
         fullVideoPath, setFullVideoPath,
-        posterID, setPosterID
+        posterID, setPosterID,
+        openFullscreenPopup, setOpenFullscreenPopup,
+        movie, setMovie, movieCredits, setMovieCredits,
+        similiarMovies, setSimiliarMovies,
+        disablePointer, setDisablePointer
     };
   
     return (
         <Box id="hero" sx={{
                 // paddingLeft: 'calc(3.5vw + 24px)', 
-                background: '#131313'
+                background: '#171717'
             }}>
             {/* use fuse js for live searching an array for search tab of projecct */}
-            {/* <Billboard movie = {originals[Math.floor(Math.random() * originals.length)]}/> */}
-            <Billboard movie = {originals[2]}/>
-            {/* <Billboard movies = {originals}/> */}
 
-            <Box className="inner">
+            <Billboard disablePointer={disablePointer} movie = {originals[4]}/>
+
+            <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
 
                 <MediaRowContainer
                     title = "Netflix Original Shows"
                     netflixOriginal
                     medias = { originals }
-                    fullscreenPlayerProps = { fullscreenPlayerProps } 
+                    fullscreenProps = { fullscreenProps } 
                 />
                 <MediaRowContainer
                     title = "Most Users Loved These Shows"
                     medias = { popular }
-                    fullscreenPlayerProps = { fullscreenPlayerProps } 
+                    fullscreenProps = { fullscreenProps } 
                 />
                 <MediaRowContainer
                     title = "Trending Now"
                     medias = { trending }
-                    fullscreenPlayerProps = { fullscreenPlayerProps } 
+                    fullscreenProps = { fullscreenProps } 
                 />
                 <MediaRowContainer
                     title = "New Releases"
                     medias = { newReleases }
-                    fullscreenPlayerProps = { fullscreenPlayerProps } 
+                    fullscreenProps = { fullscreenProps } 
                 />
                 <MediaRowContainer
                     title = "Most Loved Shows Of All Time"
                     medias = { topRated }
-                    fullscreenPlayerProps = { fullscreenPlayerProps } 
+                    fullscreenProps = { fullscreenProps } 
                 />
                 <MediaRowContainer
                     title = "Action Thrillers"
                     medias = { actionThriller }
-                    fullscreenPlayerProps = { fullscreenPlayerProps } 
+                    fullscreenProps = { fullscreenProps } 
                 />
     
             </Box>
@@ -121,8 +130,16 @@ const Hero = () => {
                 fullscreenPlayer && window.innerWidth > 1200 &&
                 
                     <FullscreenPlayer
-                        fullscreenPlayerProps = {fullscreenPlayerProps}
+                        fullscreenProps = {fullscreenProps}
                     />
+            }
+
+            {
+                openFullscreenPopup && 
+                <FullscreenPopup
+                    fullscreenProps = { fullscreenProps }
+                />
+
             }
 
             <Footer/>

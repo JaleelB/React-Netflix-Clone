@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {MediaRowWrapper, MediaRowTitle, PosterPreviewPopup } from '../../components';
 import './MediaRow.scss';
 
-const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenPlayerProps }) => {
+const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps }) => {
 
     const[isHovered, setIsHovered] = useState(false);
     const [cardPopupWidth, setCardPopupWidth] = useState(''); 
@@ -57,7 +57,7 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenPlayerProp
                             medias={medias}   
                             netflixOriginal={netflixOriginal}
                             popupProps = {popupProps}
-                            fullscreenPlayerProps = {fullscreenPlayerProps}
+                            fullscreenProps = {fullscreenProps}
                         /> 
             }
 
@@ -65,7 +65,7 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenPlayerProp
                 
                     <PosterPreviewPopup 
                         popupProps = {popupProps}
-                        fullscreenPlayerProps = {fullscreenPlayerProps}
+                        fullscreenProps = {fullscreenProps}
                     />
             }
 

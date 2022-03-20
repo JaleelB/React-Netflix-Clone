@@ -5,7 +5,7 @@ import MediaRow from './MediaRow';
 
 import '../../containers/MediaRow/MediaRow.scss';
 
-const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenPlayerProps}) => {
+const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps}) => {
 
     const wrapperRef = useRef(null);
 
@@ -16,7 +16,6 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenPlayerPr
         containerWidth, setPostersInViewTabNumber
     } = popupProps
 
-    //console.log(viewedPosters, totalPostersInView);
 
     const showPrevButton = distance < 0;
     const showNextButton = (viewedPosters + totalPostersInView) < medias.length;
@@ -32,7 +31,7 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenPlayerPr
         setPostersInViewTabNumber(prevPostersInViewTabNumber => prevPostersInViewTabNumber + 1);
         setViewPosters(viewedPosters + totalPostersInView);
         setDistance(distance - containerWidth);
-        //console.log(postersInViewTabNumber);
+        // console.log(distance, viewedPosters);
     };
 
 
@@ -48,7 +47,7 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenPlayerPr
                         netflixOriginal={netflixOriginal} 
                         wrapperRef = {wrapperRef}
                         popupProps = {popupProps}
-                        fullscreenPlayerProps = {fullscreenPlayerProps}
+                        fullscreenProps = {fullscreenProps}
                     />
 
                 {showNextButton && <ArrowForwardIosOutlined

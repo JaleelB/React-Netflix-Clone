@@ -4,7 +4,7 @@ import {apiComponents} from '../../components';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating, id, fullscreenPlayerProps, type}) => {
+const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating, id, fullscreenProps, type}) => {
 
     const { 
         setIsHovered,
@@ -24,8 +24,8 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
     } = popupProps;
 
     const {
-        setPosterID
-    } = fullscreenPlayerProps;
+        setPosterID, setOpenFullscreenPopup
+    } = fullscreenProps;
     
     useEffect(()=>{
         updatePosterWidth(Math.floor(posterRef.current.clientWidth));
@@ -61,6 +61,10 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
                 className='media-poster stacked' 
                 sx={{width: '100%', height: '100%'}}
                 ref={posterRef}
+                onClick = {() => {
+                    setOpenFullscreenPopup(true);
+                    setPosterID(id);
+                }}
                 onMouseEnter={()=>{
                     setIsHovered(true);
                     handleDelayOnMouseEnter(); 

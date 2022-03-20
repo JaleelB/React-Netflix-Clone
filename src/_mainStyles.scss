@@ -27,13 +27,14 @@ $ft-heading: 2rem;
 .big-heading{font-size: clamp(30px, 4vw, 60px);}
 .stacked{display: grid;}
 .stacked > * {grid-column: 1 / 2; grid-row: 1 / 2;}
+.disable-pointer{pointer-events: none; filter: brightness(40%);}
 
 //use fuse js for live searching an array for search tab of projecct
 body{ 
     // background: #151515;
     background: $primary-black; display: grid; place-items: center;
     font-family: $ft-sans;   line-height: 1.5;
-    overflow-x: hidden; 
+    overflow-x: hidden;
     
     &::-webkit-scrollbar { background-color: transparent;  width: 10px; }
     &::-webkit-scrollbar-thumb { background-color: $primary-red; border-radius: 10px;}

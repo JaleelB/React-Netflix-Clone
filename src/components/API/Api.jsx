@@ -3,6 +3,7 @@ const apiComponents = [
     "df7dbf24a32b1fff30834fc68ab0ce25",
     {//endpoints
         movie: "/movie",
+        tv: "/tv",
         latest_releases: "/movie/now_playing",
         top_rated: "/movie/top_rated",
         popular: "/movie/popular",

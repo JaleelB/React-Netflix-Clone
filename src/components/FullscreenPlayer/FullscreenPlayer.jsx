@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactPlayer from 'react-player/youtube';
 import './FullscreenPlayer.scss';
 
-const FullscreenPlayer = ({fullscreenPlayerProps}) => {
+const FullscreenPlayer = ({fullscreenProps}) => {
 
     const fullVideoCanvas = useRef(null);
     const[fullVideoWidth, setFullVideoWidth] = useState();
@@ -12,7 +12,7 @@ const FullscreenPlayer = ({fullscreenPlayerProps}) => {
 
     const {
         fullscreenPlayer, setFullscreenPlayer, fullVideoPath
-    } = fullscreenPlayerProps;
+    } = fullscreenProps;
 
     const handleWindowResize = () => { 
 

@@ -5,7 +5,7 @@ import {BillboardTitle, BillboardDescription, BillboardVideo, apiComponents } fr
 import './Billboard.scss';
 import { PlayArrow, Pause, VolumeOff, VolumeUp,  AddIcCallOutlined, Add } from '@mui/icons-material';
 
-const Billboard = ({movie}) => {
+const Billboard = ({movie, disablePointer}) => {
 
     
     const [videoPath, setVideoPath] = useState('');
@@ -28,33 +28,12 @@ const Billboard = ({movie}) => {
    
     useEffect(() => {
 
-        // const movieId = movie?.id;
-
-        // axios
-        // .get(`https://api.themoviedb.org/3/tv/${movieId}/videos?api_key=${apiComponents[1]}&language=en-US`)
-        // .then((res)=> {
-        //     setVideoPath(res.data.results[0]?.key)
-        // })
-
-        // async function fetchData() {
-        //     const request = await axios.get(`https://api.themoviedb.org/3/tv/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`);
-        //     setVideoPath(request.data.results[0]?.key);
-        //     return request;
-        // }
-        // fetchData();
-
-        const getMovie = async () => {
-            try{
-                axios
-                .get(`https://api.themoviedb.org/3/tv/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
-                .then((res)=> {
-                    setVideoPath(res.data.results[0]?.key);
-                })
-            } catch(err){ console.log(err); }
-
-        };
-
-        getMovie();
+        axios
+        .get(`https://api.themoviedb.org/3/tv/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
+        .then((res)=> {
+            setVideoPath(res.data.results[0]?.key)
+        })
+        .catch(error => { console.log(error) })
 
     }, [movie?.id]);
 
@@ -62,7 +41,7 @@ const Billboard = ({movie}) => {
     
     return (
         //use fuse js for live searching an array for search tab of projecct
-        <Box className="billboard stacked" 
+        <Box className={`billboard stacked ${disablePointer ? 'disable-pointer' : ''}`}
         sx={{ background: `url('https://image.tmdb.org/t/p/original${movie?.backdrop_path}')`}}
         >
             {/* 
