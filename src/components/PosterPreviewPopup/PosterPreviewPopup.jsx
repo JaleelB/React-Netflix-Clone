@@ -16,7 +16,9 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps }) => {
     } = popupProps;
 
     const {
-        fullscreenPlayer, setFullscreenPlayer, setFullVideoPath, posterID, setOpenFullscreenPopup
+        fullscreenPlayer, setFullscreenPlayer, setFullVideoPath, posterID, 
+        setOpenFullscreenPopup, setDisablePointer, disablePointer, netflixOriginalShow,
+        setNetflixOriginalShow, setMovie, setMovieCredits, setSimiliarMovies
     } = fullscreenProps;
 
     useEffect(() => {
@@ -29,9 +31,10 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps }) => {
         .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US&with_networks=213`)
+        .get(`${apiComponents[0]}${apiComponents[2].tv}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US`)
         .then((res)=> {
             setFullVideoPath(res.data.results[0]?.key)
+            // console.log(res.data.results[0]?.key)
         })
         .catch(error => { console.log(error) })
 
@@ -39,6 +42,66 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps }) => {
         //choose either movies or tv | get the type of the media
     
     },[posterID, setFullVideoPath]);
+
+
+    useEffect(() => {
+
+        if(!netflixOriginalShow){
+
+
+            axios
+            .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setMovie(res.data)
+            })
+            .catch(error => { console.log(error) })
+
+            axios
+            .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/credits?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setMovieCredits(res.data)
+            })
+            .catch(error => { console.log(error) })
+
+            axios
+            .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/similar?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setSimiliarMovies(res.data.results)
+            })
+            .catch(error => { console.log(error) })
+
+        }
+
+        //use a state to control if it is netflix original or not
+        if(netflixOriginalShow){
+            axios
+            .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setMovie(res.data)
+            })
+            .catch(error => { console.log(error) })
+
+            axios
+            .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/credits?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setMovieCredits(res.data)
+            })
+            .catch(error => { console.log(error) })
+
+            axios
+            .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/similar?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setSimiliarMovies(res.data.results)
+            })
+            .catch(error => { console.log(error) })
+        }
+
+    
+    },[posterID, setMovie, setMovieCredits, setSimiliarMovies, netflixOriginalShow]);
+
+
+    const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
+    
 
     return (
         <Box 
@@ -52,8 +115,9 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps }) => {
             onMouseLeave={()=> {
                 setIsHovered(false)
                 setDelayed(true)
+                removeNetflixOriginal()
             }}
-            onClick={() => setOpenFullscreenPopup(true)}
+            // onClick={() => setOpenFullscreenPopup(true)}
         >  
             <Box className="media-poster-info-popup">
 
@@ -66,7 +130,10 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps }) => {
                     <Box className="button-controls-container">
                         <PlayCircle 
                             className="popup-icon" 
-                            onClick={() => setFullscreenPlayer(!fullscreenPlayer)}
+                            onClick={() => {
+                                setFullscreenPlayer(!fullscreenPlayer);
+                                // setDisablePointer(!disablePointer);
+                            }}
                         />
                         <AddCircleOutline className="popup-icon"/>
                         <ThumbUpOffAlt className="popup-icon"/>

@@ -24,12 +24,13 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
     } = popupProps;
 
     const {
-        setPosterID, setOpenFullscreenPopup
+        setPosterID, setOpenFullscreenPopup, setNetflixOriginalShow, netflixOriginalShow
     } = fullscreenProps;
     
     useEffect(()=>{
         updatePosterWidth(Math.floor(posterRef.current.clientWidth));
     },[posterRef, updatePosterWidth])
+
 
     const getGenres = () => {
 
@@ -55,17 +56,22 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
         // setDelayed(true)
     }
 
+    const handleNetflixOriginal = event =>{ if (event.target.className === 'media-poster-image netflixOriginal' ) setNetflixOriginalShow(true); };
+
+    // const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
+
+
     return (
         // <Link>
             <Box 
-                className='media-poster stacked' 
+                className='media-poster stacked'
                 sx={{width: '100%', height: '100%'}}
                 ref={posterRef}
                 onClick = {() => {
                     setOpenFullscreenPopup(true);
                     setPosterID(id);
                 }}
-                onMouseEnter={()=>{
+                onMouseEnter={(e)=>{
                     setIsHovered(true);
                     handleDelayOnMouseEnter(); 
                     setCardPopupWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
@@ -78,16 +84,18 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
                     setCardPopupRating(rating);
                     setPosterID(id);
                     setMediaType(type);
+                    handleNetflixOriginal(e);
+                    // console.log(e.target.className);
                 }}
                 onMouseLeave={()=> {
-                    handleDelayOnMouseLeave()
-                    // setDelayed(true)
+                    handleDelayOnMouseLeave();
+                    // removeNetflixOriginal();
                 }}
             >
                 
                 <Box className="media-poster-image-wrapper">
                     { netflixOriginal && posterPath && <img className="netflix-icon"src="https://cdn.icon-icons.com/icons2/2699/PNG/512/netflix_logo_icon_170919.png" alt="Netflix Icon"/> }
-                    <img className="media-poster-image" draggable="false"  src={"https://image.tmdb.org/t/p/w500" + posterPath} alt={name}/>
+                    <img className={`media-poster-image ${netflixOriginal ? "netflixOriginal" : ''}`} draggable="false"  src={"https://image.tmdb.org/t/p/w500" + posterPath} alt={name}/>
                 </Box>
 
             </Box>

@@ -18,6 +18,7 @@ const Hero = () => {
     const [fullscreenPlayer, setFullscreenPlayer] = useState(false);
     const[fullVideoPath, setFullVideoPath] = useState('');
     const [posterID, setPosterID] = useState(0);
+    const [netflixOriginalShow, setNetflixOriginalShow] = useState(false);
 
     const [openFullscreenPopup, setOpenFullscreenPopup] = useState(false);
     const [movie, setMovie] = useState([]);
@@ -78,7 +79,8 @@ const Hero = () => {
         openFullscreenPopup, setOpenFullscreenPopup,
         movie, setMovie, movieCredits, setMovieCredits,
         similiarMovies, setSimiliarMovies,
-        disablePointer, setDisablePointer
+        disablePointer, setDisablePointer,
+        netflixOriginalShow, setNetflixOriginalShow
     };
   
     return (
@@ -94,9 +96,9 @@ const Hero = () => {
 
                 <MediaRowContainer
                     title = "Netflix Original Shows"
-                    netflixOriginal
                     medias = { originals }
                     fullscreenProps = { fullscreenProps } 
+                    netflixOriginal
                 />
                 <MediaRowContainer
                     title = "Most Users Loved These Shows"

@@ -23,7 +23,6 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps }) =
     const [cardPopupTitle, setCardPopupTitle] = useState('');
     const [mediaType, setMediaType] = useState('');
     const [postersInViewTabNumber, setPostersInViewTabNumber] = useState(0);
-    // const [posterID, setPosterID] = useState(0);
 
     const popupProps = {
 
@@ -45,7 +44,6 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps }) =
         postersInViewTabNumber, setPostersInViewTabNumber,
         cardPopupAirDate, setCardPopupAirDate,
         mediaType, setMediaType
-        // posterID, setPosterID,
     };
 
     return (

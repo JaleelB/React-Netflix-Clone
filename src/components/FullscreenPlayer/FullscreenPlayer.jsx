@@ -11,7 +11,7 @@ const FullscreenPlayer = ({fullscreenProps}) => {
     const[fullVideoHeight, setFullVideoHeight] = useState();
 
     const {
-        fullscreenPlayer, setFullscreenPlayer, fullVideoPath
+        fullscreenPlayer, setFullscreenPlayer, fullVideoPath, setOpenFullscreenPopup
     } = fullscreenProps;
 
     const handleWindowResize = () => { 
@@ -37,7 +37,10 @@ const FullscreenPlayer = ({fullscreenProps}) => {
             <Box className="fullscreen-video-wrapper" ref={fullVideoCanvas} >
                 <ArrowBack 
                     className="back-arrow"
-                    onClick={() => setFullscreenPlayer(!fullscreenPlayer)}
+                    onClick={() => {
+                        setFullscreenPlayer(!fullscreenPlayer);
+                        // setOpenFullscreenPopup(true);
+                    }}
                 />
                 { fullVideoPath && 
                             <ReactPlayer
