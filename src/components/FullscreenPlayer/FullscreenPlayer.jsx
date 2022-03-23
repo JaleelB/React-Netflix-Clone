@@ -11,7 +11,7 @@ const FullscreenPlayer = ({fullscreenProps}) => {
     const[fullVideoHeight, setFullVideoHeight] = useState();
 
     const {
-        fullscreenPlayer, setFullscreenPlayer, fullVideoPath, setOpenFullscreenPopup
+        fullscreenPlayer, setFullscreenPlayer, fullVideoPath
     } = fullscreenProps;
 
     const handleWindowResize = () => { 
@@ -31,12 +31,14 @@ const FullscreenPlayer = ({fullscreenProps}) => {
             window.removeEventListener('resize', handleWindowResize);
         }
     }, []);
+    
 
     return (
 
-            <Box className="fullscreen-video-wrapper" ref={fullVideoCanvas} >
+            <Box className='fullscreen-video-wrapper' ref={fullVideoCanvas} >
                 <ArrowBack 
                     className="back-arrow"
+                    style={{left: window.innerWidth < window.innerHeight && `${window.innerWidth - 45}px`, transform: window.innerWidth < window.innerHeight && 'rotate(90deg)', zIndex: window.innerWidth < window.innerHeight && 4 }}
                     onClick={() => {
                         setFullscreenPlayer(!fullscreenPlayer);
                         // setOpenFullscreenPopup(true);
@@ -44,10 +46,10 @@ const FullscreenPlayer = ({fullscreenProps}) => {
                 />
                 { fullVideoPath && 
                             <ReactPlayer
-                                className='fullscreen-video-player'
+                                className={`fullscreen-video-player ${window.innerWidth < window.innerHeight ? 'mobile-rotate' : ''}`}
                                 url={`https://www.youtube.com/embed/${fullVideoPath}?modestbranding=1&rel=0&fs=0&autohide=1&showinfo=0&controls=0`}
-                                width={fullVideoWidth}
-                                height={fullVideoHeight}
+                                width={ window.innerWidth < window.innerHeight ? fullVideoHeight + 10: fullVideoWidth}
+                                height={window.innerWidth < window.innerHeight ? fullVideoWidth : fullVideoHeight}
                                 config={{
                                     youtube: {
                                     playerVars: { 

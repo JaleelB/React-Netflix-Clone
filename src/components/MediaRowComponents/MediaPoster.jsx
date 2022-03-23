@@ -58,8 +58,6 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
 
     const handleNetflixOriginal = event =>{ if (event.target.className === 'media-poster-image netflixOriginal' ) setNetflixOriginalShow(true); };
 
-    // const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
-
 
     return (
         // <Link>
@@ -67,9 +65,10 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
                 className='media-poster stacked'
                 sx={{width: '100%', height: '100%'}}
                 ref={posterRef}
-                onClick = {() => {
-                    setOpenFullscreenPopup(true);
+                onClick = {(e) => {
+                    handleNetflixOriginal(e);                    
                     setPosterID(id);
+                    setOpenFullscreenPopup(true);
                 }}
                 onMouseEnter={(e)=>{
                     setIsHovered(true);
@@ -85,11 +84,9 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
                     setPosterID(id);
                     setMediaType(type);
                     handleNetflixOriginal(e);
-                    // console.log(e.target.className);
                 }}
                 onMouseLeave={()=> {
                     handleDelayOnMouseLeave();
-                    // removeNetflixOriginal();
                 }}
             >
                 

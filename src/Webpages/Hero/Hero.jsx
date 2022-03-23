@@ -129,7 +129,7 @@ const Hero = () => {
             </Box>
 
             {
-                fullscreenPlayer && window.innerWidth > 1200 &&
+                fullscreenPlayer && 
                 
                     <FullscreenPlayer
                         fullscreenProps = {fullscreenProps}

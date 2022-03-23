@@ -44,64 +44,64 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps }) => {
     },[posterID, setFullVideoPath]);
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if(!netflixOriginalShow){
+    //     if(!netflixOriginalShow){
 
 
-            axios
-            .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}?api_key=${apiComponents[1]}&language=en-US`)
-            .then((res)=> {
-                setMovie(res.data)
-            })
-            .catch(error => { console.log(error) })
+    //         axios
+    //         .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}?api_key=${apiComponents[1]}&language=en-US`)
+    //         .then((res)=> {
+    //             setMovie(res.data)
+    //         })
+    //         .catch(error => { console.log(error) })
 
-            axios
-            .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/credits?api_key=${apiComponents[1]}&language=en-US`)
-            .then((res)=> {
-                setMovieCredits(res.data)
-            })
-            .catch(error => { console.log(error) })
+    //         axios
+    //         .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/credits?api_key=${apiComponents[1]}&language=en-US`)
+    //         .then((res)=> {
+    //             setMovieCredits(res.data)
+    //         })
+    //         .catch(error => { console.log(error) })
 
-            axios
-            .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/similar?api_key=${apiComponents[1]}&language=en-US`)
-            .then((res)=> {
-                setSimiliarMovies(res.data.results)
-            })
-            .catch(error => { console.log(error) })
+    //         axios
+    //         .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/similar?api_key=${apiComponents[1]}&language=en-US`)
+    //         .then((res)=> {
+    //             setSimiliarMovies(res.data.results)
+    //         })
+    //         .catch(error => { console.log(error) })
 
-        }
+    //     }
 
-        //use a state to control if it is netflix original or not
-        if(netflixOriginalShow){
-            axios
-            .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}?api_key=${apiComponents[1]}&language=en-US`)
-            .then((res)=> {
-                setMovie(res.data)
-            })
-            .catch(error => { console.log(error) })
+    //     //use a state to control if it is netflix original or not
+    //     if(netflixOriginalShow){
+    //         axios
+    //         .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}?api_key=${apiComponents[1]}&language=en-US`)
+    //         .then((res)=> {
+    //             setMovie(res.data)
+    //         })
+    //         .catch(error => { console.log(error) })
 
-            axios
-            .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/credits?api_key=${apiComponents[1]}&language=en-US`)
-            .then((res)=> {
-                setMovieCredits(res.data)
-            })
-            .catch(error => { console.log(error) })
+    //         axios
+    //         .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/credits?api_key=${apiComponents[1]}&language=en-US`)
+    //         .then((res)=> {
+    //             setMovieCredits(res.data)
+    //         })
+    //         .catch(error => { console.log(error) })
 
-            axios
-            .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/similar?api_key=${apiComponents[1]}&language=en-US`)
-            .then((res)=> {
-                setSimiliarMovies(res.data.results)
-            })
-            .catch(error => { console.log(error) })
-        }
+    //         axios
+    //         .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/similar?api_key=${apiComponents[1]}&language=en-US`)
+    //         .then((res)=> {
+    //             setSimiliarMovies(res.data.results)
+    //         })
+    //         .catch(error => { console.log(error) })
+    //     }
 
     
-    },[posterID, setMovie, setMovieCredits, setSimiliarMovies, netflixOriginalShow]);
+    // },[posterID, setMovie, setMovieCredits, setSimiliarMovies, netflixOriginalShow]);
 
 
     const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
-    
+
 
     return (
         <Box 
