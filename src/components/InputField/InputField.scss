@@ -1,0 +1,35 @@
+@import '../../mainStyles';
+
+.input-container{
+    position: relative; display: flex; flex-direction: row; width: 100%; 
+    // max-width: 1200px;
+    margin: calc(10% + 56px) auto 3rem; border-radius: 5px; 
+
+    @media screen and (min-width: 600px){  margin-top: calc(5% + 56px); }
+
+    &:after {
+        content: "";
+        position: absolute; left: 0; right: 0; bottom: 0; z-index: 9; height: 2px;
+        border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; 
+        background-position: 0% 0%; background: linear-gradient(to right, $primary-black,$primary-red, $primary-red,$primary-black, $primary-red);
+        animation: translateGradient 3s linear infinite; background-size: 500% auto;
+    }
+    
+    .input{
+        width: 100%; text-align: left; height: clamp(36px,5vh,56px); flex-grow: 1;
+        padding-left: $smaller-gap; background-color: rgba(255,255,255,0.05);
+        color: $color-white;  font-size: min(.9rem,1.1rem); line-height: 2.4rem; border-style: none;
+
+        &::-webkit-input-placeholder { color: $color-white; }
+        &:focus { outline: none; }
+    }
+
+    .delete{
+        position: absolute; z-index: 4; right: 0; margin: .5rem .7rem;
+    }
+}
+
+@keyframes translateGradient { 
+    0%{background-position:0 0}
+    100%{background-position:100% 0}
+}

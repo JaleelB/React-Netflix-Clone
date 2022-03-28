@@ -1,7 +1,7 @@
 @import '../../mainStyles';
 
 .media-container{
-    margin: 2vw 0 0 0; width: 100%; position: relative;
+    margin: 2vw 0 0 0; width: 100%; position: relative; z-index: 5;
 
     .title-wrapper{ 
         padding: 0 3%; position: relative; 
@@ -14,8 +14,6 @@
         position: relative; 
         @media screen and (max-width: 1100px){ padding: 0 0 0 3%; }
         .arrow{ 
-
-            color: $primary-red;
 
             @media screen and (max-width: 1199px){
                 &.left,&.right{display:none;}
@@ -44,7 +42,7 @@
             @media screen and (min-width: 680px) and (max-width: 991px){  grid-auto-columns:21%; }
             @media screen and (min-width: 992px) and (max-width: 1199px){  grid-auto-columns:15%; }
             @media screen and (max-height: 450px){ grid-auto-columns:21%; }
-            @media screen and (min-width: 1200px){ width: max-content; grid-auto-columns:1.9%;  overflow-x: visible;} 
+            @media screen and (min-width: 1200px){ width: max-content; grid-auto-columns:1.8%;  overflow-x: visible;} 
             @media screen and (min-width: 2800px){ width: max-content; grid-auto-columns:2.5%; } 
       
             &::-webkit-scrollbar { display: none; }
@@ -72,6 +70,16 @@
 
 
             }
+        }
+
+        .large-row{
+            grid-auto-columns:39%;
+
+            @media screen and (min-width: 680px) and (max-width: 991px){  grid-auto-columns:27%; }
+            @media screen and (min-width: 992px) and (max-width: 1199px){  grid-auto-columns:21%; }
+            @media screen and (max-height: 450px){ grid-auto-columns:27%; }
+            @media screen and (min-width: 1200px){ width: max-content; grid-auto-columns:2.1%;  overflow-x: visible;} 
+            @media screen and (min-width: 2800px){ width: max-content; grid-auto-columns:2.5%; }
         }
 
         

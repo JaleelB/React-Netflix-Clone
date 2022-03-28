@@ -9,10 +9,11 @@ const apiComponents = [
         popular: "/movie/popular",
         now_playing: "/movie/now_playing",
         on_tv: "/tv/on-the-air",
-        trending: "/trending/all/day",
+        trending: "/trending/all",
         discover_movie: "/discover/movie",
         discover_tv: "/discover/tv",
         originals: `/discover/tv?api_key=df7dbf24a32b1fff30834fc68ab0ce25&with_networks=213`,
+        search: '/search'
     },
     [
         {28: 'Action' },        

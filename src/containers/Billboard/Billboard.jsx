@@ -3,15 +3,19 @@ import axios from 'axios';
 import { Box, Button, IconButton, Typography } from '@mui/material';
 import {BillboardTitle, BillboardDescription, BillboardVideo, apiComponents } from '../../components';
 import './Billboard.scss';
-import { PlayArrow, Pause, VolumeOff, VolumeUp,  AddIcCallOutlined, Add } from '@mui/icons-material';
+import { PlayArrow, Pause, VolumeOff, VolumeUp, Add } from '@mui/icons-material';
 
-const Billboard = ({movie, disablePointer}) => {
+const Billboard = ({movie, disablePointer, fullscreenProps}) => {
 
     
     const [videoPath, setVideoPath] = useState('');
     const [videoPlay, setVideoPlay] = useState(true);
     const [volumeMute, setVolumeMute] = useState(true);
     const[deviceWindowWidth, setDeviceWindowWidth] = useState(window.innerWidth);
+
+    const {
+        setFullscreenPlayer, setPosterID, setFullVideoPath, posterID, setOpenFullscreenPopup
+    } = fullscreenProps;
 
     const handleWindowResize = () => { setDeviceWindowWidth(window.innerWidth) }
 
@@ -37,12 +41,24 @@ const Billboard = ({movie, disablePointer}) => {
 
     }, [movie?.id]);
 
+    useEffect(() => {
+
+        axios
+        .get(`https://api.themoviedb.org/3/tv/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
+        .then((res)=> {
+            setFullVideoPath(res.data.results[0]?.key)
+        })
+        .catch(error => { console.log(error) })
+
+    }, [posterID,setFullVideoPath,movie?.id]);
+
 
     
     return (
         //use fuse js for live searching an array for search tab of projecct
         <Box className={`billboard stacked ${disablePointer ? 'disable-pointer' : ''}`}
-        sx={{ background: `url('https://image.tmdb.org/t/p/original${movie?.backdrop_path}')`}}
+            sx={{ background: `url('https://image.tmdb.org/t/p/original${movie?.backdrop_path}')`}}
+            onLoad={ ()=> setPosterID(movie?.id) }
         >
             {/* 
                 remove background and an image for the hero background. 
@@ -57,7 +73,7 @@ const Billboard = ({movie, disablePointer}) => {
                     <BillboardTitle title={movie?.name}/>
   
                     <Box className="billboard__supplemental-wrapper" sx={{display: 'flex', gap: '1rem'}}>
-                        <img className="netflix-icon" src="https://cdn.icon-icons.com/icons2/2699/PNG/512/netflix_logo_icon_170919.png" alt="Netflix Icon"/>
+                        <img className="netflix-icon" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="Netflix Icon"/>
                         <Typography className="billboard__supplemental-message" sx={{color :'#fff'}}>Netflix Original</Typography>
                     </Box>
 
@@ -72,11 +88,26 @@ const Billboard = ({movie, disablePointer}) => {
                                     { videoPlay ?  <Pause className="billboard__button-play-icon"/> : <PlayArrow className="billboard__button-play-icon"/> }
                                     { videoPlay ? 'Pause Trailer' : 'Play Trailer' }
                             </Button>
-                            <Button variant="outlined" className="billboard__button-details">View Info</Button>
+                            <Button 
+                                variant="outlined" 
+                                className="billboard__button-details"
+                                onClick={()=> {
+                                    setPosterID(movie?.id);
+                                    setOpenFullscreenPopup(true);
+                                }}
+                            >
+                                View Info 
+                            </Button>
                         </> }
 
                         {deviceWindowWidth < 1200 && <>
-                            <Button className="billboard__button-play">
+                            <Button 
+                                className="billboard__button-play" 
+                                onClick={()=> {
+                                    setPosterID(movie?.id);
+                                    setFullscreenPlayer(true);
+                                }}
+                            >
                                 <PlayArrow className="billboard__button-play-icon"/>
                                 Play
                             </Button>
@@ -91,7 +122,10 @@ const Billboard = ({movie, disablePointer}) => {
 
             {deviceWindowWidth > 1200 && 
                 <Box className="billboard__volume-rating-conatiner">
-                    <IconButton className="billboard__volume-toggle" onClick={()=> setVolumeMute(!volumeMute)}>
+                    <IconButton 
+                        className="billboard__volume-toggle" 
+                        onClick={ ()=> setVolumeMute(!volumeMute) }
+                    >
                         { volumeMute ? <VolumeOff className="billboard__volume-icon"/> : <VolumeUp className="billboard__volume-icon"/> }
                     </IconButton>
                     <Box className="billboard__maturity-rating">TV-14</Box>

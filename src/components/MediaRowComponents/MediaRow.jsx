@@ -4,7 +4,7 @@ import MediaPoster from './MediaPoster';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenProps }) => {
+const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenProps, typeMedia, className }) => {
 
     const [posterWidth, setPosterWidth] = useState(0);
     
@@ -25,13 +25,11 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
         
     },[posterWidth,rowContainerRef.current, setContainerWidth, setRowPadding,  setTotalPostersInView, wrapperRef ]);   
 
-    
-    // console.log(medias)
 
     return (
 
         <Box 
-            className="media-row" 
+            className={`media-row ${netflixOriginal ? 'large-row' : ''} ${className ? className: ''}`}
             ref={rowContainerRef}
             sx={{transform: `translate3d(${distance}px, 0, 0)`}}
         >
@@ -43,7 +41,6 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
                                 posterRef={posterRef}
                                 rowContainerRef= {rowContainerRef}
                                 key={media.id}
-                                netflixOriginal={netflixOriginal}
                                 posterPath = {media?.poster_path}
                                 name = {media?.name ? media?.name : media?.title}
                                 genreIDs = {media?.genre_ids}
@@ -54,7 +51,8 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
                                 rating={media?.vote_average}
                                 id={media?.id}
                                 fullscreenProps = {fullscreenProps}
-                                type={media?.media_type ? media?.media_type : ''}
+                                typeMedia={typeMedia}
+                                netflixOriginal
                             />
                                 
                 })   

@@ -10,15 +10,15 @@ import { Add, PlayArrow } from '@mui/icons-material';
 const FullscreenPopup = ({fullscreenProps}) => {
 
     const { 
-        setOpenFullscreenPopup, posterID, movie, fullscreenPlayer,
+        setOpenFullscreenPopup, posterID, movie, mediaType,
         setMovie, movieCredits, setMovieCredits, setFullscreenPlayer,
-        setSimiliarMovies, similiarMovies, setDisablePointer, netflixOriginalShow,
-        setNetflixOriginalShow, setFullVideoPath
+        setSimiliarMovies, similiarMovies, setDisablePointer, setFullVideoPath,
+        netflixOriginalShow, setNetflixOriginalShow
     } = fullscreenProps;
 
     useEffect(() => {
 
-        if(!netflixOriginalShow){
+        if(mediaType === 'movie'){
 
 
             axios
@@ -45,7 +45,7 @@ const FullscreenPopup = ({fullscreenProps}) => {
         }
 
         //use a state to control if it is netflix original or not
-        if(netflixOriginalShow){
+        if(mediaType === 'tv'){
             axios
             .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}?api_key=${apiComponents[1]}&language=en-US`)
             .then((res)=> {
@@ -69,7 +69,7 @@ const FullscreenPopup = ({fullscreenProps}) => {
         }
 
     
-    },[posterID, setMovie, setMovieCredits, setSimiliarMovies, netflixOriginalShow]);
+    },[posterID, setMovie, setMovieCredits, setSimiliarMovies, mediaType]);
 
     useEffect(() => {
 
@@ -91,6 +91,8 @@ const FullscreenPopup = ({fullscreenProps}) => {
 
 
     const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
+
+    console.log(netflixOriginalShow, mediaType);
 
     return (
         <Box 
@@ -132,6 +134,11 @@ const FullscreenPopup = ({fullscreenProps}) => {
 
                             {(movie?.title ? movie?.title : movie?.name ) && window.innerWidth < 601 && <Typography className="backdrop-title" variant="body" component="h1">{movie?.title ? movie?.title : movie?.name}</Typography>}
 
+                            {netflixOriginalShow && mediaType === 'tv' && <Box className="netflix-listing" sx={{display: 'flex', gap: '1rem'}}>
+                                <img className="netflix-icon" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="Netflix Icon"/>
+                                <Typography className="listing-supplemental-message" sx={{color :'#fff'}}>Netflix Show</Typography>
+                            </Box>}
+
                             <Box className="movie-metadata-container">
                                 {movie?.vote_average && <Box className="movie-rating">{movie?.vote_average * 10}%</Box>}
                                 {movie?.release_date && <Box className="movie-air-date">{movie?.release_date ? movie?.release_date : movie?.last_air_date}</Box>}
@@ -143,9 +150,9 @@ const FullscreenPopup = ({fullscreenProps}) => {
                                 {
                                     movie?.genres && movie?.genres.map((genre, index) => {
 
-                                        if(index === 0 && movie?.genres.length < 1) return ' ' + genre.name
-                                        if(index === 0 && movie?.genres.length > 1) return ' ' + genre.name + ', '
-                                        if(index < movie?.genres.length - 1) return genre.name + ', '
+                                        if(index === 0 && movie?.genres.length < 1) return <Typography key={index}>{' ' + genre.name}</Typography>
+                                        if(index === 0 && movie?.genres.length > 1) return <Typography key={index}>{' ' + genre.name + ', '}</Typography>
+                                        if(index < movie?.genres.length - 1) return <Typography key={index}>{genre.name + ', '}</Typography>
                                         else return genre.name
                                     })
                                 }

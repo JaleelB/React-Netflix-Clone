@@ -45,7 +45,7 @@
 
             .movie-metadata-container{
                 width: 100%; display: flex;
-                padding: .5rem 1rem 0;  margin-bottom: .25rem; gap: 1rem;
+                padding: .5rem 1rem 0;  margin-bottom: .5rem; gap: $gap;
 
                 .movie-rating{ 
                     text-align: center; color: #46d369; 

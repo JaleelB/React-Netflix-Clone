@@ -1,0 +1,28 @@
+@import '../../mainStyles';
+
+.slick-slider{
+    .slick-list{
+        overflow: visible;  margin: 10px 0;
+
+        .slick-track{ 
+            display: flex; flex-direction: row; gap: $smaller-gap; 
+
+            .backdrop{
+                width: 100%; height: clamp(170px, 20vw ,400px); background-color: #212121;
+                border-radius: 5px;
+
+                &:hover{  outline: 3px solid $primary-red; }
+                
+                img{ 
+                    inline-size: 100%; object-fit: cover; height: inherit; 
+                    position: relative; border-radius: 5px; filter: brightness(70%);
+                }
+
+                .media-row-title{ position: absolute; bottom: 1rem; margin-inline: 1rem; z-index: 3; }
+
+            }
+        }
+    }
+
+    button{ display: none !important; }
+}

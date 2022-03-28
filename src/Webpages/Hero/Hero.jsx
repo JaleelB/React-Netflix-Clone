@@ -25,6 +25,9 @@ const Hero = () => {
     const [movieCredits, setMovieCredits] = useState([]);
     const [similiarMovies, setSimiliarMovies] = useState([]);
     const [disablePointer, setDisablePointer] = useState(false);
+    const [mediaType, setMediaType] = useState('');
+
+    const [volume, setVolume] = useState(1);
    
     useEffect(() => {
 
@@ -43,7 +46,7 @@ const Hero = () => {
         .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].trending}?api_key=${apiComponents[1]}&with_networks=213`)
+        .get(`${apiComponents[0]}${apiComponents[2].trending}/week?api_key=${apiComponents[1]}&with_networks=213`)
         .then((res)=> {
             setTrending(res.data.results)
         })
@@ -80,8 +83,13 @@ const Hero = () => {
         movie, setMovie, movieCredits, setMovieCredits,
         similiarMovies, setSimiliarMovies,
         disablePointer, setDisablePointer,
-        netflixOriginalShow, setNetflixOriginalShow
+        netflixOriginalShow, setNetflixOriginalShow,
+        volume, setVolume,
+        mediaType, setMediaType
     };
+
+    const mediaTypeMovie = 'movie';
+    const mediaTypeTv = 'tv';
   
     return (
         <Box id="hero" sx={{
@@ -90,7 +98,7 @@ const Hero = () => {
             }}>
             {/* use fuse js for live searching an array for search tab of projecct */}
 
-            <Billboard disablePointer={disablePointer} movie = {originals[4]}/>
+            <Billboard disablePointer={disablePointer} movie = {originals[2]} fullscreenProps={fullscreenProps}/>
 
             <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
 
@@ -99,31 +107,37 @@ const Hero = () => {
                     medias = { originals }
                     fullscreenProps = { fullscreenProps } 
                     netflixOriginal
+                    typeMedia={mediaTypeTv}
                 />
                 <MediaRowContainer
                     title = "Most Users Loved These Shows"
                     medias = { popular }
                     fullscreenProps = { fullscreenProps } 
+                    typeMedia={mediaTypeMovie}
                 />
                 <MediaRowContainer
                     title = "Trending Now"
                     medias = { trending }
                     fullscreenProps = { fullscreenProps } 
+                    typeMedia={mediaTypeMovie}
                 />
                 <MediaRowContainer
                     title = "New Releases"
                     medias = { newReleases }
                     fullscreenProps = { fullscreenProps } 
+                    typeMedia={mediaTypeMovie}
                 />
                 <MediaRowContainer
                     title = "Most Loved Shows Of All Time"
                     medias = { topRated }
                     fullscreenProps = { fullscreenProps } 
+                    typeMedia={mediaTypeMovie}
                 />
                 <MediaRowContainer
                     title = "Action Thrillers"
                     medias = { actionThriller }
                     fullscreenProps = { fullscreenProps } 
+                    typeMedia={mediaTypeMovie}
                 />
     
             </Box>

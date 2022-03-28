@@ -1,0 +1,12 @@
+@import '../../mainStyles';
+
+#search-page{
+    width: $background-width; min-height: $background-height; padding: 0 calc(3.5vw + 24px);
+    background: $primary-black; overflow-x:hidden; position: relative;
+    color: $color-white; 
+
+    .footer{
+        position: relative; margin-top: 20px;
+    }
+
+}

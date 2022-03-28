@@ -4,7 +4,7 @@
 *::after,
 *::before { margin: 0; padding: 0; box-sizing: inherit; }
 
-.netflix-large-logo, .netflix-small-logo{ position: absolute; top: -.6rem; }
+.netflix-large-logo, .netflix-small-logo{ position: absolute; top: -.8rem; }
 .netflix-small-logo{width: 40px; height: 30px}; 
 .netflix-large-logo{width: 90px; }; 
 
@@ -12,7 +12,7 @@
     position: relative; margin-left: auto; color: $color-white; 
     &-checkbox{display :none; }
     &-button{
-        position:fixed; top: .5rem; right: 2%; 
+        position:fixed; top: .1rem; right: 2%; 
         width: 3rem; height: 3rem; z-index: 2000;
         text-align: center; cursor: pointer; border-radius: 50%;        
     }

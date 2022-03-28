@@ -44,62 +44,6 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps }) => {
     },[posterID, setFullVideoPath]);
 
 
-    // useEffect(() => {
-
-    //     if(!netflixOriginalShow){
-
-
-    //         axios
-    //         .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}?api_key=${apiComponents[1]}&language=en-US`)
-    //         .then((res)=> {
-    //             setMovie(res.data)
-    //         })
-    //         .catch(error => { console.log(error) })
-
-    //         axios
-    //         .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/credits?api_key=${apiComponents[1]}&language=en-US`)
-    //         .then((res)=> {
-    //             setMovieCredits(res.data)
-    //         })
-    //         .catch(error => { console.log(error) })
-
-    //         axios
-    //         .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/similar?api_key=${apiComponents[1]}&language=en-US`)
-    //         .then((res)=> {
-    //             setSimiliarMovies(res.data.results)
-    //         })
-    //         .catch(error => { console.log(error) })
-
-    //     }
-
-    //     //use a state to control if it is netflix original or not
-    //     if(netflixOriginalShow){
-    //         axios
-    //         .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}?api_key=${apiComponents[1]}&language=en-US`)
-    //         .then((res)=> {
-    //             setMovie(res.data)
-    //         })
-    //         .catch(error => { console.log(error) })
-
-    //         axios
-    //         .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/credits?api_key=${apiComponents[1]}&language=en-US`)
-    //         .then((res)=> {
-    //             setMovieCredits(res.data)
-    //         })
-    //         .catch(error => { console.log(error) })
-
-    //         axios
-    //         .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/similar?api_key=${apiComponents[1]}&language=en-US`)
-    //         .then((res)=> {
-    //             setSimiliarMovies(res.data.results)
-    //         })
-    //         .catch(error => { console.log(error) })
-    //     }
-
-    
-    // },[posterID, setMovie, setMovieCredits, setSimiliarMovies, netflixOriginalShow]);
-
-
     const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
 
 
@@ -107,10 +51,10 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps }) => {
         <Box 
             className="preview-popup" 
             sx={{
-                width: `${cardPopupWidth * 1.6}px`,
-                height: `${cardPopupHeight * 1.4}px`,
+                width: `${cardPopupWidth * (netflixOriginalShow ? 1.55 : 1.75)}px`,
+                height: `${cardPopupHeight * (netflixOriginalShow ? 1.3 : 1.4)}px`,
                 // left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding + ( posterIndex > 1 ? (8 * posterIndex) : 0 ) ) - rowPadding}px`
-                left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding )}px`
+                left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding ) - 30}px`
             }}
             onMouseLeave={()=> {
                 setIsHovered(false)

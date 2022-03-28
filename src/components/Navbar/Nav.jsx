@@ -25,22 +25,17 @@ export default function Nav() {
     };
   }, []);
 
-  // () => {
-  //   // if (window.scrollY > 100) {
-  //   //   setDarkNavbar(true);
-  //   // } else setDarkNavbar(false);
-  // }
 
   return (
     <Box sx={{ flexGrow: 1}}>
-      <AppBar position="fixed" sx={{ boxShadow: 'none', color: 'white', zIndex: 33, background:`${darkNavbar ? '#171717' : 'transparent'}`}}>
+      <AppBar sx={{ boxShadow: 'none', color: 'white', zIndex: 33, background:`${darkNavbar ? '#171717' : 'transparent'}`}}>
         <Toolbar sx={{display: { xs: 'flex'}}}>
 
           <Box sx={{position: 'relative', left: '0', display: { xs: 'flex'}}}>
 
             <Box sx={{display: { xs: 'block', md: 'none' } }}>
               <Link to={'/'}>
-                <img className="netflix-small-logo" src="https://cdn.icon-icons.com/icons2/2699/PNG/512/netflix_logo_icon_170919.png" alt="mobile netflix icon"/>
+                <img className="netflix-small-logo" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="mobile netflix icon"/>
               </Link>
             </Box>
 

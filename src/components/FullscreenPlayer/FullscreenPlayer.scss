@@ -8,11 +8,19 @@
     .mobile-rotate{ transform: rotate(90deg);  position: absolute; }
 
     .back-arrow{ 
-        position: absolute; top: 1rem; left: 1rem;
+        position: absolute; top: 1rem; left: 0;
         height: 4%; width: 4%; color: $color-white; 
         
         @media screen and (max-width: 500px) { left: 1rem; top: 0; height: 7%; width: 7%; }
     }
+    .video-player-controls{
+        position: absolute; bottom: 1rem; left: 2rem;
+        display: flex; align-items: center; gap: $gap; color: $color-white;
+
+        .volume-slider-controls{  width: 200px;  }
+        .replay-control{ position: relative; top: -5px; height: 2rem; width: 2rem; margin-right: $smaller-gap; }
+    }
+    
 
     .fullscreen-video-player{
         pointer-events: none;

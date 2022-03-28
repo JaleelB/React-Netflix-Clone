@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {MediaRowWrapper, MediaRowTitle, PosterPreviewPopup } from '../../components';
 import './MediaRow.scss';
 
-const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps }) => {
+const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps, typeMedia, className,disableHover }) => {
 
     const[isHovered, setIsHovered] = useState(false);
     const [cardPopupWidth, setCardPopupWidth] = useState(''); 
@@ -21,7 +21,6 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps }) =
     const [cardPopupAirDate, setCardPopupAirDate] = useState(null);
     const [cardPopupRating, setCardPopupRating] = useState(null);
     const [cardPopupTitle, setCardPopupTitle] = useState('');
-    const [mediaType, setMediaType] = useState('');
     const [postersInViewTabNumber, setPostersInViewTabNumber] = useState(0);
 
     const popupProps = {
@@ -42,24 +41,25 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps }) =
         cardPopupRating, setCardPopupRating,
         cardPopupTitle, setCardPopupTitle,
         postersInViewTabNumber, setPostersInViewTabNumber,
-        cardPopupAirDate, setCardPopupAirDate,
-        mediaType, setMediaType
+        cardPopupAirDate, setCardPopupAirDate
     };
 
     return (
 
         <Box className="media-container">
 
-            <MediaRowTitle title={title}/>
+            <MediaRowTitle title={title ? title : ''}/>
             {medias &&  <MediaRowWrapper 
                             medias={medias}   
                             netflixOriginal={netflixOriginal}
                             popupProps = {popupProps}
                             fullscreenProps = {fullscreenProps}
+                            typeMedia={typeMedia}
+                            className={className}
                         /> 
             }
 
-            { !delayed && window.innerWidth > 1200 && isHovered &&
+            { disableHover !== true && !delayed && window.innerWidth > 1200 && isHovered &&
                 
                     <PosterPreviewPopup 
                         popupProps = {popupProps}
