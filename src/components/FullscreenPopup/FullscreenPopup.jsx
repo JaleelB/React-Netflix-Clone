@@ -3,7 +3,7 @@ import React,{useEffect} from 'react';
 import axios from 'axios';
 import {apiComponents} from '../../components';
 import FullscreenPosterBackdrop from './FullscreenPosterBackdrop';
-import SimiliarMovie from './SimiliarMovie';
+import SimiliarMovies from './SimiliarMovies';
 import './FullscreenPopup.scss';
 import { Add, PlayArrow } from '@mui/icons-material';
 
@@ -19,7 +19,6 @@ const FullscreenPopup = ({fullscreenProps}) => {
     useEffect(() => {
 
         if(mediaType === 'movie'){
-
 
             axios
             .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}?api_key=${apiComponents[1]}&language=en-US`)
@@ -72,27 +71,28 @@ const FullscreenPopup = ({fullscreenProps}) => {
     },[posterID, setMovie, setMovieCredits, setSimiliarMovies, mediaType]);
 
     useEffect(() => {
+        if(mediaType === 'movie'){
+            axios
+            .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setFullVideoPath(res.data.results[0]?.key)
+            })
+            .catch(error => { console.log(error) })
+        }
 
-        axios
-        .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US`)
-        .then((res)=> {
-            setFullVideoPath(res.data.results[0]?.key)
-        })
-        .catch(error => { console.log(error) })
-
-        axios
-        .get(`${apiComponents[0]}${apiComponents[2].tv}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US`)
-        .then((res)=> {
-            setFullVideoPath(res.data.results[0]?.key)
-        })
-        .catch(error => { console.log(error) })
+        if(mediaType === 'tv'){
+            axios
+            .get(`${apiComponents[0]}${apiComponents[2].tv}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setFullVideoPath(res.data.results[0]?.key)
+            })
+            .catch(error => { console.log(error) })
+        }
     
     },[posterID, setFullVideoPath]);
 
 
     const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
-
-    console.log(netflixOriginalShow, mediaType);
 
     return (
         <Box 
@@ -192,14 +192,25 @@ const FullscreenPopup = ({fullscreenProps}) => {
                         </Box>
                         
                         <Box className="similiar-container">
-                            <Typography variant="subtitle" component="h3" sx={{marginBottom: '.2rem'}}>Similiar Shows: </Typography>
+                            {/* <Typography variant="subtitle" component="h3" sx={{marginBottom: '.2rem'}}>Similiar Shows: </Typography>
                             <Box className="similiar-movies">
                                 {
                                     similiarMovies && similiarMovies.map((recommendation) => {
                                         return <SimiliarMovie posterPath = {"https://image.tmdb.org/t/p/w500" + recommendation?.poster_path}/>
                                     })
                                 }
-                            </Box>
+                            </Box> */}
+
+                            { similiarMovies && 
+                                <SimiliarMovies
+                                    className = {"similiar-movies-gallery"}
+                                    title={"Similiar Shows"}
+                                    medias = {similiarMovies}
+                                    fullscreenProps = { fullscreenProps } 
+                                    typeMedia={mediaType} 
+                                    disableHover
+                                /> 
+                            }
                         </Box>
 
                         <Box className="cast-container">

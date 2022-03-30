@@ -5,7 +5,7 @@ import MediaRow from './MediaRow';
 
 import '../../containers/MediaRow/MediaRow.scss';
 
-const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps, typeMedia, className}) => {
+const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps, typeMedia, className, disableHover}) => {
 
     const wrapperRef = useRef(null);
 
@@ -51,6 +51,7 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps, t
                         fullscreenProps = {fullscreenProps}
                         typeMedia={typeMedia}
                         className={className}
+                        disableHover={disableHover}
                     />
 
                 {showNextButton && <ArrowForwardIosOutlined

@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import './ImageSlider.scss';
 
 
-const ImageSlider = ({randIndexes, shows}) => {
+const ImageSlider = ({randIndexes, shows, fullscreenProps}) => {
 
     const settings = {
         dots: true,
@@ -26,7 +26,7 @@ const ImageSlider = ({randIndexes, shows}) => {
             <Slider {...settings}>
                 {
                     randIndexes.map((randIndex)=>{
-                        return <ImageSliderBackdrop key={randIndex} index={randIndex} movie={shows[randIndex]}/>
+                        return <ImageSliderBackdrop key={randIndex} index={randIndex} movie={shows[randIndex]} fullscreenProps = { fullscreenProps } />
                     })
                 }
             </Slider>

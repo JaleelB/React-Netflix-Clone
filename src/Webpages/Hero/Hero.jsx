@@ -1,12 +1,11 @@
 import { Box } from '@mui/material';
 import './Hero.scss';
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
 
-const Hero = () => {
+const Hero = ({fullscreenProps}) => {
     
     const [originals, setOriginals] = useState([]);
     const [popular, setPopular] = useState([]);
@@ -14,20 +13,6 @@ const Hero = () => {
     const [topRated, setTopRated] = useState([]);
     const [actionThriller, setActionThriller] = useState([]);
     const [newReleases, setNewReleases] = useState([]);
-
-    const [fullscreenPlayer, setFullscreenPlayer] = useState(false);
-    const[fullVideoPath, setFullVideoPath] = useState('');
-    const [posterID, setPosterID] = useState(0);
-    const [netflixOriginalShow, setNetflixOriginalShow] = useState(false);
-
-    const [openFullscreenPopup, setOpenFullscreenPopup] = useState(false);
-    const [movie, setMovie] = useState([]);
-    const [movieCredits, setMovieCredits] = useState([]);
-    const [similiarMovies, setSimiliarMovies] = useState([]);
-    const [disablePointer, setDisablePointer] = useState(false);
-    const [mediaType, setMediaType] = useState('');
-
-    const [volume, setVolume] = useState(1);
    
     useEffect(() => {
 
@@ -75,29 +60,15 @@ const Hero = () => {
   
     }, []);
 
-    const fullscreenProps = {
-        fullscreenPlayer, setFullscreenPlayer,
-        fullVideoPath, setFullVideoPath,
-        posterID, setPosterID,
-        openFullscreenPopup, setOpenFullscreenPopup,
-        movie, setMovie, movieCredits, setMovieCredits,
-        similiarMovies, setSimiliarMovies,
-        disablePointer, setDisablePointer,
-        netflixOriginalShow, setNetflixOriginalShow,
-        volume, setVolume,
-        mediaType, setMediaType
-    };
+
+    const { disablePointer, fullscreenPlayer, openFullscreenPopup } = fullscreenProps;
 
     const mediaTypeMovie = 'movie';
     const mediaTypeTv = 'tv';
   
     return (
-        <Box id="hero" sx={{
-                // paddingLeft: 'calc(3.5vw + 24px)', 
-                background: '#171717'
-            }}>
-            {/* use fuse js for live searching an array for search tab of projecct */}
-
+        <Box id="hero">
+           
             <Billboard disablePointer={disablePointer} movie = {originals[2]} fullscreenProps={fullscreenProps}/>
 
             <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>

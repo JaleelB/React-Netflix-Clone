@@ -1,19 +1,20 @@
 import { Box } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import { InputField, ImageSlider, apiComponents, PosterGallery, Footer } from '../../components';
+import { InputField, ImageSlider, apiComponents, PosterGallery, Footer,FullscreenPlayer, FullscreenPopup } from '../../components';
 import axios from 'axios';
 import './Search.scss';
 
-const Search = () => {
+const Search = ({fullscreenProps}) => {
 
     const [trendingToday, setTrendingToday] = useState([]);
-    // const [discoverMovies, setDiscoverMovies] = useState([]);
     const [discoverTV, setDiscoverTV] = useState([]);
     const[isTyping, setIsTyping] = useState(false);
     const[inputText, setInputText] = useState('');
     const[searchTVResults, setSearchTVResults] = useState([]);
     const[searchMovieResults, setSearchMovieResults] = useState([]);
 
+    const { disablePointer, fullscreenPlayer, openFullscreenPopup } = fullscreenProps;
+   
     useEffect(() => {
 
         axios
@@ -61,9 +62,8 @@ const Search = () => {
         Suggestions:
         
             * Try different keywords
-            * Try using a movie, name or tv show name
+            * Try using a movie name or tv show name
     `;
-
 
 
     const randIndexGenerator = (maxValue, indexCount) => {
@@ -78,24 +78,51 @@ const Search = () => {
     };
 
 
+    // add skeleton loading for bacdrop, billboard and posters
+
     return (
         <Box id="search-page">
-            <InputField updateTyping={setIsTyping} setInput={setInputText} />
-            { !isTyping && <ImageSlider randIndexes={randIndexGenerator(20, 5)} shows={trendingToday}/> }
-            { !isTyping && <PosterGallery medias={discoverTV} title={"Discover"} className = {"poster-gallery"}/> }
+
+            <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
+                <InputField updateTyping={setIsTyping} setInput={setInputText} isTyping={isTyping}/>
+
+
+                { !isTyping && <ImageSlider randIndexes={randIndexGenerator(20, 5)} shows={trendingToday} fullscreenProps = { fullscreenProps } mediaType={"tv"}/> }
+                { !isTyping && <PosterGallery medias={discoverTV} title={"Discover"} className = {"poster-gallery"} fullscreenProps = { fullscreenProps } mediaType={"tv"}/> }
+
+                {
+                    isTyping && searchMovieResults.length > 0 &&  searchTVResults.length > 0 &&
+                    <>
+                        <PosterGallery medias={searchTVResults} title={"Tv Search Results"} className = {"poster-gallery"} fullscreenProps = { fullscreenProps } mediaType={"tv"}/> 
+                        <PosterGallery medias={searchMovieResults} title={"Movie Search Results"} className = {"poster-gallery"} fullscreenProps = { fullscreenProps } mediaType={"movie"}/> 
+                    </>
+                    
+                }
+
+                { isTyping && searchTVResults.length === 0 && <PosterGallery medias={searchTVResults} title={"Tv Search Results"} className = {"poster-gallery"} errorMessage={errorOutput} fullscreenProps = { fullscreenProps } mediaType={"tv"}/>  }
+                { isTyping && searchMovieResults.length === 0 && <PosterGallery medias={searchMovieResults} title={"Movie Search Results"} className = {"poster-gallery"} errorMessage={errorOutput} fullscreenProps = { fullscreenProps } mediaType={"movie"}/>  }
+
+
+                <Footer/>
+            </Box>
 
             {
-                isTyping && searchMovieResults.length > 0 &&  searchTVResults.length > 0 &&
-                <>
-                    <PosterGallery medias={searchTVResults} title={"Tv Search Results"} className = {"poster-gallery"}/> 
-                    <PosterGallery medias={searchMovieResults} title={"Movie Search Results"} className = {"poster-gallery"}/> 
-                </>
+                fullscreenPlayer && 
                 
+                    <FullscreenPlayer
+                        fullscreenProps = {fullscreenProps}
+                    />
             }
 
-            { isTyping && searchTVResults.length === 0 && <PosterGallery medias={searchTVResults} title={"Tv Search Results"} className = {"poster-gallery"} errorMessage={errorOutput}/>  }
-            { isTyping && searchMovieResults.length === 0 && <PosterGallery medias={searchMovieResults} title={"Movie Search Results"} className = {"poster-gallery"} errorMessage={errorOutput}/>  }
-            <Footer/>
+            {
+                openFullscreenPopup && 
+
+                    <FullscreenPopup
+                        fullscreenProps = { fullscreenProps }
+                    />
+
+            }
+
         </Box>
     )
 }

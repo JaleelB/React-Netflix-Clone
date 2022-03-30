@@ -56,6 +56,7 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps, typ
                             fullscreenProps = {fullscreenProps}
                             typeMedia={typeMedia}
                             className={className}
+                            disableHover={disableHover}
                         /> 
             }
 

@@ -4,7 +4,7 @@ import MediaPoster from './MediaPoster';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenProps, typeMedia, className }) => {
+const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenProps, typeMedia, className, disableHover }) => {
 
     const [posterWidth, setPosterWidth] = useState(0);
     
@@ -52,6 +52,7 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
                                 id={media?.id}
                                 fullscreenProps = {fullscreenProps}
                                 typeMedia={typeMedia}
+                                disableHover={disableHover}
                                 netflixOriginal
                             />
                                 

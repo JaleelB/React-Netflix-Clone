@@ -8,7 +8,7 @@
             display: flex; flex-direction: row; gap: $smaller-gap; 
 
             .backdrop{
-                width: 100%; height: clamp(170px, 20vw ,400px); background-color: #212121;
+                width: 100%; height: clamp(170px, 25vw ,600px); background-color: #212121;
                 border-radius: 5px;
 
                 &:hover{  outline: 3px solid $primary-red; }

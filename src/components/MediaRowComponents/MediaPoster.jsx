@@ -4,8 +4,7 @@ import {apiComponents} from '../../components';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating, id, fullscreenProps, typeMedia }) => {
- 
+const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating, id, fullscreenProps, typeMedia }) => {
 
     const { 
         setIsHovered,
@@ -22,10 +21,12 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
         setCardPopupRating,
     } = popupProps;
 
+
     const {
-        setPosterID, setOpenFullscreenPopup, setMediaType, setNetflixOriginalShow,
+        setPosterID, setOpenFullscreenPopup, setMediaType, setNetflixOriginalShow, netflixOriginalShow
     } = fullscreenProps;
     
+
     useEffect(()=>{
         updatePosterWidth(Math.floor(posterRef.current.clientWidth));
     },[posterRef, updatePosterWidth])
@@ -65,37 +66,41 @@ const MediaPoster = ({popupProps, index,posterPath, name, netflixOriginal, poste
     return (
         // <Link>
             <Box 
-                className='media-poster stacked'
+                className='media-poster'
                 sx={{width: '100%', height: '100%'}}
                 ref={posterRef}
-                onClick = {(e) => {
+                onClick = {() => {
                     handleMediaType();                    
                     setPosterID(id);
                     setOpenFullscreenPopup(true);
-                    handleNetflixOriginal()
+                    handleNetflixOriginal();
+                    // console.log(posterID);
                 }}
                 onMouseEnter={()=>{
-                    setIsHovered(true);
-                    handleDelayOnMouseEnter(); 
-                    setCardPopupWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
-                    setCardPopupHeight(Math.floor(posterRef.current.getBoundingClientRect().height));
-                    setPosterIndex(index);
-                    setGenres(getGenres());
-                    setCardPopupBackdrop('https://image.tmdb.org/t/p/original/' + backdrop);
-                    setCardPopupTitle(name);
-                    setCardPopupAirDate(airDate);
-                    setCardPopupRating(rating);
-                    setPosterID(id);
-                    handleMediaType();
-                    handleNetflixOriginal();
+                    if(!disableHover){
+                        setIsHovered(true);
+                        handleDelayOnMouseEnter(); 
+                        setCardPopupWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
+                        setCardPopupHeight(Math.floor(posterRef.current.getBoundingClientRect().height));
+                        setPosterIndex(index);
+                        setGenres(getGenres());
+                        setCardPopupBackdrop('https://image.tmdb.org/t/p/original/' + backdrop);
+                        setCardPopupTitle(name);
+                        setCardPopupAirDate(airDate);
+                        setCardPopupRating(rating);
+                        setPosterID(id);
+                        handleMediaType();
+                        handleNetflixOriginal();
+                    }
+                    
                 }}
                 onMouseLeave={()=> {
-                    handleDelayOnMouseLeave();
+                    if(!disableHover) handleDelayOnMouseLeave();
                 }}
             >
                 
                 <Box className="media-poster-image-wrapper">
-                    { netflixOriginal && posterPath && typeMedia === 'tv' && <img className="netflix-icon"src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="Netflix Icon"/> }
+                    { netflixOriginal && netflixOriginalShow && posterPath && typeMedia === 'tv' && <img className="netflix-icon"src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="Netflix Icon"/> }
                     <img className={`media-poster-image ${netflixOriginal ? "netflixOriginal" : ''}`} draggable="false"  src={"https://image.tmdb.org/t/p/w500" + posterPath} alt={name}/>
                 </Box>
 

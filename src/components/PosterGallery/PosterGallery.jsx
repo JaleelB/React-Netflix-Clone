@@ -5,35 +5,7 @@ import { MediaRowTitle } from '../../components';
 
 import './PosterGallery.scss';
 
-const PosterGallery = ({medias, title, className, errorMessage}) => {
-
-    const [fullscreenPlayer, setFullscreenPlayer] = useState(false);
-    const[fullVideoPath, setFullVideoPath] = useState('');
-    const [posterID, setPosterID] = useState(0);
-    const [netflixOriginalShow, setNetflixOriginalShow] = useState(false);
-
-    const [openFullscreenPopup, setOpenFullscreenPopup] = useState(false);
-    const [movie, setMovie] = useState([]);
-    const [movieCredits, setMovieCredits] = useState([]);
-    const [similiarMovies, setSimiliarMovies] = useState([]);
-    const [disablePointer, setDisablePointer] = useState(false);
-    const [mediaType, setMediaType] = useState('');
-    // const[isHovered, setIsHovered] = useState(false);
-
-    const [volume, setVolume] = useState(1);
-
-    const fullscreenProps = {
-        fullscreenPlayer, setFullscreenPlayer,
-        fullVideoPath, setFullVideoPath,
-        posterID, setPosterID,
-        openFullscreenPopup, setOpenFullscreenPopup,
-        movie, setMovie, movieCredits, setMovieCredits,
-        similiarMovies, setSimiliarMovies,
-        disablePointer, setDisablePointer,
-        netflixOriginalShow, setNetflixOriginalShow,
-        volume, setVolume,
-        mediaType, setMediaType
-    };
+const PosterGallery = ({medias, title, className, errorMessage, fullscreenProps, mediaType}) => {
 
     return (
         <Box className="poster-gallery-container">
@@ -43,7 +15,7 @@ const PosterGallery = ({medias, title, className, errorMessage}) => {
                 className = {className}
                 medias = {medias}
                 fullscreenProps = { fullscreenProps } 
-                typeMedia={"tv"} //try maling a category called all and add it to useeffect
+                typeMedia={mediaType} //try maling a category called all and add it to useeffect
                 netflixOriginal={false}
                 disableHover
             />

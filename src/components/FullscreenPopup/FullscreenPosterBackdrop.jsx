@@ -6,7 +6,7 @@ import './FullscreenPopup.scss';
 const FullscreenPosterBackdrop = ({backdrop, title, fullscreenProps}) => {
 
     const { 
-        setOpenFullscreenPopup, setDisablePointer, setFullscreenPlayer, fullscreenPlayer
+        setDisablePointer, setFullscreenPlayer, fullscreenPlayer
     } = fullscreenProps;
 
     return (
@@ -22,7 +22,6 @@ const FullscreenPosterBackdrop = ({backdrop, title, fullscreenProps}) => {
                     <Button 
                         className="button-play"
                         onClick = {() => {
-                            // setOpenFullscreenPopup(false);
                             setDisablePointer(true);
                             setFullscreenPlayer(!fullscreenPlayer);
                         }}

@@ -5,7 +5,7 @@ import './Nav.scss'
 import { Link } from "react-router-dom";
 
 
-export default function Nav() {
+export default function Nav({fullscreenProps}) {
 
   const pages = [ 'Search', 'Movies', 'TvShows', 'Saved'];
   const [checked, setChecked] = useState(false);
@@ -25,9 +25,11 @@ export default function Nav() {
     };
   }, []);
 
+  const { disablePointer } = fullscreenProps;
+
 
   return (
-    <Box sx={{ flexGrow: 1}}>
+    <Box className={`${disablePointer ? 'disable-pointer' : ''}`} sx={{ flexGrow: 1}}>
       <AppBar sx={{ boxShadow: 'none', color: 'white', zIndex: 33, background:`${darkNavbar ? '#171717' : 'transparent'}`}}>
         <Toolbar sx={{display: { xs: 'flex'}}}>
 

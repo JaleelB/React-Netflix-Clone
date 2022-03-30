@@ -31,24 +31,27 @@ const Billboard = ({movie, disablePointer, fullscreenProps}) => {
 
    
     useEffect(() => {
+        if(window.innerWidth > 1200){
 
-        axios
-        .get(`https://api.themoviedb.org/3/tv/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
-        .then((res)=> {
-            setVideoPath(res.data.results[0]?.key)
-        })
-        .catch(error => { console.log(error) })
+            axios
+            .get(`https://api.themoviedb.org/3/tv/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setVideoPath(res.data.results[0]?.key)
+            })
+            .catch(error => { console.log(error) })
+        }
 
-    }, [movie?.id]);
+    }, [movie?.id, window.innerWidth]);
 
     useEffect(() => {
-
-        axios
-        .get(`https://api.themoviedb.org/3/tv/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
-        .then((res)=> {
-            setFullVideoPath(res.data.results[0]?.key)
-        })
-        .catch(error => { console.log(error) })
+        if(window.innerWidth > 1200){
+            axios
+            .get(`https://api.themoviedb.org/3/tv/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setFullVideoPath(res.data.results[0]?.key)
+            })
+            .catch(error => { console.log(error) })
+        } 
 
     }, [posterID,setFullVideoPath,movie?.id]);
 

@@ -4,7 +4,7 @@ import React, { useRef } from 'react';
 
 import './InputField.scss';
 
-const InputField = ({updateTyping, setInput}) => {
+const InputField = ({updateTyping, setInput, isTyping}) => {
 
     const handleTextFieldUpdate = (event) => {
         if(event.target.value !== "") updateTyping(true);
@@ -30,14 +30,18 @@ const InputField = ({updateTyping, setInput}) => {
                     getInput(e);
                 } }
             />
-            <Close 
-                className="delete"
-                onClick={(e)=> {
-                    setInput('');
-                    inputField.current.value = '';
-                    updateTyping(false);
-                 } }
-            />
+            {
+                isTyping &&
+
+                    <Close 
+                        className="delete"
+                        onClick={(e)=> {
+                            setInput('');
+                            inputField.current.value = '';
+                            updateTyping(false);
+                        } }
+                    />
+            }
         </Box>
     )
 }
