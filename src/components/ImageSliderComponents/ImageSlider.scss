@@ -18,7 +18,7 @@
                     position: relative; border-radius: 5px; filter: brightness(70%);
                 }
 
-                .media-row-title{ position: absolute; bottom: 1rem; margin-inline: 1rem; z-index: 3; }
+                .media-row-title{ position: absolute; bottom: 1rem; margin-inline: 1rem; z-index: 3; display: block; }
 
             }
         }

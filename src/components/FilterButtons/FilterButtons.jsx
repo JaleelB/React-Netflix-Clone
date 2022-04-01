@@ -1,12 +1,17 @@
-import { Box, Typography } from '@mui/material';
-import React from 'react';
+import { Box } from '@mui/material';
+import React, { useEffect } from 'react';
+import {MediaRowTitle} from '../../components';
+import FilterButtonIcon from './FilterButtonIcon';
 
 import './FilterButtons.scss'
 
-const FilterButtons = () => {
+const FilterButtons = ({fullscreenProps}) => {
+
+    const {genreID, setGenreID, setGenreTitle, genreTitle} = fullscreenProps;
 
     const moiveGenres = [
        "Action",
+       "Animation",
        "Comedy",
        "Crime",
        "Documentary",
@@ -21,8 +26,11 @@ const FilterButtons = () => {
         "Western"
     ];
 
+    const genreCodes = [28, 16, 35, 80, 99, 18, 14, 27, 9648, 10749, 878, 53, 37];
+
     const buttonImages = [
         "https://pbblogassets.s3.amazonaws.com/uploads/2019/07/12130642/John-Wick.jpg",
+        "https://i.pinimg.com/originals/c4/28/7f/c4287fe2ea2eb96845ebcca6aed92d35.png",
         "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/mh-1-28-comedies-1611856048.png?crop=0.407xw:0.814xh;0.0465xw,0.0449xh&resize=640:*",
         "https://www.thefactsite.com/wp-content/uploads/2018/11/true-crime-movies.jpg",
         "https://m.media-amazon.com/images/M/MV5BMTg3NzY4NTI3N15BMl5BanBnXkFtZTgwMzc0MDc4NDM@._V1_.jpg",
@@ -35,36 +43,33 @@ const FilterButtons = () => {
         "http://www.tasteofcinema.com/wp-content/uploads/2019/01/best-thrillers-2018.jpg",
         "https://www.cowboysindians.com/wp-content/uploads/2018/07/DM_Opener.jpg"
     ];
-    
 
     return (
-        <Box className="filter-row">
-            
-            {
-                moiveGenres.map((genre, index)=>{
-                    return(
-                        <Box 
-                            className = "filter-container"
-                            key={index}
-                            // sx={{width: '10vw'}}
-                        >
+        <Box className="filters-container">
+            <MediaRowTitle title="Genres"/>
+            <Box className="filter-row">
+                
+                {
+                    moiveGenres.map((genre, index)=>{
+                        return(
+                            <Box 
+                                className = "filter-container"
+                                key={index}
+                                onClick={() => setGenreTitle(genre)}
+                            >
+                                <FilterButtonIcon 
+                                    genre={genre}
+                                    setGenreID={setGenreID} 
+                                    background={buttonImages[index]}
+                                    genreID={genreCodes[index]}
+                                />
 
-                            <Box className="genre-icon" sx={{backgroundImage: `url(${buttonImages[index]})`}}>
-                                <Box className="genre-title-wrapper">
-                                    <Typography className="genre-title" variant="subtitle1" component="h4">{genre}</Typography>
-                                </Box>
                             </Box>
+                        );
+                    })
+                }
 
-                            {/* <Box className="genre-title-wrapper">
-                                <Typography className="genre-title" variant="subtitle1" component="h4">{genre}</Typography>
-                            </Box> */}
-                        
-
-                        </Box>
-                    );
-                })
-            }
-
+            </Box>
         </Box>
     )
 }

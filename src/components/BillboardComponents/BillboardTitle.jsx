@@ -10,7 +10,7 @@ const BillboardTitle = ({title}) => {
                 component="h1" 
                 className="billboard__image-title"
                 style={{
-                    color :'#fff', fontWeight: 500, textTransform:'uppercase',
+                    color :'#fff', fontWeight: 400, textTransform:'uppercase',
                     fontSize: "min(calc(1.4vw + 2rem), 4rem)"
                 }}
             >

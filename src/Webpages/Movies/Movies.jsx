@@ -18,6 +18,13 @@ const Movies = ({fullscreenProps}) => {
     const [staffPicks, setStaffPicks] = useState([]);
 
     let randIndex = 0;
+    const mediaTypeMovie = 'movie';
+
+    const { 
+        disablePointer, fullscreenPlayer, openFullscreenPopup,
+         sectionTitle, setSectionTitle, genreTitle, setGenreTitle,
+         genreID
+    } = fullscreenProps;
 
     useEffect(() => {
 
@@ -84,6 +91,12 @@ const Movies = ({fullscreenProps}) => {
         randIndex = randIndexGenerator(20, 1);
     },[])
 
+    useEffect(()=>{
+
+        console.log(genreID);
+
+    },[genreTitle]);
+
     const randIndexGenerator = (maxValue, indexCount) => {
         let randArray =[];
 
@@ -95,19 +108,24 @@ const Movies = ({fullscreenProps}) => {
         return randArray[0];
     };
 
-    const { disablePointer, fullscreenPlayer, openFullscreenPopup } = fullscreenProps;
-
-    const mediaTypeMovie = 'movie';
-
 
     return (
-        <Box id="movies-page">
+        <Box id="movies-page" onLoad={() => setSectionTitle('Movies')}>
        
-        <Billboard disablePointer={disablePointer} movie = {discover[randIndex]} fullscreenProps={fullscreenProps}/>
+        <Billboard 
+            disablePointer={disablePointer} 
+            movie = {discover[randIndex]} 
+            fullscreenProps={fullscreenProps} 
+            sectionTitle={sectionTitle} 
+            genreTitle={genreTitle} 
+            setGenreTitle={setGenreTitle}
+        />
 
         <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
 
-            <FilterButtons/>
+            <FilterButtons 
+                fullscreenProps={fullscreenProps} 
+            />
 
             <MediaRowContainer
                 title = "Movies For You"
@@ -124,7 +142,7 @@ const Movies = ({fullscreenProps}) => {
                 typeMedia={mediaTypeMovie}
             />
             <MediaRowContainer
-                title = "Best Movie Picture Winners - The Academy Awards"
+                title = "Academy Awards Best Movie Picture Winners"
                 medias = { bestPictures }
                 className={"list-row"}
                 listRow

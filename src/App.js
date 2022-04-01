@@ -16,6 +16,9 @@ function App() {
   const [mediaType, setMediaType] = useState('');
 
   const [volume, setVolume] = useState(1);
+  const [sectionTitle, setSectionTitle] = useState('')
+  const [genreTitle, setGenreTitle] = useState('');
+  const [genreID, setGenreID] = useState(null);
 
 
   const fullscreenProps = {
@@ -28,7 +31,10 @@ function App() {
       disablePointer, setDisablePointer,
       netflixOriginalShow, setNetflixOriginalShow,
       volume, setVolume,
-      mediaType, setMediaType
+      mediaType, setMediaType,
+      sectionTitle, setSectionTitle,
+      genreTitle, setGenreTitle,
+      genreID, setGenreID
   };
 
   return (

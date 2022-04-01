@@ -4,8 +4,9 @@ import { Box, Button, IconButton, Typography } from '@mui/material';
 import {BillboardTitle, BillboardDescription, BillboardVideo, apiComponents } from '../../components';
 import './Billboard.scss';
 import { PlayArrow, Pause, VolumeOff, VolumeUp, Add } from '@mui/icons-material';
+import { Link } from "react-router-dom";
 
-const Billboard = ({movie, disablePointer, fullscreenProps}) => {
+const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreTitle, setGenreTitle}) => {
     
     const [videoPath, setVideoPath] = useState('');
     const [videoPlay, setVideoPlay] = useState(true);
@@ -40,7 +41,7 @@ const Billboard = ({movie, disablePointer, fullscreenProps}) => {
             .catch(error => { console.log(error) })
         }
 
-    }, [movie?.id, window.innerWidth]);
+    }, [movie?.id]);
 
     useEffect(() => {
         if(window.innerWidth > 1200){
@@ -68,6 +69,18 @@ const Billboard = ({movie, disablePointer, fullscreenProps}) => {
             {deviceWindowWidth > 1200 && videoPath ? <BillboardVideo source={videoPath} playState={videoPlay} muteStatus={volumeMute}/> : null }
 
             <Box className="billboard__cta-text-wrapper">
+
+                    {deviceWindowWidth > 1200 &&
+                        <Box className="billboard__section-title-wrapper" sx={{display: genreTitle && "flex"}}>
+                            <Link 
+                                to={'/Movies'}
+                                onClick={ () => setGenreTitle('') }
+                            >
+                                <span className={`section-title ${genreTitle ? "bread-crumb" : ""}`}>{`${sectionTitle} ${genreTitle ? "> " : ""}`}</span>
+                            </Link>
+                            {genreTitle && <span className="section-title">{genreTitle}</span>}
+                        </Box>
+                    } 
 
                     <BillboardTitle title={movie?.name ? movie?.name : movie?.title}/>
   
