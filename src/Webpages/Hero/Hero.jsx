@@ -11,7 +11,8 @@ const Hero = ({fullscreenProps}) => {
     const [popular, setPopular] = useState([]);
     const [trending, setTrending] = useState([]);
     const [topRated, setTopRated] = useState([]);
-    const [actionThriller, setActionThriller] = useState([]);
+    const [pixar, setPixar] = useState([]);
+    const [classics, setClassics] = useState([]);
     const [newReleases, setNewReleases] = useState([]);
    
     useEffect(() => {
@@ -24,35 +25,42 @@ const Hero = ({fullscreenProps}) => {
         .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].popular}?api_key=${apiComponents[1]}&with_networks=213`)
+        .get(`${apiComponents[0]}${apiComponents[2].popular}?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setPopular(res.data.results)
         })
         .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].trending}/week?api_key=${apiComponents[1]}&with_networks=213`)
+        .get(`${apiComponents[0]}${apiComponents[2].trending}/week?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setTrending(res.data.results)
         })
         .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].top_rated}?api_key=${apiComponents[1]}&with_networks=213`)
+        .get(`${apiComponents[0]}${apiComponents[2].top_rated}?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setTopRated(res.data.results)
         })
         .catch(error => { console.log(error) })
         
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&with_networks=213&with_genres=28&53&12`)
+        .get(`${apiComponents[0]}${apiComponents[2].list}/3700?api_key=${apiComponents[1]}`)
         .then((res)=> {
-            setActionThriller(res.data.results)
+            setPixar(res.data.items)
         })
         .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].latest_releases}?api_key=${apiComponents[1]}&language=en-US`)
+        .get(`${apiComponents[0]}${apiComponents[2].list}/95840?api_key=${apiComponents[1]}`)
+        .then((res)=> {
+            setClassics(res.data.items)
+        })
+        .catch(error => { console.log(error) })
+
+        axios
+        .get(`${apiComponents[0]}${apiComponents[2].now_playing}?api_key=${apiComponents[1]}&language=en-US`)
         .then((res)=> {
             setNewReleases(res.data.results)
         })
@@ -92,6 +100,16 @@ const Hero = ({fullscreenProps}) => {
                     fullscreenProps = { fullscreenProps } 
                     typeMedia={mediaTypeMovie}
                 />
+                
+                <MediaRowContainer
+                    title = "Classics You Have To Check Out"
+                    medias = { classics }
+                    className={"large-list-row"}
+                    listRow
+                    fullscreenProps = { fullscreenProps } 
+                    typeMedia={mediaTypeMovie}
+                />
+
                 <MediaRowContainer
                     title = "New Releases"
                     medias = { newReleases }
@@ -104,9 +122,12 @@ const Hero = ({fullscreenProps}) => {
                     fullscreenProps = { fullscreenProps } 
                     typeMedia={mediaTypeMovie}
                 />
+                
                 <MediaRowContainer
-                    title = "Action Thrillers"
-                    medias = { actionThriller }
+                    title = "Films By Pixar"
+                    medias = { pixar }
+                    className={"list-row"}
+                    listRow
                     fullscreenProps = { fullscreenProps } 
                     typeMedia={mediaTypeMovie}
                 />

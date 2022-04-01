@@ -6,7 +6,7 @@ import {apiComponents } from '../../components';
 
 import './PosterPreviewPopup.scss';
 
-const PosterPreviewPopup = ({ popupProps, fullscreenProps }) => {
+const PosterPreviewPopup = ({ popupProps, fullscreenProps, largeRow, listRow }) => {
 
     const { 
         cardPopupWidth, setDelayed, cardPopupHeight, genres,
@@ -46,15 +46,30 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps }) => {
 
     const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
 
+    const handlePopupWidth = () => {
+        return netflixOriginalShow ? 1.55:
+                largeRow ? 1.55:
+                listRow ? 1.55:
+                1.75;
+    };
+    const handlePopupHeight = () => {
+        return netflixOriginalShow ? 1.3:
+                largeRow ? 1.3:
+                listRow ? 1.3:
+                1.4;
+    };
 
+    // for card popup width factor in multiplied width
     return (
         <Box 
             className="preview-popup" 
             sx={{
-                width: `${cardPopupWidth * (netflixOriginalShow ? 1.55 : 1.75)}px`,
-                height: `${cardPopupHeight * (netflixOriginalShow ? 1.3 : 1.4)}px`,
+                // width: `${cardPopupWidth * (netflixOriginalShow ? 1.55 : 1.75)}px`,
+                // height: `${cardPopupHeight * (netflixOriginalShow ? 1.3 : 1.4 )}px`,
+                width: `${cardPopupWidth * handlePopupWidth()}px`,
+                height: `${cardPopupHeight * handlePopupHeight()}px`,
                 // left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding + ( posterIndex > 1 ? (8 * posterIndex) : 0 ) ) - rowPadding}px`
-                left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding ) - 30}px`
+                left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding ) - 40}px`
             }}
             onMouseLeave={()=> {
                 setIsHovered(false)

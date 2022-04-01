@@ -16,3 +16,4 @@ export {default as InputField} from './InputField/InputField';
 export {default as ImageSlider} from './ImageSliderComponents/ImageSlider';
 export {default as ImageSliderBackdrop} from './ImageSliderComponents/ImageSliderBackdrop';
 export {default as PosterGallery} from './PosterGallery/PosterGallery';
+export {default as FilterButtons} from './FilterButtons/FilterButtons';

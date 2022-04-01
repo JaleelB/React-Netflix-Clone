@@ -6,7 +6,6 @@ import './Billboard.scss';
 import { PlayArrow, Pause, VolumeOff, VolumeUp, Add } from '@mui/icons-material';
 
 const Billboard = ({movie, disablePointer, fullscreenProps}) => {
-
     
     const [videoPath, setVideoPath] = useState('');
     const [videoPlay, setVideoPlay] = useState(true);
@@ -58,22 +57,19 @@ const Billboard = ({movie, disablePointer, fullscreenProps}) => {
 
     
     return (
-        //use fuse js for live searching an array for search tab of projecct
+
         <Box className={`billboard stacked ${disablePointer ? 'disable-pointer' : ''}`}
             sx={{ background: `url('https://image.tmdb.org/t/p/original${movie?.backdrop_path}')`}}
             onLoad={ ()=> setPosterID(movie?.id) }
         >
-            {/* 
-                remove background and an image for the hero background. 
-                render it when screen size is small or when video has ended 
-            */}
+
             <Box className="billboard__fade-top"></Box>
 
             {deviceWindowWidth > 1200 && videoPath ? <BillboardVideo source={videoPath} playState={videoPlay} muteStatus={volumeMute}/> : null }
 
             <Box className="billboard__cta-text-wrapper">
 
-                    <BillboardTitle title={movie?.name}/>
+                    <BillboardTitle title={movie?.name ? movie?.name : movie?.title}/>
   
                     <Box className="billboard__supplemental-wrapper" sx={{display: 'flex', gap: '1rem'}}>
                         <img className="netflix-icon" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="Netflix Icon"/>

@@ -53,7 +53,7 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
                                 fullscreenProps = {fullscreenProps}
                                 typeMedia={typeMedia}
                                 disableHover={disableHover}
-                                netflixOriginal
+                                netflixOriginal={netflixOriginal}
                             />
                                 
                 })   

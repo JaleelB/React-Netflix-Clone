@@ -4,7 +4,7 @@ const apiComponents = [
     {//endpoints
         movie: "/movie",
         tv: "/tv",
-        latest_releases: "/movie/now_playing",
+        discover: '/discover',
         top_rated: "/movie/top_rated",
         popular: "/movie/popular",
         now_playing: "/movie/now_playing",
@@ -13,7 +13,10 @@ const apiComponents = [
         discover_movie: "/discover/movie",
         discover_tv: "/discover/tv",
         originals: `/discover/tv?api_key=df7dbf24a32b1fff30834fc68ab0ce25&with_networks=213`,
-        search: '/search'
+        search: '/search',
+        latest_movie: '/movie/latest',
+        upcoming_movie: '/movie/upcoming',
+        list: '/list'
     },
     [
         {28: 'Action' },        

@@ -89,7 +89,7 @@ const FullscreenPopup = ({fullscreenProps}) => {
             .catch(error => { console.log(error) })
         }
     
-    },[posterID, setFullVideoPath]);
+    },[posterID, setFullVideoPath, mediaType]);
 
 
     const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }

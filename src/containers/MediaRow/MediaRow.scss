@@ -78,8 +78,29 @@
             @media screen and (min-width: 680px) and (max-width: 991px){  grid-auto-columns:27%; }
             @media screen and (min-width: 992px) and (max-width: 1199px){  grid-auto-columns:21%; }
             @media screen and (max-height: 450px){ grid-auto-columns:27%; }
-            @media screen and (min-width: 1200px){ width: max-content; grid-auto-columns:2.1%;  overflow-x: visible;} 
+            @media screen and (min-width: 1200px){ width: max-content; grid-auto-columns:2.3%;  overflow-x: visible;} 
             @media screen and (min-width: 2800px){ width: max-content; grid-auto-columns:2.5%; }
+        }
+
+        .large-list-row{ 
+                    
+            grid-auto-columns:39%;
+
+            @media screen and (min-width: 680px) and (max-width: 991px){  grid-auto-columns:27%; }
+            @media screen and (min-width: 992px) and (max-width: 1199px){  grid-auto-columns:21%; }
+            @media screen and (max-height: 450px){ grid-auto-columns:27%; }
+            @media screen and (min-width: 1200px){ grid-auto-columns:0.427%;} 
+            // @media screen and (min-width: 2800px){ width: max-content; grid-auto-columns:2.5%; }
+                    
+        }
+
+        .list-row{
+            grid-auto-columns:39%;
+
+            @media screen and (min-width: 680px) and (max-width: 991px){  grid-auto-columns:27%; }
+            @media screen and (min-width: 992px) and (max-width: 1199px){  grid-auto-columns:21%; }
+            @media screen and (max-height: 450px){ grid-auto-columns:27%; }
+            @media screen and (min-width: 1200px){ grid-auto-columns:1.8%;}
         }
 
         

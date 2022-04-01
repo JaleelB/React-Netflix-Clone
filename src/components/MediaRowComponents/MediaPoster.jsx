@@ -18,7 +18,7 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
         setCardPopupBackdrop,
         setCardPopupAirDate,
         setCardPopupTitle,
-        setCardPopupRating,
+        setCardPopupRating
     } = popupProps;
 
 
