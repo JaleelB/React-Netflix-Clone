@@ -21,15 +21,13 @@ const Movies = ({fullscreenProps}) => {
     const mediaTypeMovie = 'movie';
 
     const { 
-        disablePointer, fullscreenPlayer, openFullscreenPopup,
-         sectionTitle, setSectionTitle, genreTitle, setGenreTitle,
-         genreID
+        disablePointer, fullscreenPlayer, openFullscreenPopup, genreTitle, setGenreTitle, genreID
     } = fullscreenProps;
 
     useEffect(() => {
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&page=1&primary_release_year=2022`)
+        .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&page=1&primary_release_year=2022${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setPopular(res.data.results)
         })
@@ -43,7 +41,7 @@ const Movies = ({fullscreenProps}) => {
         // .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}`)
+        .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setDiscover(res.data.results)
         })
@@ -57,21 +55,22 @@ const Movies = ({fullscreenProps}) => {
         .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].list}/28?api_key=${apiComponents[1]}&with_networks=213`)
+        .get(`${apiComponents[0]}${apiComponents[2].list}/28?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setBestPictures(res.data.items)
         })
         .catch(error => { console.log(error) })
         
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&certification_country=US&year=1992&vote_average.gte=8.3`)
+        .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&certification_country=US&year=1992${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setNinetysBinge(res.data.results)
+            console.log(res.data.results)
         })
         .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&certification_country=US&year=1984&vote_average.gte=8.3`)
+        .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&certification_country=US&year=1984${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setEightysBinge(res.data.results)
         })
@@ -84,18 +83,13 @@ const Movies = ({fullscreenProps}) => {
         })
         .catch(error => { console.log(error) })
   
-    }, []);
+    }, [genreID]);
 
 
     useEffect(() => {
         randIndex = randIndexGenerator(20, 1);
     },[])
 
-    useEffect(()=>{
-
-        console.log(genreID);
-
-    },[genreTitle]);
 
     const randIndexGenerator = (maxValue, indexCount) => {
         let randArray =[];
@@ -110,15 +104,16 @@ const Movies = ({fullscreenProps}) => {
 
 
     return (
-        <Box id="movies-page" onLoad={() => setSectionTitle('Movies')}>
+        <Box id="movies-page">
        
         <Billboard 
             disablePointer={disablePointer} 
             movie = {discover[randIndex]} 
             fullscreenProps={fullscreenProps} 
-            sectionTitle={sectionTitle} 
+            sectionTitle={"Movies"} 
             genreTitle={genreTitle} 
             setGenreTitle={setGenreTitle}
+            mediaType="movie"
         />
 
         <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>

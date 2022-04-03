@@ -3,10 +3,10 @@ import axios from 'axios';
 import { Box, Button, IconButton, Typography } from '@mui/material';
 import {BillboardTitle, BillboardDescription, BillboardVideo, apiComponents } from '../../components';
 import './Billboard.scss';
-import { PlayArrow, Pause, VolumeOff, VolumeUp, Add } from '@mui/icons-material';
+import { PlayArrow, Pause, VolumeOff, VolumeUp, Add, DoNotDisturbAltOutlined } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 
-const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreTitle, setGenreTitle}) => {
+const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreTitle, setGenreTitle, mediaType}) => {
     
     const [videoPath, setVideoPath] = useState('');
     const [videoPlay, setVideoPlay] = useState(true);
@@ -14,7 +14,7 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
     const[deviceWindowWidth, setDeviceWindowWidth] = useState(window.innerWidth);
 
     const {
-        setFullscreenPlayer, setPosterID, setFullVideoPath, posterID, setOpenFullscreenPopup
+        setFullscreenPlayer, setPosterID, setFullVideoPath, posterID, setOpenFullscreenPopup, setMediaType
     } = fullscreenProps;
 
     const handleWindowResize = () => { setDeviceWindowWidth(window.innerWidth) }
@@ -31,32 +31,55 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
 
    
     useEffect(() => {
+
         if(window.innerWidth > 1200){
 
-            axios
-            .get(`https://api.themoviedb.org/3/tv/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
-            .then((res)=> {
-                setVideoPath(res.data.results[0]?.key)
-            })
-            .catch(error => { console.log(error) })
+            if(mediaType==="tv"){
+                axios
+                .get(`${apiComponents[0]}${apiComponents[2].tv}/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
+                .then((res)=> {
+                    setVideoPath(res.data.results[0]?.key)
+                })
+                .catch(error => { console.log(error) })
+            }
+
+            if(mediaType==="movie"){
+                axios
+                .get(`${apiComponents[0]}${apiComponents[2].movie}/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
+                .then((res)=> {
+                    setVideoPath(res.data.results[0]?.key)
+                })
+                .catch(error => { console.log(error) })
+            }
         }
 
-    }, [movie?.id]);
+    }, [movie?.id, mediaType]);
 
     useEffect(() => {
         if(window.innerWidth > 1200){
-            axios
-            .get(`https://api.themoviedb.org/3/tv/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
-            .then((res)=> {
-                setFullVideoPath(res.data.results[0]?.key)
-            })
-            .catch(error => { console.log(error) })
+
+            if(mediaType==="tv"){
+                axios
+                .get(`${apiComponents[0]}${apiComponents[2].tv}/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
+                .then((res)=> {
+                    setFullVideoPath(res.data.results[0]?.key)
+                })
+                .catch(error => { console.log(error) })
+            }
+
+            if(mediaType==="movie"){
+                axios
+                .get(`${apiComponents[0]}${apiComponents[2].movie}/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
+                .then((res)=> {
+                    setFullVideoPath(res.data.results[0]?.key)
+                })
+                .catch(error => { console.log(error) })
+            }
         } 
 
-    }, [posterID,setFullVideoPath,movie?.id]);
+    }, [posterID,setFullVideoPath,movie?.id, mediaType]);
 
 
-    
     return (
 
         <Box className={`billboard stacked ${disablePointer ? 'disable-pointer' : ''}`}
@@ -70,10 +93,10 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
 
             <Box className="billboard__cta-text-wrapper">
 
-                    {deviceWindowWidth > 1200 &&
+                    {deviceWindowWidth > 1200 && sectionTitle &&
                         <Box className="billboard__section-title-wrapper" sx={{display: genreTitle && "flex"}}>
                             <Link 
-                                to={'/Movies'}
+                                to={`/${sectionTitle}`}
                                 onClick={ () => setGenreTitle('') }
                             >
                                 <span className={`section-title ${genreTitle ? "bread-crumb" : ""}`}>{`${sectionTitle} ${genreTitle ? "> " : ""}`}</span>
@@ -94,17 +117,26 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
                     <Box className="billboard__button-container" >
                         {deviceWindowWidth >= 1200 && <>
                             <Button 
-                                className="billboard__button-play"
+                                className={`billboard__button-play ${!videoPath ? 'disabled' : ''}`}
+                                variant={!videoPath ? 'disabled' : ''}
+                                onLoad = {()=> { if(!videoPath) setVideoPlay(false) } }
                                 onClick = {()=> setVideoPlay(!videoPlay)}
                             >
-                                    { videoPlay ?  <Pause className="billboard__button-play-icon"/> : <PlayArrow className="billboard__button-play-icon"/> }
-                                    { videoPlay ? 'Pause Trailer' : 'Play Trailer' }
+                                    { !videoPath ?  <DoNotDisturbAltOutlined className="billboard__button-play-icon"/> : "" }
+                                    { videoPath && videoPlay ?  <Pause className="billboard__button-play-icon"/> : "" }
+                                    { videoPath && !videoPlay ? <PlayArrow className="billboard__button-play-icon"/> : "" }
+                                    
+                                    { !videoPath ? "No Video Available" : ""}
+                                    { videoPath && videoPlay ? 'Pause Trailer' : ""}
+                                    { videoPath && !videoPlay ? 'Play Trailer' : ""}
+                                    
                             </Button>
                             <Button 
                                 variant="outlined" 
                                 className="billboard__button-details"
                                 onClick={()=> {
                                     setPosterID(movie?.id);
+                                    setMediaType(mediaType);
                                     setOpenFullscreenPopup(true);
                                 }}
                             >

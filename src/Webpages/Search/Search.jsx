@@ -77,7 +77,6 @@ const Search = ({fullscreenProps}) => {
         return randArray;
     };
 
-
     // add skeleton loading for bacdrop, billboard and posters
 
     return (

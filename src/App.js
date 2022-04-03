@@ -16,7 +16,7 @@ function App() {
   const [mediaType, setMediaType] = useState('');
 
   const [volume, setVolume] = useState(1);
-  const [sectionTitle, setSectionTitle] = useState('')
+  // const [sectionTitle, setSectionTitle] = useState('')
   const [genreTitle, setGenreTitle] = useState('');
   const [genreID, setGenreID] = useState(null);
 
@@ -32,7 +32,7 @@ function App() {
       netflixOriginalShow, setNetflixOriginalShow,
       volume, setVolume,
       mediaType, setMediaType,
-      sectionTitle, setSectionTitle,
+      // sectionTitle, setSectionTitle,
       genreTitle, setGenreTitle,
       genreID, setGenreID
   };

@@ -50,6 +50,8 @@
                 }
             }
 
+            .active{ border: 3px solid #454545; }
+
             &:hover ~ .filter-container:not(:hover) { transform: translateX(10%); }
 
         }

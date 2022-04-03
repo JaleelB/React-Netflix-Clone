@@ -1,12 +1,12 @@
 import { Box, Typography, Button } from '@mui/material';
-import { PlayArrow, ThumbDownOffAlt, ThumbUpOffAlt, AddCircleOutline } from '@mui/icons-material';
+import { PlayArrow, ThumbDownOffAlt, ThumbUpOffAlt, AddCircleOutline, DoNotDisturbAltOutlined } from '@mui/icons-material';
 import React from 'react';
 import './FullscreenPopup.scss';
 
 const FullscreenPosterBackdrop = ({backdrop, title, fullscreenProps}) => {
 
     const { 
-        setDisablePointer, setFullscreenPlayer, fullscreenPlayer
+        setDisablePointer, setFullscreenPlayer, fullscreenPlayer, fullVideoPath
     } = fullscreenProps;
 
     return (
@@ -20,15 +20,21 @@ const FullscreenPosterBackdrop = ({backdrop, title, fullscreenProps}) => {
                  <Box className="button-container">
 
                     <Button 
-                        className="button-play"
+                        className={`button-play ${!fullVideoPath ? 'disabled' : ''}`}
+                        // disabled = {!fullVideoPath ? true : ''}
+                        variant = {!fullVideoPath ? 'disabled' : ''}
                         onClick = {() => {
                             setDisablePointer(true);
                             setFullscreenPlayer(!fullscreenPlayer);
                         }}
                     >
 
-                        <PlayArrow className="play-icon popup-icon"/>
-                        Play
+                        { !fullVideoPath && <DoNotDisturbAltOutlined className="play-icon popup-icon"/>}
+                        { !fullVideoPath &&  "No Videos Available" }
+
+                        { fullVideoPath && <PlayArrow className="play-icon popup-icon"/>}
+                        { fullVideoPath &&  "Play" }
+                        
 
                     </Button>
 

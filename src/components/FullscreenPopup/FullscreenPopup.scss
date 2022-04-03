@@ -44,6 +44,8 @@
                 .button-container{ 
                     margin: 0 4% 4%; display: flex; gap: $smaller-gap;
 
+                    .disabled{ filter:brightness(60%); }
+
                     .popup-icons{
                         .popup-icon{
                             min-width: 35px; min-height: 35px;
@@ -97,6 +99,7 @@
 
                 .mobile-btn-container{ 
                     width: 100%; display: grid; gap: $smaller-gap; margin: $gap 0;
+                    
 
                     .mobile-btn-play, .mobile-btn-add{ width: 100%; }
                     .mobile-btn-play:hover, .mobile-btn-add:hover{ filter: brightness(70%); transition: filter 0.2s ease;}

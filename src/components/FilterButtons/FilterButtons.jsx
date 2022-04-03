@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import {MediaRowTitle} from '../../components';
 import FilterButtonIcon from './FilterButtonIcon';
 
@@ -8,6 +8,16 @@ import './FilterButtons.scss'
 const FilterButtons = ({fullscreenProps}) => {
 
     const {genreID, setGenreID, setGenreTitle, genreTitle} = fullscreenProps;
+
+    // const [activeGenre, setActiveGenre] = useState(false);
+
+    // const handleActiveGenre = (event) => {
+    //     if(event.target.classList.contains( "active" )) setActiveGenre(false);
+    //     else{
+    //         setActiveGenre(true);
+    //     }
+    // };
+
 
     const moiveGenres = [
        "Action",
@@ -44,6 +54,8 @@ const FilterButtons = ({fullscreenProps}) => {
         "https://www.cowboysindians.com/wp-content/uploads/2018/07/DM_Opener.jpg"
     ];
 
+    
+
     return (
         <Box className="filters-container">
             <MediaRowTitle title="Genres"/>
@@ -55,13 +67,18 @@ const FilterButtons = ({fullscreenProps}) => {
                             <Box 
                                 className = "filter-container"
                                 key={index}
-                                onClick={() => setGenreTitle(genre)}
+                                onClick={() => {
+                                    setGenreTitle(genre);
+                                    // handleActiveGenre(e);
+                                }}
                             >
                                 <FilterButtonIcon 
                                     genre={genre}
                                     setGenreID={setGenreID} 
                                     background={buttonImages[index]}
                                     genreID={genreCodes[index]}
+                                    // activeGenre={activeGenre}
+                                    // setActiveGenre={setActiveGenre}
                                 />
 
                             </Box>
@@ -71,6 +88,7 @@ const FilterButtons = ({fullscreenProps}) => {
 
             </Box>
         </Box>
+
     )
 }
 

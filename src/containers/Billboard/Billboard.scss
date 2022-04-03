@@ -82,6 +82,8 @@
             display: flex; gap: 1rem; white-space: nowrap;
             
             @media screen and (max-width: 600px){justify-content: center;}
+
+            .disabled{ filter:brightness(60%); }
             
             .billboard__button-details,.billboard__button-play{cursor: pointer; padding: .5rem 1rem; font-weight: 600;}
             .billboard__button-play{ 

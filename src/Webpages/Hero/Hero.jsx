@@ -73,11 +73,17 @@ const Hero = ({fullscreenProps}) => {
 
     const mediaTypeMovie = 'movie';
     const mediaTypeTv = 'tv';
+
   
     return (
         <Box id="hero">
            
-            <Billboard disablePointer={disablePointer} movie = {originals[2]} fullscreenProps={fullscreenProps}/>
+            <Billboard 
+                disablePointer={disablePointer} 
+                movie = {originals[2]} 
+                fullscreenProps={fullscreenProps}
+                mediaType={mediaTypeTv}
+            />
 
             <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
 
