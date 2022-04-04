@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Skeleton } from '@mui/material';
 import './Hero.scss';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -14,6 +14,8 @@ const Hero = ({fullscreenProps}) => {
     const [pixar, setPixar] = useState([]);
     const [classics, setClassics] = useState([]);
     const [newReleases, setNewReleases] = useState([]);
+
+    const { disablePointer, fullscreenPlayer, openFullscreenPopup, isLoading, setIsLoading } = fullscreenProps;
    
     useEffect(() => {
 
@@ -68,8 +70,15 @@ const Hero = ({fullscreenProps}) => {
   
     }, []);
 
+    useEffect(() => {
+        
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
 
-    const { disablePointer, fullscreenPlayer, openFullscreenPopup } = fullscreenProps;
+        return () => clearTimeout(timer);
+
+    },[isLoading])
 
     const mediaTypeMovie = 'movie';
     const mediaTypeTv = 'tv';
@@ -77,86 +86,114 @@ const Hero = ({fullscreenProps}) => {
   
     return (
         <Box id="hero">
-           
-            <Billboard 
-                disablePointer={disablePointer} 
-                movie = {originals[2]} 
-                fullscreenProps={fullscreenProps}
-                mediaType={mediaTypeTv}
-            />
 
-            <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
+        {
+            isLoading ?
 
-                <MediaRowContainer
-                    title = "Netflix Original Shows"
-                    medias = { originals }
-                    fullscreenProps = { fullscreenProps } 
-                    netflixOriginal
-                    typeMedia={mediaTypeTv}
-                />
-                <MediaRowContainer
-                    title = "Most Users Loved These Shows"
-                    medias = { popular }
-                    fullscreenProps = { fullscreenProps } 
-                    typeMedia={mediaTypeMovie}
-                />
-                <MediaRowContainer
-                    title = "Trending Now"
-                    medias = { trending }
-                    fullscreenProps = { fullscreenProps } 
-                    typeMedia={mediaTypeMovie}
-                />
-                
-                <MediaRowContainer
-                    title = "Classics You Have To Check Out"
-                    medias = { classics }
-                    className={"large-list-row"}
-                    listRow
-                    fullscreenProps = { fullscreenProps } 
-                    typeMedia={mediaTypeMovie}
-                />
+                <Box className="loading-skeleton">
+                    <Skeleton className="skeleton-title" variant="rectangular" width={60} height={20} />
+                    <Box className="posters-skeleton">
+                        <Skeleton className="skeleton" variant="rectangular" />
+                        <Skeleton className="skeleton" variant="rectangular" />
+                        <Skeleton className="skeleton" variant="rectangular" />
+                        <Skeleton className="skeleton" variant="rectangular" />
+                        <Skeleton className="skeleton" variant="rectangular" />
+                        <Skeleton className="skeleton" variant="rectangular" />
+                        <Skeleton className="skeleton" variant="rectangular" />
+                        <Skeleton className="skeleton" variant="rectangular" />
+                        <Skeleton className="skeleton" variant="rectangular" />
+                        <Skeleton className="skeleton" variant="rectangular" />
+                        <Skeleton className="skeleton" variant="rectangular" />
+                        <Skeleton className="skeleton" variant="rectangular" />
+                    </Box>
+                </Box> 
 
-                <MediaRowContainer
-                    title = "New Releases"
-                    medias = { newReleases }
-                    fullscreenProps = { fullscreenProps } 
-                    typeMedia={mediaTypeMovie}
-                />
-                <MediaRowContainer
-                    title = "Most Loved Shows Of All Time"
-                    medias = { topRated }
-                    fullscreenProps = { fullscreenProps } 
-                    typeMedia={mediaTypeMovie}
-                />
-                
-                <MediaRowContainer
-                    title = "Films By Pixar"
-                    medias = { pixar }
-                    className={"list-row"}
-                    listRow
-                    fullscreenProps = { fullscreenProps } 
-                    typeMedia={mediaTypeMovie}
-                />
-    
-            </Box>
+                :
 
-            {
-                fullscreenPlayer && 
-                
-                    <FullscreenPlayer
-                        fullscreenProps = {fullscreenProps}
+                <Box className="hero-page-wrapper">
+
+                    <Billboard 
+                        disablePointer={disablePointer} 
+                        movie = {originals[2]} 
+                        fullscreenProps={fullscreenProps}
+                        mediaType={mediaTypeTv}
                     />
+
+                    <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
+
+                        <MediaRowContainer
+                            title = "Netflix Original Shows"
+                            medias = { originals }
+                            fullscreenProps = { fullscreenProps } 
+                            netflixOriginal
+                            typeMedia={mediaTypeTv}
+                        />
+                        <MediaRowContainer
+                            title = "Most Users Loved These Shows"
+                            medias = { popular }
+                            fullscreenProps = { fullscreenProps } 
+                            typeMedia={mediaTypeMovie}
+                        />
+                        <MediaRowContainer
+                            title = "Trending Now"
+                            medias = { trending }
+                            fullscreenProps = { fullscreenProps } 
+                            typeMedia={mediaTypeMovie}
+                        />
+                        
+                        <MediaRowContainer
+                            title = "Classics You Have To Check Out"
+                            medias = { classics }
+                            className={"large-list-row"}
+                            listRow
+                            fullscreenProps = { fullscreenProps } 
+                            typeMedia={mediaTypeMovie}
+                        />
+
+                        <MediaRowContainer
+                            title = "New Releases"
+                            medias = { newReleases }
+                            fullscreenProps = { fullscreenProps } 
+                            typeMedia={mediaTypeMovie}
+                        />
+                        <MediaRowContainer
+                            title = "Most Loved Shows Of All Time"
+                            medias = { topRated }
+                            fullscreenProps = { fullscreenProps } 
+                            typeMedia={mediaTypeMovie}
+                        />
+                        
+                        <MediaRowContainer
+                            title = "Films By Pixar"
+                            medias = { pixar }
+                            className={"list-row"}
+                            listRow
+                            fullscreenProps = { fullscreenProps } 
+                            typeMedia={mediaTypeMovie}
+                        />
+            
+                    </Box>
+
+                    {
+                        fullscreenPlayer && 
+                        
+                            <FullscreenPlayer
+                                fullscreenProps = {fullscreenProps}
+                            />
+                    }
+
+                    {
+                        openFullscreenPopup && 
+                        <FullscreenPopup
+                            fullscreenProps = { fullscreenProps }
+                        />
+
+                    }
+
+                    <Footer/>
+
+                </Box>
             }
-
-            {
-                openFullscreenPopup && 
-                <FullscreenPopup
-                    fullscreenProps = { fullscreenProps }
-                />
-
-            }
-
-            <Footer/>
             
         </Box>
     );

@@ -91,19 +91,19 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
 
             {deviceWindowWidth > 1200 && videoPath ? <BillboardVideo source={videoPath} playState={videoPlay} muteStatus={volumeMute}/> : null }
 
-            <Box className="billboard__cta-text-wrapper">
+            {deviceWindowWidth > 1200 && sectionTitle &&
+                <Box className="billboard__section-title-wrapper" sx={{display: genreTitle && "flex"}}>
+                    <Link 
+                        to={`/${sectionTitle}`}
+                        onClick={ () => setGenreTitle('') }
+                    >
+                        <span className={`section-title ${genreTitle ? "bread-crumb" : ""}`}>{`${sectionTitle} ${genreTitle ? "> " : ""}`}</span>
+                    </Link>
+                        {genreTitle && <span className="section-title">{genreTitle}</span>}
+                </Box>
+            } 
 
-                    {deviceWindowWidth > 1200 && sectionTitle &&
-                        <Box className="billboard__section-title-wrapper" sx={{display: genreTitle && "flex"}}>
-                            <Link 
-                                to={`/${sectionTitle}`}
-                                onClick={ () => setGenreTitle('') }
-                            >
-                                <span className={`section-title ${genreTitle ? "bread-crumb" : ""}`}>{`${sectionTitle} ${genreTitle ? "> " : ""}`}</span>
-                            </Link>
-                            {genreTitle && <span className="section-title">{genreTitle}</span>}
-                        </Box>
-                    } 
+            <Box className="billboard__cta-text-wrapper">
 
                     <BillboardTitle title={movie?.name ? movie?.name : movie?.title}/>
   

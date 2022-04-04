@@ -88,6 +88,8 @@ const FullscreenPlayer = ({ fullscreenProps }) => {
                     url={`https://www.youtube.com/embed/${fullVideoPath}?modestbranding=1&rel=0&fs=0&autohide=1&showinfo=0&controls=0`}
                     width={window.innerWidth < window.innerHeight ? fullVideoHeight : fullVideoWidth}
                     height={window.innerWidth < window.innerHeight ? fullVideoWidth : fullVideoHeight}
+                    // width='100%'
+                    // height='100%'
                     config={{
                         youtube: {
                             playerVars: {

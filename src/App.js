@@ -3,6 +3,7 @@ import { Nav, NavRoutes } from './components';
 
 function App() {
 
+  const [isLoading, setIsLoading] = useState(true);
   const [fullscreenPlayer, setFullscreenPlayer] = useState(false);
   const[fullVideoPath, setFullVideoPath] = useState('');
   const [posterID, setPosterID] = useState(0);
@@ -34,7 +35,8 @@ function App() {
       mediaType, setMediaType,
       // sectionTitle, setSectionTitle,
       genreTitle, setGenreTitle,
-      genreID, setGenreID
+      genreID, setGenreID,
+      isLoading, setIsLoading
   };
 
   return (

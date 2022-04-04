@@ -2,7 +2,7 @@
 
 .fullscreen-popup{
     position: fixed; left: 0; right: 0; top: 0; bottom: 0;
-    width: $background-width; min-height: $background-height; max-width: 1200px;
+    width: $background-width; min-height: $background-height; max-width: 1350px;
     background: $primary-black; z-index: 2000;  overflow-x: hidden;
 
     &::-webkit-scrollbar {display: none;}

@@ -1,39 +1,36 @@
 import { Box, Typography } from '@mui/material';
 import React, { useState, useRef } from 'react';
 
-const FilterButtonIcon = ({setGenreID, genre, background, genreID, icons}) => {
+const FilterButtonIcon = ({setGenreID, genre, background, genreID}) => {
 
-    const [activeGenre, setActiveGenre] = useState(false);
+    // const [activeGenre, setActiveGenre] = useState(false);
     const iconRef = useRef(null);
 
-    const handleActiveGenre = (event) => {
-        // if(event.target.classList.contains( "active" )) setActiveGenre(false);
-        // else{
-        //     setActiveGenre(true);
-        // }
-        if(activeGenre && !event.target.classList.contains( "active" )){
-            setActiveGenre(false);
-            // event.target.className+="active";
-        }
-        // else if(!activeGenre){
-        //     setActiveGenre(true);
+    // const handleActiveGenre = (event) => {
+    //     // if(event.target.classList.contains( "active" )) setActiveGenre(false);
+    //     // else{
+    //     //     setActiveGenre(true);
+    //     // }
+    //     if(activeGenre && !event.target.classList.contains( "active" )){
+    //         setActiveGenre(false);
+    //         // event.target.className+="active";
+    //     }
+    //     // else if(!activeGenre){
+    //     //     setActiveGenre(true);
             
-        // }
-    };
+    //     // }
+    // };
+
 
     return (
         <Box 
             ref = {iconRef}
-            onLoad = { () => {
-                icons.push(iconRef.current);
-                console.log(icons);
-            }}
-            className={`genre-icon ${activeGenre ? 'active' : ''}`}
+            className={`genre-icon`}
             sx={{backgroundImage: `url(${background})`}} 
             onClick={(e) => {
                 setGenreID(genreID); 
-                setActiveGenre(true);
-                handleActiveGenre(e);
+                // setActiveGenre(true);
+                // handleActiveGenre(e);
                 // setActiveGenre(true);
             }}
         >

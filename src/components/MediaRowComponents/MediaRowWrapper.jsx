@@ -34,7 +34,7 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps, t
         // console.log(distance, viewedPosters);
     };
 
-
+console.log(distance, showPrevButton ,showNextButton, (viewedPosters + totalPostersInView), viewedPosters, totalPostersInView);
     return (
         <Box className="media-row-wrapper" ref={wrapperRef}>
                 {showPrevButton && <ArrowBackIosOutlined

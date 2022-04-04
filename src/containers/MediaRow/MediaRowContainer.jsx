@@ -59,8 +59,9 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps, typ
                             disableHover={disableHover}
                         /> 
             }
-
-            { disableHover !== true && !delayed && window.innerWidth > 1200 && isHovered &&
+            
+            {/*  */}
+            { !disableHover && !delayed && window.innerWidth > 1200 && isHovered &&
                 
                     <PosterPreviewPopup 
                         popupProps = {popupProps}

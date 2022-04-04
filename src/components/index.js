@@ -17,3 +17,4 @@ export {default as ImageSlider} from './ImageSliderComponents/ImageSlider';
 export {default as ImageSliderBackdrop} from './ImageSliderComponents/ImageSliderBackdrop';
 export {default as PosterGallery} from './PosterGallery/PosterGallery';
 export {default as FilterButtons} from './FilterButtons/FilterButtons';
+export {default as SkeletonLoader} from './Skeleton/SkeletonLoader';

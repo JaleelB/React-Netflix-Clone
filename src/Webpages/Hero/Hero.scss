@@ -7,6 +7,24 @@
     &::-webkit-scrollbar { background-color: transparent;  width: 10px; }
     &::-webkit-scrollbar-thumb { background-color: $primary-red; border-radius: 10px;}
 
+    .loading-skeleton{ 
+
+        width: 100%; 
+        position: relative; margin-top: 5rem; padding-left: 3%;
+        display: flex; flex-direction: column; gap: $gap;
+
+        .skeleton-title, .skeleton{background-color: #252525;}
+        .skeleton{  min-width: 150px; min-height: 200px; }
+        .posters-skeleton{
+            display: grid; grid-auto-flow: column; grid-auto-columns:39%;
+            gap: $gap; 
+
+            @media screen and (min-width: 680px) and (max-width: 991px){  grid-auto-columns:27%; }
+            @media screen and (min-width: 992px) and (max-width: 1199px){  grid-auto-columns:21%; }                        @media screen and (max-height: 450px){ grid-auto-columns:27%; }
+            @media screen and (min-width: 1200px){ grid-auto-columns:17%;} 
+        }
+    }
+
     .inner{ 
         width: 100%;  min-height: 1000px; display:flex; flex-direction: column;  
         padding: 0 0 5% 0;

@@ -22,8 +22,11 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
         setContainerWidth(Math.floor(rowContainerWidth));
         setRowPadding(Math.floor(rowPaddingValue));
         setTotalPostersInView(Math.floor(rowContainerWidth / posterWidth));
+
+        console.log(rowContainerWidth, posterWidth);
         
-    },[posterWidth,rowContainerRef.current, setContainerWidth, setRowPadding,  setTotalPostersInView, wrapperRef ]);   
+        
+    },[posterWidth, setContainerWidth, setRowPadding,  setTotalPostersInView, wrapperRef ]);   
 
 
     return (

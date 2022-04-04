@@ -1,23 +1,13 @@
 import { Box } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import {MediaRowTitle} from '../../components';
 import FilterButtonIcon from './FilterButtonIcon';
 
 import './FilterButtons.scss'
 
-const FilterButtons = ({fullscreenProps}) => {
+const FilterButtons = ({fullscreenProps,setIsGenreList, setGenreListID, setIsLoading}) => {
 
-    const {genreID, setGenreID, setGenreTitle, genreTitle} = fullscreenProps;
-
-    // const [activeGenre, setActiveGenre] = useState(false);
-
-    // const handleActiveGenre = (event) => {
-    //     if(event.target.classList.contains( "active" )) setActiveGenre(false);
-    //     else{
-    //         setActiveGenre(true);
-    //     }
-    // };
-
+    const {genreID, setGenreID, setGenreTitle} = fullscreenProps;
 
     const moiveGenres = [
        "Action",
@@ -54,6 +44,15 @@ const FilterButtons = ({fullscreenProps}) => {
         "https://www.cowboysindians.com/wp-content/uploads/2018/07/DM_Opener.jpg"
     ];
 
+    const genreMovieListIDs = [256,5903,9226,0,7060321,2654,2151,79828,24370,37375,3945,44,0]; 
+
+    useEffect(() => {
+       for(let i=0; i<genreCodes.length; i++) 
+            if(genreID === genreCodes[i]){
+                setIsGenreList(true);
+                setGenreListID(genreMovieListIDs[i]);
+            }
+    }, [genreID])
     
 
     return (
@@ -69,6 +68,7 @@ const FilterButtons = ({fullscreenProps}) => {
                                 key={index}
                                 onClick={() => {
                                     setGenreTitle(genre);
+                                    setIsLoading(true);
                                     // handleActiveGenre(e);
                                 }}
                             >

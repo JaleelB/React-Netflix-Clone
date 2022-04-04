@@ -1,9 +1,10 @@
 @import '../../mainStyles';
 
 .filters-container{
+    z-index: 10;
 
     .title-wrapper{ 
-        padding: 0 3%; position: relative; 
+        padding: 1rem 3% 0; position: relative; 
         h2{
             line-height: 1.25vw; font-size: clamp(1em, 3vw, 1.5em); font-weight: 700; 
         }

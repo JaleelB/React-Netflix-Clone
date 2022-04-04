@@ -12,7 +12,7 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps, largeRow, listRow }) 
         cardPopupWidth, setDelayed, cardPopupHeight, genres,
         rowPadding, posterIndex,setIsHovered, totalPostersInView,
         cardPopupBackdrop,cardPopupTitle,postersInViewTabNumber,
-        cardPopupAirDate, cardPopupRating, mediaType
+        cardPopupAirDate, cardPopupRating, mediaType, containerWidth
     } = popupProps;
 
     const {
@@ -59,10 +59,11 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps, largeRow, listRow }) 
                 1.4;
     };
 
-    // for card popup width factor in multiplied width
+    // ${ (containerWidth +  cardPopupWidth) > window.innerWidth ? 'align-right': ''}
+    //             ${ containerWidth >  (cardPopupWidth / 2) ? 'align-center': ''}
     return (
         <Box 
-            className="preview-popup" 
+            className="preview-popup"
             sx={{
                 // width: `${cardPopupWidth * (netflixOriginalShow ? 1.55 : 1.75)}px`,
                 // height: `${cardPopupHeight * (netflixOriginalShow ? 1.3 : 1.4 )}px`,

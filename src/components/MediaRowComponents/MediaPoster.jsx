@@ -1,24 +1,16 @@
 import { Box } from '@mui/material';
 import React, { useEffect } from 'react';
-import {apiComponents} from '../../components';
+import {apiComponents, PosterPreviewPopup} from '../../components';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
 const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating, id, fullscreenProps, typeMedia }) => {
 
     const { 
-        setIsHovered,
-        setCardPopupWidth,
-        setCardPopupHeight,
-        setDelayed,
-        setDelayHandler,
-        setPosterIndex,
-        setGenres,
-        delayHandler,
-        setCardPopupBackdrop,
-        setCardPopupAirDate,
-        setCardPopupTitle,
-        setCardPopupRating
+        setIsHovered, setCardPopupWidth, setCardPopupHeight,
+        setDelayed, setDelayHandler, setPosterIndex,
+        setGenres, delayHandler, setCardPopupBackdrop,
+        setCardPopupAirDate, setCardPopupTitle, setCardPopupRating,
     } = popupProps;
 
 
@@ -27,9 +19,14 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
     } = fullscreenProps;
     
 
+    // useEffect(()=>{
+    //     updatePosterWidth(Math.floor(posterRef.current.clientWidth));
+    // },[])
+
     useEffect(()=>{
         updatePosterWidth(Math.floor(posterRef.current.clientWidth));
     },[posterRef, updatePosterWidth])
+    
 
 
     const getGenres = () => {
@@ -64,20 +61,23 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
     };
 
     return (
-        // <Link>
+        // <>
             <Box 
                 className='media-poster'
                 sx={{width: '100%', height: '100%'}}
                 ref={posterRef}
                 onClick = {() => {
+
                     handleMediaType();                    
                     setPosterID(id);
                     setOpenFullscreenPopup(true);
                     handleNetflixOriginal();
-                    // console.log(posterID);
+
                 }}
                 onMouseEnter={()=>{
+
                     if(!disableHover){
+
                         setIsHovered(true);
                         handleDelayOnMouseEnter(); 
                         setCardPopupWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
@@ -91,12 +91,11 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
                         setPosterID(id);
                         handleMediaType();
                         handleNetflixOriginal();
+
                     }
                     
                 }}
-                onMouseLeave={()=> {
-                    if(!disableHover) handleDelayOnMouseLeave();
-                }}
+                onMouseLeave={()=> { if(!disableHover) handleDelayOnMouseLeave(); }}
             >
                 
                 <Box className="media-poster-image-wrapper">
@@ -104,8 +103,18 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
                     <img className={`media-poster-image ${netflixOriginal ? "netflixOriginal" : ''}`} draggable="false"  src={"https://image.tmdb.org/t/p/w500" + posterPath} alt={name}/>
                 </Box>
 
+                {/* { !isHover && window.innerWidth > 1200 && isHovered &&
+                
+                    <PosterPreviewPopup 
+                        popupProps = {popupProps}
+                        fullscreenProps = {fullscreenProps}
+                        // largeRow={largeRow}
+                        // listRow={listRow}
+                    />
+                } */}
+
             </Box>
-        // </Link>
+
     )
 }
 
