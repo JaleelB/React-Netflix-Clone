@@ -192,14 +192,6 @@ const FullscreenPopup = ({fullscreenProps}) => {
                         </Box>
                         
                         <Box className="similiar-container">
-                            {/* <Typography variant="subtitle" component="h3" sx={{marginBottom: '.2rem'}}>Similiar Shows: </Typography>
-                            <Box className="similiar-movies">
-                                {
-                                    similiarMovies && similiarMovies.map((recommendation) => {
-                                        return <SimiliarMovie posterPath = {"https://image.tmdb.org/t/p/w500" + recommendation?.poster_path}/>
-                                    })
-                                }
-                            </Box> */}
 
                             { similiarMovies && 
                                 <SimiliarMovies
@@ -232,7 +224,6 @@ const FullscreenPopup = ({fullscreenProps}) => {
                             }
                         </Box>
                         
-                        <Box className="trailers-container"></Box>
                     </Box>
                 </Box>
             </Box>

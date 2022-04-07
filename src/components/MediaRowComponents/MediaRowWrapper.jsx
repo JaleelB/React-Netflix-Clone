@@ -13,7 +13,7 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps, t
         distance, setDistance, 
         totalPostersInView,
         viewedPosters, setViewPosters,
-        containerWidth, setPostersInViewTabNumber
+        containerWidth, setPostersInViewTabNumber, setContainerWidth,
     } = popupProps
 
 
@@ -31,12 +31,13 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps, t
         setPostersInViewTabNumber(prevPostersInViewTabNumber => prevPostersInViewTabNumber + 1);
         setViewPosters(viewedPosters + totalPostersInView);
         setDistance(distance - containerWidth);
-        // console.log(distance, viewedPosters);
     };
 
-console.log(distance, showPrevButton ,showNextButton, (viewedPosters + totalPostersInView), viewedPosters, totalPostersInView);
     return (
-        <Box className="media-row-wrapper" ref={wrapperRef}>
+        <Box 
+            className="media-row-wrapper" 
+            ref={wrapperRef}
+        >
                 {showPrevButton && <ArrowBackIosOutlined
                     className="arrow left"
                     onClick = {()=> handleMovementLeft()}                    

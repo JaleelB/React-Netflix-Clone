@@ -4,21 +4,19 @@
     position: absolute; top: -20px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px;
     z-index: 55; background: $primary-black;
-    transition: ease all .3s; 
+    transition: ease all 250ms; 
     box-shadow: 0 2px 10px 0 #000;
 
 
     .media-poster-info-popup{
         width: 100%; height: 100%;
-        border-radius: 6px;
-       
-       
+        border-radius: 6px; 
        box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px; 
        border-radius: 6px; background: $primary-black;
        z-index: 3; opacity: 1; transform-origin: center center;
 
        .media-popup-container{
-           height: 60%; background: white; border-radius: 6px 6px 0 0;
+           height: 53%; background: white; border-radius: 6px 6px 0 0;
            background: $color-white;
 
            .popup-container-title{ color: $color-white;  margin: auto 0 .5rem .5rem; z-index: 2; }
@@ -30,33 +28,47 @@
        }
 
        .media-popup-info{
-           height: 40%;
+           height: 47%; padding: 1rem;
            color: $color-white; 
 
            .button-controls-container{ 
-               width: 100%; padding: .5rem .5rem 0;  margin-bottom: .25rem; display: flex;
+              margin-bottom: .5rem; display: flex;
 
+            //   .small-path-icon{width:1.8rem; height:1.8rem;}
                .popup-icon{
-                    min-width: 35px; min-height: 35px;
-                    max-width: 45px; max-height: 45px;
-                    margin: .2rem;
+                    min-width: 40px; min-height: 40px;
+                    max-width: 50px; max-height: 50px;
+                    margin: .2rem; border-radius: 50%;
+                    
+
+                    &:not(.play){
+                        padding: 8px;
+                        border: 2px solid #595959; background-color: rgba($color-white,.05);
+
+                        svg{
+                            path{
+                              fill: none; stroke: $color-white;
+                              stroke-width: 5; stroke-miterlimit: 10;
+                            }
+                          }
+                    }
                }
 
                .details-button{ position:relative; margin-left: auto; }
-            }
+        }
 
             .movie-metadata-container{
                 width: 100%; display: flex;
-                padding: .5rem 1rem 0;  margin-bottom: .5rem; gap: $gap;
+                margin: .8rem 0; gap: $gap;
 
                 .movie-rating{ 
-                    text-align: center; color: #46d369; 
+                    text-align: center; color: #46d369; font-weight: bold;
                     // margin: .2rem;
                 }
 
                 .media-type{
-                    text-align: center; border: 1px solid $color-white; 
-                    padding: .2rem; text-transform: uppercase; font-size: 1rem;
+                    text-align: center; border: 1px solid $color-white; font-weight: bold;
+                    padding-inline: .2rem; text-transform: uppercase; font-size: 1rem;
                 }
 
                 .movie-air-date{ 
@@ -64,29 +76,59 @@
                     // margin: .2rem;
                 }
 
-                .movie-video-quality{ text-align: center; border: 1px solid $color-white; padding: 0 .3rem; }
+                .movie-video-quality{ 
+                    text-align: center; font-weight: bold;
+                    border: 1px solid $color-white; padding: 0 .3rem; 
+                }
            }
 
             .genre-list{
-                width: 100%; padding:  0 .7rem;  margin-bottom: .5rem; 
+                width: 100%; margin-bottom: .8rem; 
                 ul{
                     list-style: none; display: flex; gap: .5rem; flex-wrap: wrap;
 
                     .genre{ 
-                        padding-right: 0.5vw; display: flex; align-items: center; font-size: 1rem;
 
-                        .separator{
+                        display: flex; align-items: center; font-size: 1rem;
 
-                            font-size: 1.2rem;
+                        &:not(:first-child){
 
-                            &::before{
-                                display: inline-block; padding-right: 0.5vw;
-                                content: "\2022";color: #646464;
+                            &:before{
+                              content: "\2022";
+                              margin-right: 5px;
+                              opacity: .5;
                             }
+
                         }
+
                     }
                 }
             }
        }
    }
 }
+
+@keyframes mountAnimation {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+      transition: none;
+    //   visibility: hidden;
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    //   visibility: visible;
+    }
+  }
+
+  @keyframes unmountAnimation {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    //   visibility: hidden;
+      transform: scale(0.5)
+    }
+  }

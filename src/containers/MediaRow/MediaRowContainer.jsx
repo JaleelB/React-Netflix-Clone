@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {MediaRowWrapper, MediaRowTitle, PosterPreviewPopup } from '../../components';
 import './MediaRow.scss';
 
-const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps, typeMedia, className,disableHover, largeRow, listRow}) => {
+const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps, typeMedia, className,disableHover}) => {
 
     const[isHovered, setIsHovered] = useState(false);
     const [cardPopupWidth, setCardPopupWidth] = useState(''); 
@@ -15,7 +15,7 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps, typ
     const [posterIndex, setPosterIndex] = useState(0);
     const [rowPadding, setRowPadding] = useState(0);
     const [genres, setGenres] = useState([]);
-    const [delayed, setDelayed] = useState(true);
+    const [delayMount, setDelayMount] = useState(false);
     const [delayHandler, setDelayHandler] = useState(null);
     const [cardPopupBackdrop, setCardPopupBackdrop] = useState('');
     const [cardPopupAirDate, setCardPopupAirDate] = useState(null);
@@ -35,14 +35,16 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps, typ
         containerWidth, setContainerWidth,
         setGenres, genres,
         cardPopupWidth, cardPopupHeight,
-        delayed, setDelayed,
+        delayMount, setDelayMount,
         delayHandler, setDelayHandler,
         cardPopupBackdrop, setCardPopupBackdrop,
         cardPopupRating, setCardPopupRating,
         cardPopupTitle, setCardPopupTitle,
         postersInViewTabNumber, setPostersInViewTabNumber,
-        cardPopupAirDate, setCardPopupAirDate
+        cardPopupAirDate, setCardPopupAirDate,
+
     };
+
 
     return (
 
@@ -60,14 +62,12 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps, typ
                         /> 
             }
             
-            {/*  */}
-            { !disableHover && !delayed && window.innerWidth > 1200 && isHovered &&
+
+            { !disableHover && delayMount && window.innerWidth > 1200 && 
                 
                     <PosterPreviewPopup 
                         popupProps = {popupProps}
                         fullscreenProps = {fullscreenProps}
-                        largeRow={largeRow}
-                        listRow={listRow}
                     />
             }
 

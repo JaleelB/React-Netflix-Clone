@@ -18,3 +18,4 @@ export {default as ImageSliderBackdrop} from './ImageSliderComponents/ImageSlide
 export {default as PosterGallery} from './PosterGallery/PosterGallery';
 export {default as FilterButtons} from './FilterButtons/FilterButtons';
 export {default as SkeletonLoader} from './Skeleton/SkeletonLoader';
+export {BootstrapTooltip} from './ToolTip/ToolTip';

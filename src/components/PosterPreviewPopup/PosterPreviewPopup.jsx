@@ -1,25 +1,32 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Tooltip, Typography } from '@mui/material';
 import { PlayCircle, ThumbDownOffAlt, ThumbUpOffAlt, AddCircleOutline, ExpandCircleDown } from '@mui/icons-material';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import axios from 'axios';
-import {apiComponents } from '../../components';
+import {apiComponents, BootstrapTooltip } from '../../components';
 
 import './PosterPreviewPopup.scss';
 
-const PosterPreviewPopup = ({ popupProps, fullscreenProps, largeRow, listRow }) => {
+const debounce = require('debounce');
+
+const PosterPreviewPopup = ({ popupProps, fullscreenProps}) => {
 
     const { 
-        cardPopupWidth, setDelayed, cardPopupHeight, genres,
+        cardPopupWidth, cardPopupHeight, genres,
         rowPadding, posterIndex,setIsHovered, totalPostersInView,
         cardPopupBackdrop,cardPopupTitle,postersInViewTabNumber,
-        cardPopupAirDate, cardPopupRating, mediaType, containerWidth
+        cardPopupAirDate, cardPopupRating, isHovered, setDelayMount
     } = popupProps;
 
     const {
         fullscreenPlayer, setFullscreenPlayer, setFullVideoPath, posterID, 
-        setOpenFullscreenPopup, setDisablePointer, disablePointer, netflixOriginalShow,
-        setNetflixOriginalShow, setMovie, setMovieCredits, setSimiliarMovies
+        setOpenFullscreenPopup, netflixOriginalShow, setNetflixOriginalShow, mediaType
     } = fullscreenProps;
+
+    const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
+
+    const mountStyle = { animation: "mountAnimation 250ms ease-in" };
+
+    const unmountStyle = { animation: "unmountAnimation 270ms ease-out" };
 
     useEffect(() => {
 
@@ -38,46 +45,29 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps, largeRow, listRow }) 
         })
         .catch(error => { console.log(error) })
 
-
-        //choose either movies or tv | get the type of the media
     
     },[posterID, setFullVideoPath]);
 
+    
+    const handleUnmountOnMouseLeave = debounce(() => setDelayMount(false), 200)
 
-    const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
-
-    const handlePopupWidth = () => {
-        return netflixOriginalShow ? 1.55:
-                largeRow ? 1.55:
-                listRow ? 1.55:
-                1.75;
-    };
-    const handlePopupHeight = () => {
-        return netflixOriginalShow ? 1.3:
-                largeRow ? 1.3:
-                listRow ? 1.3:
-                1.4;
-    };
-
-    // ${ (containerWidth +  cardPopupWidth) > window.innerWidth ? 'align-right': ''}
-    //             ${ containerWidth >  (cardPopupWidth / 2) ? 'align-center': ''}
     return (
         <Box 
             className="preview-popup"
             sx={{
-                // width: `${cardPopupWidth * (netflixOriginalShow ? 1.55 : 1.75)}px`,
-                // height: `${cardPopupHeight * (netflixOriginalShow ? 1.3 : 1.4 )}px`,
-                width: `${cardPopupWidth * handlePopupWidth()}px`,
-                height: `${cardPopupHeight * handlePopupHeight()}px`,
-                // left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding + ( posterIndex > 1 ? (8 * posterIndex) : 0 ) ) - rowPadding}px`
-                left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding ) - 40}px`
+                width: `${cardPopupWidth * 1.75}px`,
+                height: `${cardPopupHeight * 1.4}px`,
+                left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding + ( posterIndex > 1 ? (8 * posterIndex) : 0 ) ) - (rowPadding*postersInViewTabNumber) }px`
+                // left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding ) - 40}px`
             }}
+            style={isHovered ? mountStyle  : unmountStyle}
             onMouseLeave={()=> {
                 setIsHovered(false)
-                setDelayed(true)
+                handleUnmountOnMouseLeave();
+
                 removeNetflixOriginal()
             }}
-            // onClick={() => setOpenFullscreenPopup(true)}
+
         >  
             <Box className="media-poster-info-popup">
 
@@ -88,20 +78,42 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps, largeRow, listRow }) 
 
                 <Box className="media-popup-info">
                     <Box className="button-controls-container">
+
                         <PlayCircle 
-                            className="popup-icon" 
+                            className="popup-icon play" 
                             onClick={() => {
                                 setFullscreenPlayer(!fullscreenPlayer);
-                                // setDisablePointer(!disablePointer);
                             }}
                         />
-                        <AddCircleOutline className="popup-icon"/>
-                        <ThumbUpOffAlt className="popup-icon"/>
-                        <ThumbDownOffAlt className="popup-icon"/>
-                        <ExpandCircleDown 
-                            className="popup-icon details-button"
-                            onClick = {() => setOpenFullscreenPopup(true)}
-                        />
+
+                        <BootstrapTooltip title="Add To List">
+                            <Button
+                                className="popup-icon add" 
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                                    <path d="M32 16v32m16-16H16"></path>
+                                </svg>
+                            </Button>
+                        </BootstrapTooltip>
+                        
+                        <BootstrapTooltip title="Like">
+                            <ThumbUpOffAlt className="popup-icon like"/>
+                        </BootstrapTooltip>
+                        
+                        <BootstrapTooltip title="Dislike">
+                            <ThumbDownOffAlt className="popup-icon dislike"/>
+                        </BootstrapTooltip>
+                        
+                        <BootstrapTooltip title="More Information">
+                            <Button
+                                className="popup-icon details-button"
+                                onClick = {() => setOpenFullscreenPopup(true)}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                                    <path  d="M20 26l11.994 14L44 26"></path>
+                                </svg>
+                            </Button>
+                        </BootstrapTooltip>
                     </Box>
 
                     <Box className="movie-metadata-container">
@@ -115,10 +127,11 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps, largeRow, listRow }) 
                         <ul>
                             {
                                 genres.map((genre, index)=>{
-                                    return <li key={index} className="genre">
-                                                {index  > 0 ? <span className="separator"></span> : ''}
-                                                {genre}
-                                            </li>
+                                    return (
+                                        <li key={index} className="genre">
+                                            {genre}
+                                        </li>
+                                    )
                                 })
                             }
                         </ul>

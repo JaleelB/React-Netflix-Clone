@@ -1,15 +1,14 @@
 import { Box } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {apiComponents } from '../../components';
 import '../../containers/MediaRow/MediaRow.scss';
-
 
 const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating, id, fullscreenProps, typeMedia }) => {
 
     const { 
         setIsHovered, setCardPopupWidth, setCardPopupHeight,
-        setDelayed, setDelayHandler, setPosterIndex,
-        setGenres, delayHandler, setCardPopupBackdrop,
+        setDelayMount, setDelayHandler, setPosterIndex, delayMount,
+        setGenres, delayHandler, setCardPopupBackdrop, isHovered,
         setCardPopupAirDate, setCardPopupTitle, setCardPopupRating,
     } = popupProps;
 
@@ -35,16 +34,18 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
         return genres;
     };
 
-    const handleDelayOnMouseEnter = () => {
+    const handleDelayOnMount = () => {
+
         setDelayHandler(setTimeout(() => {
-            setDelayed(false)
+            setDelayMount(true);
         }, 700))
+
     }
 
-    const handleDelayOnMouseLeave = () => {
+    const handleUnmount = () => {
         clearTimeout(delayHandler)
-        // setDelayed(true)
     }
+
 
     const handleMediaType = () =>{ if (typeMedia) setMediaType(typeMedia); };
 
@@ -52,6 +53,8 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
         if(netflixOriginal && typeMedia === 'tv') setNetflixOriginalShow(true);
         else if(netflixOriginal && typeMedia === 'movie') setNetflixOriginalShow(false);
     };
+
+ 
 
     return (
         // <>
@@ -73,7 +76,7 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
                     if(!disableHover){
 
                         setIsHovered(true);
-                        handleDelayOnMouseEnter(); 
+                        handleDelayOnMount(); 
                         setCardPopupWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
                         updatePosterWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
                         setCardPopupHeight(Math.floor(posterRef.current.getBoundingClientRect().height));
@@ -90,15 +93,21 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
                     }
                     
                 }}
-                onMouseLeave={()=> { if(!disableHover) handleDelayOnMouseLeave(); }}
+                onMouseLeave={()=> { 
+                    if(!disableHover) {
+                        handleUnmount(); 
+                    }
+                }}
             >
                 
                 <Box className="media-poster-image-wrapper">
-                    { netflixOriginal && netflixOriginalShow && posterPath && typeMedia === 'tv' && <img className="netflix-icon"src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="Netflix Icon"/> }
+                    { netflixOriginal && posterPath && typeMedia === 'tv' && <img className="netflix-icon"src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="Netflix Icon"/> }
                     <img className={`media-poster-image ${netflixOriginal ? "netflixOriginal" : ''}`} draggable="false"  src={"https://image.tmdb.org/t/p/w500" + posterPath} alt={name}/>
                 </Box>
 
+
             </Box>
+            
 
     )
 }
