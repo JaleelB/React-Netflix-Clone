@@ -57,8 +57,15 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps}) => {
             sx={{
                 width: `${cardPopupWidth * 1.75}px`,
                 height: `${cardPopupHeight * 1.4}px`,
-                left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding + ( posterIndex > 1 ? (8 * posterIndex) : 0 ) ) - (rowPadding*postersInViewTabNumber) }px`
+                left: `${(
+                            (
+                                cardPopupWidth * (posterIndex >= totalPostersInView ? 
+                                posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)
+                            )
+                             + rowPadding )
+                        }px`,
                 // left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding ) - 40}px`
+                right: 0
             }}
             style={isHovered ? mountStyle  : unmountStyle}
             onMouseLeave={()=> {

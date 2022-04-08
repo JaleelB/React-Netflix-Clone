@@ -4,7 +4,7 @@ import React, { useRef } from 'react';
 
 import './InputField.scss';
 
-const InputField = ({updateTyping, setInput, isTyping}) => {
+const InputField = ({updateTyping, setInput, isTyping, setSearchMovieResults, setSearchTVResults}) => {
 
     // let textSearch;
     const inputFieldRef = useRef(null);
@@ -46,7 +46,6 @@ const InputField = ({updateTyping, setInput, isTyping}) => {
                 onChange = { (e)=> {
                     handleTextFieldUpdate(e);
                     getInput(e);
-                    // handleInputEvent();
                 } }
             />
             {
@@ -54,10 +53,12 @@ const InputField = ({updateTyping, setInput, isTyping}) => {
 
                     <Close 
                         className="delete"
-                        onClick={(e)=> {
+                        onClick={()=> {
                             setInput('');
                             inputFieldRef.current.value = '';
                             updateTyping(false);
+                            setSearchMovieResults([]);
+                            setSearchTVResults([]);
                         } }
                     />
             }

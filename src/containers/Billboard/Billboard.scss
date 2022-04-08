@@ -4,15 +4,10 @@
 
     width: 100%; height: 80vh; display: grid; position: relative;
     background-size: cover !important; background-position: center center !important;
-    margin: 0 0 3% 0;
+    margin: 0 0 3% 0; 
 
     @media screen and (min-width: 1200px) { height: 90vh; }
-    // @media screen and (min-width: 600px) and (max-width: 1199px){ height: 70vh; }
 
-    @media screen and (max-width: 600px) { 
-        display: flex; justify-content: center;  align-items: center; 
-    }
-    // @media screen and (min-width: 1200px) {align-content: center;}
 
     &::before{
         content: ''; pointer-events: none; z-index: 2;

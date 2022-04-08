@@ -83,7 +83,13 @@ const Search = ({fullscreenProps}) => {
         <Box id="search-page">
 
             <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
-                <InputField updateTyping={setIsTyping} setInput={setInputText} isTyping={isTyping}/>
+                <InputField 
+                    updateTyping={setIsTyping} 
+                    setInput={setInputText} 
+                    isTyping={isTyping}
+                    setSearchTVResults={setSearchTVResults}
+                    setSearchMovieResults={setSearchMovieResults}
+                />
 
 
                 { !isTyping && <ImageSlider randIndexes={randIndexGenerator(20, 5)} shows={trendingToday} fullscreenProps = { fullscreenProps } mediaType={"tv"}/> }

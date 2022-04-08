@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import {apiComponents } from '../../components';
 import '../../containers/MediaRow/MediaRow.scss';
 
+const debounce = require('debounce');
+
 const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating, id, fullscreenProps, typeMedia }) => {
 
     const { 
@@ -36,6 +38,8 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
 
     const handleDelayOnMount = () => {
 
+        if(delayMount) setDelayMount(false);  
+       
         setDelayHandler(setTimeout(() => {
             setDelayMount(true);
         }, 700))
@@ -60,7 +64,7 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
         // <>
             <Box 
                 className='media-poster'
-                sx={{width: '100%', height: '100%'}}
+                // sx={{width: `${width}`}}
                 ref={posterRef}
                 onLoad = {() => handlePosterSizeOnLoad() }
                 onClick = {() => {

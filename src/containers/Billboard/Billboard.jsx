@@ -40,7 +40,7 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
                 .then((res)=> {
                     setVideoPath(res.data.results[0]?.key)
                 })
-                .catch(error => { console.log(error) })
+                // .catch(error => { console.log(error) })
             }
 
             if(mediaType==="movie"){
@@ -49,33 +49,31 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
                 .then((res)=> {
                     setVideoPath(res.data.results[0]?.key)
                 })
-                .catch(error => { console.log(error) })
+                // .catch(error => { console.log(error) })
             }
         }
 
     }, [movie?.id, mediaType]);
 
     useEffect(() => {
-        if(window.innerWidth > 1200){
+    
+        if(mediaType==="tv"){
+            axios
+            .get(`${apiComponents[0]}${apiComponents[2].tv}/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setFullVideoPath(res.data.results[0]?.key)
+            })
+            // .catch(error => { console.log(error) })
+        }
 
-            if(mediaType==="tv"){
-                axios
-                .get(`${apiComponents[0]}${apiComponents[2].tv}/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
-                .then((res)=> {
-                    setFullVideoPath(res.data.results[0]?.key)
-                })
-                .catch(error => { console.log(error) })
-            }
-
-            if(mediaType==="movie"){
-                axios
-                .get(`${apiComponents[0]}${apiComponents[2].movie}/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
-                .then((res)=> {
-                    setFullVideoPath(res.data.results[0]?.key)
-                })
-                .catch(error => { console.log(error) })
-            }
-        } 
+        if(mediaType==="movie"){
+            axios
+            .get(`${apiComponents[0]}${apiComponents[2].movie}/${movie?.id}/videos?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setFullVideoPath(res.data.results[0]?.key)
+            })
+            // .catch(error => { console.log(error) })
+        }
 
     }, [posterID,setFullVideoPath,movie?.id, mediaType]);
 
@@ -89,9 +87,9 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
 
             <Box className="billboard__fade-top"></Box>
 
-            {deviceWindowWidth > 1200 && videoPath ? <BillboardVideo source={videoPath} playState={videoPlay} muteStatus={volumeMute}/> : null }
+            {window.screen.width > 1200 && videoPath ? <BillboardVideo source={videoPath} playState={videoPlay} muteStatus={volumeMute}/> : null }
 
-            {deviceWindowWidth > 1200 && sectionTitle &&
+            {window.screen.width > 1200 && sectionTitle &&
                 <Box className="billboard__section-title-wrapper" sx={{display: genreTitle && "flex"}}>
                     <Link 
                         to={`/${sectionTitle}`}
@@ -112,10 +110,10 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
                         <Typography className="billboard__supplemental-message" sx={{color :'#fff'}}>Netflix Original</Typography>
                     </Box>
 
-                    {deviceWindowWidth >= 601 && <BillboardDescription description={movie?.overview}/>}
+                    {window.screen.width >= 750 && <BillboardDescription description={movie?.overview}/>}
                     
                     <Box className="billboard__button-container" >
-                        {deviceWindowWidth >= 1200 && <>
+                        {window.screen.width >= 1200 && <>
                             <Button 
                                 className={`billboard__button-play ${!videoPath ? 'disabled' : ''}`}
                                 variant={!videoPath ? 'disabled' : ''}
@@ -144,7 +142,7 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
                             </Button>
                         </> }
 
-                        {deviceWindowWidth < 1200 && <>
+                        {window.screen.width < 1200 && <>
                             <Button 
                                 className="billboard__button-play" 
                                 onClick={()=> {
@@ -164,7 +162,7 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
                     </Box> 
             </Box> 
 
-            {deviceWindowWidth > 1200 && 
+            {window.screen.width > 1200 && 
                 <Box className="billboard__volume-rating-conatiner">
                     <IconButton 
                         className="billboard__volume-toggle" 

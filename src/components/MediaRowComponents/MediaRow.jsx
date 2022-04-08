@@ -11,7 +11,7 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
     const posterRef = useRef(null);
     const rowContainerRef = useRef(null);
 
-    const { setRowPadding, distance, setContainerWidth, setTotalPostersInView } = popupProps;
+    const { setRowPadding, distance, setContainerWidth, setTotalPostersInView, totalPostersInView } = popupProps;
 
 
     useEffect(()=>{
@@ -30,7 +30,7 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
     return (
 
         <Box 
-            className={`media-row ${netflixOriginal ? 'large-row' : ''} ${className ? className: ''}`}
+            className={`media-row ${className ? className: ''}`}
             ref={rowContainerRef}
             sx={{transform: `translate3d(${distance}px, 0, 0)`}}
         >

@@ -2,7 +2,7 @@ import { Box, Skeleton } from '@mui/material';
 import './Hero.scss';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup } from '../../components';
+import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, SkeletonLoader } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
 
 const Hero = ({fullscreenProps}) => {
@@ -90,23 +90,7 @@ const Hero = ({fullscreenProps}) => {
         {
             isLoading ?
 
-                <Box className="loading-skeleton">
-                    <Skeleton className="skeleton-title" variant="rectangular" width={60} height={20} />
-                    <Box className="posters-skeleton">
-                        <Skeleton className="skeleton" variant="rectangular" />
-                        <Skeleton className="skeleton" variant="rectangular" />
-                        <Skeleton className="skeleton" variant="rectangular" />
-                        <Skeleton className="skeleton" variant="rectangular" />
-                        <Skeleton className="skeleton" variant="rectangular" />
-                        <Skeleton className="skeleton" variant="rectangular" />
-                        <Skeleton className="skeleton" variant="rectangular" />
-                        <Skeleton className="skeleton" variant="rectangular" />
-                        <Skeleton className="skeleton" variant="rectangular" />
-                        <Skeleton className="skeleton" variant="rectangular" />
-                        <Skeleton className="skeleton" variant="rectangular" />
-                        <Skeleton className="skeleton" variant="rectangular" />
-                    </Box>
-                </Box> 
+                <SkeletonLoader/>
 
                 :
 

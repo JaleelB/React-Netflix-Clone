@@ -3,35 +3,15 @@ import React, { useState, useRef } from 'react';
 
 const FilterButtonIcon = ({setGenreID, genre, background, genreID}) => {
 
-    // const [activeGenre, setActiveGenre] = useState(false);
-    const iconRef = useRef(null);
-
-    // const handleActiveGenre = (event) => {
-    //     // if(event.target.classList.contains( "active" )) setActiveGenre(false);
-    //     // else{
-    //     //     setActiveGenre(true);
-    //     // }
-    //     if(activeGenre && !event.target.classList.contains( "active" )){
-    //         setActiveGenre(false);
-    //         // event.target.className+="active";
-    //     }
-    //     // else if(!activeGenre){
-    //     //     setActiveGenre(true);
-            
-    //     // }
-    // };
 
 
     return (
         <Box 
-            ref = {iconRef}
             className={`genre-icon`}
             sx={{backgroundImage: `url(${background})`}} 
-            onClick={(e) => {
+            onClick={() => {
                 setGenreID(genreID); 
-                // setActiveGenre(true);
-                // handleActiveGenre(e);
-                // setActiveGenre(true);
+                window.scrollTo({top: 0, behavior: 'smooth'});
             }}
         >
             <Box className="genre-title-wrapper">
