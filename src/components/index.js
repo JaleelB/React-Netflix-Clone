@@ -19,3 +19,5 @@ export {default as PosterGallery} from './PosterGallery/PosterGallery';
 export {default as FilterButtons} from './FilterButtons/FilterButtons';
 export {default as SkeletonLoader} from './Skeleton/SkeletonLoader';
 export {BootstrapTooltip} from './ToolTip/ToolTip';
+export {default as usePosterSize} from './MediaRowComponents/usePosterSize';
+export {default as useRowsliding} from './MediaRowComponents/useRowSliding';

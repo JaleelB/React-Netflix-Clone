@@ -4,15 +4,17 @@ import MediaPoster from './MediaPoster';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
-const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenProps, typeMedia, className, disableHover }) => {
+const MediaRow = ({ medias, popupProps, distance, netflixOriginal, fullscreenProps, typeMedia, className, disableHover, wrapperRef }) => {
 
-    const [posterWidth, setPosterWidth] = useState(0);
+    // const [posterWidth, setPosterWidth] = useState(0);
     
     const posterRef = useRef(null);
     const rowContainerRef = useRef(null);
 
-    const { setRowPadding, distance, setContainerWidth, setTotalPostersInView, totalPostersInView } = popupProps;
+    const { setRowPadding, setContainerWidth, setTotalPostersInView, totalPostersInView, posterWidth } = popupProps;
 
+
+    // const { setPosterWidth, distance } = popupProps
 
     useEffect(()=>{
         const rowPadding = window.getComputedStyle(rowContainerRef.current).getPropertyValue('padding-left');
@@ -24,8 +26,8 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
         setTotalPostersInView(Math.floor(rowContainerWidth / posterWidth));
 
         
-    },[posterWidth, setContainerWidth, setRowPadding,  setTotalPostersInView, wrapperRef ]);   
-
+    },[posterWidth, wrapperRef.current ]);  
+    
 
     return (
 
@@ -38,9 +40,8 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
                 medias && medias.map((media, index) => {   
                     
                     return <MediaPoster
-                                updatePosterWidth = {setPosterWidth}
+                                // updatePosterWidth = {setPosterWidth}
                                 posterRef={posterRef}
-                                rowContainerRef= {rowContainerRef}
                                 key={media.id}
                                 posterPath = {media?.poster_path}
                                 name = {media?.name ? media?.name : media?.title}
@@ -51,6 +52,7 @@ const MediaRow = ({ medias, popupProps, wrapperRef, netflixOriginal, fullscreenP
                                 airDate={media?.first_air_date ? media?.first_air_date : media?.release_date}
                                 rating={media?.vote_average}
                                 id={media?.id}
+                                // wrapperRef={wrapperRef}
                                 fullscreenProps = {fullscreenProps}
                                 typeMedia={typeMedia ? typeMedia : media?.media_type}
                                 disableHover={disableHover}

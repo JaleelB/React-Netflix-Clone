@@ -6,7 +6,7 @@ import './Billboard.scss';
 import { PlayArrow, Pause, VolumeOff, VolumeUp, Add, DoNotDisturbAltOutlined } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 
-const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreTitle, setGenreTitle, mediaType}) => {
+const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreTitle, setGenreTitle, mediaType, setGenreID, setGenreListID, setIsGenreList, setIsLoading}) => {
     
     const [videoPath, setVideoPath] = useState('');
     const [videoPlay, setVideoPlay] = useState(true);
@@ -93,7 +93,13 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
                 <Box className="billboard__section-title-wrapper" sx={{display: genreTitle && "flex"}}>
                     <Link 
                         to={`/${sectionTitle}`}
-                        onClick={ () => setGenreTitle('') }
+                        onClick={ () => {
+                            setGenreTitle('')
+                            setGenreID('')
+                            setGenreListID('')
+                            setIsGenreList(false)
+                            setIsLoading(true)
+                        } }
                     >
                         <span className={`section-title ${genreTitle ? "bread-crumb" : ""}`}>{`${sectionTitle} ${genreTitle ? "> " : ""}`}</span>
                     </Link>

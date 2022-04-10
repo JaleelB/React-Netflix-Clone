@@ -19,13 +19,14 @@ const Movies = ({fullscreenProps}) => {
     const [eightysBinge, setEightysBinge] = useState([]);
     const [ninetysBinge, setNinetysBinge] = useState([]);
     const [staffPicks, setStaffPicks] = useState([]);
+    const [trendingMovie, setSTrendingMovie] = useState([]);
 
     const mediaTypeMovie = 'movie';
     const randIndex = useRef(null);
 
     const { 
         disablePointer, fullscreenPlayer, openFullscreenPopup, genreTitle, setGenreTitle, genreID,
-        isLoading, setIsLoading
+        isLoading, setIsLoading, setGenreID
     } = fullscreenProps;
 
     const randIndexGenerator = (maxValue, indexCount) => {
@@ -77,14 +78,21 @@ const Movies = ({fullscreenProps}) => {
         })
         .catch(error => { console.log(error) })
 
-        // if(genreListID){
+        if(genreListID){
             axios
             .get(`${apiComponents[0]}${apiComponents[2].list}/${genreListID}?api_key=${apiComponents[1]}`)
             .then((res)=> {
                 setGenreList(res.data.items)
             })
             .catch(error => { console.log(error) })
-        // }
+        }
+
+        axios
+        .get(`${apiComponents[0]}${apiComponents[2].movie_trending}?api_key=${apiComponents[1]}`)
+        .then((res)=> {
+            setSTrendingMovie(res.data.results)
+        })
+        .catch(error => { console.log(error) })        
         
         axios
         .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&certification_country=US&year=1992${genreID ? `&with_genres=${genreID}` : ''}`)
@@ -145,6 +153,10 @@ const Movies = ({fullscreenProps}) => {
                     sectionTitle={"Movies"} 
                     genreTitle={genreTitle} 
                     setGenreTitle={setGenreTitle}
+                    setGenreID={setGenreID}
+                    setGenreListID={setGenreListID}
+                    setIsGenreList={setIsGenreList}
+                    setIsLoading={setIsLoading}
                     mediaType="movie"
                 />
 
@@ -178,6 +190,19 @@ const Movies = ({fullscreenProps}) => {
                         // largeRow
                         typeMedia={mediaTypeMovie}
                     />
+
+
+
+                    <MediaRowContainer
+                        title = "Trending Movies For You"
+                        medias = { trendingMovie }
+                        // className={"large-row"}
+                        fullscreenProps = { fullscreenProps } 
+                        // largeRow
+                        typeMedia={mediaTypeMovie}
+                    />
+
+
                     <MediaRowContainer
                         title = "Popular Movies This Year"
                         medias = { popular }

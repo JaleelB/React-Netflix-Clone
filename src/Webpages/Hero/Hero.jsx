@@ -41,7 +41,7 @@ const Hero = ({fullscreenProps}) => {
         .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].top_rated}?api_key=${apiComponents[1]}`)
+        .get(`${apiComponents[0]}${apiComponents[2].movie}${apiComponents[2].top_rated}?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setTopRated(res.data.results)
         })

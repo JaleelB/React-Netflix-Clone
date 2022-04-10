@@ -1,26 +1,36 @@
 import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import RowContext from './RowContext'
 import {apiComponents } from '../../components';
 import '../../containers/MediaRow/MediaRow.scss';
 
-const debounce = require('debounce');
 
-const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflixOriginal, posterRef, updatePosterWidth, genreIDs, backdrop, airDate, rating, id, fullscreenProps, typeMedia }) => {
+const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflixOriginal, genreIDs, backdrop, airDate, rating, id, fullscreenProps, typeMedia, posterRef }) => {
 
     const { 
         setIsHovered, setCardPopupWidth, setCardPopupHeight,
         setDelayMount, setDelayHandler, setPosterIndex, delayMount,
-        setGenres, delayHandler, setCardPopupBackdrop, isHovered,
+        setGenres, delayHandler, setCardPopupBackdrop,
         setCardPopupAirDate, setCardPopupTitle, setCardPopupRating,
+        setPosterWidth
     } = popupProps;
 
 
     const {
-        setPosterID, setOpenFullscreenPopup, setMediaType, setNetflixOriginalShow, netflixOriginalShow
+        setPosterID, setOpenFullscreenPopup, setMediaType, 
+        setNetflixOriginalShow
+        
     } = fullscreenProps;
+
+
+    useEffect(()=>{
+        
+            setPosterWidth(posterRef.current.getBoundingClientRect().width)
+                
+    },[posterRef.current]); 
     
     const handlePosterSizeOnLoad = () => {
-        updatePosterWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
+        setPosterWidth(posterRef.current.getBoundingClientRect().width);
     };
 
     const getGenres = () => {
@@ -64,7 +74,6 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
         // <>
             <Box 
                 className='media-poster'
-                // sx={{width: `${width}`}}
                 ref={posterRef}
                 onLoad = {() => handlePosterSizeOnLoad() }
                 onClick = {() => {
@@ -82,7 +91,7 @@ const MediaPoster = ({ disableHover, popupProps, index,posterPath, name, netflix
                         setIsHovered(true);
                         handleDelayOnMount(); 
                         setCardPopupWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
-                        updatePosterWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
+                        setPosterWidth(Math.floor(posterRef.current.getBoundingClientRect().width));
                         setCardPopupHeight(Math.floor(posterRef.current.getBoundingClientRect().height));
                         setPosterIndex(index);
                         setGenres(getGenres());

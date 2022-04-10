@@ -1,7 +1,9 @@
 import { Box } from '@mui/material';
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from '@mui/icons-material';
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import MediaRow from './MediaRow';
+import RowContext from './RowContext.js';
+
 
 import '../../containers/MediaRow/MediaRow.scss';
 
@@ -14,8 +16,7 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps, t
         totalPostersInView,
         viewedPosters, setViewPosters,
         containerWidth, setPostersInViewTabNumber, setContainerWidth,
-    } = popupProps
-
+    } = popupProps;
 
     const showPrevButton = distance < 0;
     const showNextButton = (viewedPosters + totalPostersInView) < medias.length;
@@ -33,6 +34,7 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps, t
         setDistance(distance - containerWidth);
     };
 
+
     return (
         <Box 
             className="media-row-wrapper" 
@@ -44,7 +46,6 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps, t
                 />}
 
                     <MediaRow 
-                    sx={{border:" 1px solid white"}}
                         medias={medias} 
                         netflixOriginal={netflixOriginal} 
                         wrapperRef = {wrapperRef}
@@ -53,6 +54,7 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps, t
                         typeMedia={typeMedia}
                         className={className}
                         disableHover={disableHover}
+                        distance={distance}
                     />
 
                 {showNextButton && <ArrowForwardIosOutlined
@@ -60,6 +62,7 @@ const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps, t
                     onClick = {()=> handleMovementRight()}
                 />}
         </Box>
+        
     )
 }
 

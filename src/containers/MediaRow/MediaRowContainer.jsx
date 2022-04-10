@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {MediaRowWrapper, MediaRowTitle, PosterPreviewPopup } from '../../components';
 import './MediaRow.scss';
 
@@ -22,6 +22,7 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps, typ
     const [cardPopupRating, setCardPopupRating] = useState(null);
     const [cardPopupTitle, setCardPopupTitle] = useState('');
     const [postersInViewTabNumber, setPostersInViewTabNumber] = useState(0);
+    const [posterWidth, setPosterWidth] = useState(0);
 
     const popupProps = {
 
@@ -42,13 +43,16 @@ const MediaRowContainer = ({title, medias, netflixOriginal, fullscreenProps, typ
         cardPopupTitle, setCardPopupTitle,
         postersInViewTabNumber, setPostersInViewTabNumber,
         cardPopupAirDate, setCardPopupAirDate,
-
+        posterWidth, setPosterWidth
     };
 
 
     return (
 
-        <Box className="media-container">
+        <Box 
+            className="media-container"
+            onMouseLeave={()=> setIsHovered(false)}
+        >
 
             <MediaRowTitle title={title ? title : ''}/>
             {medias &&  <MediaRowWrapper 

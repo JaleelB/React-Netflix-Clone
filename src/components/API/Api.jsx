@@ -5,10 +5,10 @@ const apiComponents = [
         movie: "/movie",
         tv: "/tv",
         discover: '/discover',
-        top_rated: "/movie/top_rated",
+        // top_rated: "/movie/top_rated",
         popular: "/movie/popular",
         now_playing: "/movie/now_playing",
-        on_tv: "/tv/on-the-air",
+        on_tv: "/tv/on_the_air",
         trending: "/trending/all",
         discover_movie: "/discover/movie",
         discover_tv: "/discover/tv",
@@ -16,7 +16,12 @@ const apiComponents = [
         search: '/search',
         latest_movie: '/movie/latest',
         upcoming_movie: '/movie/upcoming',
-        list: '/list'
+        list: '/list',
+        top_rated: '/top_rated',
+        tv_airing: '/airing_today',
+        tv_popular: '/popular',
+        tv_trending: '/trending/tv/day',
+        movie_trending: '/trending/movie/day'
     },
     [
         {28: 'Action' },        
