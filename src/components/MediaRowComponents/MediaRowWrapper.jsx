@@ -1,66 +1,84 @@
 import { Box } from '@mui/material';
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from '@mui/icons-material';
-import React, { useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import MediaRow from './MediaRow';
-import RowContext from './RowContext.js';
 
+import {useRowPopupPropsContext} from '../../RowPropsContext';
 
 import '../../containers/MediaRow/MediaRow.scss';
 
-const MediaRowWrapper = ({medias,netflixOriginal, popupProps, fullscreenProps, typeMedia, className, disableHover}) => {
+const MediaRowWrapper = ({medias,netflixOriginal, typeMedia, className, disableHover, rowRef}) => {
 
-    const wrapperRef = useRef(null);
+    const rowPopupProps = useRowPopupPropsContext();
+    // const { 
+    //     distance, setDistance, 
+    //     totalPostersInView,
+    //     viewedPosters, setViewPosters,
+    //     containerWidth, setPostersInViewTabNumber, setContainerWidth,
+    // } = rowPopupProps.rowPopupProps;
 
-    const { 
-        distance, setDistance, 
-        totalPostersInView,
-        viewedPosters, setViewPosters,
-        containerWidth, setPostersInViewTabNumber, setContainerWidth,
-    } = popupProps;
+    const { slideRowLeft, slideRowRight } = rowPopupProps.rowPopupProps;
 
-    const showPrevButton = distance < 0;
-    const showNextButton = (viewedPosters + totalPostersInView) < medias.length;
+    // const showPrevButton = distance < 0;
+    // const showNextButton = (viewedPosters + totalPostersInView) < medias.length;
 
 
-    const handleMovementLeft = () => {
-        setPostersInViewTabNumber(prevPostersInViewTabNumber => prevPostersInViewTabNumber - 1); 
-        setViewPosters(viewedPosters - totalPostersInView);
-        setDistance(distance + containerWidth + (totalPostersInView * 0.5));
-    };
+    // const slideRowLeft = () => {
+    //     setPostersInViewTabNumber(prevPostersInViewTabNumber => prevPostersInViewTabNumber - 1); 
+    //     setViewPosters(viewedPosters - totalPostersInView);
+    //     setDistance(distance + containerWidth + (totalPostersInView * 0.5));
+    // };
 
-    const handleMovementRight = () => {
-        setPostersInViewTabNumber(prevPostersInViewTabNumber => prevPostersInViewTabNumber + 1);
-        setViewPosters(viewedPosters + totalPostersInView);
-        setDistance(distance - containerWidth);
-    };
+    // const slideRowRight = () => {
+    //     setPostersInViewTabNumber(prevPostersInViewTabNumber => prevPostersInViewTabNumber + 1);
+    //     setViewPosters(viewedPosters + totalPostersInView);
+    //     setDistance(distance - containerWidth);
+    // };
 
+    // const { posterRef, posterWidth, posterHeight } = usePosterSize();
+    // const {
+    //     slideRowLeft, slideRowRight, posterRowRef, showPrevButton, showNextButton, distance
+    // } = useRowSliding(posterWidth, rowRef, medias.length);
+
+
+    // const posterProps = {
+    //     posterRef, posterWidth, posterHeight
+    // };
+
+    // console.log(showNextButton)
+
+    const[rowTabIndex, setRowTabIndex] = useState(0);
+    const showPrevButton = rowTabIndex > 0;
 
     return (
         <Box 
             className="media-row-wrapper" 
-            ref={wrapperRef}
+                // ref={posterRowRef}
         >
-                {showPrevButton && <ArrowBackIosOutlined
-                    className="arrow left"
-                    onClick = {()=> handleMovementLeft()}                    
-                />}
+            {showPrevButton && <ArrowBackIosOutlined
+                className="arrow left"
+                onClick = {() => slideRowLeft(setRowTabIndex)}                    
+            />}
 
-                    <MediaRow 
-                        medias={medias} 
-                        netflixOriginal={netflixOriginal} 
-                        wrapperRef = {wrapperRef}
-                        popupProps = {popupProps}
-                        fullscreenProps = {fullscreenProps}
-                        typeMedia={typeMedia}
-                        className={className}
-                        disableHover={disableHover}
-                        distance={distance}
-                    />
+                <MediaRow 
+                    medias={medias} 
+                    netflixOriginal={netflixOriginal} 
+                            // wrapperRef = {wrapperRef}
+                            // popupProps = {popupProps}
+                            // fullscreenProps = {fullscreenProps}
+                    typeMedia={typeMedia}
+                    className={className}
+                    disableHover={disableHover}
+                    rowTabIndex={rowTabIndex}
+                    // posterRowRef={posterRowRef}
+                            // distance={distance}
+                />
 
-                {showNextButton && <ArrowForwardIosOutlined
-                    className="arrow right"
-                    onClick = {()=> handleMovementRight()}
-                />}
+            <ArrowForwardIosOutlined
+                className="arrow right"
+                onClick = {() => slideRowRight(setRowTabIndex)}
+            />
+
         </Box>
         
     )

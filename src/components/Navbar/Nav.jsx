@@ -3,9 +3,10 @@ import { AppBar,Toolbar,Box} from '@mui/material';
 import React, { useState, useEffect } from "react";
 import './Nav.scss'
 import { Link } from "react-router-dom";
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
 
-export default function Nav({fullscreenProps}) {
+export default function Nav() {
 
   const pages = [ 'Search', 'Movies', 'TvShows', 'Saved'];
   const [checked, setChecked] = useState(false);
@@ -25,10 +26,12 @@ export default function Nav({fullscreenProps}) {
     };
   }, []);
 
-  const { disablePointer, setIsLoading } = fullscreenProps;
+  const fullscreenProps = useFullscreenPropsContext();
+  const { disablePointer, loading } = fullscreenProps.fullscreenProps;
 
 
   return (
+    // <Box sx={{ flexGrow: 1}}>
     <Box className={`${disablePointer ? 'disable-pointer' : ''}`} sx={{ flexGrow: 1}}>
       <AppBar sx={{ boxShadow: 'none', color: 'white', zIndex: 33, background:`${darkNavbar ? '#171717' : 'transparent'}`}}>
         <Toolbar sx={{display: { xs: 'flex'}}}>
@@ -38,7 +41,7 @@ export default function Nav({fullscreenProps}) {
             <Box sx={{display: { xs: 'block', md: 'none' } }}>
               <Link 
                 to={'/'}
-                onClick={ () => setIsLoading(true)} 
+                onClick={loading} 
               >
                 <img className="netflix-small-logo" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="mobile netflix icon"/>
               </Link>
@@ -47,7 +50,7 @@ export default function Nav({fullscreenProps}) {
             <Box sx={{display: { xs: 'none', md: 'block' }}}>
               <Link 
                 to={'/'}
-                onClick={ () => setIsLoading(true)} 
+                onClick={loading} 
               >
                 <img className="netflix-large-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1920px-Netflix_2015_logo.svg.png" alt="destop netflix icon"/>
               </Link>
@@ -79,7 +82,7 @@ export default function Nav({fullscreenProps}) {
 
                                 <Link 
                                   className="nav-link" 
-                                  onClick={ () => setIsLoading(true)} 
+                                  onClick={loading} 
                                   style={!checked ? {pointerEvents: "none"} : null} 
                                   to={'/'}
                                 >
@@ -92,7 +95,7 @@ export default function Nav({fullscreenProps}) {
                                   
                                   <Link 
                                     className="nav-link"  
-                                    onClick={ () => setIsLoading(true)} 
+                                    onClick={loading} 
                                     style={!checked ? {pointerEvents: "none"} : null} 
                                     to={`/${page}`}
                                   >
@@ -116,7 +119,7 @@ export default function Nav({fullscreenProps}) {
                       <Link 
                         className="full-nav-link" 
                         style={{textDecoration: 'none', textAlign: 'center', color: 'white'}}
-                        onClick={ () => setIsLoading(true)} 
+                        onClick={loading} 
                         to={'/'}>
                           Home
                         </Link>
@@ -125,7 +128,7 @@ export default function Nav({fullscreenProps}) {
                         <Box className="full-nav-item" key={page}>
                           <Link 
                             className="full-nav-link" 
-                            onClick={ () => setIsLoading(true)} 
+                            onClick={loading} 
                             style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} 
                             to={`/${page}`}
                           >

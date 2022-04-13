@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Nav, NavRoutes } from './components';
+import {FullscreenPropsProvider} from './FullscreenPropsContext';
+import {RowPropsProvider} from './RowPropsContext';
 
 function App() {
 
@@ -39,13 +41,22 @@ function App() {
   //     isLoading, setIsLoading
   // };
 
+
+  //WRAP ENTIRE APP IN 
+  //CONTEXT PROVIDER
+
+
   return (
-
-    <div className="App">
-      <Nav fullscreenProps={fullscreenProps}/>
-      <NavRoutes fullscreenProps={fullscreenProps}/>
-
-    </div>
+    <FullscreenPropsProvider>
+      <RowPropsProvider>
+            <div className="App">
+              {/* <Nav fullscreenProps={fullscreenProps}/>
+              <NavRoutes fullscreenProps={fullscreenProps}/> */}
+              <Nav />
+              <NavRoutes />
+            </div>
+        </RowPropsProvider>
+    </FullscreenPropsProvider>
 
   );
 }

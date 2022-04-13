@@ -2,19 +2,21 @@ import { ArrowBack, VolumeDown, VolumeUp } from '@mui/icons-material';
 import { Box, Typography, Slider, Stack } from '@mui/material';
 import React, { useState, useEffect, useRef } from 'react';
 import ReactPlayer from 'react-player/youtube';
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import './FullscreenPlayer.scss';
 
-const FullscreenPlayer = ({ fullscreenProps }) => {
+const FullscreenPlayer = () => {
 
     const fullVideoCanvas = useRef(null);
     const [fullVideoWidth, setFullVideoWidth] = useState();
     const [fullVideoHeight, setFullVideoHeight] = useState();
 
+    const fullscreenProps = useFullscreenPropsContext();
 
     const {
         fullscreenPlayer, setFullscreenPlayer, fullVideoPath,
         volume, setVolume
-    } = fullscreenProps;
+    } = fullscreenProps.fullscreenProps;
 
     const handleWindowResize = () => {
 
