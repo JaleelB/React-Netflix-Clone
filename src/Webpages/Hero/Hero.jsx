@@ -1,11 +1,12 @@
-import { Box, Skeleton } from '@mui/material';
+import { Box } from '@mui/material';
 import './Hero.scss';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, SkeletonLoader } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
-const Hero = ({fullscreenProps}) => {
+const Hero = () => {
     
     const [originals, setOriginals] = useState([]);
     const [popular, setPopular] = useState([]);
@@ -15,8 +16,11 @@ const Hero = ({fullscreenProps}) => {
     const [classics, setClassics] = useState([]);
     const [newReleases, setNewReleases] = useState([]);
 
-    const { disablePointer, fullscreenPlayer, openFullscreenPopup, isLoading, setIsLoading } = fullscreenProps;
-   
+
+    const fullscreenProps = useFullscreenPropsContext();
+    const { disablePointer, fullscreenPlayer, openFullscreenPopup, isLoading, updateLoading } = fullscreenProps.fullscreenProps;
+
+
     useEffect(() => {
 
         axios
@@ -55,7 +59,7 @@ const Hero = ({fullscreenProps}) => {
         .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].list}/95840?api_key=${apiComponents[1]}`)
+        .get(`${apiComponents[0]}${apiComponents[2].list}/10?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setClassics(res.data.items)
         })
@@ -73,17 +77,18 @@ const Hero = ({fullscreenProps}) => {
     useEffect(() => {
         
         const timer = setTimeout(() => {
-            setIsLoading(false);
+            updateLoading()
         }, 2000);
 
         return () => clearTimeout(timer);
 
     },[isLoading])
 
+
     const mediaTypeMovie = 'movie';
     const mediaTypeTv = 'tv';
-
   
+
     return (
         <Box id="hero">
 
@@ -97,9 +102,7 @@ const Hero = ({fullscreenProps}) => {
                 <Box className="hero-page-wrapper">
 
                     <Billboard 
-                        disablePointer={disablePointer} 
                         movie = {originals[2]} 
-                        fullscreenProps={fullscreenProps}
                         mediaType={mediaTypeTv}
                     />
 
@@ -108,70 +111,51 @@ const Hero = ({fullscreenProps}) => {
                         <MediaRowContainer
                             title = "Netflix Original Shows"
                             medias = { originals }
-                            fullscreenProps = { fullscreenProps } 
                             netflixOriginal
                             typeMedia={mediaTypeTv}
                         />
                         <MediaRowContainer
                             title = "Most Users Loved These Shows"
                             medias = { popular }
-                            fullscreenProps = { fullscreenProps } 
                             typeMedia={mediaTypeMovie}
                         />
                         <MediaRowContainer
                             title = "Trending Now"
                             medias = { trending }
-                            fullscreenProps = { fullscreenProps } 
                             typeMedia={mediaTypeMovie}
                         />
                         
                         <MediaRowContainer
                             title = "Classics You Have To Check Out"
                             medias = { classics }
-                            className={"large-list-row"}
-                            listRow
-                            fullscreenProps = { fullscreenProps } 
                             typeMedia={mediaTypeMovie}
                         />
 
                         <MediaRowContainer
                             title = "New Releases"
                             medias = { newReleases }
-                            fullscreenProps = { fullscreenProps } 
                             typeMedia={mediaTypeMovie}
                         />
                         <MediaRowContainer
                             title = "Most Loved Shows Of All Time"
-                            medias = { topRated }
-                            fullscreenProps = { fullscreenProps } 
+                            medias = { topRated } 
                             typeMedia={mediaTypeMovie}
                         />
                         
                         <MediaRowContainer
                             title = "Films By Pixar"
                             medias = { pixar }
-                            className={"list-row"}
-                            listRow
-                            fullscreenProps = { fullscreenProps } 
                             typeMedia={mediaTypeMovie}
                         />
             
                     </Box>
 
                     {
-                        fullscreenPlayer && 
-                        
-                            <FullscreenPlayer
-                                fullscreenProps = {fullscreenProps}
-                            />
+                        fullscreenPlayer && <FullscreenPlayer/>
                     }
 
                     {
-                        openFullscreenPopup && 
-                        <FullscreenPopup
-                            fullscreenProps = { fullscreenProps }
-                        />
-
+                        openFullscreenPopup && <FullscreenPopup/>
                     }
 
                     <Footer/>

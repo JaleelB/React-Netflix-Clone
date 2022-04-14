@@ -2,12 +2,15 @@ import { Box, Typography, Button } from '@mui/material';
 import { PlayArrow, ThumbDownOffAlt, ThumbUpOffAlt, AddCircleOutline, DoNotDisturbAltOutlined } from '@mui/icons-material';
 import React from 'react';
 import './FullscreenPopup.scss';
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
-const FullscreenPosterBackdrop = ({backdrop, title, fullscreenProps}) => {
 
+const FullscreenPosterBackdrop = ({backdrop, title}) => {
+
+    const fullscreenProps = useFullscreenPropsContext();
     const { 
         setDisablePointer, setFullscreenPlayer, fullscreenPlayer, fullVideoPath
-    } = fullscreenProps;
+    } = fullscreenProps.fullscreenProps;
 
     return (
         <Box className="popup-backdrop stacked">
@@ -21,7 +24,6 @@ const FullscreenPosterBackdrop = ({backdrop, title, fullscreenProps}) => {
 
                     <Button 
                         className={`button-play ${!fullVideoPath ? 'disabled' : ''}`}
-                        // disabled = {!fullVideoPath ? true : ''}
                         variant = {!fullVideoPath ? 'disabled' : ''}
                         onClick = {() => {
                             setDisablePointer(true);

@@ -6,15 +6,18 @@ import FullscreenPosterBackdrop from './FullscreenPosterBackdrop';
 import SimiliarMovies from './SimiliarMovies';
 import './FullscreenPopup.scss';
 import { Add, PlayArrow } from '@mui/icons-material';
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
-const FullscreenPopup = ({fullscreenProps}) => {
+const FullscreenPopup = () => {
+
+    const fullscreenProps = useFullscreenPropsContext();
 
     const { 
-        setOpenFullscreenPopup, posterID, movie, mediaType,
+        handleFullscreenModal, posterID, movie, mediaType,
         setMovie, movieCredits, setMovieCredits, setFullscreenPlayer,
         setSimiliarMovies, similiarMovies, setDisablePointer, setFullVideoPath,
         netflixOriginalShow, setNetflixOriginalShow
-    } = fullscreenProps;
+    } = fullscreenProps.fullscreenProps;
 
     useEffect(() => {
 
@@ -107,7 +110,7 @@ const FullscreenPopup = ({fullscreenProps}) => {
                 <Box 
                     className="fullscreen-popup__close"
                     onClick = {() => {
-                        setOpenFullscreenPopup(false);
+                        handleFullscreenModal();
                         document.body.style.overflowY = "scroll";
                         setDisablePointer(false);
                         removeNetflixOriginal();
@@ -122,7 +125,7 @@ const FullscreenPopup = ({fullscreenProps}) => {
                 <Box 
                     className="fullscreen-popup__backdrop-container"
                 >
-                    <FullscreenPosterBackdrop backdrop={movie?.backdrop_path} title={movie?.title ? movie?.title : movie?.name} fullscreenProps = {fullscreenProps}/>
+                    <FullscreenPosterBackdrop backdrop={movie?.backdrop_path} title={movie?.title ? movie?.title : movie?.name}/>
                     {movie?.backdrop_path && <Box className="fade-bottom"></Box> }
                 </Box>
                 
@@ -147,15 +150,17 @@ const FullscreenPopup = ({fullscreenProps}) => {
 
                             <Box className="genres">
                                 Genres:
-                                {
-                                    movie?.genres && movie?.genres.map((genre, index) => {
+                                <Box className="genres-list">
+                                    {
+                                        movie?.genres && movie?.genres.map((genre, index) => {
 
-                                        if(index === 0 && movie?.genres.length < 1) return <Typography key={index}>{' ' + genre.name}</Typography>
-                                        if(index === 0 && movie?.genres.length > 1) return <Typography key={index}>{' ' + genre.name + ', '}</Typography>
-                                        if(index < movie?.genres.length - 1) return <Typography key={index}>{genre.name + ', '}</Typography>
-                                        else return genre.name
-                                    })
-                                }
+                                            if(index === 0 && movie?.genres.length < 1) return <Typography key={index}>{' ' + genre.name}</Typography>
+                                            if(index === 0 && movie?.genres.length > 1) return <Typography key={index}>{' ' + genre.name + ', '}</Typography>
+                                            if(index < movie?.genres.length - 1) return <Typography key={index}>{genre.name + ', '}</Typography>
+                                            else return genre.name
+                                        })
+                                    }
+                                </Box>
                             </Box>
 
 
@@ -198,7 +203,6 @@ const FullscreenPopup = ({fullscreenProps}) => {
                                     className = {"similiar-movies-gallery"}
                                     title={"Similiar Shows"}
                                     medias = {similiarMovies}
-                                    fullscreenProps = { fullscreenProps } 
                                     typeMedia={mediaType} 
                                     disableHover
                                 /> 

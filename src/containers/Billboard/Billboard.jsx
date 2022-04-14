@@ -5,17 +5,25 @@ import {BillboardTitle, BillboardDescription, BillboardVideo, apiComponents } fr
 import './Billboard.scss';
 import { PlayArrow, Pause, VolumeOff, VolumeUp, Add, DoNotDisturbAltOutlined } from '@mui/icons-material';
 import { Link } from "react-router-dom";
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
-const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreTitle, setGenreTitle, mediaType, setGenreID, setGenreListID, setIsGenreList, setIsLoading}) => {
+const Billboard = ({movie, sectionTitle, genreTitle, setGenreTitle, mediaType, setGenreID, setGenreListID, setIsGenreList}) => {
     
     const [videoPath, setVideoPath] = useState('');
     const [videoPlay, setVideoPlay] = useState(true);
     const [volumeMute, setVolumeMute] = useState(true);
-    const[deviceWindowWidth, setDeviceWindowWidth] = useState(window.innerWidth);
+    const [deviceWindowWidth, setDeviceWindowWidth] = useState(window.innerWidth);
 
-    const {
-        setFullscreenPlayer, setPosterID, setFullVideoPath, posterID, setOpenFullscreenPopup, setMediaType
-    } = fullscreenProps;
+    // const {
+    //     setFullscreenPlayer, setPosterID, setFullVideoPath, posterID, setOpenFullscreenPopup, setMediaType
+    // } = fullscreenProps;
+
+    const fullscreenProps = useFullscreenPropsContext();
+    const { 
+        disablePointer, updateLoading, handleFullscreenModal, 
+        setDisablePointer,setPosterID, setFullVideoPath, 
+        posterID, setMediaType, setFullscreenPlayer
+    } = fullscreenProps.fullscreenProps;
 
     const handleWindowResize = () => { setDeviceWindowWidth(window.innerWidth) }
 
@@ -94,14 +102,14 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
                     <Link 
                         to={`/${sectionTitle}`}
                         onClick={ () => {
-                            setGenreTitle('')
-                            setGenreID('')
-                            setGenreListID('')
-                            setIsGenreList(false)
-                            setIsLoading(true)
+                        //     setGenreTitle('')
+                        //     setGenreID('')
+                        //     setGenreListID('')
+                        //     setIsGenreList(false)
+                               updateLoading();
                         } }
                     >
-                        <span className={`section-title ${genreTitle ? "bread-crumb" : ""}`}>{`${sectionTitle} ${genreTitle ? "> " : ""}`}</span>
+                        {/* <span className={`section-title ${genreTitle ? "bread-crumb" : ""}`}>{`${sectionTitle} ${genreTitle ? "> " : ""}`}</span> */}
                     </Link>
                         {genreTitle && <span className="section-title">{genreTitle}</span>}
                 </Box>
@@ -141,7 +149,9 @@ const Billboard = ({movie, disablePointer, fullscreenProps, sectionTitle, genreT
                                 onClick={()=> {
                                     setPosterID(movie?.id);
                                     setMediaType(mediaType);
-                                    setOpenFullscreenPopup(true);
+                                //     setOpenFullscreenPopup(true);
+                                    handleFullscreenModal();
+                                    setDisablePointer(true);
                                 }}
                             >
                                 View Info 

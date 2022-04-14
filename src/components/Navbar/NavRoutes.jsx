@@ -6,16 +6,16 @@ import TvShows from '../../Webpages/TvShows/TvShows';
 import Search from '../../Webpages/Search/Search';
 import Saved from '../../Webpages/Saved/Saved';
 
-const NavRoutes = ({fullscreenProps}) => {
+const NavRoutes = () => {
 
     return (
     
         <Routes>
-            <Route path='/' exact element={<Hero fullscreenProps={fullscreenProps}/>} />
-            <Route path='Search' element={<Search fullscreenProps={fullscreenProps}/>} />
+            <Route path='/' exact element={<Hero/>} />
+            {/* <Route path='Search' element={<Search fullscreenProps={fullscreenProps}/>} />
             <Route path='Movies' element={<Movies fullscreenProps={fullscreenProps}/>} />
             <Route path='TvShows' element={<TvShows fullscreenProps={fullscreenProps}/>} />
-            <Route path='Saved' element={<Saved />} />
+            <Route path='Saved' element={<Saved />} /> */}
         </Routes>
 
     )

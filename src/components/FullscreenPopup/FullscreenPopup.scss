@@ -97,6 +97,11 @@
 
                 .movie-overview{ line-height: 27px; font-size: 18px; margin :1rem 0 2rem 0; } 
 
+                .genres{
+                    display: flex; flex-direction: row; gap:$smaller-gap;
+                    .genres-list{ display: flex; flex-direction: row; gap:$smaller-gap; }
+                }
+
                 .mobile-btn-container{ 
                     width: 100%; display: grid; gap: $smaller-gap; margin: $gap 0;
                     
@@ -128,9 +133,9 @@
 
                 .media-row-wrapper{
 
-                    .arrow{
-                        display: none;
-                    }
+                    // .arrow{
+                    //     display: none;
+                    // }
 
                     .similiar-movies-gallery{ 
                         padding: 0; overflow: visible; width: 100%;
