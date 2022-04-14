@@ -10,42 +10,10 @@ import '../../containers/MediaRow/MediaRow.scss';
 const MediaRowWrapper = ({medias,netflixOriginal, typeMedia, className, disableHover, rowRef, rowTabIndex, setRowTabIndex, setPostersInView}) => {
 
     const rowPopupProps = useRowPopupPropsContext();
-    // const { 
-    //     distance, setDistance, 
-    //     totalPostersInView,
-    //     viewedPosters, setViewPosters,
-    //     containerWidth, setPostersInViewTabNumber, setContainerWidth,
-    // } = rowPopupProps.rowPopupProps;
 
-    const { slideRowLeft, slideRowRight } = rowPopupProps.rowPopupProps;
+    const { slideRowLeft, slideRowRight  } = rowPopupProps.rowPopupProps;
 
-    // const showPrevButton = distance < 0;
-    // const showNextButton = (viewedPosters + totalPostersInView) < medias.length;
-
-
-    // const slideRowLeft = () => {
-    //     setPostersInViewTabNumber(prevPostersInViewTabNumber => prevPostersInViewTabNumber - 1); 
-    //     setViewPosters(viewedPosters - totalPostersInView);
-    //     setDistance(distance + containerWidth + (totalPostersInView * 0.5));
-    // };
-
-    // const slideRowRight = () => {
-    //     setPostersInViewTabNumber(prevPostersInViewTabNumber => prevPostersInViewTabNumber + 1);
-    //     setViewPosters(viewedPosters + totalPostersInView);
-    //     setDistance(distance - containerWidth);
-    // };
-
-    // const { posterRef, posterWidth, posterHeight } = usePosterSize();
-    // const {
-    //     slideRowLeft, slideRowRight, posterRowRef, showPrevButton, showNextButton, distance
-    // } = useRowSliding(posterWidth, rowRef, medias.length);
-
-
-    // const posterProps = {
-    //     posterRef, posterWidth, posterHeight
-    // };
-
-    // console.log(showNextButton)
+    
 
     // const[rowTabIndex, setRowTabIndex] = useState(0);
     // const showPrevButton = rowTabIndex > 0;
@@ -57,7 +25,8 @@ const MediaRowWrapper = ({medias,netflixOriginal, typeMedia, className, disableH
         >
             <ArrowBackIosOutlined
                 className="arrow left"
-                onClick = {() => slideRowLeft(setRowTabIndex)}                    
+                // onClick = {() => slideRowLeft(setRowTabIndex)}  
+                onClick = {slideRowLeft}                    
             />
 
                 <MediaRow 
@@ -69,16 +38,17 @@ const MediaRowWrapper = ({medias,netflixOriginal, typeMedia, className, disableH
                     typeMedia={typeMedia}
                     className={className}
                     disableHover={disableHover}
-                    rowTabIndex={rowTabIndex}
-                    rowRef={rowRef}
-                    setPostersInView={setPostersInView}
+                    // rowTabIndex={rowTabIndex}
+                    // rowRef={rowRef}
+                    // setPostersInView={setPostersInView}
                     // posterRowRef={posterRowRef}
                             // distance={distance}
                 />
 
             <ArrowForwardIosOutlined
                 className="arrow right"
-                onClick = {() => slideRowRight(setRowTabIndex)}
+                // onClick = {() => slideRowRight(setRowTabIndex)}
+                onClick = {slideRowRight}
             />
 
         </Box>

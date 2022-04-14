@@ -2,19 +2,20 @@ import { Box } from '@mui/material';
 import React, { useState, useRef } from 'react';
 import {MediaRowWrapper, MediaRowTitle, PosterPreviewPopup, PaginationIndicator } from '../../components';
 import './MediaRow.scss';
-import {useRowPopupPropsContext} from '../../RowPropsContext';
+import {useRowPopupPropsContext, RowPropsProvider} from '../../RowPropsContext';
 
 const MediaRowContainer = ({title, medias, netflixOriginal, typeMedia, className,disableHover}) => {
 
-    const rowRef = useRef(null);
-    const [rowTabIndex, setRowTabIndex] = useState(0);
-    const [postersInView, setPostersInView] = useState(0);
+    // const rowRef = useRef(null);
+    // const [rowTabIndex, setRowTabIndex] = useState(0);
+    // const [postersInView, setPostersInView] = useState(0);
     
-    const rowPopupProps = useRowPopupPropsContext();
-    const {setIsHovered, delayMount} = rowPopupProps.rowPopupProps;
+    
+    const props = useRowPopupPropsContext();
+    const {setIsHovered, delayMount} = props.rowPopupProps;
     
     return (
-
+        <RowPropsProvider>
             <Box 
                 className="media-container"
                 onMouseLeave={()=> setIsHovered(false)}
@@ -22,17 +23,21 @@ const MediaRowContainer = ({title, medias, netflixOriginal, typeMedia, className
             >
 
                 <MediaRowTitle title={title ? title : ''}/>
-                <PaginationIndicator posterNum={medias.length} rowRef={rowRef} rowTabIndex={rowTabIndex} postersInView={postersInView}/>
+                <PaginationIndicator 
+                    posterNum={medias.length} 
+                    // rowTabIndex={rowTabIndex} 
+                    // postersInView={postersInView}
+                />
                 {medias &&  <MediaRowWrapper 
                                 medias={medias}   
                                 netflixOriginal={netflixOriginal}
-                                rowRef={rowRef}
+                                // rowRef={rowRef}
                                 typeMedia={typeMedia}
                                 className={className}
                                 disableHover={disableHover}
-                                rowTabIndex={rowTabIndex}
-                                setRowTabIndex={setRowTabIndex}
-                                setPostersInView={setPostersInView}
+                                // rowTabIndex={rowTabIndex}
+                                // setRowTabIndex={setRowTabIndex}
+                                // setPostersInView={setPostersInView}
                             /> 
                 }
                 
@@ -44,10 +49,9 @@ const MediaRowContainer = ({title, medias, netflixOriginal, typeMedia, className
                             // fullscreenProps = {fullscreenProps}
                         />
                 }
-
-                
+   
             </Box> 
-
+        </RowPropsProvider>
     )
     
 }

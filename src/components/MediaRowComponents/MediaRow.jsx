@@ -5,32 +5,11 @@ import '../../containers/MediaRow/MediaRow.scss';
 import {useRowPopupPropsContext} from '../../RowPropsContext';
 
 
-const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover, rowTabIndex, rowRef,setPostersInView }) => {
-
-    // const [posterWidth, setPosterWidth] = useState(0);
-    
-    // const posterRef = useRef(null);
-    // const rowContainerRef = useRef(null);
-
-    // const { setRowPadding, setContainerWidth, setTotalPostersInView, totalPostersInView, posterWidth } = popupProps;
+const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover }) => {
 
 
-    // const { setPosterWidth, distance } = popupProps
-
-    // useEffect(()=>{
-    //     const rowPadding = window.getComputedStyle(rowContainerRef.current).getPropertyValue('padding-left');
-    //     const rowPaddingValue = Number(rowPadding.substring(0, rowPadding.length - 3));
-    //     const rowContainerWidth = wrapperRef.current.clientWidth - (rowPaddingValue * 2);
-
-    //     setContainerWidth(Math.floor(rowContainerWidth));
-    //     setRowPadding(Math.floor(rowPaddingValue));
-    //     setTotalPostersInView(Math.floor(rowContainerWidth / posterWidth));
-
-        
-    // },[posterWidth, wrapperRef.current ]);  
-
-    // const rowPopupProps = useRowPopupPropsContext();
-    // const { rowTabIndex } = rowPopupProps.rowPopupProps;
+    const rowPopupProps = useRowPopupPropsContext();
+    const { rowTabIndex, rowRef, setPostersInView } = rowPopupProps.rowPopupProps;
 
     useEffect(()=>{
         setPostersInView(Math.round(Number(getComputedStyle(rowRef.current).getPropertyValue("--total-posters-in-viewport"))))
@@ -42,18 +21,12 @@ const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover,
         <Box 
             className={`media-row ${className ? className: ''}`}
             ref={rowRef}
-            onLoad={()=> {
-                // console.log(Math.round(Number(getComputedStyle(rowRef.current).getPropertyValue("--total-posters-in-viewport"))));
-                // setPostersInView(Math.round(Number(getComputedStyle(rowRef.current).getPropertyValue("--total-posters-in-viewport"))))
-            }}
             sx={{transform: `translate3d(calc(${rowTabIndex} * -100%), 0px, 0px)`}}
         >
             {
                 medias && medias.map((media, index) => {   
                     
                     return <MediaPoster
-                                // updatePosterWidth = {setPosterWidth}
-                                // posterRef={posterRef}
                                 key={media.id}
                                 posterPath = {media?.poster_path}
                                 name = {media?.name ? media?.name : media?.title}

@@ -6,7 +6,15 @@
 }
 
 .media-container{
-    margin: 2vw 0 0 0; position: relative; z-index: 5;
+    margin: 2vw 0 0 0; position: relative; z-index: 5; transition: all 500ms ease-in-out;
+
+    &:not(:hover){ 
+        .pagination-indicator{ display: none; } 
+    
+    }
+    &:hover{ 
+        .pagination-indicator{ display: block; } 
+    }
 
     
 
@@ -18,7 +26,7 @@
     }
 
     .pagination-indicator{
-        left: calc(100% - 2 * var(--row-padding)); position: absolute; 
+         position: absolute; right: 4%;
         top: var(--row-padding); padding: 0; 
 
         ul{ 
@@ -67,9 +75,9 @@
             scroll-behavior: smooth; scroll-snap-type: x mandatory; 
             transition: all 500ms ease-in-out; 
             
-            --total-posters-in-viewport: 0; width: calc(100% - (2 * var(--row-padding)));
+            --total-posters-in-viewport: 3; width: calc(100% - (2 * var(--row-padding)));
 
-            @media screen and (min-width: 320px) and (max-width: 470px){ --total-posters-in-viewport: 3; }
+            // @media screen and (min-width: 320px) and (max-width: 470px){ --total-posters-in-viewport: 3; }
             @media screen and (min-width: 471px) and (max-width: 749px){ --total-posters-in-viewport: 4; }
             @media screen and (min-width: 750px) and (max-width: 1199px){ --total-posters-in-viewport: 5; }
             @media screen and (min-width: 1200px){ --total-posters-in-viewport: 7.85; }

@@ -1,29 +1,33 @@
 import { Box } from '@mui/material';
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import PaginationIndicatorBar from './PaginationIndicatorBar';
 import '../../containers/MediaRow/MediaRow.scss';
+import {useRowPopupPropsContext} from '../../RowPropsContext';
 
 
+const PaginationIndicator = ({posterNum}) => {
 
-const PaginationIndicator = ({posterNum, rowRef, rowTabIndex, postersInView}) => {
+    const props = useRowPopupPropsContext();
+    const {rowTabIndex, postersInView, setTotalRowTabs} = props.rowPopupProps;
 
     
     const paginationIndicator = useRef(null);
     const posterCount = posterNum;
     const numOfPaginationBars =  postersInView && Math.round(posterCount / postersInView);
 
-    // console.log(numOfPaginationBars,postersInView,posterCount)
-    
     const numOfPaginationBarsArray =  [...Array(numOfPaginationBars).keys()].map(x => ++x);
-    // console.log(numOfPaginationBarsArray)
+
+    useEffect(() => {
+        setTotalRowTabs(numOfPaginationBars)
+    }, [numOfPaginationBars])
+
 
     return (
-        <Box className="pagination-indicator" ref={paginationIndicator}>
+        <Box 
+            className="pagination-indicator" 
+            ref={paginationIndicator}
+        >
             <ul>
-                {/* <PaginationIndicatorBar className="active"/>
-                <PaginationIndicatorBar/>
-                <PaginationIndicatorBar/>
-                <PaginationIndicatorBar/> */}
                 {numOfPaginationBars && 
                     numOfPaginationBarsArray.map((bar)=>{
                         if((bar - 1) === rowTabIndex) return <PaginationIndicatorBar className="active"/>
