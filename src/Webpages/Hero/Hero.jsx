@@ -59,7 +59,7 @@ const Hero = () => {
         .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].list}/95840?api_key=${apiComponents[1]}`)
+        .get(`${apiComponents[0]}${apiComponents[2].list}/10?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setClassics(res.data.items)
         })

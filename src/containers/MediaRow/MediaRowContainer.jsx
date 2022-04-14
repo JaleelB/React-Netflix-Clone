@@ -1,13 +1,14 @@
 import { Box } from '@mui/material';
 import React, { useState, useRef } from 'react';
-import {MediaRowWrapper, MediaRowTitle, PosterPreviewPopup } from '../../components';
+import {MediaRowWrapper, MediaRowTitle, PosterPreviewPopup, PaginationIndicator } from '../../components';
 import './MediaRow.scss';
 import {useRowPopupPropsContext} from '../../RowPropsContext';
 
 const MediaRowContainer = ({title, medias, netflixOriginal, typeMedia, className,disableHover}) => {
 
     const rowRef = useRef(null);
-
+    const [rowTabIndex, setRowTabIndex] = useState(0);
+    const [postersInView, setPostersInView] = useState(0);
     
     const rowPopupProps = useRowPopupPropsContext();
     const {setIsHovered, delayMount} = rowPopupProps.rowPopupProps;
@@ -17,10 +18,11 @@ const MediaRowContainer = ({title, medias, netflixOriginal, typeMedia, className
             <Box 
                 className="media-container"
                 onMouseLeave={()=> setIsHovered(false)}
-                ref={rowRef}
+                // ref={rowRef}
             >
 
                 <MediaRowTitle title={title ? title : ''}/>
+                <PaginationIndicator posterNum={medias.length} rowRef={rowRef} rowTabIndex={rowTabIndex} postersInView={postersInView}/>
                 {medias &&  <MediaRowWrapper 
                                 medias={medias}   
                                 netflixOriginal={netflixOriginal}
@@ -28,6 +30,9 @@ const MediaRowContainer = ({title, medias, netflixOriginal, typeMedia, className
                                 typeMedia={typeMedia}
                                 className={className}
                                 disableHover={disableHover}
+                                rowTabIndex={rowTabIndex}
+                                setRowTabIndex={setRowTabIndex}
+                                setPostersInView={setPostersInView}
                             /> 
                 }
                 

@@ -1,11 +1,11 @@
 import { Box } from '@mui/material';
-import React  from 'react';
+import React, {useEffect}  from 'react';
 import MediaPoster from './MediaPoster';
 import '../../containers/MediaRow/MediaRow.scss';
 import {useRowPopupPropsContext} from '../../RowPropsContext';
 
 
-const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover, rowTabIndex }) => {
+const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover, rowTabIndex, rowRef,setPostersInView }) => {
 
     // const [posterWidth, setPosterWidth] = useState(0);
     
@@ -32,12 +32,20 @@ const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover,
     // const rowPopupProps = useRowPopupPropsContext();
     // const { rowTabIndex } = rowPopupProps.rowPopupProps;
 
+    useEffect(()=>{
+        setPostersInView(Math.round(Number(getComputedStyle(rowRef.current).getPropertyValue("--total-posters-in-viewport"))))
+    },[rowRef.current])
+
 
     return (
 
         <Box 
             className={`media-row ${className ? className: ''}`}
-            // ref={posterRowRef}
+            ref={rowRef}
+            onLoad={()=> {
+                // console.log(Math.round(Number(getComputedStyle(rowRef.current).getPropertyValue("--total-posters-in-viewport"))));
+                // setPostersInView(Math.round(Number(getComputedStyle(rowRef.current).getPropertyValue("--total-posters-in-viewport"))))
+            }}
             sx={{transform: `translate3d(calc(${rowTabIndex} * -100%), 0px, 0px)`}}
         >
             {

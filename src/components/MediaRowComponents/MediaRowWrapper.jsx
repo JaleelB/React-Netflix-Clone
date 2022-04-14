@@ -7,7 +7,7 @@ import {useRowPopupPropsContext} from '../../RowPropsContext';
 
 import '../../containers/MediaRow/MediaRow.scss';
 
-const MediaRowWrapper = ({medias,netflixOriginal, typeMedia, className, disableHover, rowRef}) => {
+const MediaRowWrapper = ({medias,netflixOriginal, typeMedia, className, disableHover, rowRef, rowTabIndex, setRowTabIndex, setPostersInView}) => {
 
     const rowPopupProps = useRowPopupPropsContext();
     // const { 
@@ -47,18 +47,18 @@ const MediaRowWrapper = ({medias,netflixOriginal, typeMedia, className, disableH
 
     // console.log(showNextButton)
 
-    const[rowTabIndex, setRowTabIndex] = useState(0);
-    const showPrevButton = rowTabIndex > 0;
+    // const[rowTabIndex, setRowTabIndex] = useState(0);
+    // const showPrevButton = rowTabIndex > 0;
 
     return (
         <Box 
             className="media-row-wrapper" 
                 // ref={posterRowRef}
         >
-            {showPrevButton && <ArrowBackIosOutlined
+            <ArrowBackIosOutlined
                 className="arrow left"
                 onClick = {() => slideRowLeft(setRowTabIndex)}                    
-            />}
+            />
 
                 <MediaRow 
                     medias={medias} 
@@ -70,6 +70,8 @@ const MediaRowWrapper = ({medias,netflixOriginal, typeMedia, className, disableH
                     className={className}
                     disableHover={disableHover}
                     rowTabIndex={rowTabIndex}
+                    rowRef={rowRef}
+                    setPostersInView={setPostersInView}
                     // posterRowRef={posterRowRef}
                             // distance={distance}
                 />
