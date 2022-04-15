@@ -3,6 +3,7 @@ import React, {useEffect}  from 'react';
 import MediaPoster from './MediaPoster';
 import '../../containers/MediaRow/MediaRow.scss';
 import {useRowPopupPropsContext} from '../../RowPropsContext';
+import {PosterPropsProvider} from '../../PosterPropsContext';
 
 
 const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover }) => {
@@ -26,23 +27,26 @@ const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover 
             {
                 medias && medias.map((media, index) => {   
                     
-                    return <MediaPoster
+                    return (
+                        <PosterPropsProvider>
+                            <MediaPoster
                                 key={media.id}
                                 posterPath = {media?.poster_path}
                                 name = {media?.name ? media?.name : media?.title}
                                 genreIDs = {media?.genre_ids}
                                 backdrop = {media?.backdrop_path}
-                                // popupProps = {popupProps}
                                 index = {index}
                                 airDate={media?.first_air_date ? media?.first_air_date : media?.release_date}
                                 rating={media?.vote_average}
                                 id={media?.id}
-                                // wrapperRef={wrapperRef}
-                                // fullscreenProps = {fullscreenProps}
+                                media ={ media}
                                 typeMedia={typeMedia ? typeMedia : media?.media_type}
                                 disableHover={disableHover}
                                 netflixOriginal={netflixOriginal}
+                              
                             />
+                        </PosterPropsProvider>
+                    );
                                 
                 })   
             }

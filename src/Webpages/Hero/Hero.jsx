@@ -127,7 +127,7 @@ const Hero = () => {
                         
                         <MediaRowContainer
                             title = "Classics You Have To Check Out"
-                            medias = { classics }
+                            medias = { classics.length <= 20 ? classics : classics.slice(0, 20) }
                             typeMedia={mediaTypeMovie}
                         />
 
@@ -144,7 +144,7 @@ const Hero = () => {
                         
                         <MediaRowContainer
                             title = "Films By Pixar"
-                            medias = { pixar }
+                            medias = { pixar.length <= 20 ? pixar : pixar.slice(0, 20) }
                             typeMedia={mediaTypeMovie}
                         />
             

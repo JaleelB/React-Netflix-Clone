@@ -30,8 +30,8 @@ const PaginationIndicator = ({posterNum}) => {
             <ul>
                 {numOfPaginationBars && 
                     numOfPaginationBarsArray.map((bar)=>{
-                        if((bar - 1) === rowTabIndex) return <PaginationIndicatorBar className="active"/>
-                        else return <PaginationIndicatorBar/>
+                        if((bar - 1) === rowTabIndex) return <PaginationIndicatorBar key={bar} className="active"/>
+                        else return <PaginationIndicatorBar key={bar}/>
                     })
                 }
             </ul>
