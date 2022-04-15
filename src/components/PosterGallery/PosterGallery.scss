@@ -16,17 +16,16 @@
 
             .poster-gallery{ 
                 padding: 0; overflow: visible; width: 100%;
-                grid-auto-flow: row; grid-template-columns: repeat(auto-fill, 31%);
-
-                @media screen and (min-width: 680px) and (max-width: 991px){  grid-template-columns: repeat(auto-fill, 23%); }
-                @media screen and (min-width: 992px) and (max-width: 1199px){  grid-template-columns: repeat(auto-fill, 19%); }
-                @media screen and (max-height: 450px){ grid-template-columns: repeat(auto-fill, 23%); }
-                @media screen and (min-width: 1200px) { grid-template-columns: repeat(auto-fill, 16%); }
-                @media screen and (min-width: 2000px) { grid-template-columns: repeat(auto-fill, 9.5%); }
+                flex-wrap: wrap;
                 
+                @media screen and (min-width: 1200px){ --total-posters-in-viewport: 6.3; }
+                @media screen and (min-width: 1600px){ --total-posters-in-viewport: 7.4; }
+                @media screen and (min-width: 2000px){ --total-posters-in-viewport: 8.5; }
 
                 .media-poster{
-                    transition: all 200ms ease; background-color: #212121; text-align: center;
+                    transition: all 200ms ease; background-color: #212121; 
+                    text-align: center; margin: $smaller-gap;
+
                     &:hover{ outline: 3px solid $primary-red; transform: scaleX(1.2) scaleY(1.2); z-index: 10; }
                 }
             }

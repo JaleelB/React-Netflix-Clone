@@ -41,9 +41,16 @@ const FullscreenPosterBackdrop = ({backdrop, title}) => {
                     </Button>
 
                     <Box className="popup-icons">
-                        <AddCircleOutline className="popup-icon"/>
-                        <ThumbUpOffAlt className="popup-icon"/>
-                        <ThumbDownOffAlt className="popup-icon"/>
+                        {/* <AddCircleOutline className="popup-icon"/>   */}
+                        <Button
+                                className="popup-icon add" 
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                                    <path d="M32 16v32m16-16H16"></path>
+                                </svg>
+                        </Button>
+                        <ThumbUpOffAlt className="popup-icon like"/>
+                        <ThumbDownOffAlt className="popup-icon dislike"/>
                     </Box>
                     
                 </Box>

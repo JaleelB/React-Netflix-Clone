@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {usePosterProps} from '../../PosterPropsContext';
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import {useRowPopupPropsContext} from '../../RowPropsContext';
@@ -21,20 +21,20 @@ const MediaPoster = ({ disableHover,index, media, netflixOriginal, typeMedia }) 
    };
 
     const posterProps = usePosterProps();
-    // console.log(posterProps)
+  
     const { 
         handleDelayOnMount, 
         handleUnmountDelay, 
         getGenres
     } = posterProps; 
 
-    const { posterHeight, posterWidth, posterRef } = posterProps.usePosterSize();
+    const {  posterWidth, posterRef } = posterProps.usePosterSize();
 
     const rowPopupProps = useRowPopupPropsContext();
     const { 
-        setIsHovered, setCardPopupWidth, setCardPopupHeight,
+        setIsHovered, setCardPopupWidth,
         setPosterIndex, setCardPopupBackdrop, setCardPopupTitle,
-        setCardPopupAirDate, setCardPopupRating, delayMount, setGenres, 
+        setCardPopupAirDate, setCardPopupRating, setGenres, 
     
     } = rowPopupProps.rowPopupProps;
 
@@ -66,7 +66,6 @@ const MediaPoster = ({ disableHover,index, media, netflixOriginal, typeMedia }) 
                         
                         updatePosterId(posterAttributes.id);
                         setCardPopupWidth(posterWidth);
-                        // setCardPopupHeight(posterHeight);
                         setPosterIndex(posterAttributes.index);
                         setGenres(getGenres(posterAttributes.genreIDs));
                         setCardPopupBackdrop('https://image.tmdb.org/t/p/original/' + posterAttributes.backdrop);

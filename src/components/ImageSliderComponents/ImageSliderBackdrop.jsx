@@ -1,18 +1,20 @@
 import { Box } from '@mui/material';
 import React from 'react';
 import { MediaRowTitle } from '../../components';
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
-const ImageSliderBackdrop = ({movie, fullscreenProps}) => {
+const ImageSliderBackdrop = ({movie}) => {
 
-    const { setOpenFullscreenPopup,  setPosterID,  setMediaType, setNetflixOriginalShow } = fullscreenProps;
+    const fullscreenProps = useFullscreenPropsContext();
+    const { setOpenFullscreenPopup,  setPosterID, handleMediaType } = fullscreenProps.fullscreenProps;
 
-    const handleMediaType = () =>{ if (movie?.media_type) setMediaType(movie?.media_type); };
+    const updateMediaType = () =>{ if (movie?.media_type) handleMediaType(movie?.media_type); };
 
     return (
         <Box 
             className="backdrop stacked" 
             onClick={() => {
-                handleMediaType();                    
+                updateMediaType();                    
                 setPosterID(movie?.id);
                 setOpenFullscreenPopup(true);
             }}
