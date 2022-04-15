@@ -34,8 +34,13 @@ export function FullscreenPropsProvider({children}){
     const loading = () => setIsLoading(true);
     const updateLoading = () => setIsLoading(false);
     const handleFullscreenModal = () => setOpenFullscreenPopup(prevOpenFullscreenPopup => !prevOpenFullscreenPopup);
- 
+    const updatePosterId = (id) => setPosterID(id);
+    const handleNetflixOriginal = (netflixOriginal,typeMedia) =>{
+        if(netflixOriginal && typeMedia === 'tv') setNetflixOriginalShow(true);
+        else if(netflixOriginal && typeMedia === 'movie') setNetflixOriginalShow(false);
+    };
 
+    const handleMediaType = (typeMedia) =>{ if (typeMedia) setMediaType(typeMedia); };
 
 
     const fullscreenProps = {
@@ -54,7 +59,8 @@ export function FullscreenPropsProvider({children}){
         genreID, setGenreID, isLoading, 
 
         // functions
-        updateLoading, handleFullscreenModal, loading
+        updateLoading, handleFullscreenModal, loading,
+        handleNetflixOriginal, updatePosterId, handleMediaType
     };
 
     return (
