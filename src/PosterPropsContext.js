@@ -2,6 +2,8 @@ import React, {useContext, createContext, useState, useRef, useEffect} from 'rea
 import {apiComponents } from './components';
 import {useRowPopupPropsContext} from './RowPropsContext';
 
+
+
 const PosterPropsContext = createContext();
 
 export function usePosterProps(){
@@ -14,14 +16,14 @@ export function PosterPropsProvider({children}){
     const [posterWidth, setPosterWidth] = useState(0);
     const [posterHeight, setPosterHeight] = useState(0);
 
+    
     const rowPopupProps = useRowPopupPropsContext();
-    const { delayMount, setDelayMount, setDelayHandler } = rowPopupProps.rowPopupProps;
-
+    const { delayMount, setDelayMount, setDelayHandler, delayHandler } = rowPopupProps.rowPopupProps;
     
     const usePosterSize = () => {
         useEffect(() => {
-            setPosterWidth(posterRef.current.getBoundingClientRect().width);
-            setPosterHeight(posterRef.current.getBoundingClientRect().height)
+            setPosterWidth(posterRef.current.clientWidth);
+            setPosterHeight(posterRef.current.clientHeight)
         }, [posterRef.current]);
 
         return { posterHeight, posterWidth, posterRef };
@@ -36,11 +38,9 @@ export function PosterPropsProvider({children}){
             setDelayMount(true);
         }, 700))
 
-    }
+    };
 
-    const handleUnmountDelay = (delayHandler) => {
-        clearTimeout(delayHandler)
-    }
+    const handleUnmountDelay = () => clearTimeout(delayHandler);
 
     const getGenres = (genreIDs) => {
 
