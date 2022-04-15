@@ -10,10 +10,15 @@ const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover 
 
 
     const rowPopupProps = useRowPopupPropsContext();
-    const { rowTabIndex, rowRef, setPostersInView } = rowPopupProps.rowPopupProps;
+    const { rowTabIndex, rowRef, setPostersInView, setRowPadding } = rowPopupProps.rowPopupProps;
 
     useEffect(()=>{
-        setPostersInView(Math.round(Number(getComputedStyle(rowRef.current).getPropertyValue("--total-posters-in-viewport"))))
+        if(!disableHover){
+            const rowPadding = window.getComputedStyle(rowRef.current).getPropertyValue("padding-left");
+            setPostersInView(Math.round(Number(getComputedStyle(rowRef.current).getPropertyValue("--total-posters-in-viewport"))));
+            setRowPadding(Math.round(Number(rowPadding.substring(0, rowPadding.length - 2))))
+        }
+        
     },[rowRef.current])
 
 
@@ -31,14 +36,7 @@ const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover 
                         <PosterPropsProvider>
                             <MediaPoster
                                 key={media.id}
-                                posterPath = {media?.poster_path}
-                                name = {media?.name ? media?.name : media?.title}
-                                genreIDs = {media?.genre_ids}
-                                backdrop = {media?.backdrop_path}
                                 index = {index}
-                                airDate={media?.first_air_date ? media?.first_air_date : media?.release_date}
-                                rating={media?.vote_average}
-                                id={media?.id}
                                 media ={ media}
                                 typeMedia={typeMedia ? typeMedia : media?.media_type}
                                 disableHover={disableHover}

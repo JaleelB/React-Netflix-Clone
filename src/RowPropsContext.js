@@ -1,4 +1,4 @@
-import React, {useState, useContext, createContext, useRef} from 'react';
+import React, {useState, useContext, useEffect, createContext, useRef} from 'react';
 
 const RowPropsContext = createContext();
 
@@ -14,7 +14,7 @@ export function RowPropsProvider({children}){
     const [genres, setGenres] = useState([]);
     const [delayMount, setDelayMount] = useState(false);
     const [delayHandler, setDelayHandler] = useState(null);
-
+    const [rowPadding, setRowPadding] = useState(0);
     const [cardPopupWidth, setCardPopupWidth] = useState(''); 
     const [cardPopupHeight, setCardPopupHeight] = useState('');
     const [cardPopupBackdrop, setCardPopupBackdrop] = useState('');
@@ -31,15 +31,20 @@ export function RowPropsProvider({children}){
 
     const slideRowLeft = () => {
         if(rowTabIndex > 0) setRowTabIndex(prevRowTabIndex => prevRowTabIndex - 1)
-        else if(rowTabIndex === 0) setRowTabIndex(totalRowTabs - 1);
+        else if(rowTabIndex <= 0) setRowTabIndex(totalRowTabs - 1);
     };
     const slideRowRight = () => {
         if(rowTabIndex < (totalRowTabs - 1)) setRowTabIndex(prevRowTabIndex => prevRowTabIndex + 1);
-        else if(rowTabIndex === (totalRowTabs - 1)) setRowTabIndex(0);
+        else if(rowTabIndex >= (totalRowTabs - 1)) setRowTabIndex(0);
     };
     
+    const debounce = require('debounce');
+    const handleUnmountOnMouseLeave = debounce(() => setDelayMount(false), 200)
 
-    // const showPrevButton = rowTabIndex > 0;
+    const mountStyle = { animation: "mountAnimation 250ms ease-in" };
+
+    const unmountStyle = { animation: "unmountAnimation 270ms ease-out" };
+
 
     const rowPopupProps = {
 
@@ -52,13 +57,14 @@ export function RowPropsProvider({children}){
         cardPopupBackdrop, setCardPopupBackdrop,
         cardPopupRating, setCardPopupRating,
         cardPopupTitle, setCardPopupTitle,
-        // postersInViewTabNumber, setPostersInViewTabNumber,
+        rowPadding, setRowPadding,
         cardPopupAirDate, setCardPopupAirDate,
         posterIndex, setPosterIndex,
         slideRowLeft, slideRowRight,
         rowTabIndex, setRowTabIndex, rowRef,
         postersInView, setPostersInView,
-        totalRowTabs, setTotalRowTabs
+        totalRowTabs, setTotalRowTabs, handleUnmountOnMouseLeave,
+        mountStyle, unmountStyle
     };
 
     //create another context for fullscreen props

@@ -8,12 +8,12 @@ function App() {
 
   return (
     <FullscreenPropsProvider>
-      <RowPropsProvider>
+      {/* <RowPropsProvider> */}
             <div className="App">
               <Nav />
               <NavRoutes />
             </div>
-        </RowPropsProvider>
+        {/* </RowPropsProvider> */}
     </FullscreenPropsProvider>
 
   );

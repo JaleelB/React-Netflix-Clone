@@ -1,7 +1,7 @@
 @import '../../mainStyles';
 
 .preview-popup{
-    position: absolute; top: -20px;
+    position: absolute; 
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px;
     z-index: 55; background: $primary-black;
     transition: ease all 250ms; 

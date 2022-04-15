@@ -13,7 +13,7 @@ const FullscreenPopup = () => {
     const fullscreenProps = useFullscreenPropsContext();
 
     const { 
-        handleFullscreenModal, posterID, movie, mediaType,
+        setOpenFullscreenPopup, posterID, movie, mediaType,
         setMovie, movieCredits, setMovieCredits, setFullscreenPlayer,
         setSimiliarMovies, similiarMovies, setDisablePointer, setFullVideoPath,
         netflixOriginalShow, setNetflixOriginalShow
@@ -110,7 +110,7 @@ const FullscreenPopup = () => {
                 <Box 
                     className="fullscreen-popup__close"
                     onClick = {() => {
-                        handleFullscreenModal();
+                        setOpenFullscreenPopup(false);
                         document.body.style.overflowY = "scroll";
                         setDisablePointer(false);
                         removeNetflixOriginal();

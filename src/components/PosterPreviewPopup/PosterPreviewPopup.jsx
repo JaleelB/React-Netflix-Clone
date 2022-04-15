@@ -3,30 +3,38 @@ import { PlayCircle, ThumbDownOffAlt, ThumbUpOffAlt, AddCircleOutline, ExpandCir
 import React, {useEffect} from 'react';
 import axios from 'axios';
 import {apiComponents, BootstrapTooltip } from '../../components';
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
+import {useRowPopupPropsContext} from '../../RowPropsContext';
 
 import './PosterPreviewPopup.scss';
 
-const debounce = require('debounce');
 
-const PosterPreviewPopup = ({ popupProps, fullscreenProps}) => {
 
+const PosterPreviewPopup = () => {
+
+
+
+    const rowPopupProps = useRowPopupPropsContext();
     const { 
-        cardPopupWidth, cardPopupHeight, genres,
-        rowPadding, posterIndex,setIsHovered, totalPostersInView,
-        cardPopupBackdrop,cardPopupTitle,postersInViewTabNumber,
-        cardPopupAirDate, cardPopupRating, isHovered, setDelayMount
-    } = popupProps;
+        cardPopupWidth, genres, unmountStyle,
+        rowPadding, posterIndex,setIsHovered, postersInView,
+        cardPopupBackdrop,cardPopupTitle,rowTabIndex, mountStyle,
+        cardPopupAirDate, cardPopupRating, isHovered, handleUnmountOnMouseLeave
+    } = rowPopupProps.rowPopupProps;
 
+    const fullscreenProps = useFullscreenPropsContext();
     const {
         fullscreenPlayer, setFullscreenPlayer, setFullVideoPath, posterID, 
         setOpenFullscreenPopup, netflixOriginalShow, setNetflixOriginalShow, mediaType
-    } = fullscreenProps;
+    } = fullscreenProps.fullscreenProps;
 
     const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
 
-    const mountStyle = { animation: "mountAnimation 250ms ease-in" };
+    // const mountStyle = { animation: "mountAnimation 250ms ease-in" };
 
-    const unmountStyle = { animation: "unmountAnimation 270ms ease-out" };
+    // const unmountStyle = { animation: "unmountAnimation 270ms ease-out" };
+
+    
 
     useEffect(() => {
 
@@ -48,30 +56,30 @@ const PosterPreviewPopup = ({ popupProps, fullscreenProps}) => {
     
     },[posterID, setFullVideoPath]);
 
-    
-    const handleUnmountOnMouseLeave = debounce(() => setDelayMount(false), 200)
+
 
     return (
         <Box 
             className="preview-popup"
             sx={{
+                // top: '-70px',
+                top: `-${rowPadding}px`,
                 width: `${cardPopupWidth * 1.75}px`,
-                height: `${cardPopupHeight * 1.4}px`,
-                left: `${(
+                height: `${cardPopupWidth * 2.05}px`,
+                left: `${
+                    // (
                             (
-                                cardPopupWidth * (posterIndex >= totalPostersInView ? 
-                                posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)
+                                cardPopupWidth * (posterIndex >= postersInView ? 
+                                posterIndex  - (postersInView * rowTabIndex) : posterIndex)
                             )
-                             + rowPadding )
-                        }px`,
-                // left: `${((cardPopupWidth * (posterIndex >= totalPostersInView ? posterIndex  - (totalPostersInView * postersInViewTabNumber) : posterIndex)) + rowPadding ) - 40}px`
-                right: 0
+                    //          - rowPadding 
+                    // )
+                        }px`
             }}
             style={isHovered ? mountStyle  : unmountStyle}
             onMouseLeave={()=> {
                 setIsHovered(false)
                 handleUnmountOnMouseLeave();
-
                 removeNetflixOriginal()
             }}
 
