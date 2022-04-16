@@ -1,16 +1,20 @@
 import { Box, Typography } from '@mui/material';
-import React, { useState, useRef } from 'react';
+import React from 'react';
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
-const FilterButtonIcon = ({setGenreID, genre, background, genreID}) => {
+const FilterButtonIcon = ({ genre, genreID, setShowDropDown }) => {
 
-
+    const fullscreenProps = useFullscreenPropsContext();
+    const { setGenreID, setIsLoading, setGenreTitle } = fullscreenProps.fullscreenProps;
 
     return (
         <Box 
-            className={`genre-icon`}
-            sx={{backgroundImage: `url(${background})`}} 
+            className="genre-item"
             onClick={() => {
                 setGenreID(genreID); 
+                setGenreTitle(genre)
+                setIsLoading(true);
+                setShowDropDown(false);
                 window.scrollTo({top: 0, behavior: 'smooth'});
             }}
         >

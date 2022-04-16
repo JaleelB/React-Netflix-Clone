@@ -1,7 +1,7 @@
 import { Box, Skeleton } from '@mui/material';
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, FilterButtons, SkeletonLoader } from '../../components';
+import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, GenreMenu, SkeletonLoader } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
 
 import './TvShows.scss';
@@ -163,12 +163,12 @@ const TvShows = ({fullscreenProps}) => {
 
                 <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
 
-                    <FilterButtons 
-                        fullscreenProps={fullscreenProps} 
-                        setIsGenreList={setIsGenreList}
-                        setGenreListID = {setGenreListID}
-                        setIsLoading={setIsLoading}
-                    />
+                    {/* <FilterMenu 
+                        // fullscreenProps={fullscreenProps} 
+                        // setIsGenreList={setIsGenreList}
+                        // setGenreListID = {setGenreListID}
+                        // setIsLoading={setIsLoading}
+                    /> */}
 
                     {
                         isGenreList && genreList &&

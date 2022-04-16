@@ -1,5 +1,5 @@
 import { Box, Button, Tooltip, Typography } from '@mui/material';
-import { PlayCircle, ThumbDownOffAlt, ThumbUpOffAlt, AddCircleOutline, ExpandCircleDown } from '@mui/icons-material';
+import { PlayCircle, ThumbDownOffAlt, ThumbUpOffAlt } from '@mui/icons-material';
 import React, {useEffect} from 'react';
 import axios from 'axios';
 import {apiComponents, BootstrapTooltip } from '../../components';
@@ -30,11 +30,6 @@ const PosterPreviewPopup = () => {
 
     const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
 
-    // const mountStyle = { animation: "mountAnimation 250ms ease-in" };
-
-    // const unmountStyle = { animation: "unmountAnimation 270ms ease-out" };
-
-    
 
     useEffect(() => {
 
@@ -62,8 +57,7 @@ const PosterPreviewPopup = () => {
         <Box 
             className="preview-popup"
             sx={{
-                // top: '-70px',
-                top: `-${rowPadding}px`,
+                top: `-${rowPadding - 15}px`,
                 width: `${cardPopupWidth * 1.75}px`,
                 height: `${cardPopupWidth * 2.05}px`,
                 left: `${

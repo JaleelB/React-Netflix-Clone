@@ -1,12 +1,12 @@
 import { Box, Skeleton } from '@mui/material';
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, FilterButtons, SkeletonLoader } from '../../components';
+import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, GenreMenu, SkeletonLoader } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
-
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import './Movies.scss';
 
-const Movies = ({fullscreenProps}) => {
+const Movies = () => {
 
     const [discover, setDiscover] = useState([]);
     // const [latest, setLatest] = useState([]);
@@ -14,8 +14,8 @@ const Movies = ({fullscreenProps}) => {
     const [upcoming, setUpcoming] = useState([]);
     const [bestPictures, setBestPictures] = useState([]);
     const [genreList, setGenreList] = useState([]);
-    const [genreListID, setGenreListID] = useState();
-    const [isGenreList, setIsGenreList] = useState(false);
+    // const [genreListID, setGenreListID] = useState();
+    // const [isGenreList, setIsGenreList] = useState(false);
     const [eightysBinge, setEightysBinge] = useState([]);
     const [ninetysBinge, setNinetysBinge] = useState([]);
     const [staffPicks, setStaffPicks] = useState([]);
@@ -24,10 +24,13 @@ const Movies = ({fullscreenProps}) => {
     const mediaTypeMovie = 'movie';
     const randIndex = useRef(null);
 
+    const fullscreenProps = useFullscreenPropsContext();
     const { 
-        disablePointer, fullscreenPlayer, openFullscreenPopup, genreTitle, setGenreTitle, genreID,
-        isLoading, setIsLoading, setGenreID
-    } = fullscreenProps;
+        disablePointer, fullscreenPlayer, openFullscreenPopup, 
+        genreTitle, setGenreTitle, genreID,isLoading, 
+        updateLoading, setGenreID,genreListID, setGenreListID,
+        isGenreList, setIsGenreList
+    } = fullscreenProps.fullscreenProps;
 
     const randIndexGenerator = (maxValue, indexCount) => {
         let randArray =[];
@@ -126,13 +129,12 @@ const Movies = ({fullscreenProps}) => {
     useEffect(() => {
         
         const timer = setTimeout(() => {
-            setIsLoading(false);
+            updateLoading();
         }, 2000);
 
         return () => clearTimeout(timer);
 
     },[isLoading])
-
     
 
     return (
@@ -147,27 +149,12 @@ const Movies = ({fullscreenProps}) => {
 
             <Box className="movie-page-wrapper">
                 <Billboard 
-                    disablePointer={disablePointer} 
                     movie = {discover[randIndex.current]} 
-                    fullscreenProps={fullscreenProps} 
                     sectionTitle={"Movies"} 
-                    genreTitle={genreTitle} 
-                    setGenreTitle={setGenreTitle}
-                    setGenreID={setGenreID}
-                    setGenreListID={setGenreListID}
-                    setIsGenreList={setIsGenreList}
-                    setIsLoading={setIsLoading}
                     mediaType="movie"
                 />
 
                 <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
-
-                    <FilterButtons 
-                        fullscreenProps={fullscreenProps} 
-                        setIsGenreList={setIsGenreList}
-                        setGenreListID = {setGenreListID}
-                        setIsLoading={setIsLoading}
-                    />
 
                     {
                         isGenreList && genreList &&
@@ -175,9 +162,6 @@ const Movies = ({fullscreenProps}) => {
                             <MediaRowContainer
                             title = {`${genreTitle} Movies For You`}
                             medias = { genreList }
-                            // className={"large-row"}
-                            fullscreenProps = { fullscreenProps } 
-                            // largeRow
                             typeMedia={mediaTypeMovie}
                             />
                     }
@@ -185,9 +169,6 @@ const Movies = ({fullscreenProps}) => {
                     <MediaRowContainer
                         title = "Movies For You"
                         medias = { discover }
-                        // className={"large-row"}
-                        fullscreenProps = { fullscreenProps } 
-                        // largeRow
                         typeMedia={mediaTypeMovie}
                     />
 
@@ -196,9 +177,6 @@ const Movies = ({fullscreenProps}) => {
                     <MediaRowContainer
                         title = "Trending Movies For You"
                         medias = { trendingMovie }
-                        // className={"large-row"}
-                        fullscreenProps = { fullscreenProps } 
-                        // largeRow
                         typeMedia={mediaTypeMovie}
                     />
 
@@ -206,59 +184,42 @@ const Movies = ({fullscreenProps}) => {
                     <MediaRowContainer
                         title = "Popular Movies This Year"
                         medias = { popular }
-                        fullscreenProps = { fullscreenProps } 
                         typeMedia={mediaTypeMovie}
                     />
                     <MediaRowContainer
                         title = "Academy Awards Best Movie Picture Winners"
                         medias = { bestPictures }
-                        className={"list-row"}
-                        listRow
-                        fullscreenProps = { fullscreenProps } 
                         typeMedia={mediaTypeMovie}
                     />
                     <MediaRowContainer
                         title = "Upcoming Movies"
                         medias = { upcoming }
-                        fullscreenProps = { fullscreenProps } 
                         typeMedia={mediaTypeMovie}
                     />
                     <MediaRowContainer
                         title = "Staff Picks"
                         medias = { staffPicks }
-                        // className={"large-row"}
-                        fullscreenProps = { fullscreenProps } 
                         typeMedia={mediaTypeMovie}
                     />
                     <MediaRowContainer
                         title = "90's Binge"
                         medias = { ninetysBinge }
-                        fullscreenProps = { fullscreenProps } 
                         typeMedia={mediaTypeMovie}
                     />
                     <MediaRowContainer
                         title = "80's Binge"
-                        medias = { eightysBinge }
-                        fullscreenProps = { fullscreenProps } 
+                        medias = { eightysBinge } 
                         typeMedia={mediaTypeMovie}
                     />
 
                 </Box>
 
                 {
-                    fullscreenPlayer && 
-                    
-                        <FullscreenPlayer
-                            fullscreenProps = {fullscreenProps}
-                        />
+                    fullscreenPlayer && <FullscreenPlayer/>
                 }
 
                 {
-                    openFullscreenPopup && 
-                    <FullscreenPopup
-                        fullscreenProps = { fullscreenProps }
-                    />
-
+                    openFullscreenPopup && <FullscreenPopup/>
                 }
 
                 <Footer/>

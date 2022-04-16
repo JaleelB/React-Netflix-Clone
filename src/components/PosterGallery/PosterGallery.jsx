@@ -1,11 +1,11 @@
 import { Box, Typography } from '@mui/material';
-import React, {useState} from 'react';
+import React from 'react';
 import { MediaRowContainer } from '../../containers';
 import { MediaRowTitle } from '../../components';
 
 import './PosterGallery.scss';
 
-const PosterGallery = ({medias, title, className, errorMessage, fullscreenProps, mediaType}) => {
+const PosterGallery = ({medias, title, className, errorMessage, mediaType}) => {
 
     return (
         <Box className="poster-gallery-container">
@@ -13,8 +13,7 @@ const PosterGallery = ({medias, title, className, errorMessage, fullscreenProps,
             <MediaRowTitle title={title}/>
             <MediaRowContainer 
                 className = {className}
-                medias = {medias}
-                fullscreenProps = { fullscreenProps } 
+                medias = {medias} 
                 typeMedia={mediaType} //try maling a category called all and add it to useeffect
                 netflixOriginal={false}
                 disableHover

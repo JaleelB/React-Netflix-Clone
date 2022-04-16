@@ -2,9 +2,10 @@ import { Box } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { InputField, ImageSlider, apiComponents, PosterGallery, Footer,FullscreenPlayer, FullscreenPopup } from '../../components';
 import axios from 'axios';
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import './Search.scss';
 
-const Search = ({fullscreenProps}) => {
+const Search = () => {
 
     const [trendingToday, setTrendingToday] = useState([]);
     const [discoverTV, setDiscoverTV] = useState([]);
@@ -13,7 +14,8 @@ const Search = ({fullscreenProps}) => {
     const[searchTVResults, setSearchTVResults] = useState([]);
     const[searchMovieResults, setSearchMovieResults] = useState([]);
 
-    const { disablePointer, fullscreenPlayer, openFullscreenPopup } = fullscreenProps;
+    const fullscreenProps = useFullscreenPropsContext();
+    const { disablePointer, fullscreenPlayer, openFullscreenPopup } = fullscreenProps.fullscreenProps;
    
     useEffect(() => {
 
@@ -77,7 +79,6 @@ const Search = ({fullscreenProps}) => {
         return randArray;
     };
 
-    // add skeleton loading for bacdrop, billboard and posters
 
     return (
         <Box id="search-page">
@@ -92,20 +93,20 @@ const Search = ({fullscreenProps}) => {
                 />
 
 
-                { !isTyping && <ImageSlider randIndexes={randIndexGenerator(20, 5)} shows={trendingToday} fullscreenProps = { fullscreenProps } mediaType={"tv"}/> }
-                { !isTyping && <PosterGallery medias={discoverTV} title={"Discover"} className = {"poster-gallery"} fullscreenProps = { fullscreenProps } mediaType={"tv"}/> }
+                { !isTyping && <ImageSlider randIndexes={randIndexGenerator(20, 5)} shows={trendingToday}  mediaType={"tv"}/> }
+                { !isTyping && <PosterGallery medias={discoverTV} title={"Discover"} className = {"poster-gallery"}  mediaType={"tv"}/> }
 
                 {
                     isTyping && searchMovieResults.length > 0 &&  searchTVResults.length > 0 &&
                     <>
-                        <PosterGallery medias={searchTVResults} title={"Tv Search Results"} className = {"poster-gallery"} fullscreenProps = { fullscreenProps } mediaType={"tv"}/> 
-                        <PosterGallery medias={searchMovieResults} title={"Movie Search Results"} className = {"poster-gallery"} fullscreenProps = { fullscreenProps } mediaType={"movie"}/> 
+                        <PosterGallery medias={searchTVResults} title={"Tv Search Results"} className = {"poster-gallery"}  mediaType={"tv"}/> 
+                        <PosterGallery medias={searchMovieResults} title={"Movie Search Results"} className = {"poster-gallery"} mediaType={"movie"}/> 
                     </>
                     
                 }
 
-                { isTyping && searchTVResults.length === 0 && <PosterGallery medias={searchTVResults} title={"Tv Search Results"} className = {"poster-gallery"} errorMessage={errorOutput} fullscreenProps = { fullscreenProps } mediaType={"tv"}/>  }
-                { isTyping && searchMovieResults.length === 0 && <PosterGallery medias={searchMovieResults} title={"Movie Search Results"} className = {"poster-gallery"} errorMessage={errorOutput} fullscreenProps = { fullscreenProps } mediaType={"movie"}/>  }
+                { isTyping && searchTVResults.length === 0 && <PosterGallery medias={searchTVResults} title={"Tv Search Results"} className = {"poster-gallery"} errorMessage={errorOutput}  mediaType={"tv"}/>  }
+                { isTyping && searchMovieResults.length === 0 && <PosterGallery medias={searchMovieResults} title={"Movie Search Results"} className = {"poster-gallery"} errorMessage={errorOutput}  mediaType={"movie"}/>  }
 
 
                 <Footer/>
@@ -114,17 +115,13 @@ const Search = ({fullscreenProps}) => {
             {
                 fullscreenPlayer && 
                 
-                    <FullscreenPlayer
-                        fullscreenProps = {fullscreenProps}
-                    />
+                    <FullscreenPlayer />
             }
 
             {
                 openFullscreenPopup && 
 
-                    <FullscreenPopup
-                        fullscreenProps = { fullscreenProps }
-                    />
+                    <FullscreenPopup />
 
             }
 

@@ -46,14 +46,14 @@
         .arrow{ 
 
             @media screen and (min-width: 1200px){
-                position: absolute; top: 0; bottom: 0; margin: calc( var(--row-padding) - 1%) 0;
-                width: var(--row-padding); z-index: 10; height: 84.3%;
+                position: absolute; top: 0; bottom: 0; 
+                width: var(--row-padding); z-index: 10; height:100%;
                 cursor: pointer; background-color: rgba(20,20,20,.5);
                 color: $color-white;
 
                 &:hover{
                     background-color: rgba(20,20,20,.7);
-                    path{ transform: scale(1.05); transition: all 250ms ease-in-out;  }
+                    path{ transform: scale(1.1); transition: all 250ms ease-in-out;  }
                 }
 
                 &.left{left: 0;}
@@ -80,7 +80,7 @@
             // @media screen and (min-width: 320px) and (max-width: 470px){ --total-posters-in-viewport: 3; }
             @media screen and (min-width: 471px) and (max-width: 749px){ --total-posters-in-viewport: 4; }
             @media screen and (min-width: 750px) and (max-width: 1199px){ --total-posters-in-viewport: 5; }
-            @media screen and (min-width: 1200px){ --total-posters-in-viewport: 6.9; }
+            @media screen and (min-width: 1200px){ --total-posters-in-viewport: 6.84; }
             @media screen and (min-width: 1600px){ --total-posters-in-viewport: 8.8; }
             @media screen and (min-width: 2000px){ --total-posters-in-viewport: 9.7; }
             

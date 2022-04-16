@@ -67,7 +67,6 @@ export function RowPropsProvider({children}){
         mountStyle, unmountStyle
     };
 
-    //create another context for fullscreen props
 
     return(
         <RowPropsContext.Provider value={{rowPopupProps}} >

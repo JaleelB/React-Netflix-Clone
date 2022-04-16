@@ -16,7 +16,7 @@ export const BootstrapTooltip = styled(({ className, ...props }) => (
         fontSize: '1rem',
         boxShadow: '0 2px 10px 0 #000',
         fontWeight: 500,
-        paddingInline: '10px'
+        paddingInline: '10px',
     },
 }));
   

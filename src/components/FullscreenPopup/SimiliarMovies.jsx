@@ -12,7 +12,6 @@ const SimiliarMovies = ({medias, className, disableHover, typeMedia,title}) => {
             <MediaRowContainer 
                 className = {className}
                 medias = {medias}
-                // fullscreenProps = { fullscreenProps } 
                 typeMedia={typeMedia} 
                 disableHover
             />

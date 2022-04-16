@@ -6,7 +6,7 @@ import {useRowPopupPropsContext} from '../../RowPropsContext';
 
 import '../../containers/MediaRow/MediaRow.scss';
 
-const MediaRowWrapper = ({medias,netflixOriginal, typeMedia, className, disableHover, rowRef, rowTabIndex, setRowTabIndex, setPostersInView}) => {
+const MediaRowWrapper = ({medias,netflixOriginal, typeMedia, className, disableHover}) => {
 
     const rowPopupProps = useRowPopupPropsContext();
 
@@ -34,7 +34,6 @@ const MediaRowWrapper = ({medias,netflixOriginal, typeMedia, className, disableH
             />
 
             { !disableHover && delayMount && window.innerWidth > 1200 && 
-                    
                     <PosterPreviewPopup />
             }
 

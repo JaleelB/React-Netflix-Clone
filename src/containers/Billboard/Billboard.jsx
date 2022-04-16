@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Box, Button, IconButton, Typography } from '@mui/material';
-import {BillboardTitle, BillboardDescription, BillboardVideo, apiComponents } from '../../components';
+import {BillboardTitle, BillboardDescription, BillboardVideo, apiComponents, GenreDropdown } from '../../components';
 import './Billboard.scss';
 import { PlayArrow, Pause, VolumeOff, VolumeUp, Add, DoNotDisturbAltOutlined } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
-const Billboard = ({movie, sectionTitle, genreTitle, setGenreTitle, mediaType, setGenreID, setGenreListID, setIsGenreList}) => {
+const Billboard = ({movie, sectionTitle,  mediaType}) => {
     
     const [videoPath, setVideoPath] = useState('');
     const [videoPlay, setVideoPlay] = useState(true);
     const [volumeMute, setVolumeMute] = useState(true);
     const [deviceWindowWidth, setDeviceWindowWidth] = useState(window.innerWidth);
 
-    // const {
-    //     setFullscreenPlayer, setPosterID, setFullVideoPath, posterID, setOpenFullscreenPopup, setMediaType
-    // } = fullscreenProps;
-
     const fullscreenProps = useFullscreenPropsContext();
     const { 
-        disablePointer, updateLoading, handleFullscreenModal, 
+        disablePointer, setIsLoading, setOpenFullscreenPopup, 
         setDisablePointer,setPosterID, setFullVideoPath, 
-        posterID, setMediaType, setFullscreenPlayer
+        posterID, setMediaType, setFullscreenPlayer, genreTitle, 
+        setGenreTitle, setGenreID,setGenreListID,setIsGenreList
     } = fullscreenProps.fullscreenProps;
 
     const handleWindowResize = () => { setDeviceWindowWidth(window.innerWidth) }
@@ -95,23 +92,30 @@ const Billboard = ({movie, sectionTitle, genreTitle, setGenreTitle, mediaType, s
 
             <Box className="billboard__fade-top"></Box>
 
-            {window.screen.width > 1200 && videoPath ? <BillboardVideo source={videoPath} playState={videoPlay} muteStatus={volumeMute}/> : null }
+            {deviceWindowWidth > 1200 && videoPath ? <BillboardVideo source={videoPath} playState={videoPlay} muteStatus={volumeMute}/> : null }
 
-            {window.screen.width > 1200 && sectionTitle &&
-                <Box className="billboard__section-title-wrapper" sx={{display: genreTitle && "flex"}}>
-                    <Link 
-                        to={`/${sectionTitle}`}
-                        onClick={ () => {
-                        //     setGenreTitle('')
-                        //     setGenreID('')
-                        //     setGenreListID('')
-                        //     setIsGenreList(false)
-                               updateLoading();
-                        } }
-                    >
-                        {/* <span className={`section-title ${genreTitle ? "bread-crumb" : ""}`}>{`${sectionTitle} ${genreTitle ? "> " : ""}`}</span> */}
-                    </Link>
-                        {genreTitle && <span className="section-title">{genreTitle}</span>}
+            {sectionTitle &&
+                <Box className="billboard__sub-header" sx={{display: genreTitle && "flex"}}>
+                    <Box className="genre-details">
+                        <Link 
+                            to={`/${sectionTitle}`}
+                            onClick={ () => {
+                                setGenreTitle('')
+                                setGenreID('')
+                                setGenreListID('')
+                                setIsGenreList(false)
+                                setIsLoading(true);
+                            } }
+                        >
+                            <span className={`section-title ${genreTitle && window.innerWidth > 1200 ? "bread-crumb" : ""}`}>{`${sectionTitle} ${genreTitle && window.innerWidth > 1200 ? "> " : ""}`}</span>
+                        </Link>
+                    
+                        {genreTitle && window.innerWidth > 1200 ? <span className="section-title">{genreTitle}</span> : ""}
+
+                    </Box>
+
+                    <GenreDropdown/>
+                    
                 </Box>
             } 
 
@@ -124,10 +128,10 @@ const Billboard = ({movie, sectionTitle, genreTitle, setGenreTitle, mediaType, s
                         <Typography className="billboard__supplemental-message" sx={{color :'#fff'}}>Netflix Original</Typography>
                     </Box>
 
-                    {window.screen.width >= 750 && <BillboardDescription description={movie?.overview}/>}
+                    {deviceWindowWidth >= 750 && <BillboardDescription description={movie?.overview}/>}
                     
                     <Box className="billboard__button-container" >
-                        {window.screen.width >= 1200 && <>
+                        {deviceWindowWidth >= 1200 && <>
                             <Button 
                                 className={`billboard__button-play ${!videoPath ? 'disabled' : ''}`}
                                 variant={!videoPath ? 'disabled' : ''}
@@ -149,8 +153,7 @@ const Billboard = ({movie, sectionTitle, genreTitle, setGenreTitle, mediaType, s
                                 onClick={()=> {
                                     setPosterID(movie?.id);
                                     setMediaType(mediaType);
-                                //     setOpenFullscreenPopup(true);
-                                    handleFullscreenModal();
+                                    setOpenFullscreenPopup(true);
                                     setDisablePointer(true);
                                 }}
                             >
@@ -158,7 +161,7 @@ const Billboard = ({movie, sectionTitle, genreTitle, setGenreTitle, mediaType, s
                             </Button>
                         </> }
 
-                        {window.screen.width < 1200 && <>
+                        {deviceWindowWidth < 1200 && <>
                             <Button 
                                 className="billboard__button-play" 
                                 onClick={()=> {
@@ -178,7 +181,7 @@ const Billboard = ({movie, sectionTitle, genreTitle, setGenreTitle, mediaType, s
                     </Box> 
             </Box> 
 
-            {window.screen.width > 1200 && 
+            {deviceWindowWidth > 1200 && 
                 <Box className="billboard__volume-rating-conatiner">
                     <IconButton 
                         className="billboard__volume-toggle" 
