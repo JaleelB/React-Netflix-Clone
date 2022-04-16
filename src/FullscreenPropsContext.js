@@ -27,9 +27,11 @@ export function FullscreenPropsProvider({children}){
     const [mediaType, setMediaType] = useState('');
 
     const [volume, setVolume] = useState(1);
-    // const [sectionTitle, setSectionTitle] = useState('')
+    const [sectionTitle, setSectionTitle] = useState('')
     const [genreTitle, setGenreTitle] = useState('');
     const [genreID, setGenreID] = useState(null);
+    const [genreListID, setGenreListID] = useState();
+    const [isGenreList, setIsGenreList] = useState(false);
 
     const loading = () => setIsLoading(true);
     const updateLoading = () => setIsLoading(false);
@@ -54,14 +56,15 @@ export function FullscreenPropsProvider({children}){
         netflixOriginalShow, setNetflixOriginalShow,
         volume, setVolume,
         mediaType, setMediaType,
-        // sectionTitle, setSectionTitle,
+        sectionTitle, setSectionTitle,
         genreTitle, setGenreTitle,
         genreID, setGenreID, isLoading, 
-
+        genreListID, setGenreListID,
+        isGenreList, setIsGenreList,
         // functions
         updateLoading, 
         // handleFullscreenModal, 
-        loading,
+        loading, setIsLoading,
         handleNetflixOriginal, updatePosterId, handleMediaType
     };
 

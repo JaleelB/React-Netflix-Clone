@@ -27,18 +27,33 @@
         }
     }
 
-    &__section-title-wrapper{
-        font-size: 2.5rem; line-height: 38px; font-weight: 700; color: $color-white;
-        padding-left: 3%; display: flex; align-items: center;
-        position: relative; top: -32rem; z-index: 10;
+    &__sub-header{
+        font-size: 24px; line-height: 38px; font-weight: 400;
+        color: $color-white; width: 100%;
+        display: flex; align-items: center; justify-content: center; gap: 50px;
+        position: absolute; top: 4rem; z-index: 10;
 
-        a{
-            text-decoration: none;
+        .genre-details{
+            
+            a{
+                text-decoration: none;
 
-            &:link,
-            &:visited { color: $color-white;}
+                &:link,
+                &:visited { color: $color-white;}
 
-            .bread-crumb{  font-size: 23px; color: grey; padding-right: 10px; font-weight: 400; line-height: 1.2; }
+                .bread-crumb{  font-size: 23px; color: grey; padding-right: 10px; font-weight: 400; line-height: 1.2; }
+                
+            }
+
+        }
+
+        @media screen and (min-width: 750px){ width: auto; padding-left: 3%;}
+        @media screen and (min-width: 1200px){ 
+            top: 2rem;
+            font-size: 38px; line-height: 38px; font-weight: 700;
+            margin-right: 15px; color: $color-white; gap: 50px;
+            padding-left: 3%; display: flex; align-items: center; 
+            position: absolute; top: 6rem; z-index: 10; width: auto;
         }
     }
 
@@ -49,7 +64,7 @@
             
 
         .billboard__title-wrapper{
-            max-width: 568px;
+            width: 36%; 
             @media screen and (max-width: 599px) { display: grid; place-content: center; text-align: center;}
             &__image-title{
                 text-transform: uppercase; color: $color-white; 
@@ -61,14 +76,14 @@
             .netflix-icon{ 
                 width:calc(2vw + 24px); height:calc(2vh + 1rem); 
             }
-            .billboard__supplemental-message{ color:$color-white; font-size: clamp(1.5rem, 1.4vw, 3rem); }
+            .billboard__supplemental-message{ color:$color-white; font-size: 1.4vw; }
         }
         
         .billboard__description-wrapper{
-            max-width: 650px;
+            width: 36%; 
             @media screen and (max-height: 450px) { display: none; }
 
-            .billboard__description{ color:$color-white; font-size: clamp(1rem, 1.4vw, 2rem); line-height: 1.4; font-weight: 300; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45); }
+            .billboard__description{ color:$color-white; font-size: 1.2vw; line-height: 1.2; font-weight: 400; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45); }
         }
 
         .billboard__button-container{  

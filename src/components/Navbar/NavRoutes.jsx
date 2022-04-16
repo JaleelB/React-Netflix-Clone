@@ -13,8 +13,8 @@ const NavRoutes = () => {
         <Routes>
             <Route path='/' exact element={<Hero/>} />
             <Route path='Search' element={<Search/>} />
-            {/* <Route path='Movies' element={<Movies fullscreenProps={fullscreenProps}/>} />
-            <Route path='TvShows' element={<TvShows fullscreenProps={fullscreenProps}/>} />
+             <Route path='Movies' element={<Movies/>} />
+            {/*<Route path='TvShows' element={<TvShows fullscreenProps={fullscreenProps}/>} />
             <Route path='Saved' element={<Saved />} /> */}
         </Routes>
 
