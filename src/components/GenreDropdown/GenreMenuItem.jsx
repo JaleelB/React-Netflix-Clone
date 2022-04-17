@@ -2,10 +2,13 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
-const FilterButtonIcon = ({ genre, genreID, setShowDropDown }) => {
+const FilterButtonIcon = ({ genre, genreID, billboardProps, setShowDropDown }) => {
 
     const fullscreenProps = useFullscreenPropsContext();
-    const { setGenreID, setIsLoading, setGenreTitle } = fullscreenProps.fullscreenProps;
+    const {  setIsLoading } = fullscreenProps.fullscreenProps;
+
+    const { setGenreTitle,setGenreID } = billboardProps;
+
 
     return (
         <Box 

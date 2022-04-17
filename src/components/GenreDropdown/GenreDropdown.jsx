@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import GenreMenu from './GenreMenu';
 import './GenreDropdown.scss';
 
-const GenreDropdown = () => {
+const GenreDropdown = ({billboardProps}) => {
 
     const[showDropdown, setShowDropDown] = useState(false)
 
@@ -14,7 +14,7 @@ const GenreDropdown = () => {
                 <span className="arrow"></span>
             </Box>
             {
-                showDropdown && <GenreMenu setShowDropDown={setShowDropDown}/>
+                showDropdown && <GenreMenu setShowDropDown={setShowDropDown} billboardProps={billboardProps}/>
             }
         </Box>
     )
