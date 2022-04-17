@@ -1,0 +1,47 @@
+@import '../../mainStyles';
+
+#error-page{
+    width: $background-width; height: $background-height;
+    display: grid; place-items: center; color: $color-white;
+    background: url('https://images.firstpost.com/wp-content/uploads/2018/10/Netflix-and-Chill-1280.jpg') no-repeat center center fixed;
+    background-size: cover;
+
+    .error-container{
+        max-width: 700px; text-align: center; padding: 0 3%;
+
+        .error-card-title{ font-size: clamp(2rem, 3vw, 4rem); margin-bottom: 20px;}
+        .error-card-subtitle{ font-size: 1.62rem; font-weight: 300; }
+
+        .home-btn{
+            
+            background-color: $primary-red; margin-top: 30px;
+            border-radius: 0;
+
+            a{
+                color: $color-white; text-decoration:  none; 
+                padding: .2rem 1rem; font-size:  clamp(1.2rem, 1.4vw, 1.5rem);
+
+                display: flex; align-items: center; gap: .3rem;
+            }
+        }
+
+        .error-code-message{
+            display: flex; justify-content: center; gap: 1rem; 
+            margin-top: 2rem; font-size: clamp(1.5rem, 2vw, 2.4rem); font-weight: 300;
+            position: relative;
+
+            .error-code-title{
+                
+                &::before{
+                    content: '';
+                    width: 2px; height: 100%; position: absolute;
+                    background-color: $primary-red;
+                }
+            }
+
+            .error-code{ font-weight: 700; }
+
+            
+        }
+    }
+}

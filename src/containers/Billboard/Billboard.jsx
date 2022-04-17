@@ -21,7 +21,7 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
         posterID, setMediaType, setFullscreenPlayer, 
     } = fullscreenProps.fullscreenProps;
 
-    const { genreTitle, setGenreTitle, setGenreID } = billboardProps;
+    // const { genreTitle, setGenreTitle, setGenreID } = billboardProps;
 
     const handleWindowResize = () => { setDeviceWindowWidth(window.innerWidth) }
 
@@ -96,24 +96,24 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
             {deviceWindowWidth > 1200 && videoPath ? <BillboardVideo source={videoPath} playState={videoPlay} muteStatus={volumeMute}/> : null }
 
             {sectionTitle &&
-                <Box className="billboard__sub-header" sx={{display: genreTitle && "flex"}}>
+                <Box className="billboard__sub-header" sx={{display: billboardProps.genreTitle && "flex"}}>
                     <Box className="genre-details">
                         <Link 
                             to={`/${sectionTitle}`}
                             onClick={ () => {
-                                setGenreTitle('')
-                                setGenreID('')
+                                billboardProps.setGenreTitle('')
+                                billboardProps.setGenreID('')
                                 setIsLoading(true);
                             } }
                         >
-                            <span className={`section-title ${genreTitle && window.innerWidth > 1200 ? "bread-crumb" : ""}`}>{`${sectionTitle} ${genreTitle && window.innerWidth > 1200 ? "> " : ""}`}</span>
+                            <span className={`section-title ${billboardProps.genreTitle && window.innerWidth > 1200 ? "bread-crumb" : ""}`}>{`${sectionTitle} ${billboardProps.genreTitle && window.innerWidth > 1200 ? "> " : ""}`}</span>
                         </Link>
                     
-                        {genreTitle && window.innerWidth > 1200 ? <span className="section-title">{genreTitle}</span> : ""}
+                        {billboardProps.genreTitle && window.innerWidth > 1200 ? <span className="section-title">{billboardProps.genreTitle}</span> : ""}
 
                     </Box>
 
-                    <GenreDropdown billboardProps={billboardProps}/>
+                    <GenreDropdown billboardProps={billboardProps} sectionTitle={sectionTitle}/>
                     
                 </Box>
             } 

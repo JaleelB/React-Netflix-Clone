@@ -4,7 +4,7 @@ import GenreMenuItem from './GenreMenuItem';
 
 import './GenreDropdown.scss'
 
-const GenreMenu = ({setShowDropDown, billboardProps}) => {
+const GenreMenu = ({setShowDropDown, billboardProps, sectionTitle}) => {
 
     const { genres } = billboardProps;
 
@@ -21,6 +21,7 @@ const GenreMenu = ({setShowDropDown, billboardProps}) => {
                             genreID={genre.id}
                             billboardProps={billboardProps}
                             setShowDropDown={setShowDropDown}
+                            sectionTitle={sectionTitle}
                         />
 
                     );

@@ -4,6 +4,7 @@ import axios from 'axios';
 import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, SkeletonLoader } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
+import {useParams} from 'react-router-dom';
 import './TvShows.scss';
 
 const TvShows = () => {
@@ -47,6 +48,8 @@ const TvShows = () => {
 
         return randArray[0];
     };
+
+    const { genrePath } = useParams()
 
     useEffect(() => {
 
