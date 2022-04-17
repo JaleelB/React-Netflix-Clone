@@ -1,4 +1,4 @@
-import { Box, Button, Tooltip, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { PlayCircle, ThumbDownOffAlt, ThumbUpOffAlt } from '@mui/icons-material';
 import React, {useEffect} from 'react';
 import axios from 'axios';
@@ -9,9 +9,7 @@ import {useRowPopupPropsContext} from '../../RowPropsContext';
 import './PosterPreviewPopup.scss';
 
 
-
 const PosterPreviewPopup = () => {
-
 
 
     const rowPopupProps = useRowPopupPropsContext();
@@ -126,10 +124,12 @@ const PosterPreviewPopup = () => {
                     </Box>
 
                     <Box className="movie-metadata-container">
+
                         <Box className="movie-rating">{cardPopupRating * 10}%</Box>
                         {mediaType !== '' && <Box className="media-type">{mediaType}</Box>}
                         <Box className="movie-air-date">{cardPopupAirDate}</Box>
                         <Box className="movie-video-quality">HD</Box>
+
                     </Box>
 
                     <Box className="genre-list">

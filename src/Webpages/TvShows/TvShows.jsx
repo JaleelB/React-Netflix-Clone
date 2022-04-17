@@ -1,33 +1,41 @@
-import { Box, Skeleton } from '@mui/material';
+import { Box } from '@mui/material';
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, GenreMenu, SkeletonLoader } from '../../components';
+import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, SkeletonLoader } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
-
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import './TvShows.scss';
 
-const TvShows = ({fullscreenProps}) => {
+const TvShows = () => {
 
     const [discover, setDiscover] = useState([]);
     const [topRated, setTopRated] = useState([]);
     const [popular, setPopular] = useState([]);
     const [airingToday, setAiringToday] = useState([]);
     const [onTheAir, setOnTheAir] = useState([]);
-    const [genreList, setGenreList] = useState([]);
-    const [genreListID, setGenreListID] = useState();
-    const [isGenreList, setIsGenreList] = useState(false);
     const [eightysBinge, setEightysBinge] = useState([]);
     const [ninetysBinge, setNinetysBinge] = useState([]);
     const [staffPicks, setStaffPicks] = useState([]);
     const [trendingTv, setTrendingTv] = useState([]);
 
+    const [genres, setGenres] = useState([]);
+    const [genreTitle, setGenreTitle] = useState('');
+    const [genreID, setGenreID] = useState(null);
+
+
     const mediaTypeTv = 'tv';
     const randIndex = useRef(null);
 
+    const billboardProps = {
+        genreTitle, setGenreTitle, genreID, setGenreID, genres
+    };
+
+
+    const fullscreenProps = useFullscreenPropsContext();
     const { 
-        disablePointer, fullscreenPlayer, openFullscreenPopup, genreTitle, setGenreTitle, genreID,
-        isLoading, setIsLoading, setGenreID
-    } = fullscreenProps;
+        disablePointer, fullscreenPlayer, openFullscreenPopup, 
+        isLoading, updateLoading, 
+    } = fullscreenProps.fullscreenProps;
 
     const randIndexGenerator = (maxValue, indexCount) => {
         let randArray =[];
@@ -81,20 +89,11 @@ const TvShows = ({fullscreenProps}) => {
         .catch(error => { console.log(error) })
 
         axios
-        .get(`${apiComponents[0]}${apiComponents[2].tv}${apiComponents[2].top_rated}?api_key=${apiComponents[1]}`)
+        .get(`${apiComponents[0]}${apiComponents[2].tv}${apiComponents[2].top_rated}?api_key=${apiComponents[1]}${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setAiringToday(res.data.results)
         })
         .catch(error => { console.log(error) })
-
-        if(genreListID){
-            axios
-            .get(`${apiComponents[0]}${apiComponents[2].list}/${genreListID}?api_key=${apiComponents[1]}`)
-            .then((res)=> {
-                setGenreList(res.data.items)
-            })
-            .catch(error => { console.log(error) })
-        }
         
         axios
         .get(`${apiComponents[0]}${apiComponents[2].discover_tv}?api_key=${apiComponents[1]}&certification_country=US&first_air_date_year=1992${genreID ? `&with_genres=${genreID}` : ''}`)
@@ -117,9 +116,17 @@ const TvShows = ({fullscreenProps}) => {
             setStaffPicks(res.data.results)
         })
         .catch(error => { console.log(error) })
-  
-    }, [genreID, genreListID]);
 
+        axios
+        .get(`${apiComponents[0]}/genre${apiComponents[2].tv}${apiComponents[2].list}?api_key=${apiComponents[1]}&language=en-US`)
+        .then((res)=> {
+            setGenres(res.data)
+        })
+        .catch(error => { console.log(error) })
+  
+    }, [genreID]);
+
+   
     
     useEffect(() => {
         randIndex.current = randIndexGenerator(20, 5);
@@ -128,7 +135,7 @@ const TvShows = ({fullscreenProps}) => {
     useEffect(() => {
         
         const timer = setTimeout(() => {
-            setIsLoading(false);
+            updateLoading();
         }, 2000);
 
         return () => clearTimeout(timer);
@@ -147,102 +154,63 @@ const TvShows = ({fullscreenProps}) => {
             :
 
             <Box className="movie-page-wrapper">
-                <Billboard 
-                    disablePointer={disablePointer} 
-                    movie = {discover[randIndex.current]} 
-                    fullscreenProps={fullscreenProps} 
+                <Billboard  
+                    movie = {discover[randIndex.current]}  
                     sectionTitle={"Tv Shows"} 
-                    genreTitle={genreTitle} 
-                    setGenreTitle={setGenreTitle}
-                    setGenreID={setGenreID}
-                    setGenreListID={setGenreListID}
-                    setIsGenreList={setIsGenreList}
-                    setIsLoading={setIsLoading}
                     mediaType={mediaTypeTv}
+                    billboardProps={billboardProps}
                 />
 
                 <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
 
-                    {/* <FilterMenu 
-                        // fullscreenProps={fullscreenProps} 
-                        // setIsGenreList={setIsGenreList}
-                        // setGenreListID = {setGenreListID}
-                        // setIsLoading={setIsLoading}
-                    /> */}
-
-                    {
-                        isGenreList && genreList &&
-
-                            <MediaRowContainer
-                            title = {`${genreTitle} Tv Shows For You`}
-                            medias = { genreList }
-                            // className={"large-row"}
-                            fullscreenProps = { fullscreenProps } 
-                            // largeRow
-                            typeMedia={mediaTypeTv}
-                            />
-                    }
-
                     <MediaRowContainer
                         title = {`${genreTitle} Tv Shows For You`}
                         medias = { discover }
-                        // className={"large-row"}
-                        fullscreenProps = { fullscreenProps } 
-                        // largeRow
                         typeMedia={mediaTypeTv}
                     />
 
                     <MediaRowContainer
                         title = {`Trending Tv Shows`}
                         medias = { trendingTv }
-                        fullscreenProps = { fullscreenProps } 
                         typeMedia={mediaTypeTv}
                     />
 
                     <MediaRowContainer
                         title = {`Top Rated ${genreTitle} Tv Shows`}
                         medias = { topRated }
-                        fullscreenProps = { fullscreenProps } 
                         typeMedia={mediaTypeTv}
                     />
 
                     <MediaRowContainer
                         title = {`Popular ${genreTitle} Tv Shows This Year`}
                         medias = { popular }
-                        fullscreenProps = { fullscreenProps } 
                         typeMedia={mediaTypeTv}
                     />
 
                     <MediaRowContainer
                         title = {`Binge Worthy ${genreTitle} Tv Shows`}
                         medias = { onTheAir }
-                        fullscreenProps = { fullscreenProps } 
                         typeMedia={mediaTypeTv}
                     />
                     
                     <MediaRowContainer
                         title = {`${genreTitle} Tv Shows Airing Today`}
                         medias = { airingToday }
-                        fullscreenProps = { fullscreenProps } 
                         typeMedia={mediaTypeTv}
                     />
                     <MediaRowContainer
                         title = {`${genreTitle} Staff Picks`}
-                        medias = { staffPicks }
-                        // className={"large-row"}
-                        fullscreenProps = { fullscreenProps } 
+                        medias = { staffPicks } 
                         typeMedia={mediaTypeTv}
                     />
                     <MediaRowContainer
                         title = {`${genreTitle} 90's Binge`}
                         medias = { ninetysBinge }
-                        fullscreenProps = { fullscreenProps } 
                         typeMedia={mediaTypeTv}
                     />
                     <MediaRowContainer
                         title = {`${genreTitle} 80's Binge`}
                         medias = { eightysBinge }
-                        fullscreenProps = { fullscreenProps } 
                         typeMedia={mediaTypeTv}
                     />
 
@@ -251,16 +219,12 @@ const TvShows = ({fullscreenProps}) => {
                 {
                     fullscreenPlayer && 
                     
-                        <FullscreenPlayer
-                            fullscreenProps = {fullscreenProps}
-                        />
+                        <FullscreenPlayer/>
                 }
 
                 {
                     openFullscreenPopup && 
-                    <FullscreenPopup
-                        fullscreenProps = { fullscreenProps }
-                    />
+                    <FullscreenPopup/>
 
                 }
 

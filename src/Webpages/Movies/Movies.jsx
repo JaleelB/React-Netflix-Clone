@@ -1,7 +1,7 @@
-import { Box, Skeleton } from '@mui/material';
+import { Box } from '@mui/material';
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, GenreMenu, SkeletonLoader } from '../../components';
+import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, SkeletonLoader } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import './Movies.scss';
@@ -9,27 +9,29 @@ import './Movies.scss';
 const Movies = () => {
 
     const [discover, setDiscover] = useState([]);
-    // const [latest, setLatest] = useState([]);
     const [popular, setPopular] = useState([]);
     const [upcoming, setUpcoming] = useState([]);
     const [bestPictures, setBestPictures] = useState([]);
-    const [genreList, setGenreList] = useState([]);
-    // const [genreListID, setGenreListID] = useState();
-    // const [isGenreList, setIsGenreList] = useState(false);
     const [eightysBinge, setEightysBinge] = useState([]);
     const [ninetysBinge, setNinetysBinge] = useState([]);
     const [staffPicks, setStaffPicks] = useState([]);
     const [trendingMovie, setSTrendingMovie] = useState([]);
 
+    const [genres, setGenres] = useState([]);
+    const [genreTitle, setGenreTitle] = useState('');
+    const [genreID, setGenreID] = useState(null);
+
     const mediaTypeMovie = 'movie';
     const randIndex = useRef(null);
+
+    const billboardProps = {
+        genreTitle, setGenreTitle, genreID, setGenreID, genres
+    };
 
     const fullscreenProps = useFullscreenPropsContext();
     const { 
         disablePointer, fullscreenPlayer, openFullscreenPopup, 
-        genreTitle, setGenreTitle, genreID,isLoading, 
-        updateLoading, setGenreID,genreListID, setGenreListID,
-        isGenreList, setIsGenreList
+        isLoading, updateLoading, 
     } = fullscreenProps.fullscreenProps;
 
     const randIndexGenerator = (maxValue, indexCount) => {
@@ -81,15 +83,6 @@ const Movies = () => {
         })
         .catch(error => { console.log(error) })
 
-        if(genreListID){
-            axios
-            .get(`${apiComponents[0]}${apiComponents[2].list}/${genreListID}?api_key=${apiComponents[1]}`)
-            .then((res)=> {
-                setGenreList(res.data.items)
-            })
-            .catch(error => { console.log(error) })
-        }
-
         axios
         .get(`${apiComponents[0]}${apiComponents[2].movie_trending}?api_key=${apiComponents[1]}`)
         .then((res)=> {
@@ -118,8 +111,15 @@ const Movies = () => {
             setStaffPicks(res.data.results)
         })
         .catch(error => { console.log(error) })
+
+        axios
+        .get(`${apiComponents[0]}/genre${apiComponents[2].movie}${apiComponents[2].list}?api_key=${apiComponents[1]}&language=en-US`)
+        .then((res)=> {
+            setGenres(res.data)
+        })
+        .catch(error => { console.log(error) })
   
-    }, [genreID, genreListID]);
+    }, [genreID]);
 
     
     useEffect(() => {
@@ -152,27 +152,16 @@ const Movies = () => {
                     movie = {discover[randIndex.current]} 
                     sectionTitle={"Movies"} 
                     mediaType="movie"
+                    billboardProps={billboardProps}
                 />
 
                 <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
 
-                    {
-                        isGenreList && genreList &&
-
-                            <MediaRowContainer
-                            title = {`${genreTitle} Movies For You`}
-                            medias = { genreList }
-                            typeMedia={mediaTypeMovie}
-                            />
-                    }
-
                     <MediaRowContainer
-                        title = "Movies For You"
+                        title = {`${genreTitle} Movies For You`}
                         medias = { discover }
                         typeMedia={mediaTypeMovie}
                     />
-
-
 
                     <MediaRowContainer
                         title = "Trending Movies For You"
@@ -180,9 +169,8 @@ const Movies = () => {
                         typeMedia={mediaTypeMovie}
                     />
 
-
                     <MediaRowContainer
-                        title = "Popular Movies This Year"
+                        title = {`Popular ${genreTitle} Movies This Year`}
                         medias = { popular }
                         typeMedia={mediaTypeMovie}
                     />
@@ -197,17 +185,17 @@ const Movies = () => {
                         typeMedia={mediaTypeMovie}
                     />
                     <MediaRowContainer
-                        title = "Staff Picks"
+                        title = {`${genreTitle} Staff Picks`}
                         medias = { staffPicks }
                         typeMedia={mediaTypeMovie}
                     />
                     <MediaRowContainer
-                        title = "90's Binge"
+                        title = {`${genreTitle} 90's Binge`}
                         medias = { ninetysBinge }
                         typeMedia={mediaTypeMovie}
                     />
                     <MediaRowContainer
-                        title = "80's Binge"
+                        title = {`${genreTitle} 80's Binge`}
                         medias = { eightysBinge } 
                         typeMedia={mediaTypeMovie}
                     />

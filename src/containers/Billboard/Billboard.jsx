@@ -7,7 +7,7 @@ import { PlayArrow, Pause, VolumeOff, VolumeUp, Add, DoNotDisturbAltOutlined } f
 import { Link } from "react-router-dom";
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
-const Billboard = ({movie, sectionTitle,  mediaType}) => {
+const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
     
     const [videoPath, setVideoPath] = useState('');
     const [videoPlay, setVideoPlay] = useState(true);
@@ -18,9 +18,10 @@ const Billboard = ({movie, sectionTitle,  mediaType}) => {
     const { 
         disablePointer, setIsLoading, setOpenFullscreenPopup, 
         setDisablePointer,setPosterID, setFullVideoPath, 
-        posterID, setMediaType, setFullscreenPlayer, genreTitle, 
-        setGenreTitle, setGenreID,setGenreListID,setIsGenreList
+        posterID, setMediaType, setFullscreenPlayer, 
     } = fullscreenProps.fullscreenProps;
+
+    const { genreTitle, setGenreTitle, setGenreID } = billboardProps;
 
     const handleWindowResize = () => { setDeviceWindowWidth(window.innerWidth) }
 
@@ -102,8 +103,6 @@ const Billboard = ({movie, sectionTitle,  mediaType}) => {
                             onClick={ () => {
                                 setGenreTitle('')
                                 setGenreID('')
-                                setGenreListID('')
-                                setIsGenreList(false)
                                 setIsLoading(true);
                             } }
                         >
@@ -114,7 +113,7 @@ const Billboard = ({movie, sectionTitle,  mediaType}) => {
 
                     </Box>
 
-                    <GenreDropdown/>
+                    <GenreDropdown billboardProps={billboardProps}/>
                     
                 </Box>
             } 
