@@ -22,4 +22,7 @@ export {default as SkeletonLoader} from './Skeleton/SkeletonLoader';
 export {BootstrapTooltip} from './ToolTip/ToolTip';
 export {default as PaginationIndicator} from './MediaRowComponents/PaginationIndicator';
 export {default as PaginationIndicatorBar} from './MediaRowComponents/PaginationIndicatorBar';
+export {default as CTAEmailForm} from './CTAEmailForm/CTAEmailForm';
+export {default as StoryCard} from './StoryCard/StoryCard'
+export {default as AccordionQuestions} from './Accordion/Accordion.jsx'
 

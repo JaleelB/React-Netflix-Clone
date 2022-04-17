@@ -38,6 +38,11 @@ export function FullscreenPropsProvider({children}){
 
     const handleMediaType = (typeMedia) =>{ if (typeMedia) setMediaType(typeMedia); };
 
+    const numberOfWords = (string) => { return string.split(" ").length; }
+      
+    const truncate = (string, numOfWords) => { return string.split(" ").splice(0, numOfWords).join(" ") + "..."; }
+    
+
 
     const fullscreenProps = {
         fullscreenPlayer, setFullscreenPlayer,
@@ -50,8 +55,8 @@ export function FullscreenPropsProvider({children}){
         netflixOriginalShow, setNetflixOriginalShow,
         volume, setVolume,
         mediaType, setMediaType,
-        isLoading, 
-        updateLoading,
+        isLoading, truncate,
+        updateLoading, numberOfWords,
         loading, setIsLoading,
         handleNetflixOriginal, updatePosterId, handleMediaType
     };

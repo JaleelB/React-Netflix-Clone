@@ -1,0 +1,14 @@
+@import '../../../mainStyles';
+
+#login-page{
+
+    .story-card{ 
+        color: $color-white; padding: 50px 5%;
+        position: relative; border-bottom: 8px solid #222;
+        margin-bottom: 0; background: $color-black;
+    
+    }
+
+    
+    .btn{ min-width: 74px !important; }
+}

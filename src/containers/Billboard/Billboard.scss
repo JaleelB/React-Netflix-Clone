@@ -64,8 +64,13 @@
             
 
         .billboard__title-wrapper{
-            width: 36%; 
+           
+            width: 50%; 
+            @media screen and (min-width: 1200px){ width: 36%; }
+
+
             @media screen and (max-width: 599px) { display: grid; place-content: center; text-align: center;}
+
             &__image-title{
                 text-transform: uppercase; color: $color-white; 
             }
@@ -76,14 +81,20 @@
             .netflix-icon{ 
                 width:calc(2vw + 24px); height:calc(2vh + 1rem); 
             }
-            .billboard__supplemental-message{ color:$color-white; font-size: 1.4vw; }
+            .billboard__supplemental-message{ 
+                color:$color-white; 
+                font-size: clamp(1.1rem, 1.4vw, 1.8rem); }
         }
         
         .billboard__description-wrapper{
             width: 36%; 
             @media screen and (max-height: 450px) { display: none; }
 
-            .billboard__description{ color:$color-white; font-size: 1.2vw; line-height: 1.2; font-weight: 400; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45); }
+            .billboard__description{ 
+                color:$color-white; font-size: clamp(1.1rem, 2vw, 1.6rem);
+                line-height: 1.3; font-weight: 400; 
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45); 
+            }
         }
 
         .billboard__button-container{  

@@ -1,20 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Nav, NavRoutes } from './components';
 import {FullscreenPropsProvider} from './FullscreenPropsContext';
-import {RowPropsProvider} from './RowPropsContext';
+import StoryCardPage from './Webpages/StoryCardPage/StoryCardPage.jsx'
 
 function App() {
 
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <FullscreenPropsProvider>
-      {/* <RowPropsProvider> */}
-            <div className="App">
-              <Nav />
-              <NavRoutes />
-            </div>
-        {/* </RowPropsProvider> */}
-    </FullscreenPropsProvider>
+
+      isLogin ? <StoryCardPage setIsLogin={setIsLogin}/>
+
+      :
+
+      <FullscreenPropsProvider>
+        <div className="App">
+          <Nav />
+          <NavRoutes />
+        </div>
+      </FullscreenPropsProvider>
 
   );
 }

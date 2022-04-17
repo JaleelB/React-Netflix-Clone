@@ -1,0 +1,41 @@
+@import '../../mainStyles';
+
+.cta-form-container{
+    position: relative;  margin: auto;
+
+    .email-form-title{
+        padding: 0 5%; max-width: 450px; margin: 0 auto 1rem;  font-weight: 300;
+        color: $color-white;  text-align: center;
+
+        @media screen and (min-width: 950px){
+            max-width: none; padding-bottom: 20px; font-size: 1.2rem;
+        }
+        
+    }
+
+    .form-input-wrapper{
+        display: flex; flex-direction: column; gap: .5rem;
+        @media screen and (min-width: 950px){ flex-direction: row; gap: 0;}
+
+        
+        .email-input{ 
+            height: 48px; padding: 10px 10px 0; width: 100%;
+            box-sizing: border-box; font-size: 16px; border: solid 1px #8c8c8c;
+            color: $primary-black;
+
+            @media screen and (min-width: 1024px){
+                width: 80%; min-width: 500px; height: 55px!important;
+            }
+        }
+
+        .get-started-btn{
+            background-color: $primary-red; 
+            border-radius: 0; color: $color-white; font-weight: 300;
+            padding: .8rem 1rem; font-size: .9em;
+            margin: .7rem auto; width: 50%;
+            display: flex; align-items: center; gap: .3rem;  flex-wrap: nowrap;
+
+            @media screen and (min-width: 1024px){ margin: 0; width: auto;}
+        }
+    }
+}
