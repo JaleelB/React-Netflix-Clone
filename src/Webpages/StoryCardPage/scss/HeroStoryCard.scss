@@ -1,0 +1,34 @@
+@import '../../../mainStyles';
+
+.hero-story-card{
+    position: relative;  
+    border-bottom: 8px solid #222; height: 70vh;
+
+    .background-image-wrapper{
+        height:100%; width: $background-width;
+        position: absolute; top: 0; bottom: 0; right: 0; left: 0;
+
+        .concord-img{ inline-size: 100%; object-fit: cover; height: 100%; }
+
+        .concord-img-gradient{
+            position: absolute; top: 0; bottom: 0; right: 0; left: 0;
+            background: rgba(0,0,0,.4);    
+            background-image: linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 60%,rgba(0,0,0,.8) 100%);
+        }
+    }
+
+    .hero-story-card-text{
+        position: relative; width: 100%; margin: 0 auto;
+        padding: 75px 0; max-width: 950px;
+       text-align: center; z-index: 1;
+
+       .hero-story-card-title{  font-size: clamp(2rem, 3vw, 4rem); font-weight: 500; line-height: 1.1; }
+
+        .hero-story-card-subtitle{
+            font-size: 1.125rem; margin: 1rem auto;  font-weight: 400;
+            @media screen and (min-width: 950px){ font-size: 1.625rem; }
+        }
+        
+        h1, h2{ margin: 0 auto; max-width: 800px; }
+    }
+}

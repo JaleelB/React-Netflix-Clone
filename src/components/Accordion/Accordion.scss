@@ -1,0 +1,16 @@
+@import '../../mainStyles';
+
+.accordion-container{
+
+    margin-bottom: 40px;
+
+    .accordion-title{ text-align: center; margin-bottom: 2rem;}
+    .accordion-card-container{
+        
+        .accordion-card{
+            background-color: #303030; color: $color-white;
+
+            .expand-icon{  color: $color-white; }
+        }
+    }
+}

@@ -21,7 +21,6 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
         posterID, setMediaType, setFullscreenPlayer, 
     } = fullscreenProps.fullscreenProps;
 
-    // const { genreTitle, setGenreTitle, setGenreID } = billboardProps;
 
     const handleWindowResize = () => { setDeviceWindowWidth(window.innerWidth) }
 
