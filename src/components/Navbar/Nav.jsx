@@ -13,6 +13,8 @@ export default function Nav() {
 
   const [darkNavbar, setDarkNavbar] = useState(false);
 
+  const urlIdParameters = [23, 46, 85, 1001]
+
   const handleNavbarChange = () => {
       if (window.scrollY > 100) setDarkNavbar(true); 
       else setDarkNavbar(false);
@@ -40,7 +42,7 @@ export default function Nav() {
 
             <Box sx={{display: { xs: 'block', md: 'none' } }}>
               <Link 
-                to={'/'}
+                to={'/browse'}
                 onClick={loading} 
               >
                 <img className="netflix-small-logo" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="mobile netflix icon"/>
@@ -49,7 +51,7 @@ export default function Nav() {
 
             <Box sx={{display: { xs: 'none', md: 'block' }}}>
               <Link 
-                to={'/'}
+                to={'/browse'}
                 onClick={loading} 
               >
                 <img className="netflix-large-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1920px-Netflix_2015_logo.svg.png" alt="destop netflix icon"/>
@@ -84,20 +86,20 @@ export default function Nav() {
                                   className="nav-link" 
                                   onClick={loading} 
                                   style={!checked ? {pointerEvents: "none"} : null} 
-                                  to={'/'}
+                                  to={'/browse'}
                                 >
                                   Home
                                 </Link>
 
                               </li>
-                              {pages.map((page) => (
+                              {pages.map((page, index) => (
                                 <li className="nav-item" key={page}  onClick={() => { if(checked) setChecked(!checked) }}>
                                   
                                   <Link 
                                     className="nav-link"  
                                     onClick={loading} 
                                     style={!checked ? {pointerEvents: "none"} : null} 
-                                    to={`/${page}`}
+                                    to={`/${page}/${urlIdParameters[index]}`}
                                   >
                                     {page}
                                   </Link>
@@ -120,17 +122,17 @@ export default function Nav() {
                         className="full-nav-link" 
                         style={{textDecoration: 'none', textAlign: 'center', color: 'white'}}
                         onClick={loading} 
-                        to={'/'}>
+                        to={'/browse'}>
                           Home
                         </Link>
                     </Box>
-                    {pages.map((page) => (
+                    {pages.map((page, index) => (
                         <Box className="full-nav-item" key={page}>
                           <Link 
                             className="full-nav-link" 
                             onClick={loading} 
                             style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} 
-                            to={`/${page}`}
+                            to={`/${page}/${urlIdParameters[index]}`}
                           >
                             {page}
                           </Link>

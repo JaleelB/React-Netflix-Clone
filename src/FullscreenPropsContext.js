@@ -25,7 +25,7 @@ export function FullscreenPropsProvider({children}){
     const [similiarMovies, setSimiliarMovies] = useState([]);
     const [disablePointer, setDisablePointer] = useState(false);
     const [mediaType, setMediaType] = useState('');
-
+ 
     const [volume, setVolume] = useState(1);
 
     const loading = () => setIsLoading(true);
@@ -51,7 +51,7 @@ export function FullscreenPropsProvider({children}){
         volume, setVolume,
         mediaType, setMediaType,
         isLoading, 
-        updateLoading, 
+        updateLoading,
         loading, setIsLoading,
         handleNetflixOriginal, updatePosterId, handleMediaType
     };
