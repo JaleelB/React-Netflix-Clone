@@ -1,16 +1,16 @@
 import { Box, Button } from '@mui/material'
 import React from 'react';
-import './scss/StoryCardPage.scss';
-import StoryCardPageHeader from './StoryCardPageHeader' 
+import './scss/RegisterPage.scss';
+import RegisterPageHeader from './RegisterPageHeader' 
 import HeroStoryCard from './HeroStoryCard'
 import {TvAsset, PhoneAsset, KidsImageAsset} from './StoryCardAssets';
-import {StoryCard, AccordionQuestions, CTAEmailForm} from '../../components'
+import {StoryCard, AccordionQuestions, CTAEmailForm, Footer} from '../../components'
 
-const LoginPage = ({setIsLogin}) => {
+const RegisterPage = ({setIsLogin}) => {
     return (
         <Box id="login-page">
 
-            <StoryCardPageHeader setIsLogin={setIsLogin}/>
+            <RegisterPageHeader setIsLogin={setIsLogin}/>
 
             <Box className="story-cards">
                 <HeroStoryCard/>
@@ -46,8 +46,10 @@ const LoginPage = ({setIsLogin}) => {
 
             </Box>
 
+            <Footer/>
+
         </Box>
     )
 }
 
-export default LoginPage
+export default RegisterPage;

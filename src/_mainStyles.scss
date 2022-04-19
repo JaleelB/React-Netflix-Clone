@@ -36,7 +36,7 @@ body{
     font-family: $ft-sans;   line-height: 1.5;
     overflow-x: hidden;
     
-    &::-webkit-scrollbar { background-color: transparent;  width: 10px; }
+    &::-webkit-scrollbar { background-color: transparent;  width: 10px; height: 10px; }
     &::-webkit-scrollbar-thumb { background-color: $primary-red; border-radius: 10px;}
 
 }

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import { Nav, NavRoutes } from './components';
 import {FullscreenPropsProvider} from './FullscreenPropsContext';
-import StoryCardPage from './Webpages/StoryCardPage/StoryCardPage.jsx'
+// import RegisterPage from './Webpages/Register/RegisterPage.jsx'
+import LoginPage from './Webpages/LoginPage/LoginPage';
 
 function App() {
 
@@ -9,7 +10,8 @@ function App() {
 
   return (
 
-      isLogin ? <StoryCardPage setIsLogin={setIsLogin}/>
+      // isLogin ? <RegisterPage setIsLogin={setIsLogin}/>
+      isLogin ? <LoginPage/>
 
       :
 

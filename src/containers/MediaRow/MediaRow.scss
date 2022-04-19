@@ -6,7 +6,7 @@
 }
 
 .media-container{
-    margin: 2vw 0 0 0; position: relative; z-index: 5; transition: all 500ms ease-in-out;
+    margin: 2vw 0 0 0; position: relative; z-index: 4; transition: all 500ms ease-in-out;
 
     &:not(:hover){ 
         .pagination-indicator{ display: none; } 
@@ -75,7 +75,7 @@
             scroll-behavior: smooth; scroll-snap-type: x mandatory; 
             transition: all 500ms ease-in-out; 
             
-            --total-posters-in-viewport: 3; width: calc(100% - (2 * var(--row-padding)));
+            --total-posters-in-viewport: 2.3; width: calc(100% - (2 * var(--row-padding)));
 
             // @media screen and (min-width: 320px) and (max-width: 470px){ --total-posters-in-viewport: 3; }
             @media screen and (min-width: 471px) and (max-width: 749px){ --total-posters-in-viewport: 4; }

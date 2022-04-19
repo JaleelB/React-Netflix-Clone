@@ -5,7 +5,7 @@
 
     .email-form-title{
         padding: 0 5%; max-width: 450px; margin: 0 auto 1rem;  font-weight: 300;
-        color: $color-white;  text-align: center;
+        color: $color-white;  text-align: center; position: relative;
 
         @media screen and (min-width: 950px){
             max-width: none; padding-bottom: 20px; font-size: 1.2rem;
@@ -18,13 +18,29 @@
         @media screen and (min-width: 950px){ flex-direction: row; gap: 0;}
 
         
-        .email-input{ 
-            height: 48px; padding: 10px 10px 0; width: 100%;
+        .input{ 
+            height: 48px; padding: 10px 10px 0; width: 100%; z-index:1;
             box-sizing: border-box; font-size: 16px; border: solid 1px #8c8c8c;
             color: $primary-black;
 
             @media screen and (min-width: 1024px){
                 width: 80%; min-width: 500px; height: 55px!important;
+            }
+
+        }
+
+        .input:focus ~ .floating-label{
+
+            top: 32px; bottom: 0; left: 0;
+            font-size: 21px; opacity: 1; color: $color-white;
+
+        }
+
+        .floating-label {
+            display: none; z-index: 0;
+            @media screen and (min-width: 1024px){
+                position: absolute; left: 0; top: 75px; display: block;
+                pointer-events: none; transition: 0.2s ease all;
             }
         }
 

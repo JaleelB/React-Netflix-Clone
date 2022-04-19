@@ -1,0 +1,96 @@
+@import '../../../mainStyles';
+
+#login-page{
+    min-width: $background-width; min-height: $background-height; position: relative;
+    
+    .background-image-wrapper{
+        min-height:100%; min-width: 100%;
+        position: absolute; top: 0; bottom: 0; right: 0; left: 0;
+
+        .concord-img{ inline-size: 100%; object-fit: cover; height: 100%; }
+
+        .concord-img-gradient{
+            position: absolute; top: 0; bottom: 0; right: 0; left: 0;
+            background: rgba(0,0,0,.4);    
+            background-image: linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 60%,rgba(0,0,0,.8) 100%);
+        }
+    }
+
+    .login-body-wrapper{
+
+        min-height: $background-height; margin: 0 auto; max-width: 400px; 
+        &::before{ content:""; height: 90px; display: block; }
+
+        .login-body{
+            width: 100%; max-height: 550px;
+            background-color: rgba(0,0,0,.75);
+            z-index: 55; position: relative; 
+            padding: 40px 50px 60px; color: $color-white;
+        
+            .login-body-main{
+                width: 100%; height: 100%;
+                margin: 0 auto; 
+                display: flex; flex-direction: column; 
+
+                .login-title{ color: $color-white; font-weight: 600; margin-bottom: 15px;}
+                .password-form,.email-form{ 
+                    min-width: 100%;
+        
+                    .input-validate{ color: #e87c03; font-size: .7rem; }
+                    
+                }
+
+                .password-form{ padding-bottom: 1rem; }
+
+                
+
+                #email-input,#password-input{  
+                    width: 100%; min-height: 40px; margin: 5px 0; padding-left: 10px; 
+                    border-bottom: 2px solid #e87c03; background-color: #333;
+                    appearance: none !important; box-shadow: none !important;
+                    border-radius: 3px; transition: all 250ms ease;
+
+                    color: $color-white;
+
+                    &:focus{ outline: none; }
+                    // &:focus + .input-validate{ display: none; }
+                    
+                }
+
+                .login-button{ 
+                    background-color: $primary-red; color: $color-white;
+                    border-radius: 3px; margin: 1.5rem 0 0;
+                }
+
+                .remember-user-checkbox{ 
+                    display: flex; align-items: center; gap: .3rem; 
+                    font-size: .8rem; margin-top: 10px; color: #b3b3b3;
+                }
+
+                .regsiter-text, .captcha-text{
+                    color: #b3b3b3; margin-top: 10px;
+                    a{ color: $color-white; text-decoration: none; cursor: pointer; }
+                }
+
+                .regsiter-text{ display: flex; align-items: center; gap: .3rem; font-weight: 500; }
+
+                .captcha-text{
+                    font-size: 13px;
+                    span{ margin-right: 5px;}
+                    a{ color:#0071eb;}
+                }
+                
+
+            }
+        }
+
+    }
+
+    .footer{
+        position: absolute; bottom: 0; left:0; right: 0;
+        background: rgba(0,0,0,.75); max-width: 100%;
+        margin-bottom: 0; padding-top: 3%; padding-bottom: 30px; 
+    }
+
+
+}
