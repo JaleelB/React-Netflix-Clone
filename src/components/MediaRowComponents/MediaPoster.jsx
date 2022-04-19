@@ -70,7 +70,7 @@ const MediaPoster = ({ disableHover,index, media, netflixOriginal, typeMedia }) 
                         setGenres(getGenres(posterAttributes.genreIDs));
                         setCardPopupBackdrop('https://image.tmdb.org/t/p/original/' + posterAttributes.backdrop);
                         setCardPopupTitle(posterAttributes.name);
-                        setCardPopupAirDate(posterAttributes.airDate);
+                        setCardPopupAirDate(posterAttributes.airDate.substring(0,4));
                         setCardPopupRating(posterAttributes.rating);
                 
                         handleMediaType(typeMedia);

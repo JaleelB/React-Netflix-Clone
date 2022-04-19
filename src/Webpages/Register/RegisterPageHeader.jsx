@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Button } from '@mui/material';
-import './scss/StoryCardPageHeader.scss'
+import './scss/RegisterPageHeader.scss'
 
-const LoginHeader = ({setIsLogin}) => {
+const RegisterPageHeader = ({setIsLogin}) => {
     return (
         <Box className="login-header-wrapper">
             <Box className="login-header">
@@ -36,4 +36,4 @@ const LoginHeader = ({setIsLogin}) => {
     )
 }
 
-export default LoginHeader
+export default RegisterPageHeader;
