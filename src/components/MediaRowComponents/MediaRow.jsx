@@ -23,7 +23,7 @@ const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover 
 
 
     return (
-
+<PosterPropsProvider>
         <Box 
             className={`media-row ${className ? className: ''}`}
             ref={rowRef}
@@ -33,7 +33,7 @@ const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover 
                 medias && medias.map((media, index) => {   
                     
                     return (
-                        <PosterPropsProvider>
+                        // <PosterPropsProvider>
                             <MediaPoster
                                 key={media.id}
                                 index = {index}
@@ -43,13 +43,13 @@ const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover 
                                 netflixOriginal={netflixOriginal}
                               
                             />
-                        </PosterPropsProvider>
+                        // </PosterPropsProvider>
                     );
                                 
                 })   
             }
         </Box>
-  
+  </PosterPropsProvider>
     )
 }
 

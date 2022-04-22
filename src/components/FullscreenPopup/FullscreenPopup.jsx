@@ -1,7 +1,7 @@
 import { Box, Typography, Button } from '@mui/material';
 import React,{useEffect} from 'react';
 import axios from 'axios';
-import {apiComponents} from '../../components';
+import {apiComponents} from '..';
 import FullscreenPosterBackdrop from './FullscreenPosterBackdrop';
 import SimiliarMovies from './SimiliarMovies';
 import './FullscreenPopup.scss';
@@ -28,21 +28,21 @@ const FullscreenPopup = () => {
             .then((res)=> {
                 setMovie(res.data)
             })
-            .catch(error => { console.log(error) })
+            .catch(error => { console.error(error) })
 
             axios
             .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/credits?api_key=${apiComponents[1]}&language=en-US`)
             .then((res)=> {
                 setMovieCredits(res.data)
             })
-            .catch(error => { console.log(error) })
+            .catch(error => { console.error(error) })
 
             axios
             .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/similar?api_key=${apiComponents[1]}&language=en-US`)
             .then((res)=> {
                 setSimiliarMovies(res.data.results)
             })
-            .catch(error => { console.log(error) })
+            .catch(error => { console.error(error) })
 
         }
 
@@ -53,21 +53,21 @@ const FullscreenPopup = () => {
             .then((res)=> {
                 setMovie(res.data)
             })
-            .catch(error => { console.log(error) })
+            .catch(error => { console.error(error) })
 
             axios
             .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/credits?api_key=${apiComponents[1]}&language=en-US`)
             .then((res)=> {
                 setMovieCredits(res.data)
             })
-            .catch(error => { console.log(error) })
+            .catch(error => { console.error(error) })
 
             axios
             .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/similar?api_key=${apiComponents[1]}&language=en-US`)
             .then((res)=> {
                 setSimiliarMovies(res.data.results)
             })
-            .catch(error => { console.log(error) })
+            .catch(error => { console.error(error) })
         }
 
     
@@ -80,7 +80,7 @@ const FullscreenPopup = () => {
             .then((res)=> {
                 setFullVideoPath(res.data.results[0]?.key)
             })
-            .catch(error => { console.log(error) })
+            .catch(error => { console.error(error) })
         }
 
         if(mediaType === 'tv'){
@@ -89,7 +89,7 @@ const FullscreenPopup = () => {
             .then((res)=> {
                 setFullVideoPath(res.data.results[0]?.key)
             })
-            .catch(error => { console.log(error) })
+            .catch(error => { console.error(error) })
         }
     
     },[posterID, setFullVideoPath, mediaType]);
@@ -138,7 +138,7 @@ const FullscreenPopup = () => {
                             {(movie?.title ? movie?.title : movie?.name ) && window.innerWidth < 601 && <Typography className="backdrop-title" variant="body" component="h1">{movie?.title ? movie?.title : movie?.name}</Typography>}
 
                             {netflixOriginalShow && mediaType === 'tv' && <Box className="netflix-listing" sx={{display: 'flex', gap: '1rem'}}>
-                                <img className="netflix-icon" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="Netflix Icon"/>
+                                <img className="netflix-icon" src="https://cdn4.iconfinder.com/data/icons/erroros-and-brands/512/227_Netflix_erroro-1024.png" alt="Netflix Icon"/>
                                 <Typography className="listing-supplemental-message" sx={{color :'#fff'}}>Netflix Show</Typography>
                             </Box>}
 

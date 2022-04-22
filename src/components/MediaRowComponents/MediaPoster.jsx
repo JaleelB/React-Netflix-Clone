@@ -51,8 +51,8 @@ const MediaPoster = ({ disableHover,index, media, netflixOriginal, typeMedia }) 
                 className='media-poster'
                 ref={posterRef}
                 onClick = {() => {
-                    handleMediaType(typeMedia);                    
                     updatePosterId(posterAttributes.id);
+                    handleMediaType(typeMedia);                    
                     setOpenFullscreenPopup(true);
                     handleNetflixOriginal(netflixOriginal, typeMedia);
                 }}
@@ -83,8 +83,24 @@ const MediaPoster = ({ disableHover,index, media, netflixOriginal, typeMedia }) 
             >
                 
                 <Box className="media-poster-image-wrapper">
-                    { netflixOriginal && posterAttributes.posterPath && typeMedia === 'tv' && <img className="netflix-icon"src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="Netflix Icon"/> }
-                    <img className={`media-poster-image ${netflixOriginal ? "netflixOriginal" : ''}`} draggable="false"  src={"https://image.tmdb.org/t/p/w500" + posterAttributes.posterPath} alt={posterAttributes.name}/>
+                    { 
+                        netflixOriginal && posterAttributes.posterPath && typeMedia === 'tv' &&
+                         <img 
+                            className="netflix-icon"
+                            src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" 
+                            alt="Netflix Icon"
+                            loading="lazy"
+                            draggable="false"
+                        /> 
+                    }
+
+                    <img 
+                        className={`media-poster-image ${netflixOriginal ? "netflixOriginal" : ''}`}
+                        draggable="false"  
+                        src={"https://image.tmdb.org/t/p/w500" + posterAttributes.posterPath} 
+                        alt={posterAttributes.name}
+                        loading="lazy"
+                    />
                 </Box>
 
 

@@ -34,12 +34,21 @@ body{
     // background: #151515;
     background: $primary-black; 
     font-family: $ft-sans;   line-height: 1.5;
-    overflow-x: hidden;
+    overflow-x: hidden; overflow-y: auto;
     
-    &::-webkit-scrollbar { background-color: transparent;  width: 10px; height: 10px; }
-    &::-webkit-scrollbar-thumb { background-color: $primary-red; border-radius: 10px;}
-
+    &::-webkit-scrollbar {   width: 5px; }
+    &::-webkit-scrollbar-thumb { 
+        // background-color: $primary-red; 
+        border-color: rgba(42,42,42,.6);
+        background-color: rgba(255,255,255,.5);
+        border-radius: 10px;
+        opacity: 0.5;
+    }
+    
+    &::-webkit-scrollbar-track {background:transparent;}
+   
 }
+
 
 
 // html{-ms-overflow-style: none;  scrollbar-width: none; }

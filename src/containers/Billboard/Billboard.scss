@@ -49,11 +49,10 @@
 
         @media screen and (min-width: 750px){ width: auto; padding-left: 3%;}
         @media screen and (min-width: 1200px){ 
-            top: 2rem;
             font-size: 38px; line-height: 38px; font-weight: 700;
             margin-right: 15px; color: $color-white; gap: 50px;
             padding-left: 3%; display: flex; align-items: center; 
-            position: absolute; top: 6rem; z-index: 10; width: auto;
+            position: absolute; top: 4rem; z-index: 10; width: auto;
         }
     }
 
@@ -66,7 +65,7 @@
         .billboard__title-wrapper{
            
             width: 50%; 
-            @media screen and (min-width: 1200px){ width: 36%; }
+            @media screen and (min-width: 1200px){ width: 55%; }
 
 
             @media screen and (max-width: 599px) { display: grid; place-content: center; text-align: center;}
@@ -87,11 +86,11 @@
         }
         
         .billboard__description-wrapper{
-            width: 36%; 
+            width: 45%; 
             @media screen and (max-height: 450px) { display: none; }
 
             .billboard__description{ 
-                color:$color-white; font-size: clamp(1.1rem, 2vw, 1.6rem);
+                color:$color-white; font-size: clamp(1.1rem, 1.2vw, 1.6rem);
                 line-height: 1.3; font-weight: 400; 
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45); 
             }

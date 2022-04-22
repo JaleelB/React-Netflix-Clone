@@ -1,10 +1,26 @@
 import { Box,Link,Button } from '@mui/material';
-import React from 'react';
+import React, {useState, useRef} from 'react';
 import LoginHeader from './LoginHeader';
 import {Footer} from '../../components';
 import './scss/LoginPage.scss';
 
 const LoginPage = () => {
+
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+
+    const[email, setEmail] = useState('');
+    const[password, setPassword] = useState('');
+
+    const handleLogin = () => {
+        if(emailRef.current.value !== "" && passwordRef.current.value !== ""){
+            setPassword(passwordRef.current.value);
+            setEmail(emailRef.current.value);
+        }
+    };
+
+    
+
     return (
         <Box id="login-page">
             <LoginHeader/>
@@ -19,24 +35,34 @@ const LoginPage = () => {
                     <Box className="login-body-main">
                         <h1 className="login-title">Sign In</h1>
                         <Box className="email-form">
-                            <input id="email-input" type="text" plassholder="Email or phone number"/>
-                            <span class="input-validate">
+                            <input 
+                                id="email-input" 
+                                type="text" 
+                                plassholder="Email or phone number"
+                                ref={emailRef}
+                            />
+                            <span className="input-validate">
                                 Please enter a valid email or phone number.
                             </span>
                         </Box>
 
                         <Box className="password-form" >
-                            <input id="password-input" type="password" placeholder="Password"/>
-                            <span class="input-validate">
+                            <input 
+                                id="password-input" 
+                                type="password" 
+                                placeholder="Password"
+                                ref={passwordRef}
+                            />
+                            <span className="input-validate">
                                 Your password must contain between 7 and 60 characters.
                             </span>
                         </Box>
 
-                        <Button className="login-button">Sign In</Button>
+                        <Button className="login-button" onClick={handleLogin}>Sign In</Button>
 
                         <Box className="remember-user-checkbox">
                             <input type="checkbox" id="remember-user" name="checkbox1"/>
-                            <label for="remember-user">Remember me</label>
+                            <label htmlFor="remember-user">Remember me</label>
                         </Box>
 
                         <Box className="regsiter-text">

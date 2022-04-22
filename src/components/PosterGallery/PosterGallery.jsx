@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { MediaRowContainer } from '../../containers';
-import { MediaRowTitle } from '../../components';
+import { MediaRowTitle } from '..';
 
 import './PosterGallery.scss';
 

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import React from 'react';
-import { MediaRowTitle } from '../../components';
+import { MediaRowTitle } from '..';
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
 const ImageSliderBackdrop = ({movie}) => {
