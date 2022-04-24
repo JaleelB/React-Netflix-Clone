@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { MediaRowContainer } from '../../containers';
-import { MediaRowTitle } from '../../components';
+import { MediaRowTitle } from '..';
 import React from 'react';
 
 

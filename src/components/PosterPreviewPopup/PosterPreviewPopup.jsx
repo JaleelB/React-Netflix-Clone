@@ -2,7 +2,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { PlayCircle, ThumbDownOffAlt, ThumbUpOffAlt } from '@mui/icons-material';
 import React, {useEffect} from 'react';
 import axios from 'axios';
-import {apiComponents, BootstrapTooltip } from '../../components';
+import {apiComponents, BootstrapTooltip } from '..';
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import {useRowPopupPropsContext} from '../../RowPropsContext';
 
@@ -31,20 +31,24 @@ const PosterPreviewPopup = () => {
 
     useEffect(() => {
 
-        axios
-        .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US`)
-        .then((res)=> {
-            setFullVideoPath(res.data.results[0]?.key)
-        })
-        .catch(error => { console.log(error) })
+        if(mediaType === 'movie'){
+            axios
+            .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setFullVideoPath(res.data.results[0]?.key)
+            })
+            .catch(error => { console.log(error) })
+        }
 
-        axios
-        .get(`${apiComponents[0]}${apiComponents[2].tv}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US`)
-        .then((res)=> {
-            setFullVideoPath(res.data.results[0]?.key)
-            // console.log(res.data.results[0]?.key)
-        })
-        .catch(error => { console.log(error) })
+        else if(mediaType === 'tv'){
+            axios
+            .get(`${apiComponents[0]}${apiComponents[2].tv}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US`)
+            .then((res)=> {
+                setFullVideoPath(res.data.results[0]?.key)
+                // console.log(res.data.results[0]?.key)
+            })
+            .catch(error => { console.log(error) })
+        }
 
     
     },[posterID, setFullVideoPath]);

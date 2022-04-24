@@ -6,6 +6,10 @@
     .media-container{
         margin: 0;
 
+        &:hover .pagination-indicator {
+            display: none;
+        }
+
         .title-wrapper{ padding: 0; margin-bottom: 10px; }
 
         .media-row-wrapper{
@@ -14,11 +18,13 @@
                 display: none;
             }
 
+            .pagination-indicator{ display: none;}
+
             .poster-gallery{ 
                 padding: 0; overflow: visible; width: 100%;
                 flex-wrap: wrap;
                 
-                @media screen and (min-width: 1200px){ --total-posters-in-viewport: 6.3; }
+                @media screen and (min-width: 1200px){ --total-posters-in-viewport: 5.5; }
                 @media screen and (min-width: 1600px){ --total-posters-in-viewport: 7.4; }
                 @media screen and (min-width: 2000px){ --total-posters-in-viewport: 8.5; }
 

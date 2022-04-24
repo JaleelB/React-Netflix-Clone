@@ -1,31 +1,48 @@
 @import '../../../mainStyles';
 
 #login-page{
-    min-width: $background-width; min-height: $background-height; position: relative;
+    min-width: $background-width; min-height: $background-height; height: 100%; position: relative;
+    background-color: $color-black;
     
     .background-image-wrapper{
-        min-height:100%; min-width: 100%;
-        position: absolute; top: 0; bottom: 0; right: 0; left: 0;
+        display: none; 
 
-        .concord-img{ inline-size: 100%; object-fit: cover; height: 100%; }
-
-        .concord-img-gradient{
+        @media screen and (min-width: 741px) {
+            min-height:100%; min-width: 100%; display: block;
             position: absolute; top: 0; bottom: 0; right: 0; left: 0;
-            background: rgba(0,0,0,.4);    
-            background-image: linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 60%,rgba(0,0,0,.8) 100%);
+
+            .concord-img{ inline-size: 100%; object-fit: cover; height: 100%; }
+
+            .concord-img-gradient{
+                position: absolute; top: 0; bottom: 0; right: 0; left: 0;
+                background: rgba(0,0,0,.4);    
+                background-image: linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 60%,rgba(0,0,0,.8) 100%);
+            }
         }
     }
 
     .login-body-wrapper{
 
-        min-height: $background-height; margin: 0 auto; max-width: 400px; 
-        &::before{ content:""; height: 90px; display: block; }
+        margin: 0 auto; max-width: 100%; border-bottom: 3px solid #333;
+        &::before{ content:""; height: 70px; display: block; }
+
+
+        @media screen and (min-width: 740px) { 
+
+            &::before{ height: 90px; }
+            min-height: 75vh; max-width: 400px;
+            border: none; padding-bottom: 80px;
+        }
 
         .login-body{
-            width: 100%; max-height: 550px;
+            width: 100%; max-height: 450px;
             background-color: rgba(0,0,0,.75);
             z-index: 55; position: relative; 
-            padding: 40px 50px 60px; color: $color-white;
+            padding: 0 20px 30px; color: $color-white;
+
+            @media screen and (min-width: 740px) { 
+                min-height: 580px; padding: 50px 50px 70px;
+            }
         
             .login-body-main{
                 width: 100%; height: 100%;
@@ -43,7 +60,6 @@
                 .password-form{ padding-bottom: 1rem; }
 
                 
-
                 #email-input,#password-input{  
                     width: 100%; min-height: 40px; margin: 5px 0; padding-left: 10px; 
                     border-bottom: 2px solid #e87c03; background-color: #333;
@@ -68,14 +84,14 @@
                 }
 
                 .regsiter-text, .captcha-text{
-                    color: #b3b3b3; margin-top: 10px;
+                    color: #b3b3b3; margin-top: 10px; 
                     a{ color: $color-white; text-decoration: none; cursor: pointer; }
                 }
 
-                .regsiter-text{ display: flex; align-items: center; gap: .3rem; font-weight: 500; }
+                .regsiter-text{ display: flex; align-items: center; gap: .3rem; font-weight: 500; font-size:.9rem; }
 
                 .captcha-text{
-                    font-size: 13px;
+                    font-size: 11px;
                     span{ margin-right: 5px;}
                     a{ color:#0071eb;}
                 }
@@ -87,7 +103,7 @@
     }
 
     .footer{
-        position: absolute; bottom: 0; left:0; right: 0;
+        position: relative; bottom: 0; left:0; right: 0;
         background: rgba(0,0,0,.75); max-width: 100%;
         margin-bottom: 0; padding-top: 3%; padding-bottom: 30px; 
     }

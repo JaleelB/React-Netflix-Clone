@@ -2,8 +2,10 @@
 
 .fullscreen-popup{
     position: fixed; left: 0; right: 0; top: 0; bottom: 0;
-    width: $background-width; min-height: $background-height; max-width: 1350px;
+    width: $background-width; min-height: $background-height; max-width: 850px;
     background: $primary-black; z-index: 2000;  overflow-x: hidden;
+
+    @media screen and (min-width: 1600px) {  max-width: 1350px; }
 
     &::-webkit-scrollbar {display: none;}
 
@@ -161,7 +163,7 @@
                         overflow: visible; flex-wrap: wrap;
                         width: 100%;                         
                        
-                        @media screen and (min-width: 1200px){ --total-posters-in-viewport: 4.3; }
+                        @media screen and (min-width: 1200px){ --total-posters-in-viewport: 3.3; }
                         @media screen and (min-width: 1600px){ --total-posters-in-viewport: 5.4; }
                         @media screen and (min-width: 2000px){ --total-posters-in-viewport: 6.5; }
 

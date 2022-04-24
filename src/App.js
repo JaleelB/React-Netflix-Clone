@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import { Nav, NavRoutes } from './components';
 import {FullscreenPropsProvider} from './FullscreenPropsContext';
-// import RegisterPage from './Webpages/Register/RegisterPage.jsx'
-import LoginPage from './Webpages/LoginPage/LoginPage';
+import RegisterPage from './Webpages/Register/RegisterPage.jsx'
+// import LoginPage from './Webpages/LoginPage/LoginPage';
 
 function App() {
 
@@ -10,8 +10,8 @@ function App() {
 
   return (
 
-      // isLogin ? <RegisterPage setIsLogin={setIsLogin}/>
-      isLogin ? <LoginPage/>
+      isLogin ? <RegisterPage setIsLogin={setIsLogin}/>
+      // isLogin ? <LoginPage/>
 
       :
 

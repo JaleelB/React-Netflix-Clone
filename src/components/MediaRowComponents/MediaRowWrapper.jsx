@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from '@mui/icons-material';
 import React from 'react';
-import { MediaRow, PosterPreviewPopup } from '../../components';
+import { MediaRow, PosterPreviewPopup } from '..';
 import {useRowPopupPropsContext} from '../../RowPropsContext';
 
 import '../../containers/MediaRow/MediaRow.scss';

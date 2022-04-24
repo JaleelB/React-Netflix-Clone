@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import Slider from "react-slick"; 
 import ImageSliderBackdrop from './ImageSliderBackdrop';
-import {MediaRowTitle} from '../../components';
+import {MediaRowTitle} from '..';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

@@ -41,13 +41,17 @@ const FullscreenPlayer = () => {
 
     return (
 
-        <Box className='fullscreen-video-wrapper' ref={fullVideoCanvas} >
+        <Box 
+            className='fullscreen-video-wrapper' 
+            ref={fullVideoCanvas} 
+            onLoad={document.body.style.overflow = "hidden"}
+        >
             <ArrowBack
                 className="back-arrow"
                 style={{ left: window.innerWidth < window.innerHeight && fullVideoPath && `${window.innerWidth - 45}px`, transform: window.innerWidth < window.innerHeight && fullVideoPath && 'rotate(90deg)', zIndex: window.innerWidth < window.innerHeight && fullVideoPath && 4 }}
                 onClick={() => {
                     setFullscreenPlayer(!fullscreenPlayer);
-                    // setVolume(1);
+                    document.body.style.overflowY = "scroll";
                 }}
             />
 

@@ -38,9 +38,9 @@ export function FullscreenPropsProvider({children}){
 
     const handleMediaType = (typeMedia) =>{ if (typeMedia) setMediaType(typeMedia); };
 
-    const numberOfWords = (string) => { return string.split(" ").length; }
+    // const numberOfWords = (string) => { return string.split(" ").length; }
       
-    const truncate = (string, numOfWords) => { return string.split(" ").splice(0, numOfWords).join(" ") + "..."; }
+    // const truncate = (string, numOfWords) => { return string.split(" ").splice(0, numOfWords).join(" ") + "..."; }
     
 
 
@@ -55,8 +55,8 @@ export function FullscreenPropsProvider({children}){
         netflixOriginalShow, setNetflixOriginalShow,
         volume, setVolume,
         mediaType, setMediaType,
-        isLoading, truncate,
-        updateLoading, numberOfWords,
+        // truncate, numberOfWords,
+        updateLoading,isLoading,
         loading, setIsLoading,
         handleNetflixOriginal, updatePosterId, handleMediaType
     };
