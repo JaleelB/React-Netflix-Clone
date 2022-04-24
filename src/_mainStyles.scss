@@ -34,7 +34,7 @@ body{
     // background: #151515;
     background: $primary-black; 
     font-family: $ft-sans;   line-height: 1.5;
-    overflow-x: hidden; overflow-y: auto;
+    overflow-x: hidden; 
     
     &::-webkit-scrollbar {   width: 5px; }
     &::-webkit-scrollbar-thumb { 
