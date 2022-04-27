@@ -22,6 +22,7 @@ const MediaRow = ({ medias, netflixOriginal, typeMedia, className, disableHover 
     },[rowRef.current])
 
 
+
     return (
 <PosterPropsProvider>
         <Box 

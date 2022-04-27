@@ -7,15 +7,18 @@
 
 .media-container{
     margin: 2vw 0 0 0; position: relative; z-index: 4; transition: all 500ms ease-in-out;
-
-    &:not(:hover){ 
-        .pagination-indicator{ display: none; } 
     
-    }
-    &:hover{ 
-        .pagination-indicator{ display: block; } 
+    &:not(:hover){
+        .pagination-indicator{
+            display: none;
+        }
     }
 
+    &:hover{
+        .pagination-indicator{
+            display: block;
+        }
+    }
     
 
     .title-wrapper{ 
@@ -50,6 +53,7 @@
                 width: var(--row-padding); z-index: 10; height:100%;
                 cursor: pointer; background-color: rgba(20,20,20,.5);
                 color: $color-white;
+
 
                 &:hover{
                     background-color: rgba(20,20,20,.7);

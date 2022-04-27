@@ -47,7 +47,7 @@ router.post("/login", async (request, response)=>{
         const accessToken = jwt.sign(
             { id: user._id },
             process.env.SECRET_KEY,
-            {expiresIn: "6m"}
+            {expiresIn: "1d"}
         );
 
         //holds (removes) the password field in the json object in the body of the response
