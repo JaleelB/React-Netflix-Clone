@@ -30,8 +30,8 @@ const CTAEmailForm = () => {
         }
 
         else if(inputFormRef.current.value !== "" && email !== "" && username !== "" && password === ""){
-            // setPassword(inputFormRef.current.value);
-            const password = inputFormRef.current.value
+            setPassword(inputFormRef.current.value);
+            // const password = inputFormRef.current.value
             try{
                 await axios.post('userAuthentication/register', {email, username, password})
                 navigate("/login");
@@ -39,17 +39,6 @@ const CTAEmailForm = () => {
         }
 
     };
-
-    // const handleLogin = async() => {
-    //     console.error(emailAddress, userName, password);
-    //     try{
-    //         await axios.post('userAuthentication/register', {emailAddress, userName, password})
-    //         navigate("/login");
-    //     }catch(error){
-    //         console.error(error);
-    //     }
-    // }
-
 
     return (
         <Box className="cta-form-container">
@@ -89,19 +78,6 @@ const CTAEmailForm = () => {
                     </span>
                     <ChevronRight className="arrow"  />
                 </Button>
-
-                {/* { password && 
-                    <Button 
-                        className="get-started-btn btn" 
-                        onClick={handleLogin}
-                        sx={{minWidth: "300px"}}
-                    >
-                        <span>
-                            Login
-                        </span>
-                        <ChevronRight className="arrow"  />
-                    </Button>
-                } */}
 
             </form>
     
