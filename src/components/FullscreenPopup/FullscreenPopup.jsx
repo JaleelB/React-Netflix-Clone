@@ -184,7 +184,7 @@ const FullscreenPopup = () => {
                                     >
             
                                         <Add className="play-icon popup-icon"/>
-                                        My List
+                                        My List 
             
                                     </Button>
                                 </Box>
@@ -207,6 +207,8 @@ const FullscreenPopup = () => {
                                     disableHover
                                 /> 
                             }
+
+
                         </Box>
 
                         <Box className="cast-container">

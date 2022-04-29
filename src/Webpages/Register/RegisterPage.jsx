@@ -6,11 +6,11 @@ import HeroStoryCard from './HeroStoryCard'
 import {TvAsset, PhoneAsset, KidsImageAsset} from './StoryCardAssets';
 import {StoryCard, AccordionQuestions, CTAEmailForm, Footer} from '../../components'
 
-const RegisterPage = ({setIsLogin}) => {
+const RegisterPage = () => {
     return (
         <Box id="login-page">
 
-            <RegisterPageHeader setIsLogin={setIsLogin}/>
+            <RegisterPageHeader/>
 
             <Box className="story-cards">
                 <HeroStoryCard/>

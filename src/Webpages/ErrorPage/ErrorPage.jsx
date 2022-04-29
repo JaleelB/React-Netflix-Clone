@@ -15,7 +15,7 @@ const ErrorPage = () => {
 
                 <Button className="home-btn">
                     <Link 
-                        to={'/browse'}
+                        to={'/'}
                     >
 
                         <ChevronLeftIcon className="arrow"/>

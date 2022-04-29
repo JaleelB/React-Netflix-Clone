@@ -59,7 +59,7 @@ const PosterPreviewPopup = () => {
         <Box 
             className="preview-popup"
             sx={{
-                top: `-${rowPadding - 15}px`,
+                top: `-${rowPadding}px`,
                 width: `${cardPopupWidth * 1.75}px`,
                 height: `${cardPopupWidth * 2.05}px`,
                 left: `${
@@ -73,6 +73,9 @@ const PosterPreviewPopup = () => {
                         }px`
             }}
             style={isHovered ? mountStyle  : unmountStyle}
+            onClick={() => {
+                setFullscreenPlayer(!fullscreenPlayer);
+            }}
             onMouseLeave={()=> {
                 setIsHovered(false)
                 handleUnmountOnMouseLeave();

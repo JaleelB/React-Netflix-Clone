@@ -122,11 +122,15 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
                     <BillboardTitle title={movie?.name ? movie?.name : movie?.title}/>
   
                     <Box className="billboard__supplemental-wrapper" sx={{display: 'flex', gap: '1rem'}}>
-                        <img className="netflix-icon" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="Netflix Icon"/>
+                        <img className="netflix-icon" draggable={false} src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="Netflix Icon"/>
                         <Typography className="billboard__supplemental-message" sx={{color :'#fff'}}>Netflix Original</Typography>
                     </Box>
 
-                    {deviceWindowWidth >= 750 && <BillboardDescription description={movie?.overview}/>}
+                    
+                    {
+                        deviceWindowWidth >= 750 && 
+                        <BillboardDescription description={movie?.overview}/>
+                    }
                     
                     <Box className="billboard__button-container" >
                         {deviceWindowWidth >= 1200 && <>

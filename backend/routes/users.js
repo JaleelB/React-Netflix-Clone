@@ -5,9 +5,10 @@ const verifyAccessToken = require("../verifyAccessToken");
 
 //update method
 router.put("/:id", verifyAccessToken, async (request, response)=>{
+
     if(request.user.id === request.params.id){
         if(request.body.password){
-            request.body.password = CryptoJS.AES.encrypt(request.body.password, process.env.SECRET_KEY).toString()
+            request.body.password = CryptoJS.AES.encrypt(request.body.password, process.env.SECRET_KEY).toString();
         }
 
         try{
@@ -21,13 +22,37 @@ router.put("/:id", verifyAccessToken, async (request, response)=>{
         }catch(error){ response.status(500).json(error);  }
     }
     else{
-        response.status(403).json("Account cannot be updated")
+        response.status(403).json("Account cannot be updated.")
     }
 })
 
 //delete method
+router.delete("/:id", verifyAccessToken, async (request, response)=>{
 
+    if(request.user.id === request.params.id){
+        try{
+
+            await User.findByIdAndDelete(request.params.id)
+            response.status(200).json("Account Deleted.");
+
+        }catch(error){ response.status(500).json(error);  }
+    }
+    else{
+        response.status(403).json("Account cannot be deleted.")
+    }
+})
 
 //get method
+router.get("/find/:id", async (request, response)=>{
+
+    try{
+ 
+        const user = await User.findById(request.params.id)
+        const {password, ...userDetails} = user._doc;
+        response.status(200).json(userDetails);
+
+    }catch(error){ response.status(500).json(error);  }
+    
+})
 
 module.exports = router;
