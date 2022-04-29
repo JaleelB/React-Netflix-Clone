@@ -47,11 +47,11 @@
         .get-started-btn{
             background-color: $primary-red; 
             border-radius: 0; color: $color-white; font-weight: 300;
-            padding: .8rem 1rem; font-size: .9em;
+            padding: .8rem 1rem; font-size: .85em;
             margin: .7rem auto; width: 50%;
             display: flex; align-items: center; gap: .3rem;  flex-wrap: nowrap;
 
-            @media screen and (min-width: 1024px){ margin: 0; width: auto;}
+            @media screen and (min-width: 1024px){ margin: 0; width: auto; }
         }
     }
 }

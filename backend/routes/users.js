@@ -46,7 +46,7 @@ router.delete("/:id", verifyAccessToken, async (request, response)=>{
 router.get("/find/:id", async (request, response)=>{
 
     try{
-
+ 
         const user = await User.findById(request.params.id)
         const {password, ...userDetails} = user._doc;
         response.status(200).json(userDetails);

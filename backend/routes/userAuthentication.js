@@ -1,5 +1,3 @@
-const { Router } = require("express")
-
 const router  = require("express").Router();
 const User = require("../models/User");
 const CryptoJS = require("crypto-js");
@@ -12,7 +10,7 @@ router.post("/register", async (request, response)=>{
         email: request.body.email,
 
         //using crptojs library, the password in encrypted and in its place a hash is shown in the json genmerated as a response from post request
-        password: CryptoJS.AES.encrypt(request.body.password, process.env.SECRET_KEY).toString()
+        password: CryptoJS.AES.encrypt(request.body.password, process.env.SECRET_KEY).toString(),
     });
 
     try{
@@ -22,7 +20,9 @@ router.post("/register", async (request, response)=>{
         //listens for the succesful status of the user being created and saved then returns response to user of the userChema created by user in json format
         response.status(201).json(user);
     }
-    catch(error){ response.status(500).json(error); }
+    catch(error){ 
+        response.status(500).json(error); 
+    }
 
     
 });
@@ -35,13 +35,13 @@ router.post("/login", async (request, response)=>{
         //that email equal the email in the requesrt body made by the user
         //if equal that user exists; otherwise no user exists
         const user = await User.findOne({ email: request.body.email })
-        !user && response.status(401).json("Incorrect user email or password!");
+        if(!user) return response.status(401).json("Incorrect user email or password!");
 
         //decrpyts hashed user password
         const bytes  = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
         const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
 
-        originalPassword !== request.body.password && response.status(401).json("Incorrect user email and/or password!");
+        if( originalPassword !== request.body.password ) return response.status(401).json("Incorrect user email and/or password!");
 
         //hides user id inside jwt token
         const accessToken = jwt.sign(

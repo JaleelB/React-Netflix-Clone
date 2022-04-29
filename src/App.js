@@ -1,24 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { Nav, NavRoutes } from './components';
+import { AuthenticationContext } from './authenticationContext/AuthenticateContext';
 import {FullscreenPropsProvider} from './FullscreenPropsContext';
-import RegisterPage from './Webpages/Register/RegisterPage.jsx'
-// import LoginPage from './Webpages/LoginPage/LoginPage';
+
 
 function App() {
 
-  const [isLogin, setIsLogin] = useState(true);
+  const {user} = useContext(AuthenticationContext);
 
   return (
 
-      isLogin ? <RegisterPage setIsLogin={setIsLogin}/>
-      // isLogin ? <LoginPage/>
-
-      :
-
       <FullscreenPropsProvider>
         <div className="App">
-          <Nav />
-          <NavRoutes />
+          { user ? <Nav /> : ''}
+          <NavRoutes user={user}/>
         </div>
       </FullscreenPropsProvider>
 

@@ -21,7 +21,3 @@ app.use("/backend/users", userRoute);
 app.listen(process.env.PORT || 3000, ()=>{
     console.log("Hello Netflix Peeps!")
 });
-
-// app.listen(3000, ()=>{
-//     console.log("Hello Netflix Peeps!")
-// });
