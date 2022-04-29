@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Button } from '@mui/material';
+import {Link} from "react-router-dom";
 import './scss/RegisterPageHeader.scss'
 
 const RegisterPageHeader = () => {
@@ -26,8 +27,10 @@ const RegisterPageHeader = () => {
                                 
                             </Button>
 
-                            <Button className="register-btn btn">
-                                <span>Sign In</span>
+                            <Button className="login-btn btn">
+                                <Link to="/login">
+                                    Sign In
+                                </Link>
                             </Button>
                         </Box>
 

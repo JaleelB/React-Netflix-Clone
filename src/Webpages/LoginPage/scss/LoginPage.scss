@@ -50,6 +50,18 @@
                 display: flex; flex-direction: column; 
 
                 .login-title{ color: $color-white; font-weight: 600; margin-bottom: 15px;}
+
+                .empty-field-validate{
+                    margin: 10px 0 7px;
+                    padding: 10px 10px; font-size: .7rem;
+                    background-color: #e87c03; color: $color-white;
+                    border-radius: 3px; font-weight: 350;
+
+                    .bold-message{
+                        padding-right: 2px;
+                    }
+                }
+
                 .password-form,.email-form{ 
                     min-width: 100%;
         

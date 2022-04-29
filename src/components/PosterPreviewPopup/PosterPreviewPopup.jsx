@@ -73,9 +73,6 @@ const PosterPreviewPopup = () => {
                         }px`
             }}
             style={isHovered ? mountStyle  : unmountStyle}
-            onClick={() => {
-                setFullscreenPlayer(!fullscreenPlayer);
-            }}
             onMouseLeave={()=> {
                 setIsHovered(false)
                 handleUnmountOnMouseLeave();
@@ -86,7 +83,13 @@ const PosterPreviewPopup = () => {
             <Box className="media-poster-info-popup">
 
                 <Box className="media-popup-container stacked">
-                    <img src={cardPopupBackdrop} alt='movie backdrop'/>
+                    <img 
+                        src={cardPopupBackdrop} 
+                        alt='movie backdrop'
+                        onClick={() => {
+                            setFullscreenPlayer(!fullscreenPlayer);
+                        }}
+                    />
                     <Typography className="popup-container-title" variant="subtitle" component="h3">{cardPopupTitle}</Typography>
                 </Box>
 
