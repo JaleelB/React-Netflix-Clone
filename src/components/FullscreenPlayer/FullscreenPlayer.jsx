@@ -44,7 +44,7 @@ const FullscreenPlayer = () => {
         <Box 
             className='fullscreen-video-wrapper' 
             ref={fullVideoCanvas} 
-            onLoad={document.body.style.overflow = "hidden"}
+            onLoad={()=> document.body.style.overflow = "hidden"}
         >
             <ArrowBack
                 className="back-arrow"

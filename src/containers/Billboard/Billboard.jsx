@@ -18,7 +18,7 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
     const { 
         disablePointer, setIsLoading, setOpenFullscreenPopup, 
         setDisablePointer,setPosterID, setFullVideoPath, 
-        posterID, setMediaType, setFullscreenPlayer, 
+        posterID, setMediaType, setFullscreenPlayer
     } = fullscreenProps.fullscreenProps;
 
 
@@ -98,7 +98,7 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
                 <Box className="billboard__sub-header" sx={{display: billboardProps.genreTitle && "flex"}}>
                     <Box className="genre-details">
                         <Link 
-                            to={`/${sectionTitle}`}
+                            to={`/${sectionTitle === "Tv Shows" ? 'TvShows' : 'Movies'}/${sectionTitle === "Movies" ? '46': '85'}`}
                             onClick={ () => {
                                 billboardProps.setGenreTitle('')
                                 billboardProps.setGenreID('')
