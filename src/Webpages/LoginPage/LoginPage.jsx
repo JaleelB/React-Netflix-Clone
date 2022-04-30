@@ -15,7 +15,7 @@ const LoginPage = () => {
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const [isEmptyField, setIsEmptyField] = useState(false);
-    const {dispatch} = useContext(AuthenticationContext);
+    const {dispatch, setStayLoggedIn, stayLoggedIn} = useContext(AuthenticationContext);
 
     const getInput = (event) => { updateDebounceText(event.target.value); };
 
@@ -51,7 +51,10 @@ const LoginPage = () => {
     
 
     return (
-        <Box id="login-page">
+        <Box 
+            id="login-page"
+            // onLoad={()=> setStayLoggedIn(false)}
+        >
             <LoginHeader/>
             <Box className="background-image-wrapper">
                 <img className="concord-img vlv-creative" src="https://assets.nflxext.com/ffe/siteui/vlv3/8459cea4-79ab-4f27-9ef0-a7c92a30a9bb/03df0fe8-6cdd-40cd-a947-e7cd96bc6ad3/US-en-20220411-popsignuptwoweeks-perspective_alpha_website_small.jpg" srcSet="https://assets.nflxext.com/ffe/siteui/vlv3/8459cea4-79ab-4f27-9ef0-a7c92a30a9bb/03df0fe8-6cdd-40cd-a947-e7cd96bc6ad3/US-en-20220411-popsignuptwoweeks-perspective_alpha_website_small.jpg 1000w, https://assets.nflxext.com/ffe/siteui/vlv3/8459cea4-79ab-4f27-9ef0-a7c92a30a9bb/03df0fe8-6cdd-40cd-a947-e7cd96bc6ad3/US-en-20220411-popsignuptwoweeks-perspective_alpha_website_medium.jpg 1500w, https://assets.nflxext.com/ffe/siteui/vlv3/8459cea4-79ab-4f27-9ef0-a7c92a30a9bb/03df0fe8-6cdd-40cd-a947-e7cd96bc6ad3/US-en-20220411-popsignuptwoweeks-perspective_alpha_website_large.jpg 1800w" alt=""/>
@@ -102,7 +105,15 @@ const LoginPage = () => {
                         <Button className="login-button" onClick={handleLogin}>Sign In</Button>
 
                         <Box className="remember-user-checkbox">
-                            <input type="checkbox" id="remember-user" name="checkbox1"/>
+                            <input 
+                                type="checkbox" 
+                                id="remember-user" 
+                                name="checkbox1"
+                                checked={stayLoggedIn}
+                                onChange={()=> {
+                                    setStayLoggedIn(!stayLoggedIn);
+                                }}
+                            />
                             <label htmlFor="remember-user">Remember me</label>
                         </Box>
 
