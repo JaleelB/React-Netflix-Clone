@@ -51,7 +51,7 @@ const PosterPreviewPopup = () => {
         }
 
     
-    },[posterID, setFullVideoPath]);
+    },[posterID, setFullVideoPath, mediaType]);
 
 
 
@@ -72,6 +72,7 @@ const PosterPreviewPopup = () => {
                     // )
                         }px`
             }}
+
             style={isHovered ? mountStyle  : unmountStyle}
             onMouseLeave={()=> {
                 setIsHovered(false)

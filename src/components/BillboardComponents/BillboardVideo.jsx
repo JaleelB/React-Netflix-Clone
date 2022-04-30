@@ -1,42 +1,21 @@
 import { Box } from '@mui/material';
-import React, { useState, useEffect, useRef } from 'react';
-import ReactPlayer from 'react-player/youtube'
+import React, {  useRef } from 'react';
+import ReactPlayer from 'react-player/youtube';
+import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
 
 const BillboardVideo = ({source, playState, muteStatus}) => {
 
     const videoCanvas = useRef(null);
-    // const[videoWidth, setVideoWidth] = useState();
-    // const[videoHeight, setVideoHeight] = useState();
-
-    // const handleWindowResize = () => { 
-
-    //     if(videoCanvas && videoCanvas.current){
-    //         const width = videoCanvas.current.clientWidth;
-    //         const height = videoCanvas.current.clientHeight;
-    //         setVideoWidth(width);
-    //         setVideoHeight(height); 
-    //     }
-
-    // }
-
-    // useEffect(() => { handleWindowResize(); }, []);
-    // useEffect(() => { 
-    //     window.addEventListener("resize", handleWindowResize); 
-    //     return () => {
-    //         window.removeEventListener('resize', handleWindowResize);
-    //     }
-    // }, []);
+    const fullscreenProps = useFullscreenPropsContext();
+    const {  fullscreenPlayer } = fullscreenProps.fullscreenProps;
 
     return (
         <Box className="billboard__video-wrapper" ref={videoCanvas} >
 
              { source && <ReactPlayer
                             className='billboard__video-container'
-                            // url={`https://www.youtube.com/ watch?v=${source}?modestbranding=1&showinfo=0&rel=0&fs=0`}
                             url={`https://www.youtube.com/embed/${source}?modestbranding=1&rel=0&fs=0&autohide=1&showinfo=0&controls=0`}
-                            // width={videoWidth}
-                            // height={videoHeight}
                             width='100%'
                             height='100%'
                             config={{
@@ -47,7 +26,7 @@ const BillboardVideo = ({source, playState, muteStatus}) => {
                                     }
                                 }
                               }}
-                            playing={playState}
+                            playing={fullscreenPlayer ? !playState : playState}
                             volume={1}
                             muted={muteStatus}
                             controls={false}

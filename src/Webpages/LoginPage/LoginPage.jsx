@@ -113,7 +113,7 @@ const LoginPage = () => {
 
                         <Box className="captcha-text">
                             <span>This page is protected by Google reCAPTCHA to ensure you're not a bot.</span>
-                            <a>Learn more.</a>
+                            {/* <a href="/">Learn more.</a> */}
                         </Box>
                     </Box>
 

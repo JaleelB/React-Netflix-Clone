@@ -1,19 +1,23 @@
 // import * as React from 'react';
 import { AppBar,Toolbar,Box} from '@mui/material';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import './Nav.scss'
 import { Link } from "react-router-dom";
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
+import { ArrowDropUp, ArrowDropDown } from '@mui/icons-material';
+import { AuthenticationContext } from '../../authenticationContext/AuthenticateContext';
+import { loginStart, logout } from '../../authenticationContext/AuthenticationActions';
 
 
 export default function Nav() {
 
   const pages = [ 'Search', 'Movies', 'TvShows', 'Saved'];
+  const settings = ["Account", "Logout"];
   const [checked, setChecked] = useState(false);
-
   const [darkNavbar, setDarkNavbar] = useState(false);
+  const urlIdParameters = [23, 46, 85, 1001];
+  const {dispatch} = useContext(AuthenticationContext)
 
-  const urlIdParameters = [23, 46, 85, 1001]
 
   const handleNavbarChange = () => {
       if (window.scrollY > 100) setDarkNavbar(true); 
@@ -42,7 +46,7 @@ export default function Nav() {
 
             <Box sx={{display: { xs: 'block', md: 'none' } }}>
               <Link 
-                to={'/browse'}
+                to={'/'}
                 onClick={loading} 
               >
                 <img className="netflix-small-logo" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-1024.png" alt="mobile netflix icon"/>
@@ -51,7 +55,7 @@ export default function Nav() {
 
             <Box sx={{display: { xs: 'none', md: 'block' }}}>
               <Link 
-                to={'/browse'}
+                to={'/'}
                 onClick={loading} 
               >
                 <img className="netflix-large-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1920px-Netflix_2015_logo.svg.png" alt="destop netflix icon"/>
@@ -110,11 +114,43 @@ export default function Nav() {
                         }
                       </Box>
 
-                
-
               </Box>
 
-              <Box sx={{display: {xs: 'none', md: 'block'}, paddingRight: '2%'}} className="nav-avatar-wrapper"> <img className="nav-avatar" src="https://i.pinimg.com/originals/0d/dc/ca/0ddccae723d85a703b798a5e682c23c1.png" alt="Avatar"/> </Box>
+
+              <Box sx={{display: {xs: 'none', md: 'block'}, paddingRight: '2%'}} className="nav-avatar-wrapper"> 
+                <Box className="profile">
+                  <img 
+                    className="nav-avatar" 
+                    src="https://i.pinimg.com/originals/0d/dc/ca/0ddccae723d85a703b798a5e682c23c1.png" 
+                    alt="Avatar"
+                  /> 
+
+                  <ArrowDropDown className={`dropdown-arrow`}/>
+                </Box>
+
+                <Box className="menu-dropdown">
+                  <ArrowDropUp className="dropup-arrow"/>
+                  <Box className="settings">
+                    
+                    <ul className="settings-list">
+                      {  
+                        settings.map((setting, index)=>{
+                            return (
+                              <li 
+                                key={index} 
+                                className="settings-list-item"
+                                onClick={ () => setting === "Logout" ? dispatch(logout()) : ''}
+                              >
+                                {setting}
+                              </li>
+                            )
+                        })
+                      }
+                    </ul>
+                  </Box>
+                </Box>
+              </Box>
+
                   
               <Box className="full-nav" sx={{display: {xs: 'none', md: 'flex'}, gap: '1rem', paddingLeft: '2%'}}>
                     <Box className="full-nav-item">
@@ -122,7 +158,7 @@ export default function Nav() {
                         className="full-nav-link" 
                         style={{textDecoration: 'none', textAlign: 'center', color: 'white'}}
                         onClick={loading} 
-                        to={'/browse'}>
+                        to={'/'}>
                           Home
                         </Link>
                     </Box>

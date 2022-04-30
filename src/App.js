@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, { useContext } from 'react';
 import { Nav, NavRoutes } from './components';
 import { AuthenticationContext } from './authenticationContext/AuthenticateContext';
 import {FullscreenPropsProvider} from './FullscreenPropsContext';
