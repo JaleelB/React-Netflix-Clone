@@ -1,5 +1,5 @@
 import AuthenticationReducer from './AuthenticationReducer';
-import { createContext, useReducer, useEffect } from "react";
+import { createContext, useReducer, useEffect, useState } from "react";
 
 const INITIAL_STATE = {
     user: JSON.parse(localStorage.getItem("user")) || null,
@@ -11,11 +11,12 @@ export const AuthenticationContext = createContext(INITIAL_STATE);
 
 export const AuthenticationContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(AuthenticationReducer, INITIAL_STATE);
+    const [stayLoggedIn, setStayLoggedIn] = useState(false);
 
     //saves user informaton after login to prevent losing it when refreshing
     useEffect(() => {
-        localStorage.setItem("user", JSON.stringify(state.user));
-    }, [state.user]);
+        if(stayLoggedIn) localStorage.setItem("user", JSON.stringify(state.user));
+    }, [state.user, stayLoggedIn]);
 
     return (
         <AuthenticationContext.Provider
@@ -23,7 +24,9 @@ export const AuthenticationContextProvider = ({children}) => {
                 user: state.user,
                 isFetching: state.isFetching,
                 error: state.error,
-                dispatch
+                dispatch,
+                setStayLoggedIn,
+                stayLoggedIn
             }}
         >
             {children}

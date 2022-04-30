@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import { ArrowDropUp, ArrowDropDown } from '@mui/icons-material';
 import { AuthenticationContext } from '../../authenticationContext/AuthenticateContext';
-import { loginStart, logout } from '../../authenticationContext/AuthenticationActions';
+import { logout } from '../../authenticationContext/AuthenticationActions';
 
 
 export default function Nav() {
@@ -16,7 +16,7 @@ export default function Nav() {
   const [checked, setChecked] = useState(false);
   const [darkNavbar, setDarkNavbar] = useState(false);
   const urlIdParameters = [23, 46, 85, 1001];
-  const {dispatch} = useContext(AuthenticationContext)
+  const {dispatch, setStayLoggedIn, stayLoggedIn} = useContext(AuthenticationContext);
 
 
   const handleNavbarChange = () => {
@@ -139,7 +139,12 @@ export default function Nav() {
                               <li 
                                 key={index} 
                                 className="settings-list-item"
-                                onClick={ () => setting === "Logout" ? dispatch(logout()) : ''}
+                                onClick={ () => {
+                                  if(setting === "Logout"){
+                                    setStayLoggedIn(!stayLoggedIn);
+                                    dispatch(logout());
+                                  }
+                                }}
                               >
                                 {setting}
                               </li>
