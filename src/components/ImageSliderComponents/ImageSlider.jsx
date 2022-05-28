@@ -22,7 +22,7 @@ const ImageSlider = ({randIndexes, shows, fullscreenProps}) => {
 
     return (
         <>
-            <MediaRowTitle title={"Trending Searches"}/>
+            <MediaRowTitle title={"Trending Searches"}/> 
             <Slider {...settings}>
                 {
                     randIndexes.map((randIndex)=>{
@@ -30,6 +30,8 @@ const ImageSlider = ({randIndexes, shows, fullscreenProps}) => {
                     })
                 }
             </Slider>
+
+            
         </>
     )
 }

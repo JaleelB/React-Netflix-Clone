@@ -25,8 +25,9 @@
                 flex-wrap: wrap;
                 
                 @media screen and (min-width: 1200px){ --total-posters-in-viewport: 5.5; }
-                @media screen and (min-width: 1600px){ --total-posters-in-viewport: 7.4; }
-                @media screen and (min-width: 2000px){ --total-posters-in-viewport: 8.5; }
+                @media screen and (min-width: 1600px){ --total-posters-in-viewport: 6.4; }
+                @media screen and (min-width: 2000px){ --total-posters-in-viewport: 7.6; }
+
 
                 .media-poster{
                     transition: all 200ms ease; background-color: #212121; 

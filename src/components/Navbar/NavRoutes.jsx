@@ -8,6 +8,7 @@ import RegisterPage from '../../Webpages/Register/RegisterPage.jsx'
 import LoginPage from '../../Webpages/LoginPage/LoginPage';
 // import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import ErrorPage from '../../Webpages/ErrorPage/ErrorPage';
+import Account from '../../Webpages/Account/Account';
 
 const NavRoutes = ({user}) => {
 
@@ -23,6 +24,7 @@ const NavRoutes = ({user}) => {
                         <Route path='/Search/:genrePath' element={<Search/>} />
                         <Route path='/Movies/:genrePath' element={<Movies/>} />
                         <Route path='/TvShows/:genrePath' element={<TvShows/>} />
+                        <Route path='/YourAccount' element={<Account/>} />
                     </>
                 )
             }

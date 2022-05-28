@@ -9,6 +9,7 @@ import '../../containers/MediaRow/MediaRow.scss';
 
 const MediaPoster = ({ disableHover,index, media, netflixOriginal, typeMedia }) => {
 
+
    const posterAttributes = {
         posterPath: media?.poster_path,
         name: media?.name ? media?.name : media?.title,

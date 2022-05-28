@@ -18,6 +18,7 @@ const PosterGallery = ({medias, title, className, errorMessage, mediaType}) => {
                 netflixOriginal={false}
                 disableHover
             />
+
            { errorMessage && 
                 <Box 
                     className="error-message-container"

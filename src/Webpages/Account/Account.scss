@@ -1,0 +1,73 @@
+@import '../../mainStyles';
+
+#account-page{
+    width:100vw;  min-height: 100vh;
+    background-color: $color-white;
+    display:  flex; flex-direction: column;
+
+    .account-container{
+        margin-inline: auto; padding-inline:100px; margin-top: auto; padding-top: 2rem;
+        width: 100%; max-width: 1500px; min-height: 70vh;
+        border-bottom: 1px solid #555; 
+
+        .title-wrapper{
+            width: 100%; border-bottom: 1px solid #555;
+            display: flex; align-items: center; gap: 30px;
+            
+            .title{
+                font-weight: 400; 
+                padding-bottom: 1rem;
+            }
+
+            .memeber-since-wrapper{
+                display: flex; align-items: center;
+                .memeber-since-img{
+                    background: url(https://assets.nflxext.com/ffe/siteui/account/svg/membersince.svg) no-repeat 0 0;
+                    height: 26px; width: 26px;
+                    margin-right: 5px; padding-right: 26px;
+                }
+            }
+        }
+
+        .info-container{
+            display: flex; justify-content: space-between;
+            margin: 1rem 0; border-bottom: 1px solid rgb(121, 121, 121);
+            padding-bottom: 1rem;
+
+            .container-title{
+                .title{ 
+                    font-weight: 300; font-size: 1.1rem; 
+                    color: #333; margin-bottom: .3rem;
+                }
+                .delete-button{
+                    padding: .3rem 1rem; min-width: 100%; min-height: 35px;
+                    appearance: none; border: none; cursor: pointer;
+                }
+            }
+
+            .details-container{
+                width: 82%;
+
+                .username-container, .email-container, .password-container,
+                .plan-container, .dvd-container{
+                    display: flex; justify-content: space-between; line-height: 1.9;
+
+                    .text{ font-size: 1rem; font-weight: 350; }
+                    .link{ color: blue; cursor: pointer;  font-weight: 300;}
+                }
+
+                .plan-container{
+                    border-bottom: 1px solid #555; padding: .5rem 0;
+                }
+
+                .dvd-container{ padding: .5rem 0; }
+
+            }
+
+            
+        }
+        
+    }
+
+   
+}

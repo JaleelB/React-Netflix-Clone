@@ -3,7 +3,7 @@ import React, {useState, useRef, useContext} from 'react';
 import LoginHeader from './LoginHeader';
 import {Footer} from '../../components';
 import './scss/LoginPage.scss';
-import {login} from '../../authenticationContext/apiCalls';
+import axios from "axios";
 import {AuthenticationContext} from '../../authenticationContext/AuthenticateContext';
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,9 @@ const LoginPage = () => {
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const [isEmptyField, setIsEmptyField] = useState(false);
-    const {dispatch, setStayLoggedIn, stayLoggedIn} = useContext(AuthenticationContext);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const {dispatch, error, stayLoggedIn, setStayLoggedIn } = useContext(AuthenticationContext);
 
     const getInput = (event) => { updateDebounceText(event.target.value); };
 
@@ -34,7 +36,7 @@ const LoginPage = () => {
         }
     };
 
-    const handleLogin = (e) => {
+    const handleLogin = async(e) => {
         e.preventDefault();
 
         if((emailRef.current.value === "" && passwordRef.current.value === "") || (emailRef.current.value === "" || passwordRef.current.value === "")){
@@ -44,7 +46,19 @@ const LoginPage = () => {
 
         if(isEmptyField) setIsEmptyField(false);
 
-        login({email, password}, dispatch)
+        setEmail(emailRef.current.value);
+        setPassword(passwordRef.current.value);
+
+        // login({email, password}, dispatch)
+        dispatch({ type: "LOGIN_START" });
+        try{
+            const response = await axios.post('/userAuthentication/login', {email, password});
+            dispatch({type: "LOGIN_SUCCESS", payload: response.data});
+            
+        }catch(error){
+            setErrorMessage(error.message);
+            dispatch({type: "LOGIN_FAILURE", payload: error.response.data })
+        }
         
     };
 
@@ -66,22 +80,42 @@ const LoginPage = () => {
 
                     <Box className="login-body-main">
                         <h1 className="login-title">Sign In</h1>
-                        { 
+                        {/* { 
                             isEmptyField && 
                             <Box className="empty-field-validate">
                                 <b className="bold-message">You cannot leave a field empty.</b> 
                                 Please fill out all available fields then submit.
                             </Box>
-                        }
+                        } */}
+
+
+                        <Box className="error-message">
+                            { 
+                                isEmptyField && 
+                                <Box className="empty-field-validate">
+                                    <b className="bold-message">You cannot leave a field empty.</b> 
+                                    &nbsp;Please fill out all available fields then submit.
+                                </Box>
+                            }
+                            {
+                                errorMessage && 
+                                <Box className="error-message-wrapper">
+                                    {errorMessage}
+                                </Box>
+                            }
+                        </Box>
+
                         <Box className="email-form">
                             <input 
                                 id="email-input" 
                                 type="text" 
-                                plassholder="Email or phone number"
+                                placeholder="Email or phone number"
                                 onClick = { (event) => event.preventDefault() }
                                 ref={emailRef}
                                 onChange = { (e)=> {
-                                    getInput(e);
+                                    // getInput(e);
+                                    setEmail(emailRef.current.value);
+                                    setPassword(passwordRef.current.value);
                                 }}
                             />
                             <span className="input-validate">
@@ -96,6 +130,11 @@ const LoginPage = () => {
                                 placeholder="Password"
                                 onClick = { (event) => event.preventDefault() }
                                 ref={passwordRef}
+                                onChange = { (e)=> {
+                                    // getInput(e);
+                                    // setEmail(emailRef.current.value);
+                                    setPassword(passwordRef.current.value);
+                                }}
                             />
                             <span className="input-validate">
                                 Your password must contain between 7 and 60 characters.

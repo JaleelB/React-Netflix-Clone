@@ -60,8 +60,11 @@
                     path{ transform: scale(1.1); transition: all 250ms ease-in-out;  }
                 }
 
-                &.left{left: 0;}
+                &.left{left: 0; }
                 &.right{ right:0; }
+                &.left,&.right{ 
+                    @media screen and (min-width: 750px) and (max-width: 1199px){ display: none;}
+                }
 
             }
 
@@ -78,6 +81,8 @@
             
             scroll-behavior: smooth; scroll-snap-type: x mandatory; 
             transition: all 500ms ease-in-out; 
+
+            @media screen and (max-width: 1199px){ overflow-x: scroll; overflow-y: hidden;}
             
             --total-posters-in-viewport: 2.3; width: calc(100% - (2 * var(--row-padding)));
 
