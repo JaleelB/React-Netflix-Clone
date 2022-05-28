@@ -10,6 +10,7 @@
             .backdrop{
                 width: 100%; height: clamp(170px, 25vw ,600px); background-color: #212121;
                 border-radius: 5px;
+                
 
                 &:hover{  outline: 3px solid $primary-red; }
                 

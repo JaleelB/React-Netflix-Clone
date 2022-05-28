@@ -8,7 +8,7 @@ const BillboardDescription = ({description}) => {
     const truncate = (string, numOfWords) => { return string.split(" ").splice(0, numOfWords).join(" ") + "..."; }
 
     return (
-        <Box className="billboard__description-wrapper">
+        <Box className="billboard__description-wrapper" sx={{display: {xs: 'none', md: 'block'}}}>
             <Typography  className="billboard__description" >
                 {description && numberOfWords(description) > 50 ? truncate(description, 50) : description}
             </Typography>

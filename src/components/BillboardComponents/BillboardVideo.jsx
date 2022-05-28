@@ -10,6 +10,7 @@ const BillboardVideo = ({source, playState, muteStatus}) => {
     const fullscreenProps = useFullscreenPropsContext();
     const {  fullscreenPlayer } = fullscreenProps.fullscreenProps;
 
+
     return (
         <Box className="billboard__video-wrapper" ref={videoCanvas} >
 
@@ -32,6 +33,8 @@ const BillboardVideo = ({source, playState, muteStatus}) => {
                             controls={false}
                             loop={true}
                         /> }           
+
+         
         </Box>
     )
 }

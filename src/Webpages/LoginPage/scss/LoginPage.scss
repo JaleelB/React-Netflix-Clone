@@ -51,15 +51,25 @@
 
                 .login-title{ color: $color-white; font-weight: 600; margin-bottom: 15px;}
 
-                .empty-field-validate{
-                    margin: 10px 0 7px;
-                    padding: 10px 10px; font-size: .7rem;
-                    background-color: #e87c03; color: $color-white;
-                    border-radius: 3px; font-weight: 350;
+                .error-message{
+                
+                    .empty-field-validate{
+                       
+                        .bold-message{
+                            padding-right: 2px;
+                        }
 
-                    .bold-message{
-                        padding-right: 2px;
                     }
+
+                    .error-message-wrapper{ font-size: .8rem; font-weight: 500; }
+
+                    .error-message-wrapper, .empty-field-validate{
+                        max-width: 400px;
+                        margin: 10px 0 7px; padding: 10px 10px; font-size: .7rem;
+                        background-color: #e87c03; color: $color-white;
+                        border-radius: 3px; font-weight: 350;
+                    }
+                    
                 }
 
                 .password-form,.email-form{ 

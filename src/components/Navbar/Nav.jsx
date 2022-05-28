@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from "react";
 import './Nav.scss'
 import { Link } from "react-router-dom";
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
-import { ArrowDropUp, ArrowDropDown } from '@mui/icons-material';
+import { ArrowDropUp, ArrowDropDown, Person, Logout } from '@mui/icons-material';
 import { AuthenticationContext } from '../../authenticationContext/AuthenticateContext';
 import { logout } from '../../authenticationContext/AuthenticationActions';
 
@@ -12,17 +12,19 @@ import { logout } from '../../authenticationContext/AuthenticationActions';
 export default function Nav() {
 
   const pages = [ 'Search', 'Movies', 'TvShows', 'Saved'];
-  const settings = ["Account", "Logout"];
+  const settings = ["Manage Account", "Sign Out Of Netflix"];
   const [checked, setChecked] = useState(false);
+  ;
   const [darkNavbar, setDarkNavbar] = useState(false);
   const urlIdParameters = [23, 46, 85, 1001];
   const {dispatch, setStayLoggedIn, stayLoggedIn} = useContext(AuthenticationContext);
 
 
   const handleNavbarChange = () => {
-      if (window.scrollY > 100) setDarkNavbar(true); 
+      if (window.scrollY > 1) setDarkNavbar(true); 
       else setDarkNavbar(false);
   };
+
 
   useEffect(() => {
     window.addEventListener("scroll", handleNavbarChange);
@@ -38,8 +40,8 @@ export default function Nav() {
 
   return (
     // <Box sx={{ flexGrow: 1}}>
-    <Box className={`${disablePointer ? 'disable-pointer' : ''}`} sx={{ flexGrow: 1}}>
-      <AppBar sx={{ boxShadow: 'none', color: 'white', zIndex: 33, background:`${darkNavbar ? '#171717' : 'transparent'}`}}>
+    <Box className={`netflix-navbar ${disablePointer ? 'disable-pointer' : ''}`} sx={{ flexGrow: 1}}>
+      <AppBar position="absolute" sx={{ boxShadow: 'none', color: 'white', zIndex: 33, background:`${darkNavbar ? '#171717' : 'transparent'}`}}>
         <Toolbar sx={{display: { xs: 'flex'}}}>
 
           <Box sx={{position: 'relative', left: '0', display: { xs: 'flex'}, paddingLeft: '2%'}}>
@@ -90,7 +92,7 @@ export default function Nav() {
                                   className="nav-link" 
                                   onClick={loading} 
                                   style={!checked ? {pointerEvents: "none"} : null} 
-                                  to={'/browse'}
+                                  to={'/'}
                                 >
                                   Home
                                 </Link>
@@ -117,11 +119,11 @@ export default function Nav() {
               </Box>
 
 
-              <Box sx={{display: {xs: 'none', md: 'block'}, paddingRight: '2%'}} className="nav-avatar-wrapper"> 
+              <Box sx={{display: {xs: 'block'}, paddingRight: '2%'}} className="nav-avatar-wrapper"> 
                 <Box className="profile">
                   <img 
                     className="nav-avatar" 
-                    src="https://i.pinimg.com/originals/0d/dc/ca/0ddccae723d85a703b798a5e682c23c1.png" 
+                    src="https://ih0.redbubble.net/image.618379802.1473/flat,1000x1000,075,f.u2.jpg" 
                     alt="Avatar"
                   /> 
 
@@ -140,13 +142,16 @@ export default function Nav() {
                                 key={index} 
                                 className="settings-list-item"
                                 onClick={ () => {
-                                  if(setting === "Logout"){
+                                  if(setting === "Sign Out Of Netflix"){
                                     setStayLoggedIn(!stayLoggedIn);
                                     dispatch(logout());
                                   }
                                 }}
                               >
-                                {setting}
+                                <Link to={setting === "Manage Account" ? '/YourAccount' : ''}> 
+                                  {index === 1 ? <Logout className="dropdown-icon"/> : <Person className="dropdown-icon"/>}
+                                  {setting}
+                                </Link>
                               </li>
                             )
                         })

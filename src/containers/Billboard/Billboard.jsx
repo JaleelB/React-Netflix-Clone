@@ -13,6 +13,8 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
     const [videoPlay, setVideoPlay] = useState(true);
     const [volumeMute, setVolumeMute] = useState(true);
     const [deviceWindowWidth, setDeviceWindowWidth] = useState(window.innerWidth);
+    const [darkSubHeader, setDarkSubHeader] = useState(false);
+    const[fixedSubHeader, setFixedSubHeader] = useState(false);
 
     const fullscreenProps = useFullscreenPropsContext();
     const { 
@@ -21,8 +23,35 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
         posterID, setMediaType, setFullscreenPlayer
     } = fullscreenProps.fullscreenProps;
 
+    
+    const handleDarkSubheader = () => {
+        if (window.scrollY > 1 && window.innerWidth > 1200) setDarkSubHeader(true); 
+        else setDarkSubHeader(false);
+    };
+
+    const handleSubheaderPosition = () => {
+        if (window.scrollY > 30 && window.innerWidth > 1200) setFixedSubHeader(true); 
+        else setFixedSubHeader(false);
+    };
 
     const handleWindowResize = () => { setDeviceWindowWidth(window.innerWidth) }
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleDarkSubheader);
+    
+        return () => {
+          window.removeEventListener("scroll", handleDarkSubheader);
+        };
+    }, []);
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleSubheaderPosition);
+    
+        return () => {
+          window.removeEventListener("scroll", handleSubheaderPosition);
+        };
+    }, []);
+    
 
     useEffect(()=>{
         
@@ -82,6 +111,8 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
 
     }, [posterID,setFullVideoPath,movie?.id, mediaType]);
 
+    
+  
 
     return (
 
@@ -92,10 +123,19 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
 
             <Box className="billboard__fade-top"></Box>
 
-            {deviceWindowWidth > 1200 && videoPath ? <BillboardVideo source={videoPath} playState={videoPlay} muteStatus={volumeMute}/> : null }
+            { deviceWindowWidth > 1200 && videoPath ? <BillboardVideo source={videoPath} playState={videoPlay} muteStatus={volumeMute}/> : null }
 
             {sectionTitle &&
-                <Box className="billboard__sub-header" sx={{display: billboardProps.genreTitle && "flex"}}>
+                <Box 
+                    // className="billboard__sub-header" 
+                    className={`billboard__sub-header ${fixedSubHeader ? 'fixed-header': ''}`} 
+                    sx={{
+                            display: billboardProps.genreTitle && "flex",
+                            background:`${darkSubHeader ? '#171717' : 'transparent'}`,
+                            // position: fixedSubHeader && 'fixed',
+                            // top: fixedSubHeader && 0
+                    }}
+                >
                     <Box className="genre-details">
                         <Link 
                             to={`/${sectionTitle === "Tv Shows" ? 'TvShows' : 'Movies'}/${sectionTitle === "Movies" ? '46': '85'}`}
