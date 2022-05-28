@@ -1,9 +1,12 @@
 @import '../../mainStyles';
 
 #account-page{
-    width:100vw;  min-height: 100vh;
+    width:100vw;  height: calc(100vh - 4rem);
+    //height: calc(100vh - 4rem);
     background-color: $color-white;
     display:  flex; flex-direction: column;
+    // position: relative; top: 4rem;
+    position: relative; top: 4rem;
 
     .account-container{
         margin-inline: auto; padding-inline:100px; margin-top: auto; padding-top: 2rem;

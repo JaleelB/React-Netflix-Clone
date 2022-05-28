@@ -19,7 +19,7 @@ const Account = () => {
 
                 <Box className="info-container">
 
-                    <Box className="container-title">
+                    {/* <Box className="container-title">
                         <h2 className="title">PROFILE INFORMATION</h2>
                         <button className="delete-button">Remove Account</button>
                     </Box>
@@ -37,13 +37,37 @@ const Account = () => {
                             <h2 className="text">Password: ********</h2>
                             <Box className="link">Change Password</Box>
                         </Box>
+                    </Box> */}
+
+                    <Box className="container-title">
+                        <h2 className="title">PROFILE INFORMATION</h2>
+                        <button className="delete-button">Remove Account</button>
                     </Box>
+
+                    <Box className="details-container">
+                        <Box className="username-container">
+                            <h2 className="text">username</h2>
+                            <Box className="link">Change Username</Box>
+                        </Box>
+
+                        <Box className="email-container">
+                            <h2 className="text">email@email.com</h2>
+                            <Box className="link">Change Email</Box>
+                        </Box>
+
+                        <Box className="password-container">
+                            <h2 className="text">Password: *********</h2>
+                            <Box className="link">Change Password</Box>
+                        </Box>
+                    </Box>
+
+                    
                     
                 </Box>
 
                 <Box className="info-container">
 
-                    <Box className="container-title">
+                    {/* <Box className="container-title">
                         <h2 className="title">PLAN DETAILS</h2>
                     </Box>
 
@@ -57,6 +81,24 @@ const Account = () => {
                             <Box className="link">Add DVD Plan</Box>
                         </Box>
                         
+                    </Box> */}
+
+                    <Box className="container-title">
+                        <h2 className="title">SUBSCRIPTION DETAILS</h2>
+                    </Box>
+
+                    <Box className="details-container">
+                        <Box className="plan-container">
+                            <h2 className="text">Premium ULTRA HD</h2>
+                            <Box className="link">Change plan</Box>
+                        </Box>
+
+                        <Box className="dvd-container">
+                            <h2 className="text">No DVD Plan</h2>
+                            <Box className="link">Add DVD Plan</Box>
+                        </Box>
+
+                
                     </Box>
                     
                 </Box>
