@@ -1,0 +1,25 @@
+@import '../../mainStyles';
+
+#update-page{
+    width:100vw;  min-height: 100vh;
+    position: relative; top: 4rem;
+    background-color: $color-white;
+    display:  flex; flex-direction: column;
+    padding-top: 70px;
+
+    @media screen  and (max-width: 700px){
+        padding-top: 30px;
+    }
+    
+
+    .update-container{
+        // position: relative; margin: auto 0;
+        width: 100%; max-width: 500px; margin-inline: auto;
+        display:  flex; flex-direction: column;
+        align-items: center; justify-content: center;
+
+        @media screen  and (max-width: 550px){
+            padding-inline: 20px;
+        }
+    }
+}

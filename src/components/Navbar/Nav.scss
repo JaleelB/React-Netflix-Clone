@@ -105,16 +105,26 @@
             .settings{
 
                 position: absolute; margin-top: -13px;  width: 150px; right: 10px;
-                border: solid 1px rgba(255,255,255,.15); background-color: rgba(0,0,0,.7);
+                border: solid 1px rgba(255,255,255,.15); background-color: rgba(0,0,0,.95);
                 line-height: 25px;
 
                 .settings-list{
                     list-style: none; 
 
+                    & > *:not(:first-child):hover{ text-decoration: underline; }
+
+                    .profile-image-wrapper{
+                        display: flex; margin-top: 10px;
+                        .dropdown-image{
+                            width: 25px; height: 25px;
+                            margin-inline: 10px; border-radius: 5px;
+                        }
+                    }
+
                     .settings-list-item{
 
-                        &:first-child{
-                            position: relative; border-bottom: solid 1px rgba(255,255,255,.25);
+                        &:nth-child(3){
+                            position: relative; border-top: solid 1px rgba(255,255,255,.25);
                         }
 
                         a{

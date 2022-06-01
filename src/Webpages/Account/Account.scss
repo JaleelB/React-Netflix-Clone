@@ -1,25 +1,44 @@
 @import '../../mainStyles';
 
 #account-page{
-    width:100vw;  height: calc(100vh - 4rem);
-    //height: calc(100vh - 4rem);
+    width:100vw;  min-height: 100vh;
     background-color: $color-white;
     display:  flex; flex-direction: column;
-    // position: relative; top: 4rem;
+    overflow-wrap: anywhere;
     position: relative; top: 4rem;
+
+    @media  screen and (max-width: 400px) {
+        padding-inline: 20px;
+    }
 
     .account-container{
         margin-inline: auto; padding-inline:100px; margin-top: auto; padding-top: 2rem;
-        width: 100%; max-width: 1500px; min-height: 70vh;
+        width: 100%; max-width: 1200px; min-height: 70vh;
         border-bottom: 1px solid #555; 
+
+        @media  screen and (max-width: 569px) {
+            padding-inline: 50px;
+        }
+
+        @media  screen and (max-width: 400px) {
+            padding-inline: 20px;
+        }
 
         .title-wrapper{
             width: 100%; border-bottom: 1px solid #555;
             display: flex; align-items: center; gap: 30px;
+
+            @media  screen and (max-width: 569px) {
+                flex-direction: column; gap: 5px;
+                align-items: initial;
+            }
             
             .title{
-                font-weight: 400; 
-                padding-bottom: 1rem;
+                font-weight: 400;  padding-bottom: 1rem;
+
+                @media  screen and (max-width: 569px) {
+                    padding: 0;
+                }
             }
 
             .memeber-since-wrapper{
@@ -29,6 +48,10 @@
                     height: 26px; width: 26px;
                     margin-right: 5px; padding-right: 26px;
                 }
+
+                @media  screen and (max-width: 569px) {
+                    padding-bottom: 1rem;
+                }
             }
         }
 
@@ -37,26 +60,71 @@
             margin: 1rem 0; border-bottom: 1px solid rgb(121, 121, 121);
             padding-bottom: 1rem;
 
+            @media  screen and (max-width: 890px) {
+                flex-direction: column; gap: 20px;
+            }
+
             .container-title{
+               width: 30%;
+               @media screen and (max-width: 900px){width: 100%;}
                 .title{ 
                     font-weight: 300; font-size: 1.1rem; 
                     color: #333; margin-bottom: .3rem;
                 }
                 .delete-button{
-                    padding: .3rem 1rem; min-width: 100%; min-height: 35px;
+                    padding: .3rem 1rem; min-width: 200px; min-height: 35px;
                     appearance: none; border: none; cursor: pointer;
+                }
+
+                .delete-confirmation{
+                    width: 100%; display: flex; flex-direction: column;
+
+                    .delete-message{
+                        margin: .6rem 0; 
+                        @media screen and (min-width: 900px){ max-width: 250px;}
+
+                        font-weight: 500; color: $primary-red;
+                        font-size: 1rem;
+                    }
+
+                    .delete-cta-btns{
+                        display: flex; gap: 5px;
+                        
+                        .cta-btn{
+                            padding: .3rem 1rem;  min-height: 35px; width: 50%;
+                            appearance: none; border: none; cursor: pointer;
+
+                            @media screen and (min-width: 900px){ min-width: 100px;}
+
+                            &.delete-account-button{
+                                background-color: $primary-red; color: $color-white;
+                            }
+                        }
+                    }
+
+                    .loading{ margin-top: .3rem; color:rgba(7, 169, 26, 0.9); }
+
                 }
             }
 
+            
+
             .details-container{
-                width: 82%;
+                width: 67%;
+
+                @media  screen and (max-width: 890px) {
+                    width: 100%;
+                }
 
                 .username-container, .email-container, .password-container,
                 .plan-container, .dvd-container{
                     display: flex; justify-content: space-between; line-height: 1.9;
 
                     .text{ font-size: 1rem; font-weight: 350; }
-                    .link{ color: blue; cursor: pointer;  font-weight: 300;}
+                    .link{ 
+                        color: blue; cursor: pointer;
+                        text-decoration: none; font-weight: 300;
+                    }
                 }
 
                 .plan-container{

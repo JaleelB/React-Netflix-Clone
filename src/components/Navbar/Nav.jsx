@@ -7,6 +7,7 @@ import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import { ArrowDropUp, ArrowDropDown, Person, Logout } from '@mui/icons-material';
 import { AuthenticationContext } from '../../authenticationContext/AuthenticateContext';
 import { logout } from '../../authenticationContext/AuthenticationActions';
+import useFetchApi from '../../hooks/useFetchAPi';
 
 
 export default function Nav() {
@@ -18,6 +19,9 @@ export default function Nav() {
   const [darkNavbar, setDarkNavbar] = useState(false);
   const urlIdParameters = [23, 46, 85, 1001];
   const {dispatch, setStayLoggedIn, stayLoggedIn} = useContext(AuthenticationContext);
+
+  const {user} = useContext(AuthenticationContext);
+  const {apiData} = useFetchApi(`/users/find/${user.details._id}`);
 
 
   const handleNavbarChange = () => {
@@ -135,6 +139,10 @@ export default function Nav() {
                   <Box className="settings">
                     
                     <ul className="settings-list">
+                      <li className="profile-image-wrapper">
+                          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/2c659933850498.56ba69ac2e080.png" alt="" className="dropdown-image"/>
+                          {apiData.username}
+                      </li>
                       {  
                         settings.map((setting, index)=>{
                             return (

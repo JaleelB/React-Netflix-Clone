@@ -1,0 +1,60 @@
+@import '../../mainStyles';
+
+.update-username-container{
+
+    min-width: 300px; min-height: 400px; width: 100%;
+
+    .title{ font-weight: 400; margin-bottom: .6rem; }
+
+    .error-message-wrapper{
+        margin-bottom: 1rem;
+
+        .error-message, .empty-message{
+            margin: 10px 0 7px; padding: 10px 10px; font-size: .7rem;
+            background-color: $color-orange; color: $color-white;
+            border-radius: 3px; font-weight: 350;
+        }
+    }
+
+    .form-structure{
+        list-style-type: none;
+
+        li{
+            &:not(:nth-child(3)){ margin-bottom: 1.3rem; }
+
+           input{
+               min-height: 40px; min-width: 300px; width: 100%;
+                appearance: none;
+               border: 1px solid rgba(63, 63, 63, 0.9);
+               padding-left: 10px;
+           }
+           
+        }
+        
+    }
+
+    .loading{ margin-top: .3rem; color:rgba(7, 169, 26, 0.9); }
+
+    .validate-message{
+        display: flex; flex-direction: column;
+        color: $color-orange; font-size: .8rem; font-weight: 450;
+    }
+
+    .cta-buttons{
+        margin-top: 4rem; display: flex; gap: 10px; 
+        @media screen and (max-width: 500px){
+            flex-direction: column
+        }
+
+        .cta{ 
+            min-width: 85px; min-height: 35px;
+            appearance: none; border: none; border-radius: 3px;
+
+            a{ text-decoration: none; color: inherit; }
+ 
+            &.save-changes{
+                color: $color-white; background-color: rgba(61, 116, 254, 0.9);
+            }
+        }
+    }
+}

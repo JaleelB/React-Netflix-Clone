@@ -29,13 +29,13 @@ const CTAEmailForm = () => {
             inputFormRef.current.value = "";
         }
 
-        else if(inputFormRef.current.value !== "" && email !== "" && username !== "" && password === ""){
+        else if(inputFormRef.current.value !== "" && email !== "" && username !== ""){
             setPassword(inputFormRef.current.value);
             // const password = inputFormRef.current.value
             try{
                 await axios.post('userAuthentication/register', {email, username, password})
                 navigate("/login");
-            }catch(error){}
+            }catch(error){ console.error(error)}
         }
 
     };
@@ -58,6 +58,9 @@ const CTAEmailForm = () => {
                                 !username && email ? "Username" : 
                                 "Password"
                             }
+                            onChange = { (e)=> {
+                                if(username !== "" && email !== "") setPassword(e.target.value);
+                            }}
                         />
                         <label className="floating-label">
                             {

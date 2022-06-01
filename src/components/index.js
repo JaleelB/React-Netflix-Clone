@@ -25,4 +25,6 @@ export {default as PaginationIndicatorBar} from './MediaRowComponents/Pagination
 export {default as CTAEmailForm} from './CTAEmailForm/CTAEmailForm';
 export {default as StoryCard} from './StoryCard/StoryCard'
 export {default as AccordionQuestions} from './Accordion/Accordion.jsx'
+export {default as Loading} from './LoadingAnimation/Loading.jsx'
+
 

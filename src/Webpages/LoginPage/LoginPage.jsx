@@ -19,8 +19,6 @@ const LoginPage = () => {
 
     const {dispatch, error, stayLoggedIn, setStayLoggedIn } = useContext(AuthenticationContext);
 
-    const getInput = (event) => { updateDebounceText(event.target.value); };
-
     const updateDebounceText = debounceInput(text=>{
         if(emailRef.current.value !== "") setEmail(text);
         else if(passwordRef.current.value !== "") setPassword(text);
@@ -67,7 +65,6 @@ const LoginPage = () => {
     return (
         <Box 
             id="login-page"
-            // onLoad={()=> setStayLoggedIn(false)}
         >
             <LoginHeader/>
             <Box className="background-image-wrapper">
@@ -109,7 +106,7 @@ const LoginPage = () => {
                             <input 
                                 id="email-input" 
                                 type="text" 
-                                placeholder="Email or phone number"
+                                placeholder="Email Address"
                                 onClick = { (event) => event.preventDefault() }
                                 ref={emailRef}
                                 onChange = { (e)=> {
@@ -131,8 +128,6 @@ const LoginPage = () => {
                                 onClick = { (event) => event.preventDefault() }
                                 ref={passwordRef}
                                 onChange = { (e)=> {
-                                    // getInput(e);
-                                    // setEmail(emailRef.current.value);
                                     setPassword(passwordRef.current.value);
                                 }}
                             />

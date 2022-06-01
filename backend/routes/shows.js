@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Show = require("../models/Show");
-const verifyAccessToken = require("../verifyAccessToken");
+const verifyAccessToken = require("../utils/verifyAccessToken");
 
 //create/add show method
 // router.post("/", verifyAccessToken, async (request, response)=>{

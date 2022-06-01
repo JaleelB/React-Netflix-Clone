@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const authenticateRoute = require("./routes/userAuthentication");
 const userRoute = require("./routes/users");
-const showRoute = require("./routes/shows");
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 
@@ -13,7 +13,7 @@ mongoose
     .then( ()=> console.log("Successful connection to database") )
     .catch( (err)=> console.error(err) );
 
-//allows express app to accept jsonn file genmreated from post request when new user is made
+app.use(cookieParser())
 app.use(express.json());
 
 app.use("/backend/userAuthentication", authenticateRoute);
@@ -26,6 +26,7 @@ app.use((error, request, response, next)=>{
     
     return response.status(errorStatus).json({
         
+        success: false,
         status: errorStatus,
         message: errorMessage,
         // stack: error.stack
