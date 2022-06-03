@@ -46,7 +46,7 @@ async function login(request, response, next){
                 user.password
             );
             
-            if (!isPasswordCorrect) return next(createError(400, "Wrong password or username!"));
+            if (!isPasswordCorrect) return next(createError(400, "Incorrect password"));
         
             const token = jwt.sign(
                 { id: user._id },

@@ -2,7 +2,7 @@
 
 #hero{
     width: $background-width; transition: all 300ms ease; overflow-x:hidden;
-    position: relative; background-color: $primary-black;
+    position: relative; background-color: $primary-black; font-weight: 300px;
 
     &::-webkit-scrollbar { background-color: transparent;  width: 10px; }
     &::-webkit-scrollbar-thumb { background-color: $primary-red; border-radius: 10px;}

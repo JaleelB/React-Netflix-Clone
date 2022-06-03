@@ -12,7 +12,8 @@ import useFetchApi from '../../hooks/useFetchAPi';
 
 export default function Nav() {
 
-  const pages = [ 'Search', 'Movies', 'TvShows', 'Saved'];
+  const pages = [ 'search', 'movies', 'tv-shows', 'my-list'];
+  const pageTitles = [ 'Search', 'Movies', 'TV Shows', 'My List'];
   const settings = ["Manage Account", "Sign Out Of Netflix"];
   const [checked, setChecked] = useState(false);
   ;
@@ -109,9 +110,9 @@ export default function Nav() {
                                     className="nav-link"  
                                     onClick={loading} 
                                     style={!checked ? {pointerEvents: "none"} : null} 
-                                    to={`/${page}/${urlIdParameters[index]}`}
+                                    to={page !== 'my-list' ? `/${page}/${urlIdParameters[index]}` : '/my-list'}
                                   >
-                                    {page}
+                                    { pageTitles[index] }
                                   </Link>
 
                                 </li>
@@ -156,7 +157,7 @@ export default function Nav() {
                                   }
                                 }}
                               >
-                                <Link to={setting === "Manage Account" ? '/YourAccount' : ''}> 
+                                <Link to={setting === "Manage Account" ? '/your-account' : ''}> 
                                   {index === 1 ? <Logout className="dropdown-icon"/> : <Person className="dropdown-icon"/>}
                                   {setting}
                                 </Link>
@@ -186,9 +187,9 @@ export default function Nav() {
                             className="full-nav-link" 
                             onClick={loading} 
                             style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} 
-                            to={`/${page}/${urlIdParameters[index]}`}
+                            to={page !== 'my-list' ? `/${page}/${urlIdParameters[index]}` : '/my-list'}
                           >
-                            {page}
+                            {pageTitles[index]}
                           </Link>
                         </Box>
                     ))}

@@ -22,10 +22,15 @@
     
 
     .title-wrapper{ 
-        padding: 0 var(--row-padding); position: relative; 
-        h2{
-            line-height: 1.25vw; font-size: clamp(1em, 3vw, 1.5em); font-weight: 400; 
-        }
+        padding: 0 4%; position: relative; 
+        // h2{font-size: clamp(.9em, 3vw, 1.1em);
+            line-height: 1.25vw; font-size: 1.4vw; font-weight: 600; 
+            color: $color-white;
+
+            @media screen and (max-width: 850px){
+                font-size: $ft-lg;
+            }
+        // }
     }
 
     .pagination-indicator{

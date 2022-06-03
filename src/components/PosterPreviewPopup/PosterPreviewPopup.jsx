@@ -1,21 +1,26 @@
 import { Box, Button, Typography } from '@mui/material';
 import { PlayCircle, ThumbDownOffAlt, ThumbUpOffAlt } from '@mui/icons-material';
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import axios from 'axios';
 import {apiComponents, BootstrapTooltip } from '..';
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import {useRowPopupPropsContext} from '../../RowPropsContext';
+import useFetchApi from '../../hooks/useFetchAPi';
+import { AuthenticationContext } from '../../authenticationContext/AuthenticateContext';
 
 import './PosterPreviewPopup.scss';
 
 
 const PosterPreviewPopup = () => {
 
+    const {user} = useContext(AuthenticationContext);
+    const {apiData} = useFetchApi(`/users/find/${user.details._id}`);
+
 
     const rowPopupProps = useRowPopupPropsContext();
     const { 
-        cardPopupWidth, genres, unmountStyle,
-        rowPadding, posterIndex,setIsHovered, postersInView,
+        cardPopupWidth, genres, unmountStyle, posterOverview,
+        rowPadding, posterIndex,setIsHovered, postersInView, posterImage,
         cardPopupBackdrop,cardPopupTitle,rowTabIndex, mountStyle,
         cardPopupAirDate, cardPopupRating, isHovered, handleUnmountOnMouseLeave
     } = rowPopupProps.rowPopupProps;
@@ -45,7 +50,6 @@ const PosterPreviewPopup = () => {
             .get(`${apiComponents[0]}${apiComponents[2].tv}/${posterID}/videos?api_key=${apiComponents[1]}&language=en-US`)
             .then((res)=> {
                 setFullVideoPath(res.data.results[0]?.key)
-                // console.log(res.data.results[0]?.key)
             })
             .catch(error => { console.log(error) })
         }
@@ -85,7 +89,8 @@ const PosterPreviewPopup = () => {
 
                 <Box className="media-popup-container stacked">
                     <img 
-                        src={cardPopupBackdrop} 
+                        // src={cardPopupBackdrop} 
+                        src={`https://image.tmdb.org/t/p/original${cardPopupBackdrop}`}
                         alt='movie backdrop'
                         onClick={() => {
                             setFullscreenPlayer(!fullscreenPlayer);
@@ -107,6 +112,23 @@ const PosterPreviewPopup = () => {
                         <BootstrapTooltip title="Add To List">
                             <Button
                                 className="popup-icon add" 
+                                onClick = { async() => {
+                                    
+                                    await axios.put(`/users/saveMovie/${apiData._id}`, {
+
+                                        id: posterID,
+                                        title: cardPopupTitle,
+                                        description: posterOverview,
+                                        poster_path: posterImage,
+                                        backdrop_path: cardPopupBackdrop,
+                                        release_date: cardPopupAirDate,
+                                        mediaType: mediaType,
+                                        vote_average: cardPopupRating,
+                                        genres: genres
+                                        
+                                    })
+
+                                }}
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
                                     <path d="M32 16v32m16-16H16"></path>

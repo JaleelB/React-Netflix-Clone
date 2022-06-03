@@ -1,0 +1,28 @@
+@import '../../mainStyles';
+
+#saved-page{
+    min-height: 100vh; width: 100vw;
+    padding-inline: 5%; color: $color-white;
+    transition: all 300ms ease; overflow-x:hidden;
+    position: relative; 
+    
+    .disable-pointer{pointer-events: none; filter: brightness(40%);}
+    .inner{
+        width: 100%;position: relative; top: 4rem; 
+        
+
+        .title{
+            font-size: clamp(1rem, 4vw,2rem); font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .poster-gallery-container{
+            padding-top: 0;
+        }
+
+        .footer{
+            padding-bottom: 50px;
+        }
+        
+    }
+}

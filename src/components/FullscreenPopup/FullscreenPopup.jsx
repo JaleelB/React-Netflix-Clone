@@ -46,7 +46,6 @@ const FullscreenPopup = () => {
 
         }
 
-        //use a state to control if it is netflix original or not
         if(mediaType === 'tv'){
             axios
             .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}?api_key=${apiComponents[1]}&language=en-US`)

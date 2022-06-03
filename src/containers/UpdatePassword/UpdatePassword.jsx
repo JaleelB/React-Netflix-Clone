@@ -124,7 +124,7 @@ const UpdatePassword = () => {
                     Save
                 </button>
                 <button className="cta cancel-changes">
-                    <Link to={'/YourAccount'}>Cancel</Link>
+                    <Link to={'/your-account'}>Cancel</Link>
                 </button>
             </Box>
         </form>

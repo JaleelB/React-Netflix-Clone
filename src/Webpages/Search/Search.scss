@@ -5,6 +5,33 @@
     background: $primary-black; overflow:hidden; position: relative;
     color: $color-white; 
 
+    .title-wrapper{
+        position: relative; 
+        line-height: 1.25vw; font-size: 1.4vw; font-weight: 600; 
+        color: $color-white; margin-bottom: 1.1rem;
+
+        @media screen and (max-width: 850px){
+            font-size: $ft-lg;
+        }
+    }
+    
+    .poster-gallery-container{
+        
+        .title-wrapper{
+             position: relative; 
+            line-height: 1.25vw; font-size: 1.4vw; font-weight: 600; 
+            color: $color-white; padding-left: 1%;
+
+            @media screen and (max-width: 850px){
+                font-size: $ft-lg; padding-left: 4.3%;
+            }
+        }
+
+        .media-container{
+            margin-top: -.5rem;
+        }
+    }
+
     .footer{
         position: relative; margin-top: 20px;
     }

@@ -23,6 +23,8 @@ const UpdateEmail = () => {
     const newEmailRef = useRef();
     const confirmEmailRef = useRef();
 
+    console.log(apiData.savedMovies)
+
 
     const updateEmail = async ()=>  await axios.put(`/users/update/${apiData._id}`, {email: email});
 
@@ -135,7 +137,7 @@ const UpdateEmail = () => {
                 </button>
 
                 <button className="cta cancel-changes">
-                    <Link to={'/YourAccount'}>Cancel</Link>
+                    <Link to={'/your-account'}>Cancel</Link>
                 </button>
             </Box>
         </form>

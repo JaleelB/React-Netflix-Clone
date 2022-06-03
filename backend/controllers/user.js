@@ -1,4 +1,5 @@
 const User =  require("../models/User.js");
+const Show =  require("../models/Show.js");
 const bcrypt = require('bcrypt');
 const { createError } = require("../utils/errorHandler.js");
 
@@ -80,10 +81,10 @@ async function updateUserMovies (request, response, next){
             )
             
             response.status(201).json(updatedUser)
-        }catch(error){ console.log(error) }
+        }catch(error){ response.status(500).json(error); }
 
     }else{
-        response.status(403).json("Cannot save movies to account.")
+        return next(createError(403,"Cannot save movies to account."));
     }
 
 }
@@ -91,23 +92,64 @@ async function updateUserMovies (request, response, next){
 async function deleteUserMovies (request, response, next){
 
     if(request.user.id === request.params.id){
-        // const show = new Show(request.body);
+          
+        try{
+            const user = await User.findById(request.params.id);
+
+            // user.savedMovies.map((movie, index)=>{
+                
+            //     console.log(movie.id, request.params.showID)
+            //     if(movie.id === request.params.showID){
+            //         savedMovieIndex=index;
+            //         // console.log(index);
+            //     }   
+            // });
+            // const paramsID = new ObjectId(`${request.params.showID}`);
+            const updatedMovies = user.savedMovies.filter(movie => movie._id !== request.params.showID );
+
+            // savedMovieIndex = getArrayIndex(user.savedMovies, request.params.showID);
+            console.log(updatedMovies)
+
+            const updatedUser = await User.findByIdAndUpdate(request.params.id, 
+                // { $set: {savedMovies: [user.savedMovies[savedMovieIndex], ...user.savedMovies]}}, 
+                { $set: {savedMovies: updatedMovies}}, 
+                {new: true} 
+            );
+            
+            response.status(201).json(updatedUser.savedMovies)
+
+        }catch(error){ next(error) }
+
+    }else{
+        response.status(403).json("Delete save movies from account.")
+    }
+
+};
+
+async function getAllUserMovies (request, response, next){
+
+    if(request.user.id === request.params.id){
         
         try{
             const user = await User.findById(request.params.id);
-            const updatedUser = await User.findByIdAndUpdate(request.params.id, 
-                { $set: {savedMovies: [...user.savedMovies, show]}, }, 
-                {new: true} 
-            )
-            
-            response.status(201).json(updatedUser)
-        }catch(error){ console.log(error) }
+            const userMovies = user.savedMovies;
+            return response.status(200).json(userMovies);
+        }catch(error){ response.status(500).json(error); }
 
     }else{
-        response.status(403).json("Cannot save movies to account.")
+        return next(createError(403,"Cannot access movies for this account."));
     }
 
-}
+};
+
+// function getArrayIndex(array, itemToFind){
+//     array.map((movie, index)=>{
+//         if(movie._id === itemToFind){
+//             savedMovieIndex=index;
+//             console.log(index, movie._id);
+//         }   
+//     });
+// };
 
 
 
@@ -116,5 +158,6 @@ module.exports = {
     updateUser,
     getUser,
     updateUserMovies,
-    deleteUserMovies
+    deleteUserMovies,
+    getAllUserMovies
 };

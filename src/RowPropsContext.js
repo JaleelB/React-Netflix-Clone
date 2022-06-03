@@ -22,6 +22,9 @@ export function RowPropsProvider({children}){
     const [cardPopupRating, setCardPopupRating] = useState(null);
     const [cardPopupTitle, setCardPopupTitle] = useState('');
     const [posterIndex, setPosterIndex] = useState(0);
+    const [posterOverview, setPosterOverview] = useState('');
+    const [posterImage, setPosterImage] = useState('');
+
 
     const rowRef = useRef(null);
     const [rowTabIndex, setRowTabIndex] = useState(0);
@@ -48,23 +51,16 @@ export function RowPropsProvider({children}){
 
     const rowPopupProps = {
 
-        setIsHovered, isHovered,
-        setCardPopupWidth,setCardPopupHeight,
-        setGenres, genres,
-        cardPopupWidth, cardPopupHeight,
-        delayMount, setDelayMount,
-        delayHandler, setDelayHandler,
-        cardPopupBackdrop, setCardPopupBackdrop,
-        cardPopupRating, setCardPopupRating,
-        cardPopupTitle, setCardPopupTitle,
-        rowPadding, setRowPadding,
-        cardPopupAirDate, setCardPopupAirDate,
-        posterIndex, setPosterIndex,
-        slideRowLeft, slideRowRight,
-        rowTabIndex, setRowTabIndex, rowRef,
-        postersInView, setPostersInView,
-        totalRowTabs, setTotalRowTabs, handleUnmountOnMouseLeave,
-        mountStyle, unmountStyle
+        setIsHovered, isHovered, setCardPopupWidth,setCardPopupHeight,
+        setGenres, genres, cardPopupWidth, cardPopupHeight,
+        delayMount, setDelayMount, delayHandler, setDelayHandler,
+        cardPopupBackdrop, setCardPopupBackdrop, cardPopupRating, setCardPopupRating,
+        cardPopupTitle, setCardPopupTitle, rowPadding, setRowPadding,
+        cardPopupAirDate, setCardPopupAirDate, posterIndex, setPosterIndex,
+        slideRowLeft, slideRowRight, rowTabIndex, setRowTabIndex, rowRef,
+        postersInView, setPostersInView, totalRowTabs, setTotalRowTabs, handleUnmountOnMouseLeave,
+        mountStyle, unmountStyle, posterOverview, setPosterOverview, posterImage, setPosterImage
+
     };
 
 

@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {MediaRowWrapper, MediaRowTitle, PaginationIndicator } from '../../components';
 import './MediaRow.scss';
 import {RowPropsProvider} from '../../RowPropsContext';

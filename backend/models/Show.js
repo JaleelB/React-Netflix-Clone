@@ -2,16 +2,19 @@ const mongoose = require("mongoose");
 
 const showSchema = new mongoose.Schema({
 
-    posterId: { type: Number },
+    id: { type: Number, required: true,},
     title: { type: String },
     description: { type: String },
-    posterImage: { type: String },
-    posterBackdrop: { type: String },
-    // airDate: { type: String },
+    poster_path: { type: String },
+    backdrop_path: { type: String },
+    release_date: { type: String },
     trailer: { type: String },
-    mediaType: { type: String },
-    showRating: { type: String },
-    genres: { type: Array}
+    mediaType: { type: String, required: true },
+    vote_average: { type: Number },
+    isNetflixOriginalShow: {type: Boolean},
+    genres: { type: Array},
+    cast: { type: Array},
+    crew: { type: Array},
     
 });
 

@@ -4,7 +4,8 @@ const {
     updateUser,
     getUser,
     updateUserMovies,
-    deleteUserMovies
+    deleteUserMovies,
+    getAllUserMovies
 } = require("../controllers/user.js");
 const { verifyUser } = require("../utils/verifyAccessToken.js");
 
@@ -21,7 +22,10 @@ router.get("/find/:id", verifyUser, getUser)
 router.put("/saveMovie/:id", verifyUser,updateUserMovies)
 
 //delete movie
-router.delete("/deleteMovie/:id", verifyUser, deleteUserMovies)
+router.put("/deleteMovie/:id/:showID", verifyUser, deleteUserMovies)
+
+//get all movies
+router.get("/getAllMovies/:id", verifyUser,getAllUserMovies)
 
 
 

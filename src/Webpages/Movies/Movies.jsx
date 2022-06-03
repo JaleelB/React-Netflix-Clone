@@ -54,12 +54,6 @@ const Movies = () => {
         })
         .catch(error => { console.log(error) })
 
-        // axios
-        // .get(`${apiComponents[0]}${apiComponents[2].latest_movie}?api_key=${apiComponents[1]}`)
-        // .then((res)=> {
-        //     setLatest(res.data)
-        // })
-        // .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}${genreID ? `&with_genres=${genreID}` : ''}`)

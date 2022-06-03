@@ -102,7 +102,7 @@ const Hero = () => {
                 <Box className="hero-page-wrapper">
 
                     <Billboard 
-                        movie = {originals[2]} 
+                        movie = {originals[0]} 
                         mediaType={mediaTypeTv}
                     />
 

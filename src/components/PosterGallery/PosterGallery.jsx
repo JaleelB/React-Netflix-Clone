@@ -14,8 +14,7 @@ const PosterGallery = ({medias, title, className, errorMessage, mediaType}) => {
             <MediaRowContainer 
                 className = {className}
                 medias = {medias} 
-                typeMedia={mediaType} //try maling a category called all and add it to useeffect
-                netflixOriginal={false}
+                typeMedia={mediaType} 
                 disableHover
             />
 

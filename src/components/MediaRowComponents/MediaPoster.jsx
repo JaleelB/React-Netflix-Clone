@@ -9,16 +9,18 @@ import '../../containers/MediaRow/MediaRow.scss';
 
 const MediaPoster = ({ disableHover,index, media, netflixOriginal, typeMedia }) => {
 
-
    const posterAttributes = {
         posterPath: media?.poster_path,
         name: media?.name ? media?.name : media?.title,
         genreIDs: media?.genre_ids,
+        genres: media?.genres,
         backdrop: media?.backdrop_path,
         index: index,
         airDate: media?.first_air_date ? media?.first_air_date : media?.release_date,
         rating: media?.vote_average,
-        id: media?.id
+        id: media?.id,
+        overview: media?.overview,
+        typeMedia: media?.mediaType
    };
 
     const posterProps = usePosterProps();
@@ -33,9 +35,10 @@ const MediaPoster = ({ disableHover,index, media, netflixOriginal, typeMedia }) 
 
     const rowPopupProps = useRowPopupPropsContext();
     const { 
-        setIsHovered, setCardPopupWidth,
+        setIsHovered, setCardPopupWidth, setPosterOverview,
         setPosterIndex, setCardPopupBackdrop, setCardPopupTitle,
         setCardPopupAirDate, setCardPopupRating, setGenres, 
+        setPosterImage
     
     } = rowPopupProps.rowPopupProps;
 
@@ -44,7 +47,7 @@ const MediaPoster = ({ disableHover,index, media, netflixOriginal, typeMedia }) 
         handleNetflixOriginal, setOpenFullscreenPopup, updatePosterId,
         handleMediaType
     } = fullscreenProps.fullscreenProps;
-    
+
 
     return (
         // <>
@@ -53,28 +56,29 @@ const MediaPoster = ({ disableHover,index, media, netflixOriginal, typeMedia }) 
                 ref={posterRef}
                 onClick = {() => {
                     updatePosterId(posterAttributes.id);
-                    handleMediaType(typeMedia);                    
+                    // handleMediaType(typeMedia);    
+                    handleMediaType(typeMedia ? typeMedia : posterAttributes.typeMedia);                
                     setOpenFullscreenPopup(true);
                     handleNetflixOriginal(netflixOriginal, typeMedia);
                 }}
                 onMouseEnter={()=>{
-
                     if(!disableHover){
-
+                        
                         setIsHovered(true);
-                        
                         handleDelayOnMount(); 
-                        
-                        updatePosterId(posterAttributes.id);
-                        setCardPopupWidth(posterWidth);
+                        setCardPopupWidth(posterWidth);    
                         setPosterIndex(posterAttributes.index);
-                        setGenres(getGenres(posterAttributes.genreIDs));
-                        setCardPopupBackdrop('https://image.tmdb.org/t/p/original/' + posterAttributes.backdrop);
+                                                         
+                        updatePosterId(posterAttributes.id);
+                        setGenres(posterAttributes.genres ? posterAttributes.genres : getGenres(posterAttributes.genreIDs));
+                        setCardPopupBackdrop(posterAttributes.backdrop);
                         setCardPopupTitle(posterAttributes.name);
                         setCardPopupAirDate(posterAttributes.airDate.substring(0,4));
                         setCardPopupRating(posterAttributes.rating);
+                        setPosterOverview(posterAttributes.overview);
+                        setPosterImage(posterAttributes.posterPath);
                 
-                        handleMediaType(typeMedia);
+                        handleMediaType(typeMedia ? typeMedia : posterAttributes.typeMedia);
                         handleNetflixOriginal(netflixOriginal, typeMedia);
 
                     }
