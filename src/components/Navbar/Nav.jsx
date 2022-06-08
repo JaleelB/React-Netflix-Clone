@@ -110,7 +110,12 @@ export default function Nav() {
                                     className="nav-link"  
                                     onClick={loading} 
                                     style={!checked ? {pointerEvents: "none"} : null} 
-                                    to={page !== 'my-list' ? `/${page}/${urlIdParameters[index]}` : '/my-list'}
+                                    to={
+                                      // page !== 'my-list' && page !== 'search' ? `/${page}/${urlIdParameters[index]}`:
+                                      page === 'my-list' ? '/my-list':
+                                      page === 'search' ? '/search':
+                                      `/${page}/${urlIdParameters[index]}`
+                                    }
                                   >
                                     { pageTitles[index] }
                                   </Link>
@@ -187,7 +192,12 @@ export default function Nav() {
                             className="full-nav-link" 
                             onClick={loading} 
                             style={{textDecoration: 'none', textAlign: 'center', color: 'white'}} 
-                            to={page !== 'my-list' ? `/${page}/${urlIdParameters[index]}` : '/my-list'}
+                            to={
+                              // page !== 'my-list' ? `/${page}/${urlIdParameters[index]}` : '/my-list'
+                              page === 'my-list' ? '/my-list':
+                              page === 'search' ? '/search':
+                              `/${page}/${urlIdParameters[index]}`
+                            }
                           >
                             {pageTitles[index]}
                           </Link>

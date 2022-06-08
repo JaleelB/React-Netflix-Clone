@@ -24,7 +24,7 @@ const NavRoutes = ({user}) => {
             {
                 user && (
                     <>
-                        <Route exact path='/search/:genrePath' element={<Search/>} />
+                        <Route exact path='/search' element={<Search/>} />
                         <Route exact path='/movies/:genrePath' element={<Movies/>} />
                         <Route exact path='/tv-shows/:genrePath' element={<TvShows/>} />
                         <Route exact path='/your-account' element={<Account/>}/>
