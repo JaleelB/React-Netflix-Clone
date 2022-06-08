@@ -17,22 +17,22 @@ const LoginPage = () => {
     const [isEmptyField, setIsEmptyField] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const {dispatch, error, stayLoggedIn, setStayLoggedIn } = useContext(AuthenticationContext);
+    const {dispatch, stayLoggedIn, setStayLoggedIn } = useContext(AuthenticationContext);
 
-    const updateDebounceText = debounceInput(text=>{
-        if(emailRef.current.value !== "") setEmail(text);
-        else if(passwordRef.current.value !== "") setPassword(text);
-    }, 1000);
+    // const updateDebounceText = debounceInput(text=>{
+    //     if(emailRef.current.value !== "") setEmail(text);
+    //     else if(passwordRef.current.value !== "") setPassword(text);
+    // }, 1000);
    
-    function debounceInput(callback, delay=1000){
-        let timeout;
-        return(...args) => {
-            clearTimeout(timeout);
-            timeout = setTimeout (() => {
-                callback(...args)
-            }, delay)
-        }
-    };
+    // function debounceInput(callback, delay=1000){
+    //     let timeout;
+    //     return(...args) => {
+    //         clearTimeout(timeout);
+    //         timeout = setTimeout (() => {
+    //             callback(...args)
+    //         }, delay)
+    //     }
+    // };
 
     const handleLogin = async(e) => {
         e.preventDefault();
@@ -77,15 +77,7 @@ const LoginPage = () => {
 
                     <Box className="login-body-main">
                         <h1 className="login-title">Sign In</h1>
-                        {/* { 
-                            isEmptyField && 
-                            <Box className="empty-field-validate">
-                                <b className="bold-message">You cannot leave a field empty.</b> 
-                                Please fill out all available fields then submit.
-                            </Box>
-                        } */}
-
-
+                        
                         <Box className="error-message">
                             { 
                                 isEmptyField && 
@@ -110,7 +102,6 @@ const LoginPage = () => {
                                 onClick = { (event) => event.preventDefault() }
                                 ref={emailRef}
                                 onChange = { (e)=> {
-                                    // getInput(e);
                                     setEmail(emailRef.current.value);
                                     setPassword(passwordRef.current.value);
                                 }}

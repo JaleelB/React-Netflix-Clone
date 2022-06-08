@@ -1,8 +1,11 @@
 import { Box } from '@mui/material';
-import React from 'react';
+import React, {useContext} from 'react';
+import axios from "axios";
 import {usePosterProps} from '../../PosterPropsContext';
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import {useRowPopupPropsContext} from '../../RowPropsContext';
+import useFetchApi from '../../hooks/useFetchAPi';
+import { AuthenticationContext } from '../../authenticationContext/AuthenticateContext';
 import '../../containers/MediaRow/MediaRow.scss';
 
 
@@ -48,46 +51,57 @@ const MediaPoster = ({ disableHover,index, media, netflixOriginal, typeMedia }) 
         handleMediaType
     } = fullscreenProps.fullscreenProps;
 
+    const {user} = useContext(AuthenticationContext);
+    const {apiData} = useFetchApi(`/users/find/${user.details._id}`);
 
     return (
         // <>
             <Box 
                 className='media-poster'
                 ref={posterRef}
-                onClick = {() => {
-                    updatePosterId(posterAttributes.id);
-                    // handleMediaType(typeMedia);    
-                    handleMediaType(typeMedia ? typeMedia : posterAttributes.typeMedia);                
-                    setOpenFullscreenPopup(true);
-                    handleNetflixOriginal(netflixOriginal, typeMedia);
-                }}
-                onMouseEnter={()=>{
-                    if(!disableHover){
-                        
-                        setIsHovered(true);
-                        handleDelayOnMount(); 
-                        setCardPopupWidth(posterWidth);    
-                        setPosterIndex(posterAttributes.index);
-                                                         
-                        updatePosterId(posterAttributes.id);
-                        setGenres(posterAttributes.genres ? posterAttributes.genres : getGenres(posterAttributes.genreIDs));
-                        setCardPopupBackdrop(posterAttributes.backdrop);
-                        setCardPopupTitle(posterAttributes.name);
-                        setCardPopupAirDate(posterAttributes.airDate.substring(0,4));
-                        setCardPopupRating(posterAttributes.rating);
-                        setPosterOverview(posterAttributes.overview);
-                        setPosterImage(posterAttributes.posterPath);
-                
-                        handleMediaType(typeMedia ? typeMedia : posterAttributes.typeMedia);
-                        handleNetflixOriginal(netflixOriginal, typeMedia);
-
-                    }
-                    
-                }}
-                onMouseLeave={()=> { if(!disableHover) handleUnmountDelay(); }}
             >
-                
-                <Box className="media-poster-image-wrapper">
+                <Box 
+                    className="delete-button"
+                    onClick={()=> {
+                        axios.put(`/users/deleteMovie/${apiData._id}/${posterAttributes.id}`);
+                        window.location.reload(false);
+                    }}
+                />
+
+                <Box 
+                    className="media-poster-image-wrapper"
+                    onClick = {() => {
+                        updatePosterId(posterAttributes.id); 
+                        handleMediaType(typeMedia ? typeMedia : posterAttributes.typeMedia);                
+                        setOpenFullscreenPopup(true);
+                        handleNetflixOriginal(netflixOriginal, typeMedia ? typeMedia : posterAttributes.typeMedia);
+                    }}
+                    onMouseEnter={()=>{
+                        if(!disableHover){
+                            
+                            setIsHovered(true);
+                            handleDelayOnMount(); 
+                            setCardPopupWidth(posterWidth);    
+                            setPosterIndex(posterAttributes.index);
+                                                             
+                            updatePosterId(posterAttributes.id);
+                            setGenres(posterAttributes.genres ? posterAttributes.genres : getGenres(posterAttributes.genreIDs));
+                            setCardPopupBackdrop(posterAttributes.backdrop);
+                            setCardPopupTitle(posterAttributes.name);
+                            setCardPopupAirDate(posterAttributes.airDate.substring(0,4));
+                            setCardPopupRating(posterAttributes.rating);
+                            setPosterOverview(posterAttributes.overview);
+                            setPosterImage(posterAttributes.posterPath);
+                    
+                            handleMediaType(typeMedia ? typeMedia : posterAttributes.typeMedia);
+                            handleNetflixOriginal(netflixOriginal, typeMedia);
+    
+                        }
+                        
+                    }}
+                    onMouseLeave={()=> { if(!disableHover) handleUnmountDelay(); }}
+                >
+
                     { 
                         netflixOriginal && posterAttributes.posterPath && typeMedia === 'tv' &&
                          <img 
@@ -98,6 +112,8 @@ const MediaPoster = ({ disableHover,index, media, netflixOriginal, typeMedia }) 
                             draggable="false"
                         /> 
                     }
+
+                    
 
                     <img 
                         className={`media-poster-image ${netflixOriginal ? "netflixOriginal" : ''}`}

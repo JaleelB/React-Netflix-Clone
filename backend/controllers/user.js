@@ -75,12 +75,26 @@ async function updateUserMovies (request, response, next){
         
         try{
             const user = await User.findById(request.params.id);
+            const userMovies = user.savedMovies;
+
+            const isFound = userMovies.some(movie => {
+
+                if (movie.id === request.body.id) {
+                  return true;
+                }
+              
+                return false;
+            });
+
+            if(isFound) return next(createError(403, "This movie already exists in the database. It cannot be readded."))
+
+
             const updatedUser = await User.findByIdAndUpdate(request.params.id, 
                 { $set: {savedMovies: [...user.savedMovies, show]}, }, 
                 {new: true} 
             )
             
-            response.status(201).json(updatedUser)
+            response.status(201).json(updatedUser.savedMovies)
         }catch(error){ response.status(500).json(error); }
 
     }else{
@@ -95,24 +109,17 @@ async function deleteUserMovies (request, response, next){
           
         try{
             const user = await User.findById(request.params.id);
+            let userMovies = user.savedMovies;
 
-            // user.savedMovies.map((movie, index)=>{
-                
-            //     console.log(movie.id, request.params.showID)
-            //     if(movie.id === request.params.showID){
-            //         savedMovieIndex=index;
-            //         // console.log(index);
-            //     }   
-            // });
-            // const paramsID = new ObjectId(`${request.params.showID}`);
-            const updatedMovies = user.savedMovies.filter(movie => movie._id !== request.params.showID );
+            const indexOfObject = userMovies.findIndex(movie => {
+                return movie.id === Number(request.params.showID);
+            });
 
-            // savedMovieIndex = getArrayIndex(user.savedMovies, request.params.showID);
-            console.log(updatedMovies)
+              
+            userMovies.splice(indexOfObject, 1);
 
             const updatedUser = await User.findByIdAndUpdate(request.params.id, 
-                // { $set: {savedMovies: [user.savedMovies[savedMovieIndex], ...user.savedMovies]}}, 
-                { $set: {savedMovies: updatedMovies}}, 
+                { $set: {savedMovies: userMovies}}, 
                 {new: true} 
             );
             
@@ -121,7 +128,7 @@ async function deleteUserMovies (request, response, next){
         }catch(error){ next(error) }
 
     }else{
-        response.status(403).json("Delete save movies from account.")
+        response.status(403).json("Cannot delete movies from account.")
     }
 
 };
@@ -141,16 +148,6 @@ async function getAllUserMovies (request, response, next){
     }
 
 };
-
-// function getArrayIndex(array, itemToFind){
-//     array.map((movie, index)=>{
-//         if(movie._id === itemToFind){
-//             savedMovieIndex=index;
-//             console.log(index, movie._id);
-//         }   
-//     });
-// };
-
 
 
 module.exports = {

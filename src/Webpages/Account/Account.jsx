@@ -111,17 +111,17 @@ const Account = () => {
                     <Box className="details-container">
                         <Box className="username-container">
                             <h2 className="text">{apiData.username}</h2>
-                            <Link  onClick={() => navigate('/UpdateAccount/username')} className="link">Change Username</Link>
+                            <Link  onClick={() => navigate('/update-account/username')} className="link">Change Username</Link>
                         </Box>
 
                         <Box className="email-container">
                             <h2 className="text">{apiData.email}</h2>
-                            <Link  onClick={() => navigate('/UpdateAccount/email')} className="link">Change Email</Link>
+                            <Link  onClick={() => navigate('/update-account/email')} className="link">Change Email</Link>
                         </Box>
 
                         <Box className="password-container">
                             <h2 className="text">Password: *********</h2>
-                            <Link onClick={() => navigate('/UpdateAccount/password')} className="link">Change Password</Link>
+                            <Link onClick={() => navigate('/update-account/password')} className="link">Change Password</Link>
                         </Box>
                     </Box>
 

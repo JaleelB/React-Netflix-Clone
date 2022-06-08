@@ -62,7 +62,7 @@ async function login(request, response, next){
                 .json({ details: { ...otherDetails } });
 
         } catch (err) {
-        next(err);
+            next(err);
         }
     }
 };

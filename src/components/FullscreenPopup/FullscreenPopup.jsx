@@ -1,5 +1,5 @@
 import { Box, Typography, Button } from '@mui/material';
-import React,{useEffect} from 'react';
+import React,{useEffect, useContext} from 'react';
 import axios from 'axios';
 import {apiComponents} from '..';
 import FullscreenPosterBackdrop from './FullscreenPosterBackdrop';
@@ -7,8 +7,13 @@ import SimiliarMovies from './SimiliarMovies';
 import './FullscreenPopup.scss';
 import { Add, PlayArrow } from '@mui/icons-material';
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
+import useFetchApi from '../../hooks/useFetchAPi';
+import { AuthenticationContext } from '../../authenticationContext/AuthenticateContext';
 
 const FullscreenPopup = () => {
+
+    const {user} = useContext(AuthenticationContext);
+    const {apiData} = useFetchApi(`/users/find/${user.details._id}`);
 
     const fullscreenProps = useFullscreenPropsContext();
 
@@ -19,6 +24,7 @@ const FullscreenPopup = () => {
         netflixOriginalShow, setNetflixOriginalShow
     } = fullscreenProps.fullscreenProps;
 
+
     useEffect(() => {
 
         if(mediaType === 'movie'){
@@ -28,21 +34,18 @@ const FullscreenPopup = () => {
             .then((res)=> {
                 setMovie(res.data)
             })
-            .catch(error => { console.error(error) })
 
             axios
             .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/credits?api_key=${apiComponents[1]}&language=en-US`)
             .then((res)=> {
                 setMovieCredits(res.data)
             })
-            .catch(error => { console.error(error) })
 
             axios
             .get(`${apiComponents[0]}/${apiComponents[2].movie}/${posterID}/similar?api_key=${apiComponents[1]}&language=en-US`)
             .then((res)=> {
                 setSimiliarMovies(res.data.results)
             })
-            .catch(error => { console.error(error) })
 
         }
 
@@ -52,21 +55,18 @@ const FullscreenPopup = () => {
             .then((res)=> {
                 setMovie(res.data)
             })
-            .catch(error => { console.error(error) })
 
             axios
             .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/credits?api_key=${apiComponents[1]}&language=en-US`)
             .then((res)=> {
                 setMovieCredits(res.data)
             })
-            .catch(error => { console.error(error) })
 
             axios
             .get(`${apiComponents[0]}/${apiComponents[2].tv}/${posterID}/similar?api_key=${apiComponents[1]}&language=en-US`)
             .then((res)=> {
                 setSimiliarMovies(res.data.results)
             })
-            .catch(error => { console.error(error) })
         }
 
     
@@ -79,7 +79,6 @@ const FullscreenPopup = () => {
             .then((res)=> {
                 setFullVideoPath(res.data.results[0]?.key)
             })
-            .catch(error => { console.error(error) })
         }
 
         if(mediaType === 'tv'){
@@ -88,10 +87,41 @@ const FullscreenPopup = () => {
             .then((res)=> {
                 setFullVideoPath(res.data.results[0]?.key)
             })
-            .catch(error => { console.error(error) })
         }
     
     },[posterID, setFullVideoPath, mediaType]);
+
+    
+    const getMovieGenres = () => {
+        let genres = [];
+        
+        movie.genres.map((genre)=>{
+                genres.push(genre.name);
+        });
+
+        return genres;
+    };
+
+    const getCrewGenres = () => {
+        let credits = [];
+
+        movieCredits.crew.map((credit)=>{
+            credits.push(credit.name);
+        });
+
+        return credits;
+    };
+
+    const getCastGenres = () => {
+        let cast = [];
+        
+        movieCredits.cast.map((castMember)=>{
+            cast.push(castMember.name);
+        });
+
+        return cast;
+    };
+
 
 
     const removeNetflixOriginal = () => { if(netflixOriginalShow) setNetflixOriginalShow(false);  }
@@ -124,7 +154,12 @@ const FullscreenPopup = () => {
                 <Box 
                     className="fullscreen-popup__backdrop-container"
                 >
-                    <FullscreenPosterBackdrop backdrop={movie?.backdrop_path} title={movie?.title ? movie?.title : movie?.name}/>
+                    <FullscreenPosterBackdrop 
+                        cast={getCastGenres}
+                        crew={getCrewGenres}
+                        genres={getMovieGenres}
+                        movie={movie}
+                    />
                     {movie?.backdrop_path && <Box className="fade-bottom"></Box> }
                 </Box>
                 
@@ -143,7 +178,7 @@ const FullscreenPopup = () => {
 
                             <Box className="movie-metadata-container">
                                 {movie?.vote_average && <Box className="movie-rating">{movie?.vote_average * 10}%</Box>}
-                                {movie?.release_date && <Box className="movie-air-date">{movie?.release_date ? movie?.release_date : movie?.last_air_date}</Box>}
+                                <Box className="movie-air-date">{movie?.release_date ? movie?.release_date : movie?.first_air_date}</Box>
                                 <Box className="movie-video-quality">HD</Box>
                             </Box>
 
@@ -180,9 +215,30 @@ const FullscreenPopup = () => {
 
                                     <Button 
                                         className="mobile-btn-add"
+                                        onClick = {() => {
+                                    
+                                            axios.put(`/users/saveMovie/${apiData._id}`, {
+        
+                                                id: movie.id,
+                                                title: movie.title ? movie.title : movie.name,
+                                                description: movie.overview ? movie.overview : '',
+                                                poster_path: movie.poster_path,
+                                                backdrop_path: movie.backdrop_path,
+                                                release_date: movie?.release_date ? movie?.release_date : movie?.first_air_date,
+                                                mediaType: mediaType,
+                                                vote_average: movie.vote_average,
+                                                genres: getMovieGenres(),
+                                                cast: getCastGenres(),
+                                                crew: getCrewGenres()
+                                                
+                                            });
+
+                                            
+                                            window.location.reload(false);
+        
+                                        }}
                                     >
-            
-                                        <Add className="play-icon popup-icon"/>
+                                        <Add className="play-icon popup-icon" />
                                         My List 
             
                                     </Button>

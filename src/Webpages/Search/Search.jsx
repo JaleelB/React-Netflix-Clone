@@ -24,14 +24,12 @@ const Search = () => {
         .then((res)=> {
             setTrendingToday(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].discover_tv}?api_key=${apiComponents[1]}&language=en-US&page=1&primary_release_date.gte=2016&sort_by=popularity.desc`)
         .then((res)=> {
             setDiscoverTV(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
     },[]);
 
@@ -43,17 +41,13 @@ const Search = () => {
             .get(`${apiComponents[0]}${apiComponents[2].search}/tv?api_key=${apiComponents[1]}&language=en-US&query=${inputText}&page=1&include_adult=false`)
             .then((res)=> {
                 setSearchTVResults(res.data.results)
-                // console.log(res.data.results)
             })
-            .catch(error => { console.log(error) })
 
             axios
             .get(`${apiComponents[0]}${apiComponents[2].search}/movie?api_key=${apiComponents[1]}&language=en-US&query=${inputText}&page=1&include_adult=false`)
             .then((res)=> {
                 setSearchMovieResults(res.data.results)
-                // console.log(res.data.results)
             })
-            .catch(error => { console.log(error) })
         }
 
     },[inputText]);

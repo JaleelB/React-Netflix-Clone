@@ -12,12 +12,38 @@
         
 
         .title{
-            font-size: clamp(1rem, 4vw,2rem); font-weight: 500;
-            margin-bottom: 2rem;
+            font-size: clamp(1.4rem, 4vw,2rem); font-weight: 500;
         }
 
         .poster-gallery-container{
             padding-top: 0;
+
+            .media-poster{
+
+                position: relative;
+
+                .delete-button{
+                    position: absolute; top:0; right: 0;
+                    background-color: $primary-red; 
+                    display: flex; align-items: center; justify-content: center;
+                    width: 2rem; height: 2rem; z-index: 3; 
+                    border-top-right-radius: 6px;
+
+                    &::after,
+                    &::before {
+                        content: "";
+                        display: block; box-sizing: border-box;
+                        position: absolute; top: 15px; left: 7px;
+                        width: 16px; height: 2px;
+                        background: $color-white; border-radius: 5px;
+                        transform: rotate(45deg);  
+                    }
+
+                    &::after {
+                        transform: rotate(-45deg)
+                    }
+                }
+            }
         }
 
         .footer{

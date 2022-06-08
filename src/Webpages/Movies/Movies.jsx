@@ -52,66 +52,55 @@ const Movies = () => {
         .then((res)=> {
             setPopular(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setDiscover(res.data.results)
-            // console.log(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].upcoming_movie}?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setUpcoming(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].list}/28?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setBestPictures(res.data.items)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].movie_trending}?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setSTrendingMovie(res.data.results)
-        })
-        .catch(error => { console.log(error) })        
+        })        
         
         axios
         .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&certification_country=US&year=1992${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setNinetysBinge(res.data.results)
-            // console.log(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&certification_country=US&year=1984${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setEightysBinge(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].discover_movie}?api_key=${apiComponents[1]}&language=en-US&vote_average.gte=8.1&year=1995`)
         .then((res)=> {
             setStaffPicks(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}/genre${apiComponents[2].movie}${apiComponents[2].list}?api_key=${apiComponents[1]}&language=en-US`)
         .then((res)=> {
             setGenres(res.data)
         })
-        .catch(error => { console.log(error) })
   
     }, [genreID]);
 

@@ -4,7 +4,6 @@ import axios from 'axios';
 import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, SkeletonLoader } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
-import {useParams} from 'react-router-dom';
 import './TvShows.scss';
 
 const TvShows = () => {
@@ -49,7 +48,6 @@ const TvShows = () => {
         return randArray[0];
     };
 
-    const { genrePath } = useParams()
 
     useEffect(() => {
 
@@ -58,74 +56,60 @@ const TvShows = () => {
         .then((res)=> {
             setPopular(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].tv}${apiComponents[2].top_rated}?api_key=${apiComponents[1]}${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setTopRated(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].discover_tv}?api_key=${apiComponents[1]}${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setDiscover(res.data.results)
-            // console.log(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].on_tv}?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setOnTheAir(res.data.results)
-            // console.log(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].tv_trending}?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setTrendingTv(res.data.results)
-            // console.log(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].tv}${apiComponents[2].top_rated}?api_key=${apiComponents[1]}${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setAiringToday(res.data.results)
         })
-        .catch(error => { console.log(error) })
         
         axios
         .get(`${apiComponents[0]}${apiComponents[2].discover_tv}?api_key=${apiComponents[1]}&certification_country=US&first_air_date_year=1992${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setNinetysBinge(res.data.results)
-            // console.log(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].discover_tv}?api_key=${apiComponents[1]}&certification_country=US&first_air_date_year=1984${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setEightysBinge(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].discover_tv}?api_key=${apiComponents[1]}&language=en-US&vote_average.gte=8.1&year=1995${genreID ? `&with_genres=${genreID}` : ''}`)
         .then((res)=> {
             setStaffPicks(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}/genre${apiComponents[2].tv}${apiComponents[2].list}?api_key=${apiComponents[1]}&language=en-US`)
         .then((res)=> {
             setGenres(res.data)
         })
-        .catch(error => { console.log(error) })
   
     }, [genreID]);
 

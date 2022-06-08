@@ -42,7 +42,6 @@ const PosterPreviewPopup = () => {
             .then((res)=> {
                 setFullVideoPath(res.data.results[0]?.key)
             })
-            .catch(error => { console.log(error) })
         }
 
         else if(mediaType === 'tv'){
@@ -51,7 +50,6 @@ const PosterPreviewPopup = () => {
             .then((res)=> {
                 setFullVideoPath(res.data.results[0]?.key)
             })
-            .catch(error => { console.log(error) })
         }
 
     
@@ -67,14 +65,11 @@ const PosterPreviewPopup = () => {
                 width: `${cardPopupWidth * 1.75}px`,
                 height: `${cardPopupWidth * 2.05}px`,
                 left: `${
-                    // (
-                            (
-                                cardPopupWidth * (posterIndex >= postersInView ? 
-                                posterIndex  - (postersInView * rowTabIndex) : posterIndex)
-                            )
-                    //          - rowPadding 
-                    // )
-                        }px`
+                        (
+                            cardPopupWidth * (posterIndex >= postersInView ? 
+                            posterIndex  - (postersInView * rowTabIndex) : posterIndex)
+                        )
+                    }px`
             }}
 
             style={isHovered ? mountStyle  : unmountStyle}
@@ -89,7 +84,6 @@ const PosterPreviewPopup = () => {
 
                 <Box className="media-popup-container stacked">
                     <img 
-                        // src={cardPopupBackdrop} 
                         src={`https://image.tmdb.org/t/p/original${cardPopupBackdrop}`}
                         alt='movie backdrop'
                         onClick={() => {
@@ -112,9 +106,9 @@ const PosterPreviewPopup = () => {
                         <BootstrapTooltip title="Add To List">
                             <Button
                                 className="popup-icon add" 
-                                onClick = { async() => {
+                                onClick = { () => {
                                     
-                                    await axios.put(`/users/saveMovie/${apiData._id}`, {
+                                    axios.put(`/users/saveMovie/${apiData._id}`, {
 
                                         id: posterID,
                                         title: cardPopupTitle,
@@ -126,7 +120,9 @@ const PosterPreviewPopup = () => {
                                         vote_average: cardPopupRating,
                                         genres: genres
                                         
-                                    })
+                                    }); 
+
+                                    window.location.reload(false);
 
                                 }}
                             >

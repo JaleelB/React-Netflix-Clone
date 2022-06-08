@@ -1,4 +1,4 @@
-import { Close, TimerOutlined } from '@mui/icons-material';
+import { Close } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import React, { useRef } from 'react';
 
@@ -6,7 +6,6 @@ import './InputField.scss';
 
 const InputField = ({updateTyping, setInput, isTyping, setSearchMovieResults, setSearchTVResults}) => {
 
-    // let textSearch;
     const inputFieldRef = useRef(null);
 
     const handleTextFieldUpdate = (event) => {

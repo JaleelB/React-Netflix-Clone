@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Box, Button, IconButton, Typography } from '@mui/material';
 import {BillboardTitle, BillboardDescription, BillboardVideo, apiComponents, GenreDropdown } from '../../components';
 import './Billboard.scss';
-import { PlayArrow, Pause, VolumeOff, VolumeUp, Add, DoNotDisturbAltOutlined } from '@mui/icons-material';
+import { PlayArrow, Pause, VolumeOff, VolumeUp, DoNotDisturbAltOutlined, InfoOutlined } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 
@@ -74,7 +74,6 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
                 .then((res)=> {
                     setVideoPath(res.data.results[0]?.key)
                 })
-                // .catch(error => { console.log(error) })
             }
 
             if(mediaType==="movie"){
@@ -83,7 +82,6 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
                 .then((res)=> {
                     setVideoPath(res.data.results[0]?.key)
                 })
-                // .catch(error => { console.log(error) })
             }
         }
 
@@ -97,7 +95,6 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
             .then((res)=> {
                 setFullVideoPath(res.data.results[0]?.key)
             })
-            // .catch(error => { console.log(error) })
         }
 
         if(mediaType==="movie"){
@@ -106,7 +103,6 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
             .then((res)=> {
                 setFullVideoPath(res.data.results[0]?.key)
             })
-            // .catch(error => { console.log(error) })
         }
 
     }, [posterID,setFullVideoPath,movie?.id, mediaType]);
@@ -127,13 +123,10 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
 
             {sectionTitle &&
                 <Box 
-                    // className="billboard__sub-header" 
                     className={`billboard__sub-header ${fixedSubHeader ? 'fixed-header': ''}`} 
                     sx={{
                             display: billboardProps.genreTitle && "flex",
-                            background:`${darkSubHeader ? '#171717' : 'transparent'}`,
-                            // position: fixedSubHeader && 'fixed',
-                            // top: fixedSubHeader && 0
+                            background:`${darkSubHeader ? '#171717' : 'transparent'}`
                     }}
                 >
                     <Box className="genre-details">
@@ -199,6 +192,7 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
                                     setDisablePointer(true);
                                 }}
                             >
+                                <InfoOutlined sx={{marginRight: '8px'}}/>
                                 View Info 
                             </Button>
                         </> }
@@ -214,9 +208,18 @@ const Billboard = ({movie, sectionTitle, billboardProps, mediaType}) => {
                                 <PlayArrow className="billboard__button-play-icon"/>
                                 Play
                             </Button>
-                            <Button variant="outlined" className="billboard__button-details">
-                                <Add/>
-                                My List 
+                            <Button 
+                                variant="outlined" 
+                                className="billboard__button-details"
+                                onClick={()=> {
+                                    setPosterID(movie?.id);
+                                    setMediaType(mediaType);
+                                    setOpenFullscreenPopup(true);
+                                    setDisablePointer(true);
+                                }}
+                            >
+                                <InfoOutlined sx={{marginRight: '8px'}}/>
+                                View Info
                             </Button>
                         </> }
 

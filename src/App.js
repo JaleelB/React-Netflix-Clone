@@ -3,7 +3,6 @@ import { Nav, NavRoutes } from './components';
 import { AuthenticationContext} from './authenticationContext/AuthenticateContext';
 import {FullscreenPropsProvider} from './FullscreenPropsContext';
 
-
 function App() {
 
   const {user} = useContext(AuthenticationContext);
@@ -11,10 +10,10 @@ function App() {
   return (
 
       <FullscreenPropsProvider>
-        <div className="App">
-          { user ? <Nav /> : ''}
-          <NavRoutes user={user}/>
-        </div>
+          <div className="App">
+            { user ? <Nav /> : ''}
+            <NavRoutes user={user}/>
+          </div>
       </FullscreenPropsProvider>
 
   );

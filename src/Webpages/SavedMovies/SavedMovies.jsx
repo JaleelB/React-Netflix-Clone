@@ -1,8 +1,7 @@
 import { Box } from '@mui/material'
-import React, {useEffect, useState, useContext} from 'react';
+import React, { useContext} from 'react';
 import { PosterGallery, Footer, FullscreenPlayer,FullscreenPopup, SkeletonLoader } from '../../components';
 import './SavedMovies.scss';
-// import axios from "axios";
 import { AuthenticationContext } from '../../authenticationContext/AuthenticateContext';
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
 import useFetchApi from '../../hooks/useFetchAPi';
@@ -10,49 +9,33 @@ import useFetchApi from '../../hooks/useFetchAPi';
 const SavedMovies = () => {
 
     const {user} = useContext(AuthenticationContext);
-    const {apiData, error} = useFetchApi(`/users/getAllMovies/${user.details._id}`);
+    const {apiData} = useFetchApi(`/users/getAllMovies/${user.details._id}`);
+
     const fullscreenProps = useFullscreenPropsContext();
     const { 
-        fullscreenPlayer, openFullscreenPopup, 
-        isLoading, updateLoading, disablePointer
+        fullscreenPlayer, openFullscreenPopup,
+        disablePointer
     } = fullscreenProps.fullscreenProps;
 
-    useEffect(() => {
-        
-        const timer = setTimeout(() => {
-            updateLoading();
-        }, 2000);
-
-        return () => clearTimeout(timer);
-
-    },[isLoading])
-
+    
     return (
         <Box id="saved-page">
-            {
-                isLoading ?
+            
+            <Box className="inner">
+                <h1 className={`title ${disablePointer ? 'disable-pointer' : ''}`}>My List</h1>
 
-                <SkeletonLoader/>
+                <PosterGallery
+                    medias={apiData} 
+                    className = {`poster-gallery ${disablePointer ? 'disable-pointer' : ''}`} 
+                />
 
-                :
-                <Box className="inner">
-                    <h1 className={`title ${disablePointer ? 'disable-pointer' : ''}`}>My List</h1>
+                { fullscreenPlayer && <FullscreenPlayer/> }
+                {openFullscreenPopup && <FullscreenPopup/>} 
 
-                    <PosterGallery
-                        medias={apiData} 
-                        // title={"Tv Search Results"} 
-                        className = {`poster-gallery ${disablePointer ? 'disable-pointer' : ''}`}  
-                        // mediaType={"tv"}
-                    />
+                <Footer/>
 
-                    { fullscreenPlayer && <FullscreenPlayer/> }
-                    {openFullscreenPopup && <FullscreenPopup/>} 
+            </Box> 
 
-                    <Footer/>
-
-                </Box> 
-
-            }     
 
         </Box>
     )

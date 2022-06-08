@@ -1,12 +1,17 @@
 import { Box } from '@mui/material';
 import './Hero.scss';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import {apiComponents, Footer, FullscreenPlayer,FullscreenPopup, SkeletonLoader } from '../../components';
 import { MediaRowContainer, Billboard } from '../../containers';
 import {useFullscreenPropsContext} from '../../FullscreenPropsContext';
+import useFetchApi from '../../hooks/useFetchAPi';
+import { AuthenticationContext } from '../../authenticationContext/AuthenticateContext';
 
 const Hero = () => {
+
+    const {user} = useContext(AuthenticationContext);
+    const {apiData} = useFetchApi(`/users/find/${user.details._id}`);
     
     const [originals, setOriginals] = useState([]);
     const [popular, setPopular] = useState([]);
@@ -28,49 +33,42 @@ const Hero = () => {
         .then((res)=> {
             setOriginals(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].popular}?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setPopular(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].trending}/week?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setTrending(res.data.results)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].movie}${apiComponents[2].top_rated}?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setTopRated(res.data.results)
         })
-        .catch(error => { console.log(error) })
         
         axios
         .get(`${apiComponents[0]}${apiComponents[2].list}/3700?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setPixar(res.data.items)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].list}/10?api_key=${apiComponents[1]}`)
         .then((res)=> {
             setClassics(res.data.items)
         })
-        .catch(error => { console.log(error) })
 
         axios
         .get(`${apiComponents[0]}${apiComponents[2].now_playing}?api_key=${apiComponents[1]}&language=en-US`)
         .then((res)=> {
             setNewReleases(res.data.results)
         })
-        .catch(error => { console.log(error) })
   
     }, []);
 
@@ -107,6 +105,15 @@ const Hero = () => {
                     />
 
                     <Box className={`inner ${disablePointer ? 'disable-pointer' : ''}`}>
+
+                        {
+                            apiData.savedMovies.length !== 0 && 
+                            <MediaRowContainer
+                                title = "My List"
+                                medias = { apiData.savedMovies }
+                            />
+
+                        }
 
                         <MediaRowContainer
                             title = "Netflix Original Shows"

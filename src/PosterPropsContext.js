@@ -15,6 +15,7 @@ export function PosterPropsProvider({children}){
     const posterRef = useRef(null);
     const [posterWidth, setPosterWidth] = useState(0);
     const [posterHeight, setPosterHeight] = useState(0);
+    const [reloadAfterDelete, setReloadAfterDelete] = useState(false);
 
     
     const rowPopupProps = useRowPopupPropsContext();

@@ -20,7 +20,7 @@ const ImageSliderBackdrop = ({movie}) => {
             }}
         >
             <img className="backdrop-image" src={`https://image.tmdb.org/t/p/w1280/${movie?.backdrop_path}`} alt="movie-backdrop"/>
-            {/* <MediaRowTitle title={movie?.title ? movie?.title : movie?.name}/> */}
+            <MediaRowTitle title={movie?.title ? movie?.title : movie?.name}/>
         </Box>
     )
 }
