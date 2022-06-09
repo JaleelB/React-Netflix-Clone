@@ -64,12 +64,13 @@ const PosterPreviewPopup = () => {
                 top: `-${rowPadding}px`,
                 width: `${cardPopupWidth * 1.75}px`,
                 height: `${cardPopupWidth * 2.05}px`,
+                
                 left: `${
                         (
                             cardPopupWidth * (posterIndex >= postersInView ? 
                             posterIndex  - (postersInView * rowTabIndex) : posterIndex)
                         )
-                    }px`
+                    }px`,
             }}
 
             style={isHovered ? mountStyle  : unmountStyle}

@@ -122,6 +122,19 @@ export default function Nav() {
 
                                 </li>
                               ))}
+
+                              <li className="nav-item" onClick={() => { if(checked) setChecked(!checked) }}>
+
+                              <Link 
+                                className="nav-link" 
+                                onClick={loading} 
+                                style={!checked ? {pointerEvents: "none"} : null} 
+                                to={'/your-account'}
+                              >
+                                Account
+                              </Link>
+
+                              </li>
                           </ul>
                         }
                       </Box>
