@@ -19,21 +19,6 @@ const LoginPage = () => {
 
     const {dispatch, stayLoggedIn, setStayLoggedIn } = useContext(AuthenticationContext);
 
-    // const updateDebounceText = debounceInput(text=>{
-    //     if(emailRef.current.value !== "") setEmail(text);
-    //     else if(passwordRef.current.value !== "") setPassword(text);
-    // }, 1000);
-   
-    // function debounceInput(callback, delay=1000){
-    //     let timeout;
-    //     return(...args) => {
-    //         clearTimeout(timeout);
-    //         timeout = setTimeout (() => {
-    //             callback(...args)
-    //         }, delay)
-    //     }
-    // };
-
     const handleLogin = async(e) => {
         e.preventDefault();
 
@@ -50,7 +35,7 @@ const LoginPage = () => {
         // login({email, password}, dispatch)
         dispatch({ type: "LOGIN_START" });
         try{
-            const response = await axios.post('/userAuthentication/login', {email, password});
+            const response = await axios.post('https://jaleelbdev-netflix-clone.herokuapp.com/userAuthentication/login', {email, password});
             dispatch({type: "LOGIN_SUCCESS", payload: response.data});
             
         }catch(error){
