@@ -1,6 +1,6 @@
 const User =  require("../models/User.js");
 const Show =  require("../models/Show.js");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs')
 const { createError } = require("../utils/errorHandler.js");
 
 async function updateUser (request, response, next){

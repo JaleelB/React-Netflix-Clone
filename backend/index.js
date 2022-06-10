@@ -18,7 +18,6 @@ app.use(express.json());
 
 app.use("/backend/userAuthentication", authenticateRoute);
 app.use("/backend/users", userRoute);
-// app.use("/backend/shows", showRoute);
 
 app.use((error, request, response, next)=>{
     const errorStatus = error.status || 500;
@@ -33,6 +32,10 @@ app.use((error, request, response, next)=>{
     })
 })
 
+
+app.get("/", (req, res)=>{
+    res.send("server start")
+});
 
 
 app.listen(process.env.PORT || 3500, ()=>{
