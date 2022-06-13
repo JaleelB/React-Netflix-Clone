@@ -35,7 +35,7 @@ const LoginPage = () => {
         // login({email, password}, dispatch)
         dispatch({ type: "LOGIN_START" });
         try{
-            const response = await axios.post('/userAuthentication/login', {email, password});
+            const response = await axios.post('https://jaleelbdev-netflix-clone.herokuapp.com/userAuthentication/login', {email, password});
             dispatch({type: "LOGIN_SUCCESS", payload: response.data});
             
         }catch(error){
